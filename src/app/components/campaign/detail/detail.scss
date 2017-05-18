@@ -24,3 +24,13 @@
   width: 60%;
   height: 263px;
 }
+
+.table-report {
+  thead {
+    background-color: $rl-pale-gray;
+  }
+
+  .cycle-id  {
+    min-width: 150px;
+  }
+}

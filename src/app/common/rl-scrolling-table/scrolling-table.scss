@@ -1,0 +1,25 @@
+.rl-scrolling-table {
+  overflow: auto;
+  margin-bottom: 20px;
+
+  table {
+    margin-bottom: 0;
+
+    .fixed-header {
+      position: absolute;
+      top: 0;
+      left: 0;
+
+      tr:first-child th {
+        border-top-width: 0;
+      }
+    }
+
+    &.table-bordered {
+      tr:first-child th {
+        border-top-width: 1px;
+      }
+    }
+  }
+
+}

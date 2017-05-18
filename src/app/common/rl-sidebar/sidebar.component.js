@@ -3,11 +3,12 @@ import template from './sidebar.html';
 
 class Controller {
 
-  constructor($cookies, $state) {
+  constructor($cookies, $rootScope, $state) {
     'ngInject';
     this.accordion = [];
     this.collapsed = false;
     this.$cookies = $cookies;
+    this.$rootScope = $rootScope;
     this.$state = $state;
   }
 
@@ -27,6 +28,7 @@ class Controller {
   }
 
   sidebarToggle() {
+    this.$rootScope.$broadcast('sidebar-toggle');
     this.collapsed = !this.collapsed;
     let expireDate = new Date();
     expireDate.setDate(expireDate.getDate() + 365);

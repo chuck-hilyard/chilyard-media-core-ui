@@ -1,5 +1,5 @@
-<div class="rl-container">
-  <rl-sidebar links="$ctrl.sidebar.links"></rl-sidebar>
+<div class="rl-container rl-container__sidebar" ng-class="{'rl-container__sidebar--collapse': $ctrl.sidebar.collapsed}">
+  <rl-sidebar callback="$ctrl.sidebarCallback(collapsed)" links="$ctrl.sidebar.links"></rl-sidebar>
   <div class="rl-content">
     <rl-expanding-header data="$ctrl.header">
       <rl-date-range class="pull-right" cycles="$ctrl.campaign.cycles"></rl-date-range>

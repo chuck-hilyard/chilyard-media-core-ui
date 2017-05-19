@@ -3,12 +3,11 @@ import template from './sidebar.html';
 
 class Controller {
 
-  constructor($cookies, $rootScope, $state) {
+  constructor($cookies, $state) {
     'ngInject';
     this.accordion = [];
     this.collapsed = false;
     this.$cookies = $cookies;
-    this.$rootScope = $rootScope;
     this.$state = $state;
   }
 
@@ -19,6 +18,7 @@ class Controller {
       let accordionCollapse = !this.$state.$current.name.includes(link.state);
       this.accordion.push(accordionCollapse);
     });
+    this.callback({collapsed: this.collapsed});
   }
 
   accordionToggle(event, index) {
@@ -28,16 +28,17 @@ class Controller {
   }
 
   sidebarToggle() {
-    this.$rootScope.$broadcast('sidebar-toggle');
     this.collapsed = !this.collapsed;
     let expireDate = new Date();
     expireDate.setDate(expireDate.getDate() + 365);
     this.$cookies.put('sidebar', this.collapsed, {expires: expireDate});
+    this.callback({collapsed: this.collapsed});
   }
 }
 
 export default {
   bindings: {
+    callback: '&',
     links: '<'
   },
   template: template,

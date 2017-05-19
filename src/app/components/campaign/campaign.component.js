@@ -104,6 +104,10 @@ class Controller {
     };
   }
 
+  sidebarCallback(callback) {
+    this.sidebar.collapsed = callback;
+  }
+
 }
 
 export default {

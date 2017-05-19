@@ -6,13 +6,10 @@
 }
 
 .rl-container {
-  display: flex;
   height: 100%;
 
   .rl-content {
-    flex: 2;
     padding: ($grid-gutter-width  / 2);
-    overflow: auto;
 
     h1:first-child {
       margin-top: 0;

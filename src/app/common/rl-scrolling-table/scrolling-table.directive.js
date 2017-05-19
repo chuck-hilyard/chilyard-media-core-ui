@@ -1,7 +1,7 @@
 import template from './scrolling-table.html';
 
 
-export default function rlScrollingTable($window) {
+export default function rlScrollingTable() {
   'ngInject';
 
   return {
@@ -12,55 +12,59 @@ export default function rlScrollingTable($window) {
   };
 
   function link(scope, element) {
-    const heightPercentage = 0.7;
-    let container = element[0].querySelector('.rl-scrolling-table');
-    let containerWidth = null;
-    let originalHeader = null;
-    let clonedHeader = null;
+    this.heightPercentage = 0.7;
+    this.container = element[0].querySelector('.rl-scrolling-table');
+    this.containerWidth = null;
+    this.originalHeader = null;
+    this.clonedHeader = null;
 
 
-    init();
-    function init() {
+    this.init = () => {
       // Set container height
-      let height = window.innerHeight * heightPercentage;
+      let height = window.innerHeight * this.heightPercentage;
       scope.height = `${height}px`;
 
       // Clone table header
-      originalHeader = element[0].querySelector('table thead');
-      clonedHeader = originalHeader.cloneNode(true);
-      clonedHeader.className = 'fixed-header';
-      clonedHeader.style.display = 'none';
-      originalHeader.after(clonedHeader);
+      this.originalHeader = element[0].querySelector('table thead');
+      this.clonedHeader = this.originalHeader.cloneNode(true);
+      this.clonedHeader.className = 'fixed-header';
+      this.clonedHeader.style.display = 'none';
+      this.originalHeader.after(this.clonedHeader);
 
       // Set event listeners
-      angular.element(container).on('scroll', setClone);
-      angular.element($window).on('resize', setClone);
-      angular.element($window).on('scroll', setClone);
-    }
+      this.container.addEventListener('scroll', this.setClone);
+      window.addEventListener('resize', this.setClone);
+    };
 
-    function setClone() {
+    this.setClone = () => {
       // Place fixed header
-      clonedHeader.style.display = container.scrollTop > 0 ? 'table-header-group' : 'none';
-      clonedHeader.style.top = `${container.scrollTop}px`;
+      this.clonedHeader.style.display = this.container.scrollTop > 0 ? 'table-header-group' : 'none';
+      this.clonedHeader.style.top = `${this.container.scrollTop}px`;
+      this.setWidth();
+    };
 
+    this.setWidth = () => {
       // Don't update sizes if container hasn't changed
-      if (!containerWidth || containerWidth !== container.clientWidth) {
+      if (!this.containerWidth || this.containerWidth !== this.container.clientWidth) {
+        console.log('sizing');
         // Set cloned header width
-        containerWidth = container.clientWidth;
-        let originalHeaderWidth = $window.getComputedStyle(originalHeader, null).getPropertyValue('width');
-        clonedHeader.style.width = parseInt(originalHeaderWidth) + 1 + 'px';  // Extra pixel is to account for border-collapse
+        this.containerWidth = this.container.clientWidth;
+        let originalHeaderWidth = window.getComputedStyle(this.originalHeader, null).getPropertyValue('width');
+        this.clonedHeader.style.width = parseInt(originalHeaderWidth) + 1 + 'px';  // Extra pixel is to account for border-collapse
 
         // Get columns from both headers
-        let columns = originalHeader.querySelectorAll('tr:first-child th');
-        let clonedColumns = clonedHeader.querySelectorAll('tr:first-child th');
+        let columns = this.originalHeader.querySelectorAll('tr:first-child th');
+        let clonedColumns = this.clonedHeader.querySelectorAll('tr:first-child th');
 
         // Set column widths for clonedHeader
         angular.forEach(columns, (column, index) => {
-          let width = $window.getComputedStyle(column, null).getPropertyValue('width');
+          let width = window.getComputedStyle(column, null).getPropertyValue('width');
           clonedColumns[index].style.width = width;
         });
       }
-    }
+    };
+
+    this.init();
   }
 
 }

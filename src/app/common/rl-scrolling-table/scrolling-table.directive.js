@@ -14,22 +14,22 @@ export default function rlScrollingTable() {
   function link(scope, element) {
     this.heightPercentage = 0.7;
     this.container = element[0].querySelector('.rl-scrolling-table');
-    this.original = null;
-    this.clone = null;
+    this.master = null;
+    this.header = null;
     this.scrollLeft = null;
 
 
     this.init = () => {
       // Clone table header
-      this.original = element[0].querySelector('.rl-table');
-      this.original.className += ' rl-table-master';
-      this.clone = this.original.cloneNode(true);
-      this.clone.className = 'rl-table rl-table-header';
-      this.clone.querySelector('tbody').remove();
-      this.original.after(this.clone);
+      this.master = element[0].querySelector('.rl-table');
+      this.master.className += ' rl-table-master';
+      this.header = this.master.cloneNode(true);
+      this.header.className = 'rl-table rl-table-header';
+      this.header.querySelector('tbody').remove();
+      this.master.after(this.header);
 
       // Set event listeners
-      this.original.addEventListener('scroll', this.scroll);
+      this.master.addEventListener('scroll', this.scroll);
       window.addEventListener('resize', this.setHeight);
 
       this.setup();
@@ -44,41 +44,40 @@ export default function rlScrollingTable() {
     };
 
     this.setHeight = () => {
-      this.original.style.height = window.innerHeight * this.heightPercentage + 'px';
+      this.master.style.height = window.innerHeight * this.heightPercentage + 'px';
     };
 
     this.scroll = () => {
-      if (!this.scrollLeft || this.scrollLeft !== this.original.scrollLeft) {
-        this.scrollLeft = this.original.scrollLeft;
-        this.clone.style.left = (this.scrollLeft * -1) + 'px';
+      if (!this.scrollLeft || this.scrollLeft !== this.master.scrollLeft) {
+        this.scrollLeft = this.master.scrollLeft;
+        this.header.style.left = `${this.scrollLeft * -1}px`;
       }
     };
 
     this.sizeClone = () => {
       // Get columns from both headers
-      let cells = this.original.querySelectorAll('tr:first-child th');
-      let originalColumns = this.original.querySelectorAll('col');
-      let clonedColumns = this.clone.querySelectorAll('col');
+      let masterCells = this.master.querySelectorAll('tr:first-child th');
+      let headerColumns = this.header.querySelectorAll('col');
 
-      if (originalColumns.length === 0) {
+      if (headerColumns.length === 0) {
         throw new Error('RL-SCROLLING-TABLE REQUIRES <COLGROUP> TO BE DEFINED');
       }
 
-      // Set widths for clonedHeader
+      // Set widths for
       let totalWidth = 0;
-      angular.forEach(cells, (cell, index) => {
+      angular.forEach(masterCells, (cell, index) => {
         let width = window.getComputedStyle(cell, null).getPropertyValue('width');
-        clonedColumns[index].style.width = width;
+        headerColumns[index].style.width = width;
         totalWidth += parseInt(width);
       });
 
       // Set clones parent div dimensions
-      this.clone.querySelector('.rl-table-clip').style.width = totalWidth + 'px';
+      this.header.querySelector('.rl-table-clip').style.width = totalWidth + 'px';
 
       // Offset .rl-table-header from .rl-table-master scrollbar
-      let scrollbarWidth = this.original.offsetWidth - this.original.clientWidth;
+      let scrollbarWidth = this.master.offsetWidth - this.master.clientWidth;
       if (scrollbarWidth !== 0) {
-        this.clone.style.right = `${scrollbarWidth}px`;
+        this.header.style.right = `${scrollbarWidth}px`;
       }
     };
 

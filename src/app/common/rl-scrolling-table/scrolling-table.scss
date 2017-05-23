@@ -1,24 +1,35 @@
+@import './src/styles/variables';
+
 .rl-scrolling-table {
-  overflow: auto;
+  overflow: hidden;
   margin-bottom: 20px;
+  border: solid 1px $border-color;
 
-  table {
+  .rl-table-master {
+    overflow: auto;
+  }
+
+  .rl-table-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+  }
+
+  .table {
     margin-bottom: 0;
+    border-width: 0;
+    border-collapse: separate;
 
-    .fixed-header {
-      position: absolute;
-      top: 0;
-      left: 0;
-
-      tr:first-child th {
-        border-top-width: 0;
-      }
+    th,
+    td {
+      border-width: 0 0 1px 1px;
     }
 
-    &.table-bordered {
-      tr:first-child th {
-        border-top-width: 1px;
-      }
+    th:first-child,
+    td:first-child {
+      border-left-width: 0;
     }
   }
 

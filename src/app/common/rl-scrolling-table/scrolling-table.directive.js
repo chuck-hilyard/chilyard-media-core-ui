@@ -14,53 +14,71 @@ export default function rlScrollingTable() {
   function link(scope, element) {
     this.heightPercentage = 0.7;
     this.container = element[0].querySelector('.rl-scrolling-table');
-    this.containerWidth = null;
-    this.originalHeader = null;
-    this.clonedHeader = null;
+    this.original = null;
+    this.clone = null;
+    this.scrollLeft = null;
 
 
     this.init = () => {
-      // Set container height
-      let height = window.innerHeight * this.heightPercentage;
-      scope.height = `${height}px`;
-
       // Clone table header
-      this.originalHeader = element[0].querySelector('table thead');
-      this.clonedHeader = this.originalHeader.cloneNode(true);
-      this.clonedHeader.className = 'fixed-header';
-      this.clonedHeader.style.display = 'none';
-      this.originalHeader.after(this.clonedHeader);
+      this.original = element[0].querySelector('.rl-table');
+      this.original.className += ' rl-table-master';
+      this.clone = this.original.cloneNode(true);
+      this.clone.className = 'rl-table rl-table-header';
+      this.clone.querySelector('tbody').remove();
+      this.original.after(this.clone);
 
       // Set event listeners
-      this.container.addEventListener('scroll', this.setClone);
-      window.addEventListener('resize', this.setClone);
+      this.original.addEventListener('scroll', this.scroll);
+      window.addEventListener('resize', this.setHeight);
+
+      this.setup();
     };
 
-    this.setClone = () => {
-      // Place fixed header
-      this.clonedHeader.style.display = this.container.scrollTop > 0 ? 'table-header-group' : 'none';
-      this.clonedHeader.style.top = `${this.container.scrollTop}px`;
-      this.setWidth();
+    this.setup = () => {
+      let $link = this;
+      setTimeout(function() {
+        $link.setHeight();
+        $link.sizeClone();
+      }, 250);
     };
 
-    this.setWidth = () => {
-      // Don't update sizes if container hasn't changed
-      if (!this.containerWidth || this.containerWidth !== this.container.clientWidth) {
-        console.log('sizing');
-        // Set cloned header width
-        this.containerWidth = this.container.clientWidth;
-        let originalHeaderWidth = window.getComputedStyle(this.originalHeader, null).getPropertyValue('width');
-        this.clonedHeader.style.width = parseInt(originalHeaderWidth) + 1 + 'px';  // Extra pixel is to account for border-collapse
+    this.setHeight = () => {
+      this.original.style.height = window.innerHeight * this.heightPercentage + 'px';
+    };
 
-        // Get columns from both headers
-        let columns = this.originalHeader.querySelectorAll('tr:first-child th');
-        let clonedColumns = this.clonedHeader.querySelectorAll('tr:first-child th');
+    this.scroll = () => {
+      if (!this.scrollLeft || this.scrollLeft !== this.original.scrollLeft) {
+        this.scrollLeft = this.original.scrollLeft;
+        this.clone.style.left = (this.scrollLeft * -1) + 'px';
+      }
+    };
 
-        // Set column widths for clonedHeader
-        angular.forEach(columns, (column, index) => {
-          let width = window.getComputedStyle(column, null).getPropertyValue('width');
-          clonedColumns[index].style.width = width;
-        });
+    this.sizeClone = () => {
+      // Get columns from both headers
+      let cells = this.original.querySelectorAll('tr:first-child th');
+      let originalColumns = this.original.querySelectorAll('col');
+      let clonedColumns = this.clone.querySelectorAll('col');
+
+      if (originalColumns.length === 0) {
+        throw new Error('RL-SCROLLING-TABLE REQUIRES <COLGROUP> TO BE DEFINED');
+      }
+
+      // Set widths for clonedHeader
+      let totalWidth = 0;
+      angular.forEach(cells, (cell, index) => {
+        let width = window.getComputedStyle(cell, null).getPropertyValue('width');
+        clonedColumns[index].style.width = width;
+        totalWidth += parseInt(width);
+      });
+
+      // Set clones parent div dimensions
+      this.clone.querySelector('.rl-table-clip').style.width = totalWidth + 'px';
+
+      // Offset .rl-table-header from .rl-table-master scrollbar
+      let scrollbarWidth = this.original.offsetWidth - this.original.clientWidth;
+      if (scrollbarWidth !== 0) {
+        this.clone.style.right = `${scrollbarWidth}px`;
       }
     };
 

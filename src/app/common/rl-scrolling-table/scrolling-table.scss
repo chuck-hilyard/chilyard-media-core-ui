@@ -5,17 +5,23 @@
   margin-bottom: 20px;
   border: solid 1px $border-color;
 
-  .rl-table-master {
-    overflow: auto;
-  }
-
   .rl-table-header {
     position: absolute;
     top: 0;
     left: 0;
     right: 0;
     overflow: hidden;
+
+    &.rl-table-header--scrollbar {
+      border-right: solid 1px $border-color;
+    }
   }
+
+  .rl-table-master {
+    overflow: auto;
+    border-top: solid 1px $border-color;
+  }
+
 
   .table {
     margin-bottom: 0;
@@ -31,6 +37,18 @@
     td:first-child {
       border-left-width: 0;
     }
+  }
+
+  .rl-table-loading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $rl-bright-white;
   }
 
 }

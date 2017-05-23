@@ -224,7 +224,7 @@
     <rl-scrolling-table>
       <table class="table table-striped table-condensed table-bordered table-report">
         <colgroup>
-          <col class="date-id">
+          <col class="dates">
           <col class="status">
           <col class="utilization">
           <col class="budget">
@@ -250,10 +250,7 @@
         </colgroup>
         <thead>
           <tr>
-            <th class="cycle-id">
-              Cycle Date<br>
-              <i>Cycle Id</i>
-            </th>
+            <th>Cycle Dates</th>
             <th>Status</th>
             <th>Utilization</th>
             <th>Budget</th>
@@ -305,10 +302,7 @@
         </thead>
         <tbody>
           <tr ng-repeat="row in $ctrl.trendChart.chart.data.labels">
-            <td class="date-id">
-              2017-04-01 &mdash; 2017-04-30<br>
-              <i>1000020: {{$index}}</i>
-            </td>
+            <td class="dates">2017-04-01 &mdash; 2017-04-30</td>
             <td class="status">Running</td>
             <td class="utilization">75%</td>
             <td class="budget">$1,000.00</td>

@@ -11,6 +11,7 @@
     left: 0;
     right: 0;
     overflow: hidden;
+    border-left: solid 1px $border-color;
 
     &.rl-table-header--scrollbar {
       border-right: solid 1px $border-color;
@@ -20,8 +21,25 @@
   .rl-table-master {
     overflow: auto;
     border-top: solid 1px $border-color;
+    border-left: solid 1px $border-color;
   }
 
+  .rl-static-column {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+    border-bottom: solid 1px $border-color;
+
+    .rl-static-body {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      overflow: hidden;
+    }
+  }
 
   .table {
     margin-bottom: 0;

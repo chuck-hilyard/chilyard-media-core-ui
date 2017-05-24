@@ -14,10 +14,8 @@ export default function rlScrollingTable() {
   function link(scope, element) {
     this.container = element[0].querySelector('.rl-scrolling-table');
     this.heightPercentage = 0.6;
-
     this.header = null;
     this.master = null;
-    this.scrollLeft = null;
 
 
     this.init = () => {
@@ -52,10 +50,7 @@ export default function rlScrollingTable() {
     };
 
     this.scroll = () => {
-      if (!this.scrollLeft || this.scrollLeft !== this.master.scrollLeft) {
-        this.scrollLeft = this.master.scrollLeft;
-        this.header.scrollLeft = this.scrollLeft;
-      }
+      this.header.scrollLeft = this.master.scrollLeft;
     };
 
     this.sizeElements = () => {

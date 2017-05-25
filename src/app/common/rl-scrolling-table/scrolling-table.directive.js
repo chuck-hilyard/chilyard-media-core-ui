@@ -82,14 +82,18 @@ export default function rlScrollingTable() {
       this.master.style.marginTop = `${headerHeight - this.borderWidth}px`;
       this.master.style.marginLeft = `${staticColumnWidth}`;
       this.header.style.left = `${staticColumnWidth}`;
+      this.staticColumn.style.width = `${staticColumnWidth}`;
 
       // Scrollbar offsets
       let scrollbarWidth = this.master.offsetWidth - this.master.clientWidth - this.borderWidth;
-      let scrollbarHeight = this.master.offsetHeight - this.master.clientHeight - this.borderWidth;
       if (scrollbarWidth !== 0) {
         this.header.className += ' rl-table-header--scrollbar';
         this.header.style.right = `${scrollbarWidth - this.borderWidth}px`;
-        this.staticColumn.style.width = `${staticColumnWidth}`;
+      }
+
+      let scrollbarHeight = this.master.offsetHeight - this.master.clientHeight - this.borderWidth;
+      if (scrollbarWidth !== 0) {
+        this.staticColumn.className += ' rl-static-head--scrollbar';
         this.staticColumn.style.bottom = `${scrollbarHeight}px`;
       }
 

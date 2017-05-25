@@ -30,7 +30,10 @@
     left: 0;
     bottom: 0;
     overflow: hidden;
-    border-bottom: solid 1px $border-color;
+
+    &.rl-static-column--scrollbar {
+      border-bottom: solid 1px $border-color;
+    }
 
     .rl-static-body {
       position: absolute;

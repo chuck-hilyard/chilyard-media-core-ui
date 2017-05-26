@@ -2,9 +2,10 @@ import template from './campaign.html';
 
 
 class Controller {
-  constructor(CampaignSidebar) {
+  constructor(CampaignSidebar, $scope) {
     'ngInject';
     this.header = {};
+    this.$scope = $scope;
     this.sidebar = CampaignSidebar;
   }
 
@@ -104,8 +105,9 @@ class Controller {
     };
   }
 
-  handleSidebarToggle(callback) {
-    this.sidebar.collapsed = callback;
+  handleSidebarToggle(status) {
+    this.sidebar.collapsed = status;
+    this.$scope.sidebar = status;
   }
 
 }

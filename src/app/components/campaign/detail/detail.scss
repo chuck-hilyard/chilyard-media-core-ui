@@ -26,6 +26,11 @@
 }
 
 .table-report {
+  thead,
+  tbody {
+    background-color: $rl-pale-gray;
+  }
+
   th {
     white-space: nowrap;
   }

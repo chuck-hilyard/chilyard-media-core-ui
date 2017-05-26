@@ -4,6 +4,7 @@
   overflow: hidden;
   margin-bottom: 20px;
   border: solid 1px $border-color;
+  background-color: $border-color;
 
   .rl-table-header {
     position: absolute;
@@ -11,17 +12,36 @@
     left: 0;
     right: 0;
     overflow: hidden;
-
-    &.rl-table-header--scrollbar {
-      border-right: solid 1px $border-color;
-    }
+    border-left: solid 1px $border-color;
   }
 
   .rl-table-master {
-    overflow: auto;
+    overflow-x: scroll;
+    overflow-y: scroll;
     border-top: solid 1px $border-color;
+    border-left: solid 1px $border-color;
   }
 
+  .rl-static-column {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+
+    .rl-static-head {
+      width: inherit;
+    }
+
+    .rl-static-body {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: inherit;
+      overflow: hidden;
+    }
+  }
 
   .table {
     margin-bottom: 0;
@@ -31,6 +51,10 @@
     th,
     td {
       border-width: 0 0 1px 1px;
+    }
+
+    tr:last-child td {
+      border-bottom-width: 0;
     }
 
     th:first-child,

@@ -50,7 +50,7 @@ export default function rlScrollingTable($timeout) {
         this.build();
       }
       else {
-        setTimeout(this.initChecker, 250);
+        this.$timeout(this.initChecker, 250);
       }
     };
 

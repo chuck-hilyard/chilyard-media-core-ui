@@ -1,12 +1,12 @@
 @import './src/styles/variables';
 
 .rl-sidebar {
-  position: relative;
+  position: fixed;
+  top: $navbar-height;
+  left: 0;
   width: 240px;
-  min-height: 100%;
-  flex: 1;
+  height: 100%;
   background-color: $rl-charcoal;
-  transition: width 0.5s;
 
   .nav-sidebar {
     padding-top: ($grid-gutter-width / 2);
@@ -88,4 +88,12 @@
 
   }
 
+}
+
+.rl-container__sidebar {
+  padding-left: 240px;
+}
+
+.rl-container__sidebar--collapse {
+  padding-left: 54px;
 }

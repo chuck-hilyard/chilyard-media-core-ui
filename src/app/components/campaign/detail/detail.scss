@@ -24,3 +24,42 @@
   width: 60%;
   height: 263px;
 }
+
+.table-report {
+  thead,
+  tbody {
+    background-color: $rl-pale-gray;
+  }
+
+  th {
+    white-space: nowrap;
+  }
+
+  td.dates {
+    white-space: nowrap;
+  }
+
+  .utilization,
+  .budget,
+  .spend,
+  .impressions,
+  .cpm,
+  .ctr,
+  .all-clicks,
+  .social-reach,
+  .social-impressions,
+  .website-clicks,
+  .button-clicks,
+  .link-clicks,
+  .social-clicks,
+  .lead-forms,
+  .check-ins,
+  .post-comments,
+  .post-reactions,
+  .post-shares,
+  .post-engagement,
+  .page-likes,
+  .page-engagement {
+    text-align: right;
+  }
+}

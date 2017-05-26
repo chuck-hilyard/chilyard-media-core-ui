@@ -1,0 +1,78 @@
+@import './src/styles/variables';
+
+.rl-scrolling-table {
+  overflow: hidden;
+  margin-bottom: 20px;
+  border: solid 1px $border-color;
+  background-color: $border-color;
+
+  .rl-table-header {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+    border-left: solid 1px $border-color;
+  }
+
+  .rl-table-master {
+    overflow-x: scroll;
+    overflow-y: scroll;
+    border-top: solid 1px $border-color;
+    border-left: solid 1px $border-color;
+  }
+
+  .rl-static-column {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    overflow: hidden;
+
+    .rl-static-head {
+      width: inherit;
+    }
+
+    .rl-static-body {
+      position: absolute;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: inherit;
+      overflow: hidden;
+    }
+  }
+
+  .table {
+    margin-bottom: 0;
+    border-width: 0;
+    border-collapse: separate;
+
+    th,
+    td {
+      border-width: 0 0 1px 1px;
+    }
+
+    tr:last-child td {
+      border-bottom-width: 0;
+    }
+
+    th:first-child,
+    td:first-child {
+      border-left-width: 0;
+    }
+  }
+
+  .rl-table-loading {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: $rl-bright-white;
+  }
+
+}

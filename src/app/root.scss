@@ -1,21 +1,15 @@
 @import './src/styles/variables';
 
 .rl-body {
-  position: absolute;
-  top: $navbar-height;
-  right: 0;
-  bottom: 38px;
-  left:0 ;
+  padding-top: $navbar-height;
+  padding-bottom: 38px;
 }
 
 .rl-container {
-  display: flex;
   height: 100%;
 
   .rl-content {
-    flex: 2;
     padding: ($grid-gutter-width  / 2);
-    overflow: auto;
 
     h1:first-child {
       margin-top: 0;

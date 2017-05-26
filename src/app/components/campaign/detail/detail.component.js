@@ -236,9 +236,7 @@ class Controller {
               },
               ticks: {
                 padding: 30,
-
               }
-              
             }
           ]
         },

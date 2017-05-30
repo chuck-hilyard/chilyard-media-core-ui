@@ -2,7 +2,7 @@ import template from './detail.html';
 
 class Controller {
 
-  constructor($filter, $http, $scope, CampaignDetailService, CampaignTrendChart, Session) {
+  constructor($filter, $http, $scope, CampaignDetailService, CampaignSidebar, CampaignTrendChart, Session) {
     'ngInject';
     // Anuglar
     this.$filter = $filter;
@@ -16,7 +16,7 @@ class Controller {
 
     this.trendChart = angular.copy(CampaignTrendChart);
 
-    $scope.$parent.$watch('sidebar', (newValue, oldValue) => {
+    $scope.$watch(() => CampaignSidebar.collapsed, (newValue, oldValue) => {
       if (newValue !== oldValue) {
         this.tableDelegate.resize();
       }

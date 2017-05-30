@@ -95,6 +95,13 @@ export default function rlScrollingTable($timeout) {
       });
       masterTable.style.width = `${totalWidth}px`;
 
+      // Set row heights
+      let rows = this.master.querySelectorAll('tr');
+      angular.forEach(rows, (row) => {
+        let height = window.getComputedStyle(row, null).getPropertyValue('height');
+        row.style.height = height;
+      });
+
       // Clone table header
       this.header.appendChild(masterTable.cloneNode(true));
       this.header.querySelector('tbody').remove();

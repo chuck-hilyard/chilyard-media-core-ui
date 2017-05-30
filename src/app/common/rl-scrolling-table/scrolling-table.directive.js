@@ -1,29 +1,40 @@
 import template from './scrolling-table.html';
 
 
-export default function rlScrollingTable() {
+export default function rlScrollingTable($timeout) {
   'ngInject';
 
   return {
     restrict: 'E',
     template: template,
     transclude: true,
-    link: link
+    link: link,
+    scope: {
+      delegate: '='
+    }
   };
 
   function link(scope, element) {
     this.borderWidth = 1;
-    this.container = element[0].querySelector('.rl-scrolling-table');
     this.heightPercentage = 0.6;
+    this.resizing;
+    this.$timeout = $timeout;
+
+    // DOM elements 
+    this.container = element[0].querySelector('.rl-scrolling-table');
     this.header = element[0].querySelector('.rl-table-header');
     this.master = element[0].querySelector('.rl-table-master');
     this.staticColumn = element[0].querySelector('.rl-static-column');
     this.staticHead = element[0].querySelector('.rl-static-head');
     this.staticBody = element[0].querySelector('.rl-static-body');
-    this.resizing;
 
     this.init = () => {
       scope.loading = true;
+
+      // Assign delegates
+      if(angular.isDefined(scope.delegate)) {
+        scope.delegate.resize = this.handleResize;
+      }
 
       // Set event listeners
       this.master.addEventListener('scroll', this.scroll);
@@ -39,15 +50,14 @@ export default function rlScrollingTable() {
         this.build();
       }
       else {
-        setTimeout(this.initChecker, 250);
+        this.$timeout(this.initChecker, 250);
       }
     };
 
     this.handleResize = () => {
       scope.loading = true;
-      scope.$digest();
-      clearTimeout(this.resizing);
-      this.resizing = setTimeout(this.resize, 500);
+      this.$timeout.cancel(this.resizing);
+      this.resizing = this.$timeout(this.resize, 250);
       this.setHeight();
     };
 
@@ -185,7 +195,6 @@ export default function rlScrollingTable() {
       this.master.querySelector('thead').remove();
 
       scope.loading = false;
-      scope.$digest();
     };
 
     this.init();

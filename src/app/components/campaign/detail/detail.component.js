@@ -2,19 +2,29 @@ import template from './detail.html';
 
 class Controller {
 
-  constructor($filter, $http, $scope, CampaignDetailService, CampaignTrendChart, Session) {
+  constructor($filter, $http, $scope, CampaignDetailService, CampaignSidebar, CampaignTrendChart, Session) {
     'ngInject';
     // Anuglar
     this.$filter = $filter;
     this.$http = $http;
-    this.$scope = $scope;
 
     // Local Vars
     this.metrics = this.setMetrics();
     this.session = Session;
     this.service = CampaignDetailService;
+    this.tableDelegate = {};
 
     this.trendChart = angular.copy(CampaignTrendChart);
+
+    $scope.$watch(() => CampaignSidebar.collapsed, (newValue, oldValue) => {
+      if (newValue !== oldValue) {
+        this.tableDelegate.resize();
+      }
+    });
+
+    $scope.$watch(() => this.session.dateRange, () => {
+      this.getTrendData();
+    }, true);
 
     // FPO RANDOM CHART DATA
     // TODO: REPLACE
@@ -27,10 +37,6 @@ class Controller {
   $onInit() {
     this.campaign = this.campaignRequest.data.campaign;
     this.getTrendData();
-
-    this.$scope.$watch(() => this.session.dateRange, () => {
-      this.getTrendData();
-    }, true);
   }
 
   getTrendData() {

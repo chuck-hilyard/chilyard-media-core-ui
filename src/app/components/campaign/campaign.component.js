@@ -104,8 +104,8 @@ class Controller {
     };
   }
 
-  handleSidebarToggle(callback) {
-    this.sidebar.collapsed = callback;
+  handleSidebarToggle(status) {
+    this.sidebar.collapsed = status;
   }
 
 }

@@ -12,6 +12,7 @@ class Controller {
     this.metrics = this.setMetrics();
     this.session = Session;
     this.service = CampaignDetailService;
+    this.sortState = {};
     this.tableDelegate = {};
 
     this.trendChart = angular.copy(CampaignTrendChart);
@@ -58,6 +59,10 @@ class Controller {
       dates: `${start},${end}`,
       metrics: metrics.toString()
     };
+  }
+
+  handleSort(state) {
+    this.sortState = state;
   }
 
   setMetrics() {

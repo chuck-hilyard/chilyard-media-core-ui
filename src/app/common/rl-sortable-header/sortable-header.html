@@ -1,0 +1,8 @@
+<div class="sortable-header" ng-click="$ctrl.sort()">
+  <translate  ng-transclude></translate>
+  <span>
+    <i class="fa fa-sort"></i>
+    <i class="fa fa-sort-asc" ng-if="$ctrl.state.key === $ctrl.key && $ctrl.state.desc === false"></i>
+    <i class="fa fa-sort-desc" ng-if="$ctrl.state.key === $ctrl.key && $ctrl.state.desc === true"></i>
+  </span>
+</div>

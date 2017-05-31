@@ -7,8 +7,11 @@ export default function rlScrollingTable($timeout) {
   return {
     restrict: 'E',
     template: template,
-    transclude: true,
     link: link,
+    transclude: {
+      'header': 'headerTable',
+      'body': 'bodyTable'
+    },
     scope: {
       delegate: '='
     }
@@ -20,13 +23,13 @@ export default function rlScrollingTable($timeout) {
     this.resizing;
     this.$timeout = $timeout;
 
-    // DOM elements 
+    // DOM elements
     this.container = element[0].querySelector('.rl-scrolling-table');
-    this.header = element[0].querySelector('.rl-table-header');
-    this.master = element[0].querySelector('.rl-table-master');
-    this.staticColumn = element[0].querySelector('.rl-static-column');
-    this.staticHead = element[0].querySelector('.rl-static-head');
-    this.staticBody = element[0].querySelector('.rl-static-body');
+    this.header = element[0].querySelector('.header');
+    this.body = element[0].querySelector('.body');
+    this.staticColumn = element[0].querySelector('.static-column');
+    this.staticHead = element[0].querySelector('.static-head');
+    this.staticBody = element[0].querySelector('.static-body');
 
     this.init = () => {
       scope.loading = true;
@@ -37,15 +40,15 @@ export default function rlScrollingTable($timeout) {
       }
 
       // Set event listeners
-      this.master.addEventListener('scroll', this.scroll);
+      this.body.addEventListener('scroll', this.scroll);
       window.addEventListener('resize', this.handleResize);
 
       this.initChecker();
     };
 
     this.initChecker = () => {
-      let masterRows = this.master.querySelectorAll('tbody tr');
-      if (masterRows.length > 0) {
+      let bodyRows = this.body.querySelectorAll('tbody tr');
+      if (bodyRows.length > 0) {
         this.setHeight();
         this.build();
       }
@@ -62,75 +65,47 @@ export default function rlScrollingTable($timeout) {
     };
 
     this.setHeight = () => {
-      this.master.style.height = window.innerHeight * this.heightPercentage + 'px';
+      this.body.style.height = `${window.innerHeight * this.heightPercentage}px`;
     };
 
     this.scroll = () => {
-      this.header.scrollLeft = this.master.scrollLeft;
-      this.staticBody.scrollTop = this.master.scrollTop;
+      this.header.scrollLeft = this.body.scrollLeft;
+      this.staticBody.scrollTop = this.body.scrollTop;
     };
 
     this.build = () => {
-      let masterTable = this.master.querySelector('table');
-      let masterCells = this.master.querySelectorAll('tr:first-child th');
-      let masterColumns = this.master.querySelectorAll('col');
-
-      if (masterColumns.length === 0) {
-        throw new Error('RL-SCROLLING-TABLE REQUIRES <COLGROUP> TO BE DEFINED');
-      }
-
-      // Set widths
-      masterTable.style.width = `${this.master.clientWidth}px`;
-      let staticColumnWidth = 0;
-      let totalWidth = 0;
-      angular.forEach(masterCells, (cell, index) => {
-        let width = window.getComputedStyle(cell, null).getPropertyValue('width');
-        masterColumns[index].style.width = width;
-        if (index === 0) {
-          staticColumnWidth = width;
-        }
-        else {
-          totalWidth += parseInt(width);
-        }
-      });
-      masterTable.style.width = `${totalWidth}px`;
+      let staticHeaderWidth = window.getComputedStyle(this.staticHead.querySelector('th:first-child'), null).getPropertyValue('width');
+      let staticBodyWidth = window.getComputedStyle(this.staticBody.querySelector('td:first-child'), null).getPropertyValue('width');
+      let staticWidth = `${Math.max(parseInt(staticHeaderWidth), parseInt(staticBodyWidth))}px`;
 
       // Set row heights
-      let rows = this.master.querySelectorAll('tr');
+      let rows = this.container.querySelectorAll('tr');
       angular.forEach(rows, (row) => {
         let height = window.getComputedStyle(row, null).getPropertyValue('height');
         row.style.height = height;
       });
 
-      // Clone table header
-      this.header.appendChild(masterTable.cloneNode(true));
-      this.header.querySelector('tbody').remove();
-
       // Table offsets
       let headerHeight = this.header.querySelector('thead').clientHeight;
-      this.master.style.marginTop = `${headerHeight - this.borderWidth}px`;
-      this.master.style.marginLeft = `${staticColumnWidth}`;
-      this.header.style.left = `${staticColumnWidth}`;
-      this.staticColumn.style.width = `${staticColumnWidth}`;
+      this.body.style.marginTop = `${headerHeight - this.borderWidth}px`;
+      this.body.style.marginLeft = `${staticWidth}`;
+      this.header.style.left = `${staticWidth}`;
+      this.staticColumn.style.width = `${staticWidth}`;
+      this.staticBody.style.top = `${headerHeight}px`;
 
       // Scrollbar offsets
-      let scrollbarWidth = this.master.offsetWidth - this.master.clientWidth;
+      let scrollbarWidth = this.body.offsetWidth - this.body.clientWidth;
       if (scrollbarWidth !== 0) {
         this.header.style.right = `${scrollbarWidth - this.borderWidth}px`;
       }
 
-      let scrollbarHeight = this.master.offsetHeight - this.master.clientHeight;
+      let scrollbarHeight = this.body.offsetHeight - this.body.clientHeight;
       if (scrollbarHeight !== 0) {
         this.staticColumn.style.bottom = `${scrollbarHeight - this.borderWidth}px`;
       }
 
-      // Static column table
-      let staticTable = masterTable.cloneNode(true);
-      staticTable.querySelector('colgroup').remove();
-      staticTable.style.width = '';
-
       // Remove non-static columns from static column table
-      let staticRows = staticTable.querySelectorAll('tr');
+      let staticRows = this.staticColumn.querySelectorAll('tr');
       angular.forEach(staticRows, (row) => {
         let rowCells = row.querySelectorAll('th, td');
         angular.forEach(rowCells, (cell, index) => {
@@ -140,24 +115,10 @@ export default function rlScrollingTable($timeout) {
         });
       });
 
-      // Create static head table
-      this.staticHead.appendChild(staticTable.cloneNode(true));
-      this.staticHead.querySelector('tbody').remove();
-
-      // Create static body table
-      this.staticBody.appendChild(staticTable.cloneNode(true));
-      this.staticBody.querySelector('thead').remove();
-      this.staticBody.style.top = window.getComputedStyle(this.staticHead, null).getPropertyValue('height');
-
-      // Remove master thead
-      this.master.querySelector('thead').remove();
-
       // Remove static column from other tables
       let rowSelectors = [
-        '.rl-table-header tr',
-        '.rl-table-header colgroup',
-        '.rl-table-master tr',
-        '.rl-table-master colgroup'
+        '.header tr',
+        '.body tr',
       ];
       let otherRows = this.container.querySelectorAll(rowSelectors.join());
       angular.forEach(otherRows, (row) => {
@@ -169,37 +130,41 @@ export default function rlScrollingTable($timeout) {
         });
       });
 
-      scope.loading = false;
+      this.resize();
     };
 
     this.resize = () => {
-      let masterTable = this.master.querySelector('table');
-      let masterCells = this.master.querySelectorAll('tr:first-child td');
-      let masterColumns = this.master.querySelectorAll('col');
+      let bodyTable = this.body.querySelector('table');
+      let bodyCells = this.body.querySelectorAll('tr:first-child td');
       let headerTable = this.header.querySelector('table');
-      let headerColumns = this.header.querySelectorAll('col');
+      let headerCells = this.header.querySelectorAll('tr:first-child th');
 
-      // Put header back in master table
-      masterTable.appendChild( headerTable.querySelector('thead').cloneNode(true) );
+      // Put temp header into body
+      bodyTable.appendChild( headerTable.querySelector('thead').cloneNode(true) );
 
       // Set table widths to match container
-      masterTable.style.width = `${this.master.clientWidth}px`;
-      headerTable.style.width = `${this.master.clientWidth}px`;
+      bodyTable.style.width = `${this.body.clientWidth}px`;
+      headerTable.style.width = `${this.body.clientWidth}px`;
+
+      angular.forEach(bodyCells, (cell) => {
+        cell.style.width = '';
+      });
 
       let totalWidth = 0;
-      angular.forEach(masterCells, (cell, index) => {
-        masterColumns[index].style.width = '';
+      angular.forEach(bodyCells, (cell, index) => {
         let width = window.getComputedStyle(cell, null).getPropertyValue('width');
-        masterColumns[index].style.width = width;
-        headerColumns[index].style.width = width;
+        cell.style.width = width;
+        headerCells[index].style.width = width;
         totalWidth += parseInt(width);
       });
 
-      masterTable.style.width = `${totalWidth}px`;
-      headerTable.style.width = `${totalWidth}px`;
+      if (this.body.clientWidth < totalWidth) {
+        bodyTable.style.width = `${totalWidth}px`;
+        headerTable.style.width = `${totalWidth}px`;
+      }
 
-      // Remove master thead
-      this.master.querySelector('thead').remove();
+      // Remove temp header
+      this.body.querySelector('thead').remove();
 
       scope.loading = false;
     };

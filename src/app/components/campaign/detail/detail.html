@@ -283,30 +283,34 @@
       <body-table>
         <table class="table table-striped table-condensed table-bordered table-report">
           <tbody>
-            <tr ng-repeat="row in $ctrl.trendChart.chart.data.labels">
-              <td class="dates">2017-04-01 &mdash; 2017-04-30</td>
-              <td class="status">Running</td>
-              <td class="utilization">75%</td>
-              <td class="budget">$1,000.00</td>
-              <td class="spend">$750.00</td>
-              <td class="impressions">4,444</td>
-              <td class="cpm">$2.93</td>
-              <td class="ctr">3.90%</td>
-              <td class="all-clicks">3,500</td>
-              <td class="social-reach">64</td>
-              <td class="social-impressions">15</td>
-              <td class="website-clicks">15</td>
-              <td class="button-clicks">15</td>
-              <td class="link-clicks">15</td>
-              <td class="social-clicks">15</td>
-              <td class="lead-forms">15</td>
-              <td class="check-ins">64</td>
-              <td class="post-comments">15</td>
-              <td class="post-reactions">15</td>
-              <td class="post-shares">15</td>
-              <td class="post-engagement">15</td>
-              <td class="page-likes">15</td>
-              <td class="page-engagement">15</td>
+            <tr ng-repeat="row in $ctrl.gridData">
+              <td class="dates">
+                {{row.startDate}}
+                &mdash;
+                {{row.endDate}}
+              </td>
+              <td class="status">{{row.status}}</td>
+              <td class="utilization">{{row.utilization | number}}%</td>
+              <td class="budget">{{row.budget | currency}}</td>
+              <td class="spend">{{row.spend | currency}}</td>
+              <td class="impressions">{{row.impressions | number}}</td>
+              <td class="cpm">{{row.cpm | currency}}</td>
+              <td class="ctr">{{row.ctr | number}}%</td>
+              <td class="all-clicks">{{row.allClicks | number}}</td>
+              <td class="social-reach">{{row.socialReach | number}}</td>
+              <td class="social-impressions">{{row.socialImpressions | number}}</td>
+              <td class="website-clicks">{{row.websiteClicks | number}}</td>
+              <td class="button-clicks">{{row.buttonClicks | number}}</td>
+              <td class="link-clicks">{{row.linkClicks | number}}</td>
+              <td class="social-clicks">{{row.socialClicks | number}}</td>
+              <td class="lead-forms">{{row.leadForms | number}}</td>
+              <td class="check-ins">{{row.checkIns | number}}</td>
+              <td class="post-comments">{{row.postComments | number}}</td>
+              <td class="post-reactions">{{row.postReactions | number}}</td>
+              <td class="post-shares">{{row.postShares | number}}</td>
+              <td class="post-engagement">{{row.postEngagement | number}}</td>
+              <td class="page-likes">{{row.pageLikes | number}}</td>
+              <td class="page-engagement">{{row.pageEngagement | number}}</td>
             </tr>
           </tbody>
         </table>

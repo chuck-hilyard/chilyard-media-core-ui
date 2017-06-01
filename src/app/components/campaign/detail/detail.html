@@ -230,27 +230,88 @@
                 <rl-sortable-header key="'dates'" sort-state="$ctrl.sortState" on-sort="$ctrl.handleSort(state)">Cycle Dates</rl-sortable-header>
               </th>
               <th>Status</th>
-              <th>Utl</th>
+              <th uib-tooltip-html="$ctrl.tooltips.utilization"
+                  tooltip-append-to-body="true"
+                  tooltip-placement="auto bottom">
+                Utl&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
               <th>Budget</th>
               <th>Spend</th>
-              <th>Imp</th>
-              <th>CPM</th>
-              <th>CTR</th>
+              <th uib-tooltip-html="$ctrl.tooltips.impressions"
+                  tooltip-append-to-body="true"
+                  tooltip-placement="auto bottom">
+                Imp&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.cpm"
+                  tooltip-append-to-body="true"
+                  tooltip-placement="auto bottom">
+                CPM
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.ctr"
+                  tooltip-append-to-body="true"
+                  tooltip-placement="auto bottom">
+                CTR
+                <i class="fa fa-info-circle"></i>
+              </th>
               <th>All Clicks</th>
-              <th>Social<br>Reach</th>
-              <th>Social<br>Impressions</th>
-              <th>Website<br>Clicks</th>
-              <th>Button<br>Clicks</th>
-              <th>Link<br>Clicks</th>
-              <th>Social<br>Clicks</th>
-              <th>Lead Forms<br>Submitted</th>
+              <th>
+                Social Reach
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.socialImpressions"
+                  tooltip-append-to-body="true"
+                  tooltip-placement="auto bottom">
+                Social Imp&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th>
+                Website Clicks
+              </th>
+              <th>
+                Button Clicks
+              </th>
+              <th>
+                Link Clicks
+              </th>
+              <th>
+                Social Clicks
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.leadForms"
+                  tooltip-append-to-body="true"
+                  tooltip-placement="auto bottom">
+                Lead Forms&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
               <th>Check-Ins</th>
-              <th>Post<br>Comments</th>
-              <th>Post<br>Reactions</th>
-              <th>Post<br>Shares</th>
-              <th>Post<br>Engagement</th>
-              <th>Page<br>Likes</th>
-              <th>Page<br>Engagement</th>
+              <th uib-tooltip-html="$ctrl.tooltips.postComments"
+                  tooltip-append-to-body="true"
+                  tooltip-placement="auto bottom">
+                Post Com&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th>
+                Post Reactions
+              </th>
+              <th>
+                Post Shares
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.postEngagement"
+                  tooltip-append-to-body="true"
+                  tooltip-placement="auto bottom">
+                Post Eng&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th>
+                Page Likes
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.pageEngagement"
+                  tooltip-append-to-body="true"
+                  tooltip-placement="auto bottom">
+                Page Eng&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
             </tr>
             <tr>
               <th>Total</th>

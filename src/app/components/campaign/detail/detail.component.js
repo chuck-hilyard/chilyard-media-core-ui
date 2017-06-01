@@ -1,8 +1,17 @@
 import template from './detail.html';
+import cpmTooltip from './tooltips/cpm.html';
+import ctrTooltip from './tooltips/ctr.html';
+import impressionsTooltip from './tooltips/impressions.html';
+import leadFormsTooltip from './tooltips/lead-forms.html';
+import pageEngagementTooltip from './tooltips/page-engagement.html';
+import postCommentsTooltip from './tooltips/post-comments.html';
+import postEngagementTooltip from './tooltips/post-engagement.html';
+import socialImpressionsTooltip from './tooltips/social-impressions.html';
+import utilizationTooltip from './tooltips/utilization.html';
 
 class Controller {
 
-  constructor($filter, $scope, CampaignDetailService, CampaignSidebar, CampaignTrendChart, Session) {
+  constructor($filter, $sce, $scope, CampaignDetailService, CampaignSidebar, CampaignTrendChart, Session) {
     'ngInject';
     // Anuglar
     this.$filter = $filter;
@@ -14,6 +23,19 @@ class Controller {
     this.service = CampaignDetailService;
     this.sortState = {};
     this.tableDelegate = {};
+
+    // Tooltip templates
+    this.tooltips = {
+      cpm: $sce.trustAsHtml(cpmTooltip),
+      ctr: $sce.trustAsHtml(ctrTooltip),
+      impressions: $sce.trustAsHtml(impressionsTooltip),
+      leadForms: $sce.trustAsHtml(leadFormsTooltip),
+      pageEngagement: $sce.trustAsHtml(pageEngagementTooltip),
+      postComments: $sce.trustAsHtml(postCommentsTooltip),
+      postEngagement: $sce.trustAsHtml(postEngagementTooltip),
+      socialImpressions: $sce.trustAsHtml(socialImpressionsTooltip),
+      utilization: $sce.trustAsHtml(utilizationTooltip)
+    };
 
     this.trendChart = angular.copy(CampaignTrendChart);
 

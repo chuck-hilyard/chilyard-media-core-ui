@@ -2,13 +2,13 @@ import template from './detail.html';
 
 class Controller {
 
-  constructor($filter, $http, $scope, CampaignDetailService, CampaignSidebar, CampaignTrendChart, Session) {
+  constructor($filter, $scope, CampaignDetailService, CampaignSidebar, CampaignTrendChart, Session) {
     'ngInject';
     // Anuglar
     this.$filter = $filter;
-    this.$http = $http;
 
     // Local Vars
+    this.gridData = {};
     this.metrics = this.setMetrics();
     this.session = Session;
     this.service = CampaignDetailService;
@@ -23,8 +23,9 @@ class Controller {
       }
     });
 
-    $scope.$watch(() => this.session.dateRange, () => {
+    $scope.$watch(() => Session.dateRange, () => {
       this.getTrendData();
+      this.getPerformanceData();
     }, true);
 
     // FPO RANDOM CHART DATA
@@ -38,31 +39,49 @@ class Controller {
   $onInit() {
     this.campaign = this.campaignRequest.data.campaign;
     this.getTrendData();
+    this.getPerformanceData();
+  }
+
+  dateRangeToString() {
+    let start = this.$filter('date')(this.session.dateRange.start, 'yyyy-MM-dd');
+    let end = this.$filter('date')(this.session.dateRange.end, 'yyyy-MM-dd');
+    return `${start},${end}`;
   }
 
   getTrendData() {
-    let params = this.getTrendParams();
+    let metrics = this.metrics.trend.map((item) => item.id);
+    let params = {
+      dates: this.dateRangeToString(),
+      metrics: metrics.toString()
+    };
     this.service.getTrendData(this.campaign.mcid, params)
       .then((response) => {
         this.trendChart.build('bar', response.data, this.metrics.trend);
       })
       .catch((error) => {
-        throw new Error(JSON.stringify(error));
+        throw new Error('GET TREND DATA ERROR: ', JSON.stringify(error));
       });
   }
 
-  getTrendParams() {
-    let start = this.$filter('date')(this.session.dateRange.start, 'yyyy-MM-dd');
-    let end = this.$filter('date')(this.session.dateRange.end, 'yyyy-MM-dd');
-    let metrics = this.metrics.trend.map((item) => item.id);
-    return {
-      dates: `${start},${end}`,
-      metrics: metrics.toString()
+  getPerformanceData() {
+    let params = {
+      dates: this.dateRangeToString(),
     };
+    this.service.getPerformanceData(this.campaign.mcid, params)
+      .then((response) => {
+        this.gridData = response.data;
+      })
+      .catch((error) => {
+        throw new Error('GET PERFORMANCE DATA ERROR: ', JSON.stringify(error));
+      });
   }
 
   handleSort(state) {
     this.sortState = state;
+  }
+
+  handleNextPage() {
+    angular.noop();
   }
 
   setMetrics() {

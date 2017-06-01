@@ -13,7 +13,8 @@ export default function rlScrollingTable($timeout) {
       'body': 'bodyTable'
     },
     scope: {
-      delegate: '='
+      delegate: '=',
+      onNextPage: '&'
     }
   };
 
@@ -40,7 +41,7 @@ export default function rlScrollingTable($timeout) {
       }
 
       // Set event listeners
-      this.body.addEventListener('scroll', this.scroll);
+      this.body.addEventListener('scroll', this.scroll.bind(null, scope));
       window.addEventListener('resize', this.handleResize);
 
       this.initChecker();
@@ -65,12 +66,20 @@ export default function rlScrollingTable($timeout) {
     };
 
     this.setHeight = () => {
-      this.body.style.height = `${window.innerHeight * this.heightPercentage}px`;
+      let headerHeight = window.getComputedStyle(this.header, null).getPropertyValue('height');
+      let bodyHeight = window.getComputedStyle(this.body, null).getPropertyValue('height');
+      let maxHeight = window.innerHeight * this.heightPercentage;
+      if (parseInt(headerHeight) + parseInt(bodyHeight) > maxHeight) {
+        this.body.style.height = `${maxHeight}px`;
+      }
     };
 
-    this.scroll = () => {
+    this.scroll = (scope) => {
       this.header.scrollLeft = this.body.scrollLeft;
       this.staticBody.scrollTop = this.body.scrollTop;
+      if (angular.isDefined(scope.onNextPage) && this.body.scrollTop >= this.body.scrollHeight * 0.75 - this.body.clientHeight) {
+        scope.onNextPage();
+      }
     };
 
     this.build = () => {

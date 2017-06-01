@@ -221,7 +221,7 @@
   <div class="col-xs-12">
     <h3>Cycle Performance</h3>
 
-    <rl-scrolling-table delegate="$ctrl.tableDelegate">
+    <rl-scrolling-table delegate="$ctrl.tableDelegate" on-next-page="$ctrl.handleNextPage()">
       <header-table>
         <table class="table table-striped table-condensed table-bordered table-report">
           <thead>

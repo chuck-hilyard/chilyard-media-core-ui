@@ -9,7 +9,7 @@ export default class Service {
     let config = {
       params: params
     };
-    return this.$http.get(`/campaign/${mcid}/performance-data`, config);
+    return this.$http.get(`/campaign/${mcid}/cycle`, config);
   }
 
   getTrendData(mcid, params) {

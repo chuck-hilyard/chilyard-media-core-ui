@@ -6,7 +6,7 @@
   border: solid 1px $border-color;
   background-color: $border-color;
 
-  .rl-table-header {
+  .header {
     position: absolute;
     top: 0;
     left: 0;
@@ -15,25 +15,25 @@
     border-left: solid 1px $border-color;
   }
 
-  .rl-table-master {
+  .body {
     overflow-x: scroll;
     overflow-y: scroll;
     border-top: solid 1px $border-color;
     border-left: solid 1px $border-color;
   }
 
-  .rl-static-column {
+  .static-column {
     position: absolute;
     top: 0;
     left: 0;
     bottom: 0;
     overflow: hidden;
 
-    .rl-static-head {
+    .static-head {
       width: inherit;
     }
 
-    .rl-static-body {
+    .static-body {
       position: absolute;
       top: 0;
       left: 0;
@@ -63,7 +63,7 @@
     }
   }
 
-  .rl-table-loading {
+  .loading {
     position: absolute;
     top: 0;
     right: 0;

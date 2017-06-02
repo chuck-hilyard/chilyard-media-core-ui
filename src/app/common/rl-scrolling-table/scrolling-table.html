@@ -1,11 +1,11 @@
 <div class="rl-scrolling-table">
-  <div class="rl-table-header"></div>
-  <div class="rl-static-column">
-    <div class="rl-static-head"></div>
-    <div class="rl-static-body"></div>
+  <div class="static-column">
+    <div class="static-head" ng-transclude="header"></div>
+    <div class="static-body" ng-transclude="body"></div>
   </div>
-  <div class="rl-table-master" ng-transclude></div>
-  <div class="rl-table-loading" ng-show="loading">
+  <div class="header" ng-transclude="header"></div>
+  <div class="body" ng-transclude="body"></div>
+  <div class="loading" ng-show="loading">
     <i class="fa fa-spinner fa-pulse fa-5x"></i>
   </div>
 </div>

@@ -5,6 +5,13 @@ export default class Service {
     this.$http = $http;
   }
 
+  getPerformanceData(mcid, params) {
+    let config = {
+      params: params
+    };
+    return this.$http.get(`/campaign/${mcid}/cycle`, config);
+  }
+
   getTrendData(mcid, params) {
     let config = {
       params: params

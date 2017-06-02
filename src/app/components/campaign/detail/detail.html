@@ -226,7 +226,9 @@
         <table class="table table-striped table-condensed table-bordered table-report">
           <thead>
             <tr>
-              <th>Cycle Dates</th>
+              <th>
+                <rl-sortable-header key="'dates'" sort-state="$ctrl.sortState" on-sort="$ctrl.handleSort(state)">Cycle Dates</rl-sortable-header>
+              </th>
               <th>Status</th>
               <th>Utl</th>
               <th>Budget</th>

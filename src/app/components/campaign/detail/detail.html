@@ -230,85 +230,89 @@
                 <rl-sortable-header key="'dates'" sort-state="$ctrl.sortState" on-sort="$ctrl.handleSort(state)">Cycle Dates</rl-sortable-header>
               </th>
               <th>Status</th>
-              <th uib-tooltip-html="$ctrl.tooltips.utilization"
-                  tooltip-append-to-body="true"
-                  tooltip-placement="auto bottom">
+              <th uib-tooltip-html="$ctrl.tooltips.utilization">
                 Utl&hellip;
                 <i class="fa fa-info-circle"></i>
               </th>
               <th>Budget</th>
               <th>Spend</th>
-              <th uib-tooltip-html="$ctrl.tooltips.impressions"
-                  tooltip-append-to-body="true"
-                  tooltip-placement="auto bottom">
+              <th uib-tooltip-html="$ctrl.tooltips.impressions">
                 Imp&hellip;
                 <i class="fa fa-info-circle"></i>
               </th>
-              <th uib-tooltip-html="$ctrl.tooltips.cpm"
-                  tooltip-append-to-body="true"
-                  tooltip-placement="auto bottom">
+              <th uib-tooltip-html="$ctrl.tooltips.cpm">
                 CPM
                 <i class="fa fa-info-circle"></i>
               </th>
-              <th uib-tooltip-html="$ctrl.tooltips.ctr"
-                  tooltip-append-to-body="true"
-                  tooltip-placement="auto bottom">
+              <th uib-tooltip-html="$ctrl.tooltips.ctr">
                 CTR
                 <i class="fa fa-info-circle"></i>
               </th>
-              <th>All Clicks</th>
-              <th>
-                Social Reach
+              <th uib-tooltip-html="$ctrl.tooltips.allClicks">
+                All Cl&hellip;
+                <i class="fa fa-info-circle"></i>
               </th>
-              <th uib-tooltip-html="$ctrl.tooltips.socialImpressions"
-                  tooltip-append-to-body="true"
-                  tooltip-placement="auto bottom">
+              <th uib-tooltip-html="$ctrl.tooltips.frequency">
+                Freq&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.reach">
+                Reach
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.socialReach">
+                Social Reach
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.socialImpressions">
                 Social Imp&hellip;
                 <i class="fa fa-info-circle"></i>
               </th>
-              <th>
-                Website Clicks
+              <th uib-tooltip-html="$ctrl.tooltips.websiteClicks">
+                Website Cl&hellip;
+                <i class="fa fa-info-circle"></i>
               </th>
-              <th>
-                Button Clicks
+              <th uib-tooltip-html="$ctrl.tooltips.buttonClicks">
+                Button Cl&hellip;
+                <i class="fa fa-info-circle"></i>
               </th>
-              <th>
-                Link Clicks
+              <th uib-tooltip-html="$ctrl.tooltips.linkClicks">
+                Link Cl&hellip;
+                <i class="fa fa-info-circle"></i>
               </th>
-              <th>
-                Social Clicks
+              <th uib-tooltip-html="$ctrl.tooltips.socialClicks">
+                Social Cl&hellip;
+                <i class="fa fa-info-circle"></i>
               </th>
-              <th uib-tooltip-html="$ctrl.tooltips.leadForms"
-                  tooltip-append-to-body="true"
-                  tooltip-placement="auto bottom">
+              <th uib-tooltip-html="$ctrl.tooltips.leadForms">
                 Lead Forms&hellip;
                 <i class="fa fa-info-circle"></i>
               </th>
-              <th>Check-Ins</th>
-              <th uib-tooltip-html="$ctrl.tooltips.postComments"
-                  tooltip-append-to-body="true"
-                  tooltip-placement="auto bottom">
+              <th uib-tooltip-html="$ctrl.tooltips.checkIns">
+                Check-Ins
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.postComments">
                 Post Com&hellip;
                 <i class="fa fa-info-circle"></i>
               </th>
-              <th>
-                Post Reactions
+              <th uib-tooltip-html="$ctrl.tooltips.postReactions">
+                Post Reac&hellip;
+                <i class="fa fa-info-circle"></i>
               </th>
-              <th>
+              <th uib-tooltip-html="$ctrl.tooltips.postShares">
                 Post Shares
+                <i class="fa fa-info-circle"></i>
               </th>
-              <th uib-tooltip-html="$ctrl.tooltips.postEngagement"
-                  tooltip-append-to-body="true"
-                  tooltip-placement="auto bottom">
+              <th uib-tooltip-html="$ctrl.tooltips.postEngagement">
                 Post Eng&hellip;
                 <i class="fa fa-info-circle"></i>
               </th>
-              <th>
+              <th uib-tooltip-html="$ctrl.tooltips.pageLikes">
                 Page Likes
+                <i class="fa fa-info-circle"></i>
               </th>
-              <th uib-tooltip-html="$ctrl.tooltips.pageEngagement"
-                  tooltip-append-to-body="true"
-                  tooltip-placement="auto bottom">
+              <th uib-tooltip-html="$ctrl.tooltips.pageEngagement">
                 Page Eng&hellip;
                 <i class="fa fa-info-circle"></i>
               </th>
@@ -323,6 +327,8 @@
               <th class="cpm">##,###</th>
               <th class="ctr">#.##%</th>
               <th class="all-clicks">##,###</th>
+              <th class="frequency">###</th>
+              <th class="reach">###</th>
               <th class="social-reach">###</th>
               <th class="social-impressions">###</th>
               <th class="website-clicks">###</th>
@@ -358,6 +364,8 @@
               <td class="cpm">{{row.cpm | currency}}</td>
               <td class="ctr">{{row.ctr | number}}%</td>
               <td class="all-clicks">{{row.allClicks | number}}</td>
+              <td class="frequency">{{row.socialReach | number}}</td>
+              <td class="reach">{{row.socialImpressions | number}}</td>
               <td class="social-reach">{{row.socialReach | number}}</td>
               <td class="social-impressions">{{row.socialImpressions | number}}</td>
               <td class="website-clicks">{{row.websiteClicks | number}}</td>

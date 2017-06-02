@@ -1,13 +1,25 @@
 import template from './detail.html';
+import utilizationTooltip from './tooltips/utilization.html';
+import impressionsTooltip from './tooltips/impressions.html';
 import cpmTooltip from './tooltips/cpm.html';
 import ctrTooltip from './tooltips/ctr.html';
-import impressionsTooltip from './tooltips/impressions.html';
-import leadFormsTooltip from './tooltips/lead-forms.html';
-import pageEngagementTooltip from './tooltips/page-engagement.html';
-import postCommentsTooltip from './tooltips/post-comments.html';
-import postEngagementTooltip from './tooltips/post-engagement.html';
+import allClicksTooltip from './tooltips/all-clicks.html';
+import frequencyTooltip from './tooltips/frequency.html';
+import reachTooltip from './tooltips/reach.html';
+import socialReachTooltip from './tooltips/social-reach.html';
 import socialImpressionsTooltip from './tooltips/social-impressions.html';
-import utilizationTooltip from './tooltips/utilization.html';
+import websiteClickTooltip from './tooltips/website-clicks.html';
+import buttonClicksTooltip from './tooltips/button-clicks.html';
+import linkClicksTooltip from './tooltips/link-clicks.html';
+import socialClicksTooltip from './tooltips/social-clicks.html';
+import leadFormsTooltip from './tooltips/lead-forms.html';
+import checkInsTooltip from './tooltips/check-ins.html';
+import postCommentsTooltip from './tooltips/post-comments.html';
+import postReactionsTooltip from './tooltips/post-reactions.html';
+import postSharesTooltip from './tooltips/post-shares.html';
+import postEngagementTooltip from './tooltips/post-engagement.html';
+import pageLikesTooltip from './tooltips/page-likes.html';
+import pageEngagementTooltip from './tooltips/page-engagement.html';
 
 class Controller {
 
@@ -26,15 +38,27 @@ class Controller {
 
     // Tooltip templates
     this.tooltips = {
+      utilization: $sce.trustAsHtml(utilizationTooltip),
+      impressions: $sce.trustAsHtml(impressionsTooltip),
       cpm: $sce.trustAsHtml(cpmTooltip),
       ctr: $sce.trustAsHtml(ctrTooltip),
-      impressions: $sce.trustAsHtml(impressionsTooltip),
-      leadForms: $sce.trustAsHtml(leadFormsTooltip),
-      pageEngagement: $sce.trustAsHtml(pageEngagementTooltip),
-      postComments: $sce.trustAsHtml(postCommentsTooltip),
-      postEngagement: $sce.trustAsHtml(postEngagementTooltip),
+      allClicks: $sce.trustAsHtml(allClicksTooltip),
+      frequency: $sce.trustAsHtml(frequencyTooltip),
+      reach: $sce.trustAsHtml(reachTooltip),
+      socialReach: $sce.trustAsHtml(socialReachTooltip),
       socialImpressions: $sce.trustAsHtml(socialImpressionsTooltip),
-      utilization: $sce.trustAsHtml(utilizationTooltip)
+      websiteClicks: $sce.trustAsHtml(websiteClickTooltip),
+      buttonClicks: $sce.trustAsHtml(buttonClicksTooltip),
+      linkClicks: $sce.trustAsHtml(linkClicksTooltip),
+      socialClicks: $sce.trustAsHtml(socialClicksTooltip),
+      leadForms: $sce.trustAsHtml(leadFormsTooltip),
+      checkIns: $sce.trustAsHtml(checkInsTooltip),
+      postComments: $sce.trustAsHtml(postCommentsTooltip),
+      postReactions: $sce.trustAsHtml(postReactionsTooltip),
+      postShares: $sce.trustAsHtml(postSharesTooltip),
+      postEngagement: $sce.trustAsHtml(postEngagementTooltip),
+      pageLikes: $sce.trustAsHtml(pageLikesTooltip),
+      pageEngagement: $sce.trustAsHtml(pageEngagementTooltip)
     };
 
     this.trendChart = angular.copy(CampaignTrendChart);

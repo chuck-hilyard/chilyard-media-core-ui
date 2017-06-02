@@ -11,13 +11,18 @@ export default angular
     tooltip,
     charts
   ])
-  .config(($stateProvider) => {
+  .config(($stateProvider, $uibTooltipProvider) => {
     'ngInject';
     $stateProvider
       .state('campaign.detail', {
         url: '',
         component: 'campaign.detail'
       });
+
+    $uibTooltipProvider.options({
+      appendToBody: true,
+      placement: "auto bottom"
+    });
   })
   .component('campaign.detail', component)
   .service('CampaignDetailService', service)

@@ -21,7 +21,7 @@ export default angular
 
     $uibTooltipProvider.options({
       appendToBody: true,
-      placement: "auto bottom"
+      placement: 'auto bottom'
     });
   })
   .component('campaign.detail', component)

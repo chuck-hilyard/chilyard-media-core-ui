@@ -1,25 +1,4 @@
 import template from './detail.html';
-import utilizationTooltip from './tooltips/utilization.html';
-import impressionsTooltip from './tooltips/impressions.html';
-import cpmTooltip from './tooltips/cpm.html';
-import ctrTooltip from './tooltips/ctr.html';
-import allClicksTooltip from './tooltips/all-clicks.html';
-import frequencyTooltip from './tooltips/frequency.html';
-import reachTooltip from './tooltips/reach.html';
-import socialReachTooltip from './tooltips/social-reach.html';
-import socialImpressionsTooltip from './tooltips/social-impressions.html';
-import websiteClickTooltip from './tooltips/website-clicks.html';
-import buttonClicksTooltip from './tooltips/button-clicks.html';
-import linkClicksTooltip from './tooltips/link-clicks.html';
-import socialClicksTooltip from './tooltips/social-clicks.html';
-import leadFormsTooltip from './tooltips/lead-forms.html';
-import checkInsTooltip from './tooltips/check-ins.html';
-import postCommentsTooltip from './tooltips/post-comments.html';
-import postReactionsTooltip from './tooltips/post-reactions.html';
-import postSharesTooltip from './tooltips/post-shares.html';
-import postEngagementTooltip from './tooltips/post-engagement.html';
-import pageLikesTooltip from './tooltips/page-likes.html';
-import pageEngagementTooltip from './tooltips/page-engagement.html';
 
 class Controller {
 
@@ -27,6 +6,7 @@ class Controller {
     'ngInject';
     // Anuglar
     this.$filter = $filter;
+    this.$sce = $sce;
 
     // Local Vars
     this.gridData = {};
@@ -38,27 +18,27 @@ class Controller {
 
     // Tooltip templates
     this.tooltips = {
-      utilization: $sce.trustAsHtml(utilizationTooltip),
-      impressions: $sce.trustAsHtml(impressionsTooltip),
-      cpm: $sce.trustAsHtml(cpmTooltip),
-      ctr: $sce.trustAsHtml(ctrTooltip),
-      allClicks: $sce.trustAsHtml(allClicksTooltip),
-      frequency: $sce.trustAsHtml(frequencyTooltip),
-      reach: $sce.trustAsHtml(reachTooltip),
-      socialReach: $sce.trustAsHtml(socialReachTooltip),
-      socialImpressions: $sce.trustAsHtml(socialImpressionsTooltip),
-      websiteClicks: $sce.trustAsHtml(websiteClickTooltip),
-      buttonClicks: $sce.trustAsHtml(buttonClicksTooltip),
-      linkClicks: $sce.trustAsHtml(linkClicksTooltip),
-      socialClicks: $sce.trustAsHtml(socialClicksTooltip),
-      leadForms: $sce.trustAsHtml(leadFormsTooltip),
-      checkIns: $sce.trustAsHtml(checkInsTooltip),
-      postComments: $sce.trustAsHtml(postCommentsTooltip),
-      postReactions: $sce.trustAsHtml(postReactionsTooltip),
-      postShares: $sce.trustAsHtml(postSharesTooltip),
-      postEngagement: $sce.trustAsHtml(postEngagementTooltip),
-      pageLikes: $sce.trustAsHtml(pageLikesTooltip),
-      pageEngagement: $sce.trustAsHtml(pageEngagementTooltip)
+      utilization: this.tooltipHtml('campaignDetails.utilizationTitle'),
+      impressions: this.tooltipHtml('campaignDetails.impressionsTitle', 'campaignDetails.impressionsMessage'),
+      cpm: this.tooltipHtml('campaignDetails.cpmTitle', 'campaignDetails.cpmMessage'),
+      ctr: this.tooltipHtml('campaignDetails.ctrTitle', 'campaignDetails.ctrMessage'),
+      allClicks: this.tooltipHtml('campaignDetails.allClicksTitle', 'campaignDetails.allClicksMessage'),
+      frequency: this.tooltipHtml('campaignDetails.frequencyTitle', 'campaignDetails.frequencyMessage'),
+      reach: this.tooltipHtml('campaignDetails.reachTitle', 'campaignDetails.reachMessage'),
+      socialReach: this.tooltipHtml('campaignDetails.socialReachTitle', 'campaignDetails.socialReachMessage'),
+      socialImpressions: this.tooltipHtml('campaignDetails.socialImpressionsTitle', 'campaignDetails.socialImpressionsMessage'),
+      websiteClicks: this.tooltipHtml('campaignDetails.websiteClicksTitle', 'campaignDetails.websiteClicksMessage'),
+      buttonClicks: this.tooltipHtml('campaignDetails.buttonClicksTitle', 'campaignDetails.buttonClicksMessage'),
+      linkClicks: this.tooltipHtml('campaignDetails.linkClicksTitle', 'campaignDetails.linkClicksMessage'),
+      socialClicks: this.tooltipHtml('campaignDetails.socialClicksTitle', 'campaignDetails.socialClicksMessage'),
+      leadForms: this.tooltipHtml('campaignDetails.leadFormsTitle', 'campaignDetails.leadFormsMessage'),
+      checkIns: this.tooltipHtml('campaignDetails.checkInsTitle', 'campaignDetails.checkInsMessage'),
+      postComments: this.tooltipHtml('campaignDetails.postCommentsTitle', 'campaignDetails.postCommentsMessage'),
+      postReactions: this.tooltipHtml('campaignDetails.postReactionsTitle', 'campaignDetails.postReactionsMessage'),
+      postShares: this.tooltipHtml('campaignDetails.postSharesTitle', 'campaignDetails.postSharesMessage'),
+      postEngagement: this.tooltipHtml('campaignDetails.postEngagementTitle', 'campaignDetails.postEngagementMessage'),
+      pageLikes: this.tooltipHtml('campaignDetails.pageLikesTitle', 'campaignDetails.pageLikesMessage'),
+      pageEngagement: this.tooltipHtml('campaignDetails.pageEngagementTitle', 'campaignDetails.pageEngagementMessage')
     };
 
     this.trendChart = angular.copy(CampaignTrendChart);
@@ -180,6 +160,14 @@ class Controller {
         return item;
       }
     });
+  }
+
+  tooltipHtml(titleKey, messageKey) {
+    let output = `<b>${this.$filter('translate')(titleKey)}</b>`;
+    if (messageKey) {
+      output += `<hr>${this.$filter('translate')(messageKey)}`;
+    }
+    return this.$sce.trustAsHtml(output);
   }
 
   // FPO RANDOM CHART DATA

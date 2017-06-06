@@ -1,3 +1,5 @@
+import details from './detail/lang-en';
+
 export default Object.assign(
   {
     campaign: {
@@ -7,5 +9,6 @@ export default Object.assign(
       test: 'Test',
       sub: 'Sub'
     }
-  }
+  },
+  details
 );

@@ -17,6 +17,9 @@
   "parserOptions": {
     "sourceType": "module"
   },
+  "plugins": [
+    "json"
+  ],
   "rules": {
     "eol-last": [
       "error",

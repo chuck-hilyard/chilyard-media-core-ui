@@ -21,7 +21,8 @@ describe('common.sidebar', () => {
         $state: mocks.state
       };
       let bindings = {
-        links: mocks.links
+        links: mocks.links,
+        onToggle: angular.noop
       };
       $ctrl = $componentController('rlSidebar', locals, bindings);
     });

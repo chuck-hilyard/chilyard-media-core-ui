@@ -9,24 +9,11 @@ export default class Sidebar {
         children: []
       },
       {
-        translateKey: 'campaign.edit',
-        state: 'campaign.edit',
+        translateKey: 'campaign.creatives',
+        state: 'campaign.creatives',
         icon: 'fa-pencil',
         order: 1,
         children: []
-      },
-      {
-        translateKey: 'campaign.test',
-        state: 'home',
-        icon: 'fa-star',
-        order: 1,
-        children: [
-          {
-            translateKey: 'campaign.sub',
-            state: 'campaign.sub',
-            order: 0
-          }
-        ]
       }
     ];
   }

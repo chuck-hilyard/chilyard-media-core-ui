@@ -51,7 +51,7 @@ export default function rlScrollingTable($timeout) {
       let bodyRows = this.body.querySelectorAll('tbody tr');
       if (bodyRows.length > 0) {
         this.setHeight();
-        this.build();
+        this.$timeout(this.build, 250);
       }
       else {
         this.$timeout(this.initChecker, 250);
@@ -87,13 +87,6 @@ export default function rlScrollingTable($timeout) {
       let staticBodyWidth = window.getComputedStyle(this.staticBody.querySelector('td:first-child'), null).getPropertyValue('width');
       let staticWidth = `${Math.max(parseInt(staticHeaderWidth), parseInt(staticBodyWidth))}px`;
 
-      // Set row heights
-      let rows = this.container.querySelectorAll('tr');
-      angular.forEach(rows, (row) => {
-        let height = window.getComputedStyle(row, null).getPropertyValue('height');
-        row.style.height = height;
-      });
-
       // Table offsets
       let headerHeight = this.header.querySelector('thead').clientHeight;
       this.body.style.marginTop = `${headerHeight - this.borderWidth}px`;
@@ -102,15 +95,10 @@ export default function rlScrollingTable($timeout) {
       this.staticColumn.style.width = `${staticWidth}`;
       this.staticBody.style.top = `${headerHeight}px`;
 
-      // Scrollbar offsets
+      // Vertical scrollbar offset
       let scrollbarWidth = this.body.offsetWidth - this.body.clientWidth;
       if (scrollbarWidth !== 0) {
         this.header.style.right = `${scrollbarWidth - this.borderWidth}px`;
-      }
-
-      let scrollbarHeight = this.body.offsetHeight - this.body.clientHeight;
-      if (scrollbarHeight !== 0) {
-        this.staticColumn.style.bottom = `${scrollbarHeight - this.borderWidth}px`;
       }
 
       // Remove non-static columns from static column table
@@ -124,13 +112,17 @@ export default function rlScrollingTable($timeout) {
         });
       });
 
-      // Remove static column from other tables
+      // Set row heights and remove static columns cell from scrolling tables
       let rowSelectors = [
         '.header tr',
         '.body tr',
       ];
       let otherRows = this.container.querySelectorAll(rowSelectors.join());
-      angular.forEach(otherRows, (row) => {
+      angular.forEach(otherRows, (row, index) => {
+        let height = window.getComputedStyle(row, null).getPropertyValue('height');
+        row.style.height = height;
+        staticRows[index].style.height = height;
+
         let rowCells = row.querySelectorAll('col, th, td');
         angular.forEach(rowCells, (cell, index) => {
           if (index === 0) {
@@ -167,9 +159,16 @@ export default function rlScrollingTable($timeout) {
         totalWidth += parseInt(width);
       });
 
+      // Make sure table always fills container
       if (this.body.clientWidth < totalWidth) {
         bodyTable.style.width = `${totalWidth}px`;
         headerTable.style.width = `${totalWidth}px`;
+      }
+
+      // Horizontal scrollbar offset
+      let scrollbarHeight = this.body.offsetHeight - this.body.clientHeight;
+      if (scrollbarHeight !== 0) {
+        this.staticColumn.style.bottom = `${scrollbarHeight - this.borderWidth}px`;
       }
 
       // Remove temp header

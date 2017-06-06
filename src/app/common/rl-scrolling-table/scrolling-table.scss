@@ -16,8 +16,7 @@
   }
 
   .body {
-    overflow-x: scroll;
-    overflow-y: scroll;
+    overflow-x: auto;
     border-top: solid 1px $border-color;
     border-left: solid 1px $border-color;
   }

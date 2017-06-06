@@ -230,27 +230,91 @@
                 <rl-sortable-header key="'dates'" sort-state="$ctrl.sortState" on-sort="$ctrl.handleSort(state)">Cycle Dates</rl-sortable-header>
               </th>
               <th>Status</th>
-              <th>Utl</th>
+              <th uib-tooltip-html="$ctrl.tooltips.utilization">
+                Utl&hellip;
+              </th>
               <th>Budget</th>
               <th>Spend</th>
-              <th>Imp</th>
-              <th>CPM</th>
-              <th>CTR</th>
-              <th>All Clicks</th>
-              <th>Social<br>Reach</th>
-              <th>Social<br>Impressions</th>
-              <th>Website<br>Clicks</th>
-              <th>Button<br>Clicks</th>
-              <th>Link<br>Clicks</th>
-              <th>Social<br>Clicks</th>
-              <th>Lead Forms<br>Submitted</th>
-              <th>Check-Ins</th>
-              <th>Post<br>Comments</th>
-              <th>Post<br>Reactions</th>
-              <th>Post<br>Shares</th>
-              <th>Post<br>Engagement</th>
-              <th>Page<br>Likes</th>
-              <th>Page<br>Engagement</th>
+              <th uib-tooltip-html="$ctrl.tooltips.impressions">
+                Imp&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.cpm">
+                CPM
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.ctr">
+                CTR
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.allClicks">
+                Clicks
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.frequency">
+                Freq&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.reach">
+                Reach
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.socialReach">
+                Social Reach
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.socialImpressions">
+                Social Imp&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.websiteClicks">
+                Website Cl&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.buttonClicks">
+                Button Cl&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.linkClicks">
+                Link Cl&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.socialClicks">
+                Social Cl&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.leadForms">
+                Lead Forms&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.checkIns">
+                Check-Ins
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.postComments">
+                Post Com&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.postReactions">
+                Post Reac&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.postShares">
+                Post Shares
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.postEngagement">
+                Post Eng&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.pageLikes">
+                Page Likes
+                <i class="fa fa-info-circle"></i>
+              </th>
+              <th uib-tooltip-html="$ctrl.tooltips.pageEngagement">
+                Page Eng&hellip;
+                <i class="fa fa-info-circle"></i>
+              </th>
             </tr>
             <tr>
               <th>Total</th>
@@ -262,6 +326,8 @@
               <th class="cpm">##,###</th>
               <th class="ctr">#.##%</th>
               <th class="all-clicks">##,###</th>
+              <th class="frequency">###</th>
+              <th class="reach">###</th>
               <th class="social-reach">###</th>
               <th class="social-impressions">###</th>
               <th class="website-clicks">###</th>
@@ -297,6 +363,8 @@
               <td class="cpm">{{row.cpm | currency}}</td>
               <td class="ctr">{{row.ctr | number}}%</td>
               <td class="all-clicks">{{row.allClicks | number}}</td>
+              <td class="frequency">{{row.socialReach | number}}</td>
+              <td class="reach">{{row.socialImpressions | number}}</td>
               <td class="social-reach">{{row.socialReach | number}}</td>
               <td class="social-impressions">{{row.socialImpressions | number}}</td>
               <td class="website-clicks">{{row.websiteClicks | number}}</td>

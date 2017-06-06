@@ -6,9 +6,6 @@ class Controller {
     'ngInject';
     this.creatives = [];
     this.tableDelegate = {};
-    this.tableOptions = {
-      sideScroll: false
-    };
 
     for(let i = 0; i < 4; i++) {
       this.creatives.push(i);

@@ -1,4 +1,5 @@
 import template from './detail.html';
+import dataGridConfig from './data-grid/data-grid';
 
 class Controller {
 
@@ -9,7 +10,9 @@ class Controller {
     this.$sce = $sce;
 
     // Local Vars
+    this.gridColumns = [];
     this.gridData = {};
+    this.gridConfig = dataGridConfig;
     this.metrics = this.setMetrics();
     this.session = Session;
     this.service = CampaignDetailService;
@@ -68,6 +71,26 @@ class Controller {
     this.getPerformanceData();
   }
 
+  configureColumns(data) {
+    this.gridColumns = [];
+    let keys = Object.keys(data);
+    angular.forEach(keys, (value) => {
+      let keyOptions = dataGridConfig[value];
+      let column = {
+        key: value
+      };
+      if (keyOptions) {
+        angular.extend(column, keyOptions);
+      }
+      else {
+        column.label = value;
+      }
+      if (column.hide !== true) {
+        this.gridColumns.push(column);
+      }
+    });
+  }
+
   dateRangeToString() {
     let start = this.$filter('date')(this.session.dateRange.start, 'yyyy-MM-dd');
     let end = this.$filter('date')(this.session.dateRange.end, 'yyyy-MM-dd');
@@ -95,6 +118,7 @@ class Controller {
     };
     this.service.getPerformanceData(this.campaign.mcid, params)
       .then((response) => {
+        this.configureColumns(response.data[0]);
         this.gridData = response.data;
       })
       .catch((error) => {
@@ -104,10 +128,11 @@ class Controller {
 
   handleSort(state) {
     this.sortState = state;
+    console.log(this.sortState);
   }
 
   handleNextPage() {
-    angular.noop();
+    console.log('handle next page');
   }
 
   setMetrics() {

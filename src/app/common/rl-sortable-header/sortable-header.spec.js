@@ -7,7 +7,7 @@ describe('common.sortable-header', () => {
     $ctrl.sortState = {};
     $ctrl.key = 'foo';
     $ctrl.$onInit();
-  }
+  };
 
   beforeEach(() => {
     angular.mock.module('common.sortable-header');

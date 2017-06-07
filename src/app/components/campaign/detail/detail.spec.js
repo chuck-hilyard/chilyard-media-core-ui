@@ -3,7 +3,7 @@ import mocks from './detail.mocks';
 
 describe('components.campaign.detail', () => {
 
-  let $ctrl, $httpBackend, service;
+  let $ctrl, service;
   let mockSce = {
     trustAsHtml: (value) => value
   };
@@ -18,11 +18,10 @@ describe('components.campaign.detail', () => {
 
     let bindings = {
       campaignRequest: mocks.campaignRequest
-    }
+    };
 
     angular.mock.inject(($injector) => {
       let $componentController = $injector.get('$componentController');
-      $httpBackend = $injector.get('$httpBackend');
       service = $injector.get('CampaignDetailService');
       $ctrl = $componentController('campaign.detail', {}, bindings);
     });

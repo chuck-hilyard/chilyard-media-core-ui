@@ -1,6 +1,102 @@
 {
-  "links": {
-    "foo": {},
-    "bar": {}
+  "campaignRequest": {
+    "data": {
+      "campaign": {
+        "mcid": 123456
+      }
+    }
+  },
+  "metrics": {
+    "options": [
+      {
+        "id": "impressions",
+        "format": "int",
+        "label": "Impressions",
+        "type": "line"
+      },
+      {
+        "id": "clicks",
+        "format": "int",
+        "label": "Clicks",
+        "type": "line"
+      },
+      {
+        "id": "ctr",
+        "format": "float",
+        "label": "CTR",
+        "type": "line"
+      },
+      {
+        "id": "spend",
+        "format": "currency",
+        "label": "Spend",
+        "type": "bar"
+      }
+    ],
+    "demographics": [
+      {
+        "id": "impressions",
+        "format": "int",
+        "label": "Impressions",
+        "type": "line"
+      },
+      {
+        "id": "spend",
+        "format": "currency",
+        "label": "Spend",
+        "type": "bar"
+      }
+    ],
+    "devices": [
+      {
+        "id": "impressions",
+        "format": "int",
+        "label": "Impressions",
+        "type": "line"
+      }
+    ],
+    "trend": [
+      {
+        "id": "impressions",
+        "format": "int",
+        "label": "Impressions",
+        "type": "line"
+      },
+      {
+        "id": "spend",
+        "format": "currency",
+        "label": "Spend",
+        "type": "bar"
+      }
+    ]
+  },
+  "session": {
+    "dateRange": {
+      "start": "0000-00-00",
+      "end": "0000-00-00"
+    }
+  },
+  "tooltips": {
+    "utilization": "<b>campaignDetails.utilizationTitle</b>",
+    "impressions": "<b>campaignDetails.impressionsTitle</b><hr>campaignDetails.impressionsMessage",
+    "cpm": "<b>campaignDetails.cpmTitle</b><hr>campaignDetails.cpmMessage",
+    "ctr": "<b>campaignDetails.ctrTitle</b><hr>campaignDetails.ctrMessage",
+    "allClicks": "<b>campaignDetails.allClicksTitle</b><hr>campaignDetails.allClicksMessage",
+    "frequency": "<b>campaignDetails.frequencyTitle</b><hr>campaignDetails.frequencyMessage",
+    "reach": "<b>campaignDetails.reachTitle</b><hr>campaignDetails.reachMessage",
+    "socialReach": "<b>campaignDetails.socialReachTitle</b><hr>campaignDetails.socialReachMessage",
+    "socialImpressions": "<b>campaignDetails.socialImpressionsTitle</b><hr>campaignDetails.socialImpressionsMessage",
+    "websiteClicks": "<b>campaignDetails.websiteClicksTitle</b><hr>campaignDetails.websiteClicksMessage",
+    "buttonClicks": "<b>campaignDetails.buttonClicksTitle</b><hr>campaignDetails.buttonClicksMessage",
+    "linkClicks": "<b>campaignDetails.linkClicksTitle</b><hr>campaignDetails.linkClicksMessage",
+    "socialClicks": "<b>campaignDetails.socialClicksTitle</b><hr>campaignDetails.socialClicksMessage",
+    "leadForms": "<b>campaignDetails.leadFormsTitle</b><hr>campaignDetails.leadFormsMessage",
+    "checkIns": "<b>campaignDetails.checkInsTitle</b><hr>campaignDetails.checkInsMessage",
+    "postComments": "<b>campaignDetails.postCommentsTitle</b><hr>campaignDetails.postCommentsMessage",
+    "postReactions": "<b>campaignDetails.postReactionsTitle</b><hr>campaignDetails.postReactionsMessage",
+    "postShares": "<b>campaignDetails.postSharesTitle</b><hr>campaignDetails.postSharesMessage",
+    "postEngagement": "<b>campaignDetails.postEngagementTitle</b><hr>campaignDetails.postEngagementMessage",
+    "pageLikes": "<b>campaignDetails.pageLikesTitle</b><hr>campaignDetails.pageLikesMessage",
+    "pageEngagement": "<b>campaignDetails.pageEngagementTitle</b><hr>campaignDetails.pageEngagementMessage"
   }
 }

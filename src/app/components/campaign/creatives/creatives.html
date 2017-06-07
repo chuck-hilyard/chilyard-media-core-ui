@@ -1,0 +1,63 @@
+<div class="row">
+  <div class="col-xs-12">
+    <div class="page-header">
+      <h2>Creatives</h2>
+    </div>
+  </div>
+</div>
+
+<div class="row padding-top padding-bottom-lg">
+  <div class="col-xs-12">
+
+    <rl-scrolling-table delegate="$ctrl.tableDelegate">
+      <header-table>
+        <table class="table table-striped table-condensed table-bordered table-creatives">
+          <thead>
+            <tr>
+              <th>Creatives</th>
+              <th>Status</th>
+              <th>
+                Publisher<br>
+                <i>Campaign</i>
+              </th>
+              <th>Results</th>
+              <th>Reach</th>
+              <th>Cost</th>
+              <th>Amount Spent</th>
+              <th>Relevance Score</th>
+            </tr>
+          </thead>
+        </table>
+      </header-table>
+      <body-table>
+        <table class="table table-striped table-condensed table-bordered table-creatives">
+          <tbody>
+            <tr ng-repeat="creative in $ctrl.creatives">
+              <td class="creatives">
+                <img src="http://via.placeholder.com/50x50">
+                Creative {{$index}}
+              </td>
+              <td class="status">Active</td>
+              <td class="publisher">
+                Facebook Website Clicks<br>
+                <i>WCPID: #########</i>
+              </td>
+              <td class="results">
+                160<br>
+                Link Clicks
+              </td>
+              <td class="reach">5,448</td>
+              <td class="cost">
+                $2.50<br>
+                Per Link Click
+              </td>
+              <td class="amount-spent">$400.54</td>
+              <td class="relevance">2</td>
+            </tr>
+          </tbody>
+        </table>
+      </body-table>
+    </rl-scrolling-table>
+
+  </div>
+</div>

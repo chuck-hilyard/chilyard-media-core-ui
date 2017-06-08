@@ -1,4 +1,10 @@
-import mocks from './detail.mocks';
+// Campaign level mocks
+import mockCampaignRequest from '../mock-data/campaign-request';
+import mockSession from '../mock-data/session';
+
+// Campaign Detail level mocks
+import mockMetrics from './mock-data/metrics';
+import mockTooltips from './mock-data/tooltips';
 
 
 describe('components.campaign.detail', () => {
@@ -12,12 +18,12 @@ describe('components.campaign.detail', () => {
     angular.mock.module('campaign.detail', ($provide) => {
       $provide.value('CampaignSidebar', {});
       $provide.value('CampaignTrendChart', {});
-      $provide.value('Session', mocks.session);
+      $provide.value('Session',mockSession);
       $provide.value('$sce', mockSce);
     });
 
     let bindings = {
-      campaignRequest: mocks.campaignRequest
+      campaignRequest: mockCampaignRequest
     };
 
     angular.mock.inject(($injector) => {
@@ -31,10 +37,10 @@ describe('components.campaign.detail', () => {
     expect($ctrl.gridData).toEqual({});
     expect($ctrl.sortState).toEqual({});
     expect($ctrl.tableDelegate).toEqual({});
-    expect($ctrl.metrics).toEqual(mocks.metrics);
-    expect($ctrl.session).toEqual(mocks.session);
+    expect($ctrl.metrics).toEqual(mockMetrics);
+    expect($ctrl.session).toEqual(mockSession);
     expect($ctrl.service).toEqual(service);
-    expect($ctrl.tooltips).toEqual(mocks.tooltips);
+    expect($ctrl.tooltips).toEqual(mockTooltips);
   });
 
 });

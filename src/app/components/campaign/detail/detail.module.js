@@ -1,4 +1,5 @@
 import uiRouter from 'angular-ui-router';
+import ngTranslate from 'angular-translate';
 import tooltip from 'angular-ui-bootstrap/src/tooltip';
 import component from './detail.component';
 import service from './detail.service';
@@ -9,7 +10,8 @@ export default angular
   .module('campaign.detail', [
     uiRouter,
     tooltip,
-    charts
+    charts,
+    ngTranslate
   ])
   .config(($stateProvider, $uibTooltipProvider) => {
     'ngInject';

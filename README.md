@@ -31,11 +31,9 @@ $ npm install
 - `$ npm run build` Build /dist directory
 - `$ npm run lint` Lint js and scss files
 - `$ npm run start:test` Start local server with mocked gateway calls
-- `$ npm run test:e2e` Run protractor tests*
+- `$ npm run test:e2e` Run protractor tests
 - `$ npm run test:unit` Run karma tests
 
-
-*Requires `npm start:test` to already be running
 
 ## RL SSO Module
 Located in `/src/app/common/rl-sso` this module will handle the authentication with ReachLocal services. It listens for 401 responses and will open an authentication modal when needed.

@@ -3,7 +3,7 @@ describe('components.home', () => {
   let $ctrl;
 
   beforeEach(() => {
-    angular.mock.module('components.home');
+    angular.mock.module('home');
 
     angular.mock.inject(($injector) => {
       let $componentController = $injector.get('$componentController');

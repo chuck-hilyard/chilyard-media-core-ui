@@ -8,11 +8,11 @@
   },
   "scripts": {
     "build": "webpack --config ./webpack/production.config.js",
-    "lint": "eslint ./src/app/**/* ./test/app/**/*; stylelint ./src/app/**/*.scss; exit 0;",
+    "lint": "eslint ./src/app/**/* ./test/app/**/* --ext=js,json ; stylelint ./src/app/**/*.scss; exit 0;",
     "pretest:e2e": "webdriver-manager update",
     "start": "webpack-dev-server --config ./webpack/development.config.js --hot",
     "start:test": "webpack-dev-server --config ./webpack/test.config.js --hot",
-    "test:e2e": "protractor test/protractor.conf.js; exit 0;",
+    "test:e2e": "npm run start:test & protractor test/protractor.conf.js; exit 0;",
     "test:unit": "karma start ./karma.conf.js; exit 0;"
   },
   "dependencies": {
@@ -44,6 +44,7 @@
   "devDependencies": {
     "angular-mocks": "^1.5.8",
     "eslint": "^3.18.0",
+    "eslint-plugin-json": "^1.2.0",
     "jasmine": "^2.5.3",
     "karma": "^1.5.0",
     "karma-chrome-launcher": "^2.0.0",

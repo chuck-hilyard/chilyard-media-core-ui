@@ -1,0 +1,124 @@
+{
+  "campaignId": {
+    "hide": true
+  },
+  "dateRange": {
+    "label": "Cycle Dates",
+    "sortable": true
+  },
+  "status": {
+    "label": "Status"
+  },
+  "utilization": {
+    "label": "Utl...",
+    "filter": "number"
+  },
+  "budget": {
+    "label": "Budget",
+    "filter": "currency"
+  },
+  "spend": {
+    "label": "Spend",
+    "filter": "currency"
+  },
+  "impressions": {
+    "label": "Imp...",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "cpm": {
+    "label": "CPM",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "ctr": {
+    "label": "CTR",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "allClicks": {
+    "label": "Clicks",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "frequency": {
+    "label": "Frequency",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "reach": {
+    "label": "Reach",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "socialReach": {
+    "label": "Social Reach",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "socialImpressions": {
+    "label": "Social Imp...",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "websiteClicks": {
+    "label": " Website Cl...",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "buttonClicks": {
+    "label": "Button Cl...",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "linkClicks": {
+    "label": "Link Cl...",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "socialClicks": {
+    "label": "Social Cl...",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "leadForms": {
+    "label": "Lead Forms...",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "checkIns": {
+    "label": "Check-Ins",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "postComments": {
+    "label": "Post Com...",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "postReactions": {
+    "label": " Post Reac...",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "postShares": {
+    "label": "Post Shares",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "postEngagement": {
+    "label": "Post Eng...",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "pageLikes": {
+    "label": "Page Likes",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  },
+  "pageEngagement": {
+    "label": "Page Eng...",
+    "filter": "number",
+    "icon": "fa-info-circle"
+  }
+}

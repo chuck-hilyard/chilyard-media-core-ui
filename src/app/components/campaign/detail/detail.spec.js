@@ -9,7 +9,7 @@ import mockTooltips from './mock-data/tooltips';
 
 describe('components.campaign.detail', () => {
 
-  let $ctrl, $httpBackend, $sce, service;
+  let $ctrl, $sce, service;
 
   beforeEach(() => {
     angular.mock.module('campaign.detail', ($provide) => {
@@ -24,7 +24,6 @@ describe('components.campaign.detail', () => {
 
     angular.mock.inject(($injector) => {
       let $componentController = $injector.get('$componentController');
-      $httpBackend = $injector.get('$httpBackend');
       $sce = $injector.get('$sce');
       service = $injector.get('CampaignDetailService');
       $ctrl = $componentController('campaign.detail', {}, bindings);

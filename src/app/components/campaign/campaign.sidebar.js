@@ -7,14 +7,14 @@ export default class Sidebar {
         icon: 'fa-line-chart',
         order: 0,
         children: []
-      },
-      {
-        translateKey: 'campaign.creatives',
-        state: 'campaign.creatives',
-        icon: 'fa-pencil',
-        order: 1,
-        children: []
       }
+      // {
+      //   translateKey: 'campaign.creatives',
+      //   state: 'campaign.creatives',
+      //   icon: 'fa-pencil',
+      //   order: 1,
+      //   children: []
+      // }
     ];
   }
 }

@@ -11,8 +11,7 @@ config.plugins = [
   new cleanPlugin([paths.dist], {
     root: paths.root
   }),
-  new copyPlugin([
-    {
+  new copyPlugin([{
       from: `${paths.source}/index.html`,
     },
     {
@@ -23,7 +22,9 @@ config.plugins = [
   ]),
   new webpack.DefinePlugin({
     ENVIRONMENT: JSON.stringify('development'),
-    LANGUAGES: JSON.stringify(['en'])
+    LANGUAGES: JSON.stringify(['en']),
+    // NOTE: need to add CORS allow origin * to gateway to run locally
+    GATEWAY_URL: JSON.stringify('http://localhost:8080/media-social-gateway')
   }),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor'
@@ -31,7 +32,11 @@ config.plugins = [
 ];
 
 config.devServer = {
-  contentBase: `${paths.dist}`
+  contentBase: `${paths.dist}`,
+  port: 4000,
+  headers: {
+    'Access-Control-Allow-Origin': '*'
+  }
 };
 
 module.exports = config;

@@ -125,6 +125,63 @@
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td class="expand">
+                  <i class="fa fa-plus-circle"></i>
+                </td>
+                <td class="name">
+                  HARD CODED FORM DEMO<br>
+                  MCID: <a ui-sref="campaign.detail({mcid:2140702})">2140702</a>
+                </td>
+                <td class="priority">
+                  1
+                </td>
+                <td class="budget">
+                  $7,777
+                </td>
+                <td class="set-score">
+                  <i class="fa fa-circle"></i>
+                </td>
+                <td class="performance" ng-class="{'red': row < 8}">
+                  <i class="fa fa-circle"></i>
+                </td>
+                <td class="cpl">
+                  <i class="fa fa-circle"></i>
+                </td>
+                <td class="cpl-trend" ng-class="{'yellow': row < 5}">
+                  <i class="fa fa-circle"></i>
+                </td>
+                <td class="utilization">
+                  <i class="fa fa-circle"></i>
+                </td>
+                <td class="cost-per-click" ng-class="{'blue': row < 5}">
+                  <i class="fa fa-circle"></i>
+                </td>
+                <td class="cost-per-call">
+                  <i class="fa fa-circle"></i>
+                </td>
+                <td class="ctr">
+                  <i class="fa fa-circle"></i>
+                </td>
+                <td class="avg-qs">
+                  <i class="fa fa-circle"></i>
+                </td>
+                <td class="clicks-per-lead">
+                  <i class="fa fa-circle"></i>
+                </td>
+                <td class="budget-score">
+                  <i class="fa fa-circle"></i>
+                </td>
+                <td class="alerts">
+                  <i class="fa fa-flag"></i>
+                </td>
+                <td class="client-call red">
+                  <i class="fa fa-circle"></i>
+                </td>
+                <td class="reviewed">
+                  <i class="fa fa-check-square-o" ng-class="{'fa-square-o': $index > 6}"></i>
+                </td>
+              </tr>
               <tr ng-repeat="row in $ctrl.rows">
                 <td class="expand">
                   <i class="fa fa-plus-circle"></i>

@@ -2,9 +2,11 @@
   "campaignId": {
     "hide": true
   },
-  "dateRange": {
-    "label": "Cycle Dates",
-    "sortable": true
+  "startDate": {
+    "label": "Start Date"
+  },
+  "endDate": {
+    "label": "End Date"
   },
   "status": {
     "label": "Status"
@@ -106,7 +108,7 @@
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "postEngagement": {
+  "postEngagements": {
     "label": "Post Eng...",
     "filter": "number",
     "icon": "fa-info-circle"

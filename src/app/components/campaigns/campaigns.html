@@ -78,6 +78,35 @@
               </tr>
             </thead>
             <tbody>
+              <tr>
+                <td>
+                  <input type="checkbox">
+                </td>
+                <td class="campaign">
+                  <a ui-sref="campaign.detail({mcid:2140702})">HARD CODED FOR DEMO</a><br>
+                  MCID: 2140702
+                </td>
+                <td class="advertiser">
+                  <a ui-sref="advertiser.detail({maid:123456})"">My Advertiser {{$index}}</a><br>
+                  MAID: 123456
+                </td>
+                <td class="offer">
+                  ReachOffer<br>
+                  OID: 1234
+                </td>
+                <td class="sategory">
+                  Stuff
+                </td>
+                <td class="sub-category">
+                  Things
+                </td>
+                <td class="status">
+                  Running
+                </td>
+                <td class="budget">
+                  $7,777
+                </td>
+              </tr>
               <tr ng-repeat="row in $ctrl.rows">
                 <td>
                   <input type="checkbox">

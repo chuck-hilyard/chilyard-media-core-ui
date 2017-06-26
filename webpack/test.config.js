@@ -28,12 +28,14 @@ config.plugins = [
   ]),
   new webpack.DefinePlugin({
     ENVIRONMENT: JSON.stringify('test'),
-    LANGUAGES: JSON.stringify(['en'])
+    LANGUAGES: JSON.stringify(['en']),
+    GATEWAY_URL: JSON.stringify('')
   })
 ];
 
 config.devServer = {
-  contentBase: `${paths.dist}`
+  contentBase: `${paths.dist}`,
+  port: 4000
 };
 
 module.exports = config;

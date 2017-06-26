@@ -1,5 +1,7 @@
 import template from './campaign.html';
 
+// Private
+let setHeader = setHeader;
 
 class Controller {
   constructor(CampaignSidebar) {
@@ -12,108 +14,108 @@ class Controller {
     this.advertiser = this.campaignRequest.data.advertiser;
     this.campaign = this.campaignRequest.data.campaign;
     this.order = this.campaignRequest.data.order;
-    this.setHeader();
-  }
-
-  setHeader() {
-    this.header = {
-      type: 'Campaign',
-      title: 'My Campaign 01',
-      subType: 'Advertiser',
-      subTitle: 'JJ\'s Plumbing',
-      subLink: `advertiser.detail({maid:${this.advertiser.maid}})`,
-      columns: [
-        {
-          title: 'Advertiser',
-          rows: [
-            {
-              name: 'Advertiser Name',
-              value: this.advertiser.name,
-              link: `advertiser.detail({maid:${this.advertiser.maid}})`
-            },
-            {
-              name: 'Master Advertiser ID',
-              value: this.advertiser.maid
-            },
-            {
-              name: 'Current Advertiser ID',
-              value: this.advertiser.caid,
-            },
-            {
-              name: 'Advertiser Business',
-              value: this.advertiser.business
-            }
-          ]
-        },
-        {
-          title: 'Campaign',
-          rows: [
-            {
-              name: 'Master Campaign ID',
-              value: this.campaign.mcid
-            },
-            {
-              name: 'Current Campaign ID',
-              value: this.campaign.ccid
-            },
-            {
-              name: 'Offer Name',
-              value: this.campaign.offerName
-            },
-            {
-              name: 'Offer ID',
-              value: this.campaign.offerId
-            },
-            {
-              name: 'Business Category',
-              value: this.campaign.category
-            },
-            {
-              name: 'Business Sub Category',
-              value: this.campaign.subCategory
-            }
-          ]
-        },
-        {
-          title: 'Order Information',
-          rows: [
-            {
-              name: 'Order ID',
-              value: this.order.oid,
-              link: `order.detail({oid:${this.order.oid}})`
-            },
-            {
-              name: 'Payment Type',
-              value: this.order.payment
-            },
-            {
-              name: 'Current Budget',
-              value: this.order.budget
-            },
-            {
-              name: 'Current Cycle',
-              value: this.order.cycle
-            },
-            {
-              name: 'Auto Renew Type',
-              value: this.order.renew
-            }
-          ]
-        }
-      ]
-    };
+    this.header = setHeader(this.campaignOverview.data, this.order);
   }
 
   handleSidebarToggle(status) {
     this.sidebar.collapsed = status;
   }
+}
 
+function setHeader(overview, order ) {
+  return {
+    type: 'Campaign',
+    title: overview.name,
+    subType: 'Advertiser',
+    subTitle: overview.advertiserName,
+    subLink: `advertiser.detail({maid:${overview.masterAdvertiserId}})`,
+    columns: [
+      {
+        title: 'Advertiser',
+        rows: [
+          {
+            name: 'Advertiser Name',
+            value: overview.advertiserName,
+            link: `advertiser.detail({maid:${overview.masterAdvertiserId}})`
+          },
+          {
+            name: 'Master Advertiser ID',
+            value: overview.masterAdvertiserId
+          },
+          {
+            name: 'Current Advertiser ID',
+            value: overview.currentAdvertiserId,
+          },
+          {
+            name: 'Advertiser Business',
+            value: overview.businessId
+          }
+        ]
+      },
+      {
+        title: 'Campaign',
+        rows: [
+          {
+            name: 'Master Campaign ID',
+            value: overview.masterCampaignId
+          },
+          {
+            name: 'Current Campaign ID',
+            value: overview.activeCampaignId
+          },
+          {
+            name: 'Offer Name',
+            value: overview.offerName
+          },
+          {
+            name: 'Offer ID',
+            value: overview.offerId
+          },
+          {
+            name: 'Business Category',
+            value: overview.businessCategoryName
+          },
+          {
+            name: 'Business Sub Category',
+            value: overview.businessSubCategoryName
+          }
+        ]
+      },
+      {
+        title: 'Order Information',
+        rows: [
+          {
+            name: 'Order ID',
+            value: order.oid,
+            link: `order.detail({oid:${order.oid}})`
+          },
+          {
+            name: 'Payment Type',
+            value: order.payment
+          },
+          {
+            name: 'Current Budget',
+            value: order.budget
+          },
+          {
+            name: 'Current Cycle',
+            value: order.cycle
+          },
+          {
+            name: 'Auto Renew Type',
+            value: order.renew
+          }
+        ]
+      }
+    ]
+  };
 }
 
 export default {
   template: template,
   controller: Controller,
   bindings: {
-    campaignRequest: '<'
+    campaignRequest: '<',
+    campaignOverview: '<'
   }
 };

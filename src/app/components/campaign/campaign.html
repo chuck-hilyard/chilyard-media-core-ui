@@ -1,9 +1,12 @@
 <div class="rl-container rl-container__sidebar" ng-class="{'rl-container__sidebar--collapse': $ctrl.sidebar.collapsed}">
   <rl-sidebar links="$ctrl.sidebar.links" on-toggle="$ctrl.handleSidebarToggle(collapsed)" ></rl-sidebar>
   <div class="rl-content">
+
     <rl-expanding-header data="$ctrl.header">
       <rl-date-range class="pull-right" cycles="$ctrl.campaign.cycles"></rl-date-range>
     </rl-expanding-header>
     <div class="rl-expading-header__body" ui-view></div>
+
+  <!--  <div ui-view></div> -->
   </div>
 </div>

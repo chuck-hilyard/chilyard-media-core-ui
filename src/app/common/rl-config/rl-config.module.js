@@ -7,11 +7,12 @@ class service {
 
   constructor() {
     this.languages = LANGUAGES;
+    this.gatewayUrl = GATEWAY_URL;
   }
 
 }
 
 export default angular
   .module('common.rlConfig', [])
-  .service('Config', service)
+  .service('rlConfig', service)
   .name;

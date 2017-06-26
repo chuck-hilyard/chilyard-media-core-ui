@@ -1,6 +1,7 @@
 // Campaign level mocks
 import mockCampaignRequest from '../mock-data/campaign-request';
 import mockSession from '../mock-data/session';
+import mockRlConfig from '../mock-data/rlConfig.json';
 
 // Campaign Detail level mocks
 import mockMetrics from './mock-data/metrics';
@@ -9,13 +10,14 @@ import mockTooltips from './mock-data/tooltips';
 
 describe('components.campaign.detail', () => {
 
-  let $ctrl, $sce, service;
+  let $ctrl, $sce, service, rlConfig;
 
   beforeEach(() => {
     angular.mock.module('campaign.detail', ($provide) => {
       $provide.value('CampaignSidebar', {});
       $provide.value('CampaignTrendChart', {});
       $provide.value('Session',mockSession);
+      $provide.value('rlConfig', mockRlConfig);
     });
 
     let bindings = {
@@ -24,9 +26,13 @@ describe('components.campaign.detail', () => {
 
     angular.mock.inject(($injector) => {
       let $componentController = $injector.get('$componentController');
+      let stateParams = {
+        mcid: 123456
+      }
       $sce = $injector.get('$sce');
+      rlConfig = $injector.get('rlConfig');
       service = $injector.get('CampaignDetailService');
-      $ctrl = $componentController('campaign.detail', {}, bindings);
+      $ctrl = $componentController('campaign.detail', {$stateParams: stateParams}, bindings);
     });
   });
 
@@ -48,7 +54,8 @@ describe('components.campaign.detail', () => {
     spyOn(service, 'getPerformanceData').and.callThrough();
     $ctrl.$onInit();
     expect($ctrl.campaign).toEqual(mockCampaignRequest.data.campaign);
-    expect(service.getTrendData).toHaveBeenCalledWith(123456, {dates:'2017-01-01,2017-01-31',metrics:'impressions,spend'});
+    // getTrendData call commented out in demo code
+    //expect(service.getTrendData).toHaveBeenCalledWith(123456, {dates:'2017-01-01,2017-01-31',metrics:'impressions,spend'});
     expect(service.getPerformanceData).toHaveBeenCalledWith(123456, {dates:'2017-01-01,2017-01-31'});
 
   });

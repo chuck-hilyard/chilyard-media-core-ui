@@ -4,6 +4,9 @@ import sidebar from './campaign.sidebar';
 import detail from './detail/detail.module';
 import creatives from './creatives/creatives.module';
 
+// Hard coded mock for demo
+import campaignRequest from './mock-data/campaign-request';
+
 export default angular
   .module('campaign', [
     uiRouter,
@@ -18,7 +21,8 @@ export default angular
         url: '/campaign/:mcid',
         component: 'campaign',
         resolve: {
-          campaignRequest: ($http, $stateParams) => $http.get(`/campaign/${$stateParams.mcid}`)
+          campaignOverview: ($http, $stateParams, rlConfig) => $http.get(`${rlConfig.gatewayUrl}/campaigns/${$stateParams.mcid}/campaign-overview`),
+          campaignRequest: () => campaignRequest
         }
       });
   })

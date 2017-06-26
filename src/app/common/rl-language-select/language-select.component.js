@@ -3,9 +3,9 @@ import languageSelectTemplate from './language-select.html';
 
 class languageSelectController {
 
-  constructor(Config, $cookies, $translate) {
+  constructor(rlConfig, $cookies, $translate) {
     'ngInject';
-    this.languages = Config.languages;
+    this.languages = rlConfig.languages;
 
     this.$cookies = $cookies;
     this.$translate = $translate;

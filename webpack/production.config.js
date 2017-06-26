@@ -21,7 +21,8 @@ config.plugins = [
   ]),
   new webpack.DefinePlugin({
     ENVIRONMENT: JSON.stringify('production'),
-    LANGUAGES: JSON.stringify(['en'])
+    LANGUAGES: JSON.stringify(['en']),
+    GATEWAY_URL: JSON.stringify('???')
   }),
   new webpack.optimize.UglifyJsPlugin({
     compress: true

@@ -3,11 +3,12 @@ import dataGridConfig from './data-grid/data-grid';
 
 class Controller {
 
-  constructor($filter, $sce, $scope, CampaignDetailService, CampaignSidebar, CampaignTrendChart, Session) {
+  constructor($filter, $sce, $scope, $stateParams, CampaignDetailService, CampaignSidebar, CampaignTrendChart, Session) {
     'ngInject';
     // Anuglar
     this.$filter = $filter;
     this.$sce = $sce;
+    this.$stateParams = $stateParams;
 
     // Local Vars
     this.gridColumns = [];
@@ -39,7 +40,7 @@ class Controller {
       postComments: this.tooltipHtml('campaignDetails.postCommentsTitle', 'campaignDetails.postCommentsMessage'),
       postReactions: this.tooltipHtml('campaignDetails.postReactionsTitle', 'campaignDetails.postReactionsMessage'),
       postShares: this.tooltipHtml('campaignDetails.postSharesTitle', 'campaignDetails.postSharesMessage'),
-      postEngagement: this.tooltipHtml('campaignDetails.postEngagementTitle', 'campaignDetails.postEngagementMessage'),
+      postEngagements: this.tooltipHtml('campaignDetails.postEngagementTitle', 'campaignDetails.postEngagementMessage'),
       pageLikes: this.tooltipHtml('campaignDetails.pageLikesTitle', 'campaignDetails.pageLikesMessage'),
       pageEngagement: this.tooltipHtml('campaignDetails.pageEngagementTitle', 'campaignDetails.pageEngagementMessage')
     };
@@ -52,23 +53,23 @@ class Controller {
       }
     });
 
-    $scope.$watch(() => Session.dateRange, () => {
-      this.getTrendData();
-      this.getPerformanceData();
-    }, true);
+    // $scope.$watch(() => Session.dateRange, () => {
+    //   this.getTrendData();
+    //   this.getPerformanceData();
+    // }, true);
 
     // FPO RANDOM CHART DATA
     // TODO: REPLACE
-    this.demographicChart = {};
-    this.setDemographicChart();
-    this.deviceChart = {};
-    this.setDeviceChart();
+    // this.demographicChart = {};
+    // this.setDemographicChart();
+    // this.deviceChart = {};
+    // this.setDeviceChart();
   }
 
   $onInit() {
     this.campaign = this.campaignRequest.data.campaign;
     this.getTrendData();
-    this.getPerformanceData();
+    this.getGridData();
   }
 
   configureColumns(data) {
@@ -103,36 +104,35 @@ class Controller {
       dates: this.dateRangeToString(),
       metrics: metrics.toString()
     };
-    this.service.getTrendData(this.campaign.mcid, params)
-      .then((response) => {
-        this.trendChart.build('bar', response.data, this.metrics.trend);
-      })
-      .catch((error) => {
-        throw new Error('GET TREND DATA ERROR: ', JSON.stringify(error));
-      });
+    // this.service.getTrendData(this.campaign.mcid, params)
+    //   .then((response) => {
+    //     this.trendChart.build('bar', response.data, this.metrics.trend);
+    //   })
+    //   .catch((error) => {
+    //     throw new Error('GET TREND DATA ERROR: ', JSON.stringify(error));
+    //   });
   }
 
-  getPerformanceData() {
+  getGridData() {
     let params = {
       dates: this.dateRangeToString(),
     };
-    this.service.getPerformanceData(this.campaign.mcid, params)
+    this.service.getPerformanceData(this.$stateParams.mcid, params)
       .then((response) => {
         this.configureColumns(response.data[0]);
         this.gridData = response.data;
       })
       .catch((error) => {
-        throw new Error('GET PERFORMANCE DATA ERROR: ', JSON.stringify(error));
+        throw new Error(`GET PERFORMANCE DATA ERROR: ${JSON.stringify(error)}`);
       });
   }
 
   handleSort(state) {
     this.sortState = state;
-    console.log(this.sortState);
   }
 
   handleNextPage() {
-    console.log('handle next page');
+    angular.noop();
   }
 
   setMetrics() {
@@ -197,203 +197,203 @@ class Controller {
 
   // FPO RANDOM CHART DATA
   // TODO: REPLACE
-  randomNumber(multiplier, roundMethod) {
-    switch(roundMethod) {
-    case 'none':
-      return Math.random() * multiplier;
-    case 'ceil':
-      return Math.ceil(Math.random() * multiplier);
-    case 'floor':
-    default:
-      return Math.floor(Math.random() * multiplier);
-    }
-  }
+  // randomNumber(multiplier, roundMethod) {
+  //   switch(roundMethod) {
+  //   case 'none':
+  //     return Math.random() * multiplier;
+  //   case 'ceil':
+  //     return Math.ceil(Math.random() * multiplier);
+  //   case 'floor':
+  //   default:
+  //     return Math.floor(Math.random() * multiplier);
+  //   }
+  // }
 
-  setDemographicChart() {
-    let chart = this.demographicChart;
+  // setDemographicChart() {
+  //   let chart = this.demographicChart;
 
-    chart.colors = {
-      metric1: {
-        male: '#23a4a9',
-        female: '#bdd964'
-      },
-      metric2: {
-        male: '#2b97ce',
-        female: '#a26da9'
-      }
-    };
+  //   chart.colors = {
+  //     metric1: {
+  //       male: '#23a4a9',
+  //       female: '#bdd964'
+  //     },
+  //     metric2: {
+  //       male: '#2b97ce',
+  //       female: '#a26da9'
+  //     }
+  //   };
 
-    chart.metric1 = {
-      type: 'horizontalBar',
-      data: {
-        labels: ['13-17', '18-24', '24-34', '35-44', '45-54', '55-64', '65+'],
-        datasets: [
-          {
-            label: 'Male Impressions',
-            data: [],
-            backgroundColor: chart.colors.metric1.male,
-            borderColor: chart.colors.metric1.male,
-          },
-          {
-            label: 'Female Impressions',
-            data: [],
-            backgroundColor: chart.colors.metric1.female,
-            borderColor: chart.colors.metric1.female,
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-          display: false
-        },
-        scales: {
-          xAxes: [
-            {
-              gridLines: {
-                drawBorder: false
-              },
-              ticks: {
-                callback: (value) => (value * -1)
-              }
-            }
-          ],
-          yAxes: [
-            {
-              gridLines: {
-                drawBorder: false,
-                display: false
-              },
-              ticks: {
-                fontColor: '#fff'
-              }
-            }
-          ]
-        },
-        tooltips: {
-          callbacks: {
-            label: (tooltipItem, data) => {
-              let di = tooltipItem.datasetIndex;
-              return data.datasets[di].label + ': ' + tooltipItem.xLabel * -1;
-            }
-          }
-        }
-      }
-    };
+  //   chart.metric1 = {
+  //     type: 'horizontalBar',
+  //     data: {
+  //       labels: ['13-17', '18-24', '24-34', '35-44', '45-54', '55-64', '65+'],
+  //       datasets: [
+  //         {
+  //           label: 'Male Impressions',
+  //           data: [],
+  //           backgroundColor: chart.colors.metric1.male,
+  //           borderColor: chart.colors.metric1.male,
+  //         },
+  //         {
+  //           label: 'Female Impressions',
+  //           data: [],
+  //           backgroundColor: chart.colors.metric1.female,
+  //           borderColor: chart.colors.metric1.female,
+  //         }
+  //       ]
+  //     },
+  //     options: {
+  //       responsive: true,
+  //       maintainAspectRatio: false,
+  //       legend: {
+  //         display: false
+  //       },
+  //       scales: {
+  //         xAxes: [
+  //           {
+  //             gridLines: {
+  //               drawBorder: false
+  //             },
+  //             ticks: {
+  //               callback: (value) => (value * -1)
+  //             }
+  //           }
+  //         ],
+  //         yAxes: [
+  //           {
+  //             gridLines: {
+  //               drawBorder: false,
+  //               display: false
+  //             },
+  //             ticks: {
+  //               fontColor: '#fff'
+  //             }
+  //           }
+  //         ]
+  //       },
+  //       tooltips: {
+  //         callbacks: {
+  //           label: (tooltipItem, data) => {
+  //             let di = tooltipItem.datasetIndex;
+  //             return data.datasets[di].label + ': ' + tooltipItem.xLabel * -1;
+  //           }
+  //         }
+  //       }
+  //     }
+  //   };
 
-    chart.metric2 = {
-      type: 'horizontalBar',
-      data: {
-        labels: ['13-17', '18-24', '24-34', '35-44', '45-54', '55-64', '65+'],
-        datasets: [
-          {
-            label: 'Male Spend',
-            data: [],
-            backgroundColor: chart.colors.metric2.male,
-            borderColor: chart.colors.metric2.male,
-          },
-          {
-            label: 'Female Spend',
-            data: [],
-            backgroundColor: chart.colors.metric2.female,
-            borderColor: chart.colors.metric2.female,
-          }
-        ]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-          display: false
-        },
-        scales: {
-          xAxes: [
-            {
-              gridLines: {
-                drawBorder: false
-              },
-              ticks: {
-                callback: (value) => this.$filter('currency')(value)
-              }
-            }
-          ],
-          yAxes: [
-            {
-              gridLines: {
-                display: false
-              },
-              ticks: {
-                padding: 30,
-              }
-            }
-          ]
-        },
-        tooltips: {
-          callbacks: {
-            label: (tooltipItem, data) => {
-              let di = tooltipItem.datasetIndex;
-              return data.datasets[di].label + ': ' + this.$filter('currency')(tooltipItem.xLabel);
-            }
-          }
-        }
-      }
-    };
+  //   chart.metric2 = {
+  //     type: 'horizontalBar',
+  //     data: {
+  //       labels: ['13-17', '18-24', '24-34', '35-44', '45-54', '55-64', '65+'],
+  //       datasets: [
+  //         {
+  //           label: 'Male Spend',
+  //           data: [],
+  //           backgroundColor: chart.colors.metric2.male,
+  //           borderColor: chart.colors.metric2.male,
+  //         },
+  //         {
+  //           label: 'Female Spend',
+  //           data: [],
+  //           backgroundColor: chart.colors.metric2.female,
+  //           borderColor: chart.colors.metric2.female,
+  //         }
+  //       ]
+  //     },
+  //     options: {
+  //       responsive: true,
+  //       maintainAspectRatio: false,
+  //       legend: {
+  //         display: false
+  //       },
+  //       scales: {
+  //         xAxes: [
+  //           {
+  //             gridLines: {
+  //               drawBorder: false
+  //             },
+  //             ticks: {
+  //               callback: (value) => this.$filter('currency')(value)
+  //             }
+  //           }
+  //         ],
+  //         yAxes: [
+  //           {
+  //             gridLines: {
+  //               display: false
+  //             },
+  //             ticks: {
+  //               padding: 30,
+  //             }
+  //           }
+  //         ]
+  //       },
+  //       tooltips: {
+  //         callbacks: {
+  //           label: (tooltipItem, data) => {
+  //             let di = tooltipItem.datasetIndex;
+  //             return data.datasets[di].label + ': ' + this.$filter('currency')(tooltipItem.xLabel);
+  //           }
+  //         }
+  //       }
+  //     }
+  //   };
 
-    for(let i = 1; i <= 8; i++) {
-      chart.metric1.data.datasets[0].data.push(this.randomNumber(500) * -1);
-      chart.metric1.data.datasets[1].data.push(this.randomNumber(500) * -1);
-      chart.metric2.data.datasets[0].data.push(this.randomNumber(20));
-      chart.metric2.data.datasets[1].data.push(this.randomNumber(20));
-    }
-  }
+  //   for(let i = 1; i <= 8; i++) {
+  //     chart.metric1.data.datasets[0].data.push(this.randomNumber(500) * -1);
+  //     chart.metric1.data.datasets[1].data.push(this.randomNumber(500) * -1);
+  //     chart.metric2.data.datasets[0].data.push(this.randomNumber(20));
+  //     chart.metric2.data.datasets[1].data.push(this.randomNumber(20));
+  //   }
+  // }
 
-  setDeviceChart() {
-    let chart = this.deviceChart;
-    let mobileColor = '#23a4a9';
-    let desktopColor = '#7bc8cb';
+  // setDeviceChart() {
+  //   let chart = this.deviceChart;
+  //   let mobileColor = '#23a4a9';
+  //   let desktopColor = '#7bc8cb';
 
-    let totalCount = 100;
-    let desktopCount = this.randomNumber(totalCount);
+  //   let totalCount = 100;
+  //   let desktopCount = this.randomNumber(totalCount);
 
-    chart.chart = {
-      type: 'pie',
-      data: {
-        labels: [
-          'Desktop',
-          'Mobile'
-        ],
-        datasets: [{
-          data: [
-            desktopCount,
-            (totalCount - desktopCount)
-          ],
-          backgroundColor: [
-            desktopColor,
-            mobileColor
-          ]
-        }]
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-          display: false
-        },
-        cutoutPercentage: 80,
-        elements: {
-          center: {
-            line1: '46,555',
-            line1Padding: 50,
-            line2: 'Impressions',
-            line2Padding: 50,
-            fontColor: '#394354'
-          }
-        }
-      }
-    };
+  //   chart.chart = {
+  //     type: 'pie',
+  //     data: {
+  //       labels: [
+  //         'Desktop',
+  //         'Mobile'
+  //       ],
+  //       datasets: [{
+  //         data: [
+  //           desktopCount,
+  //           (totalCount - desktopCount)
+  //         ],
+  //         backgroundColor: [
+  //           desktopColor,
+  //           mobileColor
+  //         ]
+  //       }]
+  //     },
+  //     options: {
+  //       responsive: true,
+  //       maintainAspectRatio: false,
+  //       legend: {
+  //         display: false
+  //       },
+  //       cutoutPercentage: 80,
+  //       elements: {
+  //         center: {
+  //           line1: '46,555',
+  //           line1Padding: 50,
+  //           line2: 'Impressions',
+  //           line2Padding: 50,
+  //           fontColor: '#394354'
+  //         }
+  //       }
+  //     }
+  //   };
 
-  }
+  // }
 
 }
 

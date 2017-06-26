@@ -11,8 +11,7 @@
   "globals": {
     "angular": true,
     "LANGUAGES": true,
-    "MADMIN_GATEWAY_URL": true,
-    "MEDIA_GATEWAY_URL": true
+    "GATEWAY_URL": true
   },
   "parserOptions": {
     "sourceType": "module"

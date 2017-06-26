@@ -17,7 +17,7 @@
   "postComments": "<b>campaignDetails.postCommentsTitle</b><hr>campaignDetails.postCommentsMessage",
   "postReactions": "<b>campaignDetails.postReactionsTitle</b><hr>campaignDetails.postReactionsMessage",
   "postShares": "<b>campaignDetails.postSharesTitle</b><hr>campaignDetails.postSharesMessage",
-  "postEngagement": "<b>campaignDetails.postEngagementTitle</b><hr>campaignDetails.postEngagementMessage",
+  "postEngagements": "<b>campaignDetails.postEngagementTitle</b><hr>campaignDetails.postEngagementMessage",
   "pageLikes": "<b>campaignDetails.pageLikesTitle</b><hr>campaignDetails.pageLikesMessage",
   "pageEngagement": "<b>campaignDetails.pageEngagementTitle</b><hr>campaignDetails.pageEngagementMessage"
 }

@@ -1,4 +1,11 @@
 <button class="btn btn-default btn-date-range" ng-click="$ctrl.dateModal()">
-  <b ng-if="$ctrl.session.dateRange.name">{{$ctrl.session.dateRange.name}}:</b>
-  {{$ctrl.session.dateRange.start | date:'yyyy/MM/dd'}} &mdash; {{$ctrl.session.dateRange.end | date:'yyyy/MM/dd'}}
+
+    <b>By {{$ctrl.session.dateRange.breakdownType}}</b> |
+    <b ng-if="$ctrl.session.dateRange.name">{{$ctrl.session.dateRange.name}}</b>
+    <span ng-if="$ctrl.session.dateRange.breakdownType=='days'">
+     {{$ctrl.session.dateRange.start | date:'yyyy/MM/dd'}} &mdash; {{$ctrl.session.dateRange.end | date:'yyyy/MM/dd'}}
+   </span>
+   <span ng-if="$ctrl.session.dateRange.breakdownType=='cycles'">
+    {{$ctrl.session.dateRange.start}} &mdash; {{$ctrl.session.dateRange.end}}
+  </span>
 </button>

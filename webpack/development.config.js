@@ -24,7 +24,7 @@ config.plugins = [
     ENVIRONMENT: JSON.stringify('development'),
     LANGUAGES: JSON.stringify(['en']),
     // NOTE: need to add CORS allow origin * to gateway to run locally
-    GATEWAY_URL: JSON.stringify('http://localhost:8080/media-social-gateway')
+    GATEWAY_URL: JSON.stringify('http://localhost:8081/media-social-gateway')
   }),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor'

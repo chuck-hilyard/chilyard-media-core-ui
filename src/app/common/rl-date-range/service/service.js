@@ -7,43 +7,73 @@ export default class Daterange {
 
   setRanges() {
     let today = new Date();
-    this.ranges = [
-      {
-        name: 'Last 7 days',
-        start: this.subtract(7),
-        end: today
-      },
-      {
-        name: 'Last 14 days',
-        start: this.subtract(14),
-        end: today
-      },
-      {
-        name: 'Last 30 days',
-        start: this.subtract(30),
-        end: today
-      },
-      {
-        name: 'This week',
-        start: this.weekStart(),
-        end: today
-      },
-      {
-        name: 'Last week',
-        start: this.lastWeekStart(),
-        end: this.lastWeekEnd()
-      },
-      {
-        name: 'This month',
-        start: this.monthStart(),
-        end: today
-      },
-      {
-        name: 'Last month',
-        start: this.lastMonthStart(),
-        end: this.lastMonthEnd()
-      },
-    ];
+    this.ranges = {
+      cycles: [{
+        breakdownType: 'cycles',
+        name: 'This Cycle',
+        start: 4,
+        end: undefined
+      }, {
+        breakdownType: 'cycles',
+        name: 'Last Cycle',
+        start: 3,
+        end: undefined
+      }],
+      months: [{
+        breakdownType: 'months',
+        name: 'This Month',
+        start: 4,
+        end: undefined
+      }, {
+        breakdownType: 'months',
+        name: 'Last Cycle',
+        start: 3,
+        end: undefined
+      }],
+      days: [{
+          breakdownType: 'days',
+          name: 'Last 7 days',
+          start: this.subtract(7),
+          end: today
+        },
+        {
+          breakdownType: 'days',
+          name: 'Last 14 days',
+          start: this.subtract(14),
+          end: today
+        },
+        {
+          breakdownType: 'days',
+          name: 'Last 30 days',
+          start: this.subtract(30),
+          end: today
+        },
+        {
+          breakdownType: 'days',
+          name: 'This week',
+          start: this.weekStart(),
+          end: today
+        },
+        {
+          breakdownType: 'days',
+          name: 'Last week',
+          start: this.lastWeekStart(),
+          end: this.lastWeekEnd()
+        },
+        {
+          breakdownType: 'days',
+          name: 'This month',
+          start: this.monthStart(),
+          end: today
+        },
+        {
+          breakdownType: 'days',
+          name: 'Last month',
+          start: this.lastMonthStart(),
+          end: this.lastMonthEnd()
+        },
+      ]
+    };
   }
 
   // Utlity Functions

@@ -11,10 +11,8 @@ class Controller {
   }
 
   $onInit() {
-    this.advertiser = this.campaignRequest.data.advertiser;
-    this.campaign = this.campaignRequest.data.campaign;
-    this.order = this.campaignRequest.data.order;
-    this.header = setHeader(this.campaignOverview.data, this.order);
+    this.campaign = this.campaignOverview.data;
+    this.header = setHeader(this.campaignOverview.data);
   }
 
   handleSidebarToggle(status) {
@@ -22,7 +20,7 @@ class Controller {
   }
 }
 
-function setHeader(overview, order ) {
+function setHeader(overview) {
   return {
     type: 'Campaign',
     title: overview.name,
@@ -86,24 +84,24 @@ function setHeader(overview, order ) {
         rows: [
           {
             name: 'Order ID',
-            value: order.oid,
-            link: `order.detail({oid:${order.oid}})`
+            value: overview.oid,
+            link: `order.detail({oid:${overview.oid}})`
           },
           {
             name: 'Payment Type',
-            value: order.payment
+            value: overview.payment
           },
           {
             name: 'Current Budget',
-            value: order.budget
+            value: overview.budget
           },
           {
             name: 'Current Cycle',
-            value: order.cycle
+            value: overview.cycle
           },
           {
             name: 'Auto Renew Type',
-            value: order.renew
+            value: overview.renew
           }
         ]
       }
@@ -115,7 +113,7 @@ export default {
   template: template,
   controller: Controller,
   bindings: {
-    campaignRequest: '<',
+    campaignCycles: '<',
     campaignOverview: '<'
   }
 };

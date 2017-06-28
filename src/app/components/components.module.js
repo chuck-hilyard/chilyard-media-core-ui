@@ -9,13 +9,13 @@ import notFound from './404/404.module';
 
 export default angular
   .module('components', [
-    // home,
-    // advertisers,
-    // advertiser,
-    // campaigns,
+    home,
+    advertisers,
+    advertiser,
+    campaigns,
     campaign,
     notFound
-    // orders,
-    // order
+    //orders,
+    //order
   ])
   .name;

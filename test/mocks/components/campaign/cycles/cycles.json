@@ -1,0 +1,40 @@
+{
+  "currentCycleIndex": 2,
+  "cycles": [
+    {
+      "start": "2017-06-01",
+      "cycleNumber": 6,
+      "cycleId": 456456
+    },
+    {
+      "start": "2017-05-01",
+      "end": "2017-05-31",
+      "cycleNumber": 5,
+      "cycleId": 211211
+    },
+    {
+      "start": "2017-04-01",
+      "end": "2017-04-30",
+      "cycleNumber": 4,
+      "cycleId": 975319
+    },
+    {
+      "start": "2017-03-01",
+      "end": "2017-03-31",
+      "cycleNumber": 3,
+      "cycleId": 1213109
+    },
+    {
+      "start": "2017-02-01",
+      "end": "2017-02-28",
+      "cycleNumber": 2,
+      "cycleId": 324345
+    },
+    {
+      "start": "2017-01-01",
+      "end": "2017-01-31",
+      "cycleNumber": 1,
+      "cycleId": 201456
+    }
+  ]
+}

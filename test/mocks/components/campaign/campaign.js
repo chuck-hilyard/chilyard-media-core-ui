@@ -1,11 +1,13 @@
-import get from './campaign.get';
+import getCycles from './campaign.get-cycles';
 import getPerformance from './campaign.get-performance';
 import getTrend from './campaign.get-trend';
+import getOverview from './campaign.get-overview'
 
 export default angular
   .module('mocks.campaign', [
-    get,
+    getCycles,
     getPerformance,
-    getTrend
+    getTrend,
+    getOverview
   ])
   .name;

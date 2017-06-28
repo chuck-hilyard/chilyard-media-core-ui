@@ -51,7 +51,7 @@ class Controller {
   }
 
   getRangeName() {
-    let match = this.ranges.find((range) => {
+    let match = this.ranges.cycles.find((range) => {
       let start = this.range.start.getTime() === range.start.getTime();
       let end = this.range.end.getTime() === range.end.getTime();
       return start && end;

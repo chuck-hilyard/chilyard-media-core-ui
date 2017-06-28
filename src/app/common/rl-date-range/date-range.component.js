@@ -17,10 +17,10 @@ class Controller {
       let lastCycle = angular.copy(this.cycles[1]);
       lastCycle.name = 'Last Cycle';
       this.dateRanges.unshift(thisCycle, lastCycle);
-      this.session.dateRange = angular.copy(this.dateRanges[1]);
+      this.session.dateRange = angular.copy(this.dateRanges.cycles[1]);
     }
     else {
-      this.session.dateRange = angular.copy(this.dateRanges[2]);
+      this.session.dateRange = angular.copy(this.dateRanges.days[2]);
     }
   }
 

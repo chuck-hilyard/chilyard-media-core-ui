@@ -10,7 +10,7 @@ export default angular
     'ngInject';
 
     $httpBackend
-      .when('GET', /\/campaign\/123456\/cycle\?dates=[0-9]{4}-[0-9]{2}-[0-9]{2},[0-9]{4}-[0-9]{2}-[0-9]{2}$/)
+      .when('GET', /\/campaigns\/\d+\/cycle-performance\/cycle$/)
       .respond(performanceData);
 
   })

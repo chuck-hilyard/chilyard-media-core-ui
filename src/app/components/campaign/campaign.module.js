@@ -4,8 +4,9 @@ import sidebar from './campaign.sidebar';
 import detail from './detail/detail.module';
 import creatives from './creatives/creatives.module';
 
-// Hard coded mock for demo
-import campaignRequest from './mock-data/campaign-request';
+// TODO Remove when api on gateway is working
+import fakeCycleData from '../../../../test/mocks/components/campaign/cycles/cycles';
+
 
 export default angular
   .module('campaign', [
@@ -22,7 +23,9 @@ export default angular
         component: 'campaign',
         resolve: {
           campaignOverview: ($http, $stateParams, rlConfig) => $http.get(`${rlConfig.gatewayUrl}/campaigns/${$stateParams.mcid}/campaign-overview`),
-          campaignRequest: () => campaignRequest
+          //campaignCycles: ($http, $stateParams, rlConfig) => $http.get(`${rlConfig.gatewayUrl}/campaigns/${$stateParams.mcid}/cycles`)
+          // TODO Remove when api on gateway is working
+          campaignCycles: ($q, $stateParams, rlConfig) => $q.when({data: fakeCycleData})
         }
       });
   })

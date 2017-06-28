@@ -1,6 +1,7 @@
 import template from './detail.html';
 import dataGridConfig from './data-grid/data-grid';
 
+const apiDateFilter = 'yyyy-MM-dd';
 class Controller {
 
   constructor($filter, $sce, $scope, $stateParams, CampaignDetailService, CampaignSidebar, CampaignTrendChart, Session) {
@@ -67,7 +68,8 @@ class Controller {
   }
 
   $onInit() {
-    this.campaign = this.campaignRequest.data.campaign;
+    console.log({campaignOverview: this.campaignOverview});
+    this.campaign = this.campaignOverview.data;
     this.getTrendData();
     this.getGridData();
   }
@@ -82,8 +84,7 @@ class Controller {
       };
       if (keyOptions) {
         angular.extend(column, keyOptions);
-      }
-      else {
+      } else {
         column.label = value;
       }
       if (column.hide !== true) {
@@ -98,24 +99,30 @@ class Controller {
     return `${start},${end}`;
   }
 
+  dateToString(date) {
+    return this.$filter('date')(date, apiDateFilter);
+  }
+
   getTrendData() {
     let metrics = this.metrics.trend.map((item) => item.id);
     let params = {
       dates: this.dateRangeToString(),
       metrics: metrics.toString()
     };
-    // this.service.getTrendData(this.campaign.mcid, params)
-    //   .then((response) => {
-    //     this.trendChart.build('bar', response.data, this.metrics.trend);
-    //   })
-    //   .catch((error) => {
-    //     throw new Error('GET TREND DATA ERROR: ', JSON.stringify(error));
-    //   });
+    this.service.getTrendData(this.$stateParams.mcid, params)
+      .then((response) => {
+        this.trendChart.build('bar', response.data, this.metrics.trend);
+      })
+      .catch((error) => {
+        //throw new Error('GET TREND DATA ERROR: ', JSON.stringify(error));
+      });
   }
 
   getGridData() {
     let params = {
-      dates: this.dateRangeToString(),
+      // Need to change
+      //start: this.dateToString(this.session.dateRange.start),
+      //end: this.dateToString(this.session.dateRange.end)
     };
     this.service.getPerformanceData(this.$stateParams.mcid, params)
       .then((response) => {
@@ -136,8 +143,7 @@ class Controller {
   }
 
   setMetrics() {
-    let options = [
-      {
+    let options = [{
         id: 'impressions',
         format: 'int',
         label: 'Impressions',
@@ -181,7 +187,7 @@ class Controller {
 
   metricFilter(attr, index) {
     return this.metrics.options.filter((item) => {
-      if(this.metrics[attr][index].id !== item.id) {
+      if (this.metrics[attr][index].id !== item.id) {
         return item;
       }
     });
@@ -401,6 +407,7 @@ export default {
   template: template,
   controller: Controller,
   bindings: {
-    campaignRequest: '<'
+    campaignCycles: '<',
+    campaignOverview: '<'
   }
 };

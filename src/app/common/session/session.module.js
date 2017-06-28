@@ -2,6 +2,7 @@ class Session {
   constructor() {
     'ngInject';
     this.dateRange = {};
+    this.dataSettings = {};
   }
 }
 

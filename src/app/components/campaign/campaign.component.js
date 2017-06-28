@@ -1,8 +1,5 @@
 import template from './campaign.html';
 
-// Private
-let setHeader = setHeader;
-
 class Controller {
   constructor(CampaignSidebar) {
     'ngInject';
@@ -19,6 +16,8 @@ class Controller {
     this.sidebar.collapsed = status;
   }
 }
+
+// Private Functions
 
 function setHeader(overview) {
   return {

@@ -10,7 +10,7 @@ import mockTooltips from './mock-data/tooltips';
 
 describe('components.campaign.detail', () => {
 
-  let $ctrl, $sce, service, rlConfig;
+  let $ctrl, $sce, service;
 
   beforeEach(() => {
     angular.mock.module('campaign.detail', ($provide) => {
@@ -29,9 +29,9 @@ describe('components.campaign.detail', () => {
       let $componentController = $injector.get('$componentController');
       let stateParams = {
         mcid: 123456
-      }
+      };
       $sce = $injector.get('$sce');
-      rlConfig = $injector.get('rlConfig');
+      //rlConfig = $injector.get('rlConfig');
       service = $injector.get('CampaignDetailService');
       $ctrl = $componentController('campaign.detail', {
         $stateParams: stateParams

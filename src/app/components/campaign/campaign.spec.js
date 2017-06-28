@@ -7,19 +7,17 @@ describe('components.campaign', () => {
 
   beforeEach(() => {
 
-    angular.mock.module('campaign', ($provide) => {
-      //$provide.value('CampaignSidebar', mockCampaignSidebar);
-    });
+    angular.mock.module('campaign', () => {});
 
     let bindings = {
       campaignCycles: mockCampaignCycles,
       campaignOverview: mockCampaignOverview
-    }
+    };
 
     angular.mock.inject(($injector) => {
       let stateParams = {
         mcid: 123456
-      }
+      };
       let $componentController = $injector.get('$componentController');
       $ctrl = $componentController('campaign', {
         $stateParams: stateParams

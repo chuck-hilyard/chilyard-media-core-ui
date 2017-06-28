@@ -68,7 +68,6 @@ class Controller {
   }
 
   $onInit() {
-    console.log({campaignOverview: this.campaignOverview});
     this.campaign = this.campaignOverview.data;
     this.getTrendData();
     this.getGridData();
@@ -114,7 +113,7 @@ class Controller {
         this.trendChart.build('bar', response.data, this.metrics.trend);
       })
       .catch((error) => {
-        //throw new Error('GET TREND DATA ERROR: ', JSON.stringify(error));
+        throw new Error('GET TREND DATA ERROR: ', JSON.stringify(error));
       });
   }
 
@@ -144,31 +143,26 @@ class Controller {
 
   setMetrics() {
     let options = [{
-        id: 'impressions',
-        format: 'int',
-        label: 'Impressions',
-        type: 'line'
-      },
-      {
-        id: 'clicks',
-        format: 'int',
-        label: 'Clicks',
-        type: 'line'
-      },
-      {
-        id: 'ctr',
-        format: 'float',
-        label: 'CTR',
-        type: 'line'
-      },
-      {
-        id: 'spend',
-        format: 'currency',
-        label: 'Spend',
-        type: 'bar'
-
-      }
-    ];
+      id: 'impressions',
+      format: 'int',
+      label: 'Impressions',
+      type: 'line'
+    }, {
+      id: 'clicks',
+      format: 'int',
+      label: 'Clicks',
+      type: 'line'
+    }, {
+      id: 'ctr',
+      format: 'float',
+      label: 'CTR',
+      type: 'line'
+    }, {
+      id: 'spend',
+      format: 'currency',
+      label: 'Spend',
+      type: 'bar'
+    }];
     return {
       options: options,
       demographics: [

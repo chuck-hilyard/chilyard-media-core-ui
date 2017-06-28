@@ -25,7 +25,7 @@ export default angular
           campaignOverview: ($http, $stateParams, rlConfig) => $http.get(`${rlConfig.gatewayUrl}/campaigns/${$stateParams.mcid}/campaign-overview`),
           //campaignCycles: ($http, $stateParams, rlConfig) => $http.get(`${rlConfig.gatewayUrl}/campaigns/${$stateParams.mcid}/cycles`)
           // TODO Remove when api on gateway is working
-          campaignCycles: ($q, $stateParams, rlConfig) => $q.when({data: fakeCycleData})
+          campaignCycles: ($q) => $q.when({data: fakeCycleData})
         }
       });
   })

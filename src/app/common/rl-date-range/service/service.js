@@ -31,48 +31,41 @@ export default class Daterange {
         end: undefined
       }],
       days: [{
-          breakdownType: 'days',
-          name: 'Last 7 days',
-          start: this.subtract(7),
-          end: today
-        },
-        {
-          breakdownType: 'days',
-          name: 'Last 14 days',
-          start: this.subtract(14),
-          end: today
-        },
-        {
-          breakdownType: 'days',
-          name: 'Last 30 days',
-          start: this.subtract(30),
-          end: today
-        },
-        {
-          breakdownType: 'days',
-          name: 'This week',
-          start: this.weekStart(),
-          end: today
-        },
-        {
-          breakdownType: 'days',
-          name: 'Last week',
-          start: this.lastWeekStart(),
-          end: this.lastWeekEnd()
-        },
-        {
-          breakdownType: 'days',
-          name: 'This month',
-          start: this.monthStart(),
-          end: today
-        },
-        {
-          breakdownType: 'days',
-          name: 'Last month',
-          start: this.lastMonthStart(),
-          end: this.lastMonthEnd()
-        },
-      ]
+        breakdownType: 'days',
+        name: 'Last 7 days',
+        start: this.subtract(7),
+        end: today
+      }, {
+        breakdownType: 'days',
+        name: 'Last 14 days',
+        start: this.subtract(14),
+        end: today
+      }, {
+        breakdownType: 'days',
+        name: 'Last 30 days',
+        start: this.subtract(30),
+        end: today
+      }, {
+        breakdownType: 'days',
+        name: 'This week',
+        start: this.weekStart(),
+        end: today
+      }, {
+        breakdownType: 'days',
+        name: 'Last week',
+        start: this.lastWeekStart(),
+        end: this.lastWeekEnd()
+      }, {
+        breakdownType: 'days',
+        name: 'This month',
+        start: this.monthStart(),
+        end: today
+      }, {
+        breakdownType: 'days',
+        name: 'Last month',
+        start: this.lastMonthStart(),
+        end: this.lastMonthEnd()
+      }]
     };
   }
 

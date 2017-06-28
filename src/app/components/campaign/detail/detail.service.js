@@ -1,4 +1,3 @@
-
 // TODO Remove when api on gateway is working
 //import fakePerformanceData from '../../../../../test/mocks/components/campaign/performance-data/performance-data';
 
@@ -14,19 +13,16 @@ export default class Service {
   getPerformanceData(mcid, params) {
     let config = {
       params: params
-    }
+    };
     // TODO Remove when api on gateway is working
     //return this.$q.when({data: fakePerformanceData});
     return this.$http.get(`${this.gatewayUrl}/campaigns/${mcid}/cycle-performance/cycles`, config);
 
   }
 
-  getTrendData(mcid, params) {
-    let config = {
-      params: params
-    };
+  getTrendData() {
     return this.$q.when([]);
-    //return this.$http.get(`${this.rlConfig.gatewayUrl}/campaigns/${mcid}/trend-data`, config);
+    // TODO Replace with get data from cycle-performance data..
   }
 
 }

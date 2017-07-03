@@ -1,28 +1,23 @@
-// TODO Remove when api on gateway is working
-//import fakePerformanceData from '../../../../../test/mocks/components/campaign/performance-data/performance-data';
-
 export default class Service {
 
-  constructor($http, rlConfig, $q) {
+  constructor($http, rlConfig) {
     'ngInject';
     this.$http = $http;
     this.gatewayUrl = rlConfig.gatewayUrl;
-    this.$q = $q;
   }
 
-  getPerformanceData(mcid, params) {
+  getAgeGenderData(mcid, breakdown, params) {
     let config = {
       params: params
     };
-    // TODO Remove when api on gateway is working
-    //return this.$q.when({data: fakePerformanceData});
-    return this.$http.get(`${this.gatewayUrl}/campaigns/${mcid}/cycle-performance/cycles`, config);
-
+    return this.$http.get(`${this.gatewayUrl}/campaigns/${mcid}/age-gender-stats-summary/${breakdown}`, config);
   }
 
-  getTrendData() {
-    return this.$q.when([]);
-    // TODO Replace with get data from cycle-performance data..
+  getPerformanceData(mcid, breakdown, params) {
+    let config = {
+      params: params
+    };
+    return this.$http.get(`${this.gatewayUrl}/campaigns/${mcid}/cycle-performance/${breakdown}`, config);
   }
 
 }

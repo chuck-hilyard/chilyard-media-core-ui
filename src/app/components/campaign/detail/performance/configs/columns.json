@@ -1,6 +1,13 @@
 {
+  "$$hashKey": {
+    "hide": true
+  },
   "campaignId": {
     "hide": true
+  },
+  "dateRange": {
+    "label": "Cycle",
+    "sortable": true
   },
   "startDate": {
     "label": "Start Date"
@@ -10,6 +17,9 @@
   },
   "status": {
     "label": "Status"
+  },
+  "cycleNumber": {
+    "hide": true
   },
   "utilization": {
     "label": "Utl...",
@@ -118,7 +128,7 @@
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "pageEngagement": {
+  "pageEngagements": {
     "label": "Page Eng...",
     "filter": "number",
     "icon": "fa-info-circle"

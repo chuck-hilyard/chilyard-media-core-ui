@@ -1,0 +1,27 @@
+<div class="panel panel-default">
+  <div class="panel-heading panel-heading--form">
+    <div class="row">
+      <div class="col-md-9">
+        <h3 class="panel-title">Mobile vs. Desktop</h3>
+      </div>
+      <div class="col-md-3">
+        <select class="form-control input-sm"
+          ng-model="$ctrl.metrics.devices[0]"
+          ng-options="item as item.label for item in $ctrl.metrics.options">
+        </select>
+      </div>
+    </div>
+  </div>
+  <div class="panel-body text-center">
+    <div class="device-chart">
+      <rl-chart data="$ctrl.deviceChart.chart"></rl-chart>
+    </div>
+  </div>
+  <ul class="list-group">
+    <li class="list-group-item" ng-repeat="label in $ctrl.deviceChart.chart.data.labels">
+      <b class="pull-right">{{$ctrl.deviceChart.chart.data.datasets[0].data[$index]}}&#37;</b>
+      <span class="fa fa-circle" ng-style="{'color': $ctrl.deviceChart.chart.data.datasets[0].backgroundColor[$index]}"></span>
+      {{label}}
+    </li>
+  </ul>
+</div>

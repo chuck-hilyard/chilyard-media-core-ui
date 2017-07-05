@@ -99,6 +99,30 @@ class Controller {
   }
 
   setOptions() {
+    return {
+      responsive: true,
+      maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
+      scales: {
+        xAxes: [
+          {
+            gridLines: {
+              display: false,
+            }
+          }
+        ],
+        yAxes: this.setYAxes()
+      },
+      tooltips: {
+        bodySpacing: 4,
+        mode: 'index'
+      }
+    };
+  }
+
+  setYAxes() {
     let yAxes = [];
     this.metrics.forEach((metric, index) => {
       let position = (index === 0) ? 'left' : 'right';
@@ -116,31 +140,15 @@ class Controller {
           callback: (dataLabel) => this.$filter('currency')(dataLabel)
         };
         break;
+      case 'int':
+        axis.ticks = {
+          callback: (dataLabel) => this.$filter('number')(dataLabel)
+        };
+        break;
       }
       yAxes.push(axis);
     });
-
-    return {
-      responsive: true,
-      maintainAspectRatio: false,
-      legend: {
-        display: false
-      },
-      scales: {
-        xAxes: [
-          {
-            gridLines: {
-              display: false,
-            }
-          }
-        ],
-        yAxes: yAxes
-      },
-      tooltips: {
-        bodySpacing: 4,
-        mode: 'index'
-      }
-    };
+    return yAxes;
   }
 
   updateChart() {

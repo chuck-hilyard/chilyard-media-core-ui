@@ -90,5 +90,51 @@
         }
       ]
     }
+  },
+    {
+    "metricName": "ctr",
+    "displayName": "CTR",
+    "male": {
+      "total": 4.12,
+      "percentage": 52,
+      "ageGroups": [
+        {
+          "ageGroup": "13 - 17",
+          "total": 3.5,
+          "percentage": 15
+        },
+        {
+          "ageGroup": "18 - 24",
+          "total": 3.5,
+          "percentage": 15
+        },
+        {
+          "ageGroup": "25 - 34",
+          "total": 3.5,
+          "percentage": 15
+        }
+      ]
+    },
+    "female": {
+      "total": 3.7,
+      "percentage": 47,
+      "ageGroups": [
+        {
+          "ageGroup": "13 - 17",
+          "total": 3,
+          "percentage": 15
+        },
+        {
+          "ageGroup": "18 - 24",
+          "total": 3,
+          "percentage": 15
+        },
+        {
+          "ageGroup": "25 - 34",
+          "total": 3,
+          "percentage": 15
+        }
+      ]
+    }
   }
 ]

@@ -3,18 +3,17 @@ import metricsConfig from './configs/metrics';
 
 class Controller {
 
-  constructor($filter) {
+  constructor($filter, rlColors) {
     'ngInject';
     this.$filter = $filter;
-
     this.colors = [
       {
-        male: '#23a4a9',
-        female: '#bdd964'
+        male: rlColors.charts[4].shades[0],
+        female: rlColors.charts[2].shades[0]
       },
       {
-        male: '#2b97ce',
-        female: '#a26da9'
+        male: rlColors.charts[1].shades[0],
+        female: rlColors.charts[6].shades[0]
       }
     ];
     this.chart1 = {};
@@ -36,99 +35,57 @@ class Controller {
 
   build(data) {
     let $ctrl = this;
-    this.chart1 = {
-      type: 'horizontalBar',
-      data: {
-        labels: this.labels,
-        datasets: $ctrl.setDatasets(data, 0)
-      },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-          display: false
-        },
-        scales: {
-          xAxes: [
-            {
-              gridLines: {
-                drawBorder: false
-              },
-              ticks: {
-                beginAtZero: true,
-                callback: (value) => (value * -1)
-              }
-            }
-          ],
-          yAxes: [
-            {
-              gridLines: {
-                drawBorder: false,
-                display: false
-              },
-              ticks: {
-                fontColor: '#fff'
-              }
-            }
-          ]
-        },
-        tooltips: {
-          callbacks: {
-            label: (tooltipItem, data) => {
-              let di = tooltipItem.datasetIndex;
-              return data.datasets[di].label + ': ' + tooltipItem.xLabel * -1;
-            }
-          }
-        }
-      }
-    };
 
-    this.chart2 = {
-      type: 'horizontalBar',
-      data: {
-        labels: this.labels,
-        datasets: $ctrl.setDatasets(data, 1)
+    this.charts = [
+      {
+        type: 'horizontalBar',
+        data: {
+          labels: this.labels,
+          datasets: $ctrl.setDatasets(data, 0)
+        },
+        options: $ctrl.setOptions(0)
       },
-      options: {
-        responsive: true,
-        maintainAspectRatio: false,
-        legend: {
-          display: false
+      {
+        type: 'horizontalBar',
+        data: {
+          labels: this.labels,
+          datasets: $ctrl.setDatasets(data, 1)
         },
-        scales: {
-          xAxes: [
-            {
-              gridLines: {
-                drawBorder: false
-              },
-              ticks: {
-                beginAtZero: true,
-                callback: (value) => this.$filter('currency')(value)
-              }
-            }
-          ],
-          yAxes: [
-            {
-              gridLines: {
-                display: false
-              },
-              ticks: {
-                padding: 30,
-              }
-            }
-          ]
-        },
-        tooltips: {
-          callbacks: {
-            label: (tooltipItem, data) => {
-              let di = tooltipItem.datasetIndex;
-              return data.datasets[di].label + ': ' + this.$filter('currency')(tooltipItem.xLabel);
-            }
-          }
-        }
+        options: $ctrl.setOptions(1)
       }
+    ];
+  }
+
+  filterOptions(index) {
+    return this.metricOptions.filter((item) => {
+      if (this.metrics[index].id !== item.id) {
+        return item;
+      }
+    });
+  }
+
+  getTotals(index, gender) {
+    if (!this.data) {
+      return {
+        percentage: 0,
+        total: 0
+      };
+    }
+    let metric = this.metrics[index];
+    let metricData = this.data.find((item) => item.metricName === metric.id);
+    let total = 0;
+    if (metric.format === 'currency') {
+      total = this.$filter('currency')(metricData[gender].total);
+    }
+    else {
+      total = this.$filter('number')(metricData[gender].total);
+    }
+    return {
+      percentage: metricData[gender].percentage,
+      total: total
     };
   }
+
 
   setDatasets(data, index) {
     let metric = this.metrics[index];
@@ -142,7 +99,7 @@ class Controller {
         borderColor: this.colors[index].male,
       },
       {
-        label: 'Female Impressions',
+        label: `Female ${metric.label}`,
         data: metricData.female.ageGroups.map((item) => item.total * modifier),
         backgroundColor: this.colors[index].female,
         borderColor: this.colors[index].female,
@@ -150,12 +107,75 @@ class Controller {
     ];
   }
 
-  filterOptions(index) {
-    return this.metricOptions.filter((item) => {
-      if (this.metrics[index].id !== item.id) {
-        return item;
+  setOptions(index) {
+    let modifier = index === 0 ? -1 : 1;
+    return {
+      responsive: true,
+      maintainAspectRatio: false,
+      legend: {
+        display: false
+      },
+      scales: {
+        xAxes: [
+          this.setXAxis(index)
+        ],
+        yAxes: [
+          this.setYAxis(index)
+        ]
+      },
+      tooltips: {
+        callbacks: {
+          label: (tooltipItem, data) => {
+            let di = tooltipItem.datasetIndex;
+            return `${data.datasets[di].label}: ${tooltipItem.xLabel * modifier}`;
+          }
+        }
       }
-    });
+    };
+  }
+
+  setXAxis(index) {
+    let metric = this.metrics[index];
+    let modifier = index === 0 ? -1 : 1;
+    let xAxis = {
+      gridLines: {
+        drawBorder: false
+      },
+      ticks: {
+        beginAtZero: true
+      }
+    };
+    if (metric.format === 'currency') {
+      xAxis.ticks.callback = (value) => this.$filter('currency')(value * modifier);
+    }
+    else {
+      xAxis.ticks.callback = (value) => this.$filter('number')(value * modifier);
+    }
+    return xAxis;
+  }
+
+  setYAxis(index) {
+    let yAxis = {
+      gridLines: {
+        drawBorder: false,
+        display: false
+      }
+    };
+    if (index === 0) {
+      yAxis.ticks = {
+        fontColor: '#fff'
+      };
+    }
+    else {
+      yAxis.ticks = {
+        padding: 30
+      };
+    }
+    return yAxis;
+  }
+
+  updateChart() {
+    this.build(this.data);
   }
 
 }

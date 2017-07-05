@@ -58,6 +58,26 @@ class Colors {
           '#a7dbdd',
           '#d3edee'
         ]
+      },
+      {
+        name: 'pink',
+        shades: [
+          '#d11c55',
+          '#da4977',
+          '#7e37799',
+          '#eda4bb',
+          '#f6d2dd'
+        ]
+      },
+      {
+        name: 'purple',
+        shades: [
+          '#a26da9',
+          '#b58aba',
+          '#c7a7cb',
+          '#dac5dd',
+          '#ece2ee'
+        ]
       }
     ];
 

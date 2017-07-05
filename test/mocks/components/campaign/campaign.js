@@ -1,13 +1,14 @@
 import getCycles from './campaign.get-cycles';
 import getPerformance from './campaign.get-performance';
-import getTrend from './campaign.get-trend';
-import getOverview from './campaign.get-overview'
+import getOverview from './campaign.get-overview';
+import getAgeGender from './campaign.get-age-gender';
+
 
 export default angular
   .module('mocks.campaign', [
     getCycles,
     getPerformance,
-    getTrend,
-    getOverview
+    getOverview,
+    getAgeGender
   ])
   .name;

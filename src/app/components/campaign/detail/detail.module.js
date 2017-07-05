@@ -1,30 +1,31 @@
 import uiRouter from 'angular-ui-router';
 import ngTranslate from 'angular-translate';
-import tooltip from 'angular-ui-bootstrap/src/tooltip';
 import component from './detail.component';
 import service from './detail.service';
-import charts from './charts/charts.module';
+import overviewPanels from './overview-panels/overview-panels.module';
+import trendChart from './trend-chart/trend-chart.module';
+import ageGenderChart from './age-gender-chart/age-gender-chart.module';
+import deviceChart from './device-chart/device-chart.module';
+import performance from './performance/performance.module';
 import './detail.scss';
 
 export default angular
   .module('campaign.detail', [
     uiRouter,
-    tooltip,
-    charts,
-    ngTranslate
+    ngTranslate,
+    overviewPanels,
+    trendChart,
+    ageGenderChart,
+    deviceChart,
+    performance
   ])
-  .config(($stateProvider, $uibTooltipProvider) => {
+  .config(($stateProvider) => {
     'ngInject';
     $stateProvider
       .state('campaign.detail', {
         url: '',
         component: 'campaign.detail'
       });
-
-    $uibTooltipProvider.options({
-      appendToBody: true,
-      placement: 'auto bottom'
-    });
   })
   .component('campaign.detail', component)
   .service('CampaignDetailService', service)

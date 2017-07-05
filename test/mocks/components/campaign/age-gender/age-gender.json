@@ -1,0 +1,94 @@
+[
+  {
+    "metricName": "impressions",
+    "displayName": "Impressions",
+    "male": {
+      "total": 12811,
+      "percentage": 52,
+      "ageGroups": [
+        {
+          "ageGroup": "13 - 17",
+          "total": 1000,
+          "percentage": 15
+        },
+        {
+          "ageGroup": "18 - 24",
+          "total": 1000,
+          "percentage": 15
+        },
+        {
+          "ageGroup": "25 - 34",
+          "total": 1000,
+          "percentage": 15
+        }
+      ]
+    },
+    "female": {
+      "total": 23930,
+      "percentage": 47,
+      "ageGroups": [
+        {
+          "ageGroup": "13 - 17",
+          "total": 1000,
+          "percentage": 15
+        },
+        {
+          "ageGroup": "18 - 24",
+          "total": 1000,
+          "percentage": 15
+        },
+        {
+          "ageGroup": "25 - 34",
+          "total": 1000,
+          "percentage": 15
+        }
+      ]
+    }
+  },
+  {
+    "metricName": "spend",
+    "displayName": "Amount Spent",
+    "male": {
+      "total": 74.95,
+      "percentage": 52,
+      "ageGroups": [
+        {
+          "ageGroup": "13 - 17",
+          "total": 1000,
+          "percentage": 15
+        },
+        {
+          "ageGroup": "18 - 24",
+          "total": 1000,
+          "percentage": 15
+        },
+        {
+          "ageGroup": "25 - 34",
+          "total": 1000,
+          "percentage": 15
+        }
+      ]
+    },
+    "female": {
+      "total": 67.81,
+      "percentage": 47,
+      "ageGroups": [
+        {
+          "ageGroup": "13 - 17",
+          "total": 1000,
+          "percentage": 15
+        },
+        {
+          "ageGroup": "18 - 24",
+          "total": 1000,
+          "percentage": 15
+        },
+        {
+          "ageGroup": "25 - 34",
+          "total": 1000,
+          "percentage": 15
+        }
+      ]
+    }
+  }
+]

@@ -19,8 +19,16 @@ export default angular
         url: '/campaign/:mcid',
         component: 'campaign',
         resolve: {
-          campaignCycles: (CampaignService, $stateParams) => CampaignService.getCampaignCycles($stateParams.mcid),
-          campaignOverview: (CampaignService, $stateParams) => CampaignService.getCampaignOverview($stateParams.mcid)
+          campaignCycles: (CampaignService, $stateParams) => {
+            return CampaignService.getCampaignCycles($stateParams.mcid)
+              .then((success) => success.data)
+              .catch((error) => error);
+          },
+          campaignOverview: (CampaignService, $stateParams) => {
+            return CampaignService.getCampaignOverview($stateParams.mcid)
+              .then((success) => success.data)
+              .catch((error) => error);
+          }
         }
       });
   })

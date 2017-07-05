@@ -42,7 +42,7 @@ class Controller {
   }
 
   $onInit() {
-    this.campaign = this.campaignOverview.data;
+    this.campaign = this.campaignOverview;
     this.getPerformanceData();
     this.getAgeGenderData();
   }
@@ -59,7 +59,7 @@ class Controller {
         this.ageGenderData = response.data;
       })
       .catch((error) => {
-        this.ageGenderData = new Error(`GET PERFORMANCE DATA ERROR: ${JSON.stringify(error)}`);
+        this.ageGenderData = new Error(JSON.stringify(error));
       });
   }
 
@@ -84,7 +84,7 @@ class Controller {
         this.performanceData = response.data;
       })
       .catch((error) => {
-        this.performanceData = new Error(`GET PERFORMANCE DATA ERROR: ${JSON.stringify(error)}`);
+        this.performanceData = new Error(JSON.stringify(error));
       });
   }
 

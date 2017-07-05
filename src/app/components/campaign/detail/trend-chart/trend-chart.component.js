@@ -67,6 +67,10 @@ class Controller {
     return this.$filter('number')(total);
   }
 
+  isError() {
+    return this.data instanceof Error;
+  }
+
   setLabels(data) {
     return data.map((item) => {
       return item.cycleNumber;

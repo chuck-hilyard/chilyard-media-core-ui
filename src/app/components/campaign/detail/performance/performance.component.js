@@ -56,7 +56,6 @@ class Controller {
 
   configureTable(data) {
     this.columns = [];
-    this.data = data;
     let keys = Object.keys(data[0]);
     angular.forEach(keys, (value) => {
       let keyOptions = this.columnsConfig [value];
@@ -80,6 +79,10 @@ class Controller {
 
   handleNextPage() {
     angular.noop();
+  }
+
+  isError() {
+    return this.data instanceof Error;
   }
 
   tooltipHtml(titleKey, messageKey) {

@@ -17,7 +17,7 @@ export default class Service {
     let config = {
       params: params
     };
-    return this.$http.get(`${this.gatewayUrl}/campaigns/${mcid}/cycle-performance/${breakdown}`, config);
+    return this.$http.get(`${this.gatewayUrl}/campaigns/${mcid}/stats/${breakdown}`, config);
   }
 
 }

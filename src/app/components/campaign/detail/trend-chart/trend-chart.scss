@@ -1,0 +1,16 @@
+@import './src/styles/variables';
+
+.trend-chart {
+  height: 350px;
+  margin-bottom: $grid-gutter-width;
+}
+
+.table-trend-metrics {
+  td {
+    width: 50%;
+
+    &:first-child {
+      text-align: right;
+    }
+  }
+}

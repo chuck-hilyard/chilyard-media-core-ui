@@ -1,5 +1,6 @@
 import tooltip from 'angular-ui-bootstrap/src/tooltip';
 import component from './performance.component';
+import './performance.scss';
 
 export default angular
   .module('campaign.detail.performance', [

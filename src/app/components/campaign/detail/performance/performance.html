@@ -7,7 +7,7 @@
         <table class="table table-striped table-condensed table-bordered table-report">
           <thead>
             <tr>
-              <th ng-repeat="column in $ctrl.columns" uib-tooltip-html="$ctrl.tooltips[column.key]">
+              <th ng-class="column.key" ng-repeat="column in $ctrl.columns" uib-tooltip-html="$ctrl.tooltips[column.key]">
                 <span ng-if="!column.sortable">{{column.label}}</span>
                 <rl-sortable-header
                   key="column.key"
@@ -24,7 +24,7 @@
         <table class="table table-striped table-condensed table-bordered table-report">
           <tbody>
             <tr ng-repeat="row in $ctrl.data">
-              <td ng-class="column.key" ng-repeat="column in $ctrl.columns">
+              <td ng-class="[column.key, {'text-right': column.filter === 'number' || column.filter === 'currency'}]" ng-repeat="column in $ctrl.columns">
                 <span ng-if="!column.filter">{{row[column.key]}}</span>
                 <span ng-if="column.filter === 'number'">{{row[column.key] | number}}</span>
                 <span ng-if="column.filter === 'currency'">{{row[column.key] | currency}}</span>

@@ -1,35 +1,47 @@
 <div class="rl-date-range-modal">
+  <div class="modal-header">
+    <div class="row">
+      <div class="col-xs-12" translate>
+        dateRange.modalHeading
+      </div>
+    </div>
+  </div>
   <div class="modal-body">
     <div class="row">
       <div class="col-xs-12">
-        Select the breakdown (show data by cycles, months, days) and then select the range of data to show.
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12">
         <uib-tabset active="active">
-          <uib-tab index="0" heading="Cycles">
+          <uib-tab index="0" heading="{{'dateRange.cycles' | translate}}">
             <div class="col-sm-3 col-list-ranges">
               <ul class="list-unstyled">
                 <li ng-repeat="range in ::$ctrl.resolve.ranges.cycles" ng-click="$ctrl.setRange(range)" ng-class="{'active':$ctrl.range.name === range.name}">
-                  {{range.name}}
+                  {{range.name}} <i class="fa fa-check"></i>
                 </li>
               </ul>
             </div>
             <div class="col-sm-9">
-              <div>START</div>
-              <div>END</div>
+              <div class="text-uppercase" translate>app.start</div>
+              <div class="text-uppercase" translate>app.end</div>
             </div>
           </uib-tab>
-          <uib-tab index="1" heading="Months">
-            Hello months
+          <uib-tab index="1" heading="{{'dateRange.months' | translate}}">
+            <div class="col-sm-3 col-list-ranges">
+              <ul class="list-unstyled">
+                <li ng-repeat="range in ::$ctrl.resolve.ranges.months" ng-click="$ctrl.setRange(range)" ng-class="{'active':$ctrl.range.name === range.name}">
+                  {{range.name}} <i class="fa fa-check"></i>
+                </li>
+              </ul>
+            </div>
+            <div class="col-sm-9">
+              <div class="text-uppercase" translate>app.start</div>
+              <div class="text-uppercase" translate>app.end</div>
+            </div>
           </uib-tab>
-          <uib-tab index="2" heading="Days">
+          <uib-tab index="2" heading="{{'dateRange.days' | translate}}">
             <div class="row">
               <div class="col-sm-3 col-list-ranges">
                 <ul class="list-unstyled">
                   <li ng-repeat="range in ::$ctrl.resolve.ranges.days" ng-click="$ctrl.setRange(range)" ng-class="{'active':$ctrl.range.name === range.name}">
-                    {{range.name}}
+                    {{range.name}} <i class="fa fa-check"></i>
                   </li>
                 </ul>
               </div>
@@ -42,8 +54,11 @@
                     <div class="datepicker" uib-datepicker ng-model="$ctrl.range.end" datepicker-options="$ctrl.options.end"></div>
                   </div>
                 </div>
-                <br>
-                <em class="bookend" ng-if="$ctrl.resolve.cycles"><span>&nbsp;</span> Indicates cycle start/end.</em>
+                <div class="row">
+                  <div class="col-xs-12">
+                    <em ng-if="$ctrl.resolve.cycles"><span class="bookend"><span>&nbsp;</span></span> <span translate>dateRange.calendarNotation</span></em>
+                  </div>
+                </div>
               </div>
             </div>
           </uib-tab>
@@ -53,12 +68,8 @@
   </div>
 
   <div class="modal-footer">
-    <span>
-      <b>By {{$ctrl.range.breakdownType}}</b> |
-      <b ng-if="$ctrl.range.name">{{$ctrl.range.name}}</b>
-       {{$ctrl.range.start | date:'yyyy/MM/dd'}} &mdash; {{$ctrl.range.end | date:'yyyy/MM/dd'}}
-    </span>
-    <button class="btn btn-default" type="button" ng-click="$ctrl.cancel()">Cancel</button>
-    <button class="btn btn-primary" type="button" ng-click="$ctrl.update()">Update</button>
+    <rl-date-range-label range="$ctrl.range"></rl-date-range-label>
+    <button class="btn btn-default" type="button" ng-click="$ctrl.cancel()" translate>app.cancel</button>
+    <button class="btn btn-primary" type="button" ng-click="$ctrl.update()" translate>app.update</button>
   </div>
 </div>

@@ -9,6 +9,7 @@ class Controller {
 
   $onInit() {
     this.campaign = this.campaignOverview;
+    this.cycles  = this.campaignCycles;
     this.header = setHeader(this.campaignOverview);
   }
 
@@ -26,85 +27,63 @@ function setHeader(overview) {
     subType: 'Advertiser',
     subTitle: overview.advertiserName,
     subLink: `advertiser.detail({maid:${overview.masterAdvertiserId}})`,
-    columns: [
-      {
-        title: 'Advertiser',
-        rows: [
-          {
-            name: 'Advertiser Name',
-            value: overview.advertiserName,
-            link: `advertiser.detail({maid:${overview.masterAdvertiserId}})`
-          },
-          {
-            name: 'Master Advertiser ID',
-            value: overview.masterAdvertiserId
-          },
-          {
-            name: 'Current Advertiser ID',
-            value: overview.currentAdvertiserId,
-          },
-          {
-            name: 'Advertiser Business',
-            value: overview.businessId
-          }
-        ]
-      },
-      {
-        title: 'Campaign',
-        rows: [
-          {
-            name: 'Master Campaign ID',
-            value: overview.masterCampaignId
-          },
-          {
-            name: 'Current Campaign ID',
-            value: overview.activeCampaignId
-          },
-          {
-            name: 'Offer Name',
-            value: overview.offerName
-          },
-          {
-            name: 'Offer ID',
-            value: overview.offerId
-          },
-          {
-            name: 'Business Category',
-            value: overview.businessCategoryName
-          },
-          {
-            name: 'Business Sub Category',
-            value: overview.businessSubCategoryName
-          }
-        ]
-      },
-      {
-        title: 'Order Information',
-        rows: [
-          {
-            name: 'Order ID',
-            value: overview.oid,
-            link: `order.detail({oid:${overview.oid}})`
-          },
-          {
-            name: 'Payment Type',
-            value: overview.payment
-          },
-          {
-            name: 'Current Budget',
-            value: overview.budget
-          },
-          {
-            name: 'Current Cycle',
-            value: overview.cycle
-          },
-          {
-            name: 'Auto Renew Type',
-            value: overview.renew
-          }
-        ]
-      }
-    ]
+    columns: [{
+      title: 'Advertiser',
+      rows: [{
+        name: 'Advertiser Name',
+        value: overview.advertiserName,
+        link: `advertiser.detail({maid:${overview.masterAdvertiserId}})`
+      }, {
+        name: 'Master Advertiser ID',
+        value: overview.masterAdvertiserId
+      }, {
+        name: 'Current Advertiser ID',
+        value: overview.currentAdvertiserId,
+      }, {
+        name: 'Advertiser Business',
+        value: overview.businessId
+      }]
+    }, {
+      title: 'Campaign',
+      rows: [{
+        name: 'Master Campaign ID',
+        value: overview.masterCampaignId
+      }, {
+        name: 'Current Campaign ID',
+        value: overview.activeCampaignId
+      }, {
+        name: 'Offer Name',
+        value: overview.offerName
+      }, {
+        name: 'Offer ID',
+        value: overview.offerId
+      }, {
+        name: 'Business Category',
+        value: overview.businessCategoryName
+      }, {
+        name: 'Business Sub Category',
+        value: overview.businessSubCategoryName
+      }]
+    }, {
+      title: 'Order Information',
+      rows: [{
+        name: 'Order ID',
+        value: overview.oid,
+        link: `order.detail({oid:${overview.oid}})`
+      }, {
+        name: 'Payment Type',
+        value: overview.payment
+      }, {
+        name: 'Current Budget',
+        value: overview.budget
+      }, {
+        name: 'Current Cycle',
+        value: overview.cycle
+      }, {
+        name: 'Auto Renew Type',
+        value: overview.renew
+      }]
+    }]
   };
 }
 

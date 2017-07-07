@@ -1,40 +1,67 @@
 {
-  "currentCycleIndex": 6,
-  "cycles": [
-    {
-      "start": "2017-06-01",
-      "cycleNumber": 6,
-      "cycleId": 456456
-    },
-    {
-      "start": "2017-05-01",
-      "end": "2017-05-31",
-      "cycleNumber": 5,
-      "cycleId": 211211
-    },
-    {
-      "start": "2017-04-01",
-      "end": "2017-04-30",
-      "cycleNumber": 4,
-      "cycleId": 975319
-    },
-    {
-      "start": "2017-03-01",
-      "end": "2017-03-31",
-      "cycleNumber": 3,
-      "cycleId": 1213109
-    },
-    {
-      "start": "2017-02-01",
-      "end": "2017-02-28",
-      "cycleNumber": 2,
-      "cycleId": 324345
-    },
-    {
-      "start": "2017-01-01",
-      "end": "2017-01-31",
-      "cycleNumber": 1,
-      "cycleId": 201456
-    }
-  ]
+  "currentCycleIndex" : 1,
+  "cycles" : [ {
+    "cycleId" : 2292510,
+    "cycleNumber" : 9,
+    "startDate" : null,
+    "endDate" : null,
+    "active" : false,
+    "isActive" : false
+  }, {
+    "cycleId" : 2271667,
+    "cycleNumber" : 8,
+    "startDate" : "2017-05-26",
+    "endDate" : null,
+    "active" : true,
+    "isActive" : true
+  }, {
+    "cycleId" : 2251879,
+    "cycleNumber" : 7,
+    "startDate" : "2017-04-26",
+    "endDate" : "2017-05-26",
+    "active" : false,
+    "isActive" : false
+  }, {
+    "cycleId" : 2231935,
+    "cycleNumber" : 6,
+    "startDate" : "2017-03-27",
+    "endDate" : "2017-04-26",
+    "active" : false,
+    "isActive" : false
+  }, {
+    "cycleId" : 2213776,
+    "cycleNumber" : 5,
+    "startDate" : "2017-02-25",
+    "endDate" : "2017-03-27",
+    "active" : false,
+    "isActive" : false
+  }, {
+    "cycleId" : 2195753,
+    "cycleNumber" : 4,
+    "startDate" : "2017-01-26",
+    "endDate" : "2017-02-25",
+    "active" : false,
+    "isActive" : false
+  }, {
+    "cycleId" : 2178678,
+    "cycleNumber" : 3,
+    "startDate" : "2016-12-25",
+    "endDate" : "2017-01-26",
+    "active" : false,
+    "isActive" : false
+  }, {
+    "cycleId" : 2161940,
+    "cycleNumber" : 2,
+    "startDate" : "2016-11-24",
+    "endDate" : "2016-12-25",
+    "active" : false,
+    "isActive" : false
+  }, {
+    "cycleId" : 2140702,
+    "cycleNumber" : 1,
+    "startDate" : "2016-10-24",
+    "endDate" : "2016-11-24",
+    "active" : false,
+    "isActive" : false
+  } ]
 }

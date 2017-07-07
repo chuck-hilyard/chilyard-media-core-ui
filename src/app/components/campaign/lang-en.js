@@ -1,4 +1,5 @@
 import details from './detail/lang-en';
+import dataSettings from './data-settings/lang-en';
 
 export default Object.assign(
   {
@@ -8,5 +9,6 @@ export default Object.assign(
       creatives: 'Creatives'
     }
   },
-  details
+  details,
+  dataSettings
 );

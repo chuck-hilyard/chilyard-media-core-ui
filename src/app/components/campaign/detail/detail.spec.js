@@ -4,13 +4,9 @@ import mockCampaignCycles from '../../../../../test/mocks/components/campaign/cy
 import mockSession from '../mock-data/session';
 import mockRlConfig from '../mock-data/rlConfig.json';
 
-// Campaign Detail level mocks
-import mockMetrics from './mock-data/metrics';
-import mockTooltips from './mock-data/tooltips';
-
 describe('components.campaign.detail', () => {
 
-  let $ctrl, $sce, service;
+  let $ctrl, service;
 
   beforeEach(() => {
     angular.mock.module('campaign.detail', ($provide) => {
@@ -22,7 +18,9 @@ describe('components.campaign.detail', () => {
 
     let bindings = {
       campaignCycles: mockCampaignCycles,
-      campaignOverview: mockCampaignOverview
+      campaignOverview: {
+        data: mockCampaignOverview
+      }
     };
 
     angular.mock.inject(($injector) => {
@@ -30,8 +28,6 @@ describe('components.campaign.detail', () => {
       let stateParams = {
         mcid: 123456
       };
-      $sce = $injector.get('$sce');
-      //rlConfig = $injector.get('rlConfig');
       service = $injector.get('CampaignDetailService');
       $ctrl = $componentController('campaign.detail', {
         $stateParams: stateParams
@@ -40,42 +36,25 @@ describe('components.campaign.detail', () => {
   });
 
   it('constructs', () => {
-    expect($ctrl.gridData).toEqual({});
-    expect($ctrl.metrics).toEqual(mockMetrics);
-    expect($ctrl.session).toEqual(mockSession);
+    expect($ctrl.ageGenderData).toBeNull();
+    expect($ctrl.performanceData).toBeNull();
     expect($ctrl.service).toEqual(service);
-    expect($ctrl.sortState).toEqual({});
-    expect($ctrl.tableDelegate).toEqual({});
-    expect($ctrl.trendChart).toEqual({});
-    angular.forEach($ctrl.tooltips, (value, key) => {
-      expect($sce.getTrustedHtml(value)).toBe(mockTooltips[key]);
-    });
   });
 
-  it('$onInit', () => {
-    spyOn(service, 'getTrendData').and.callThrough();
+  it('$onChanges', () => {
     spyOn(service, 'getPerformanceData').and.callThrough();
-    $ctrl.$onInit();
-    expect($ctrl.campaign).toEqual(mockCampaignOverview.data);
-    expect(service.getPerformanceData).toHaveBeenCalledWith(123456, {});
-  });
-
-  describe('dateRangeToString', () => {
-    it('converts date range object to a string', () => {
-      let dateString = $ctrl.dateRangeToString();
-      expect(dateString).toBe('2017-01-01,2017-01-31');
+    $ctrl.$onChanges({
+      campaignOverview: {
+        currentValue: {
+          data: mockCampaignOverview
+        }
+      }
     });
-  });
-
-  describe('metricFilter', () => {
-    it('returns unselected metrics', () => {
-      let metrics = $ctrl.metricFilter('trend', 1);
-      let filterString = JSON.stringify($ctrl.metrics.trend[1]);
-      let expected = angular.copy(mockMetrics.options).filter((value) => {
-        return JSON.stringify(value) !== filterString;
-      });
-      expect(metrics).toEqual(expected);
-    });
+    expect($ctrl.campaign).toEqual(mockCampaignOverview);
+    //expect(service.getPerformanceData).toHaveBeenCalledWith(mockCampaignOverview.masterCampaignId, 'cycles', {
+    //  start: 1,
+    //  end: 10
+    //  });
   });
 
 });

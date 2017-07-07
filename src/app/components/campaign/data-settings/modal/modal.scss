@@ -8,6 +8,7 @@
       padding: 5px ($grid-gutter-width / 2);
       color: $text-color;
       cursor: pointer;
+
       .fa {
         margin-left: 2px;
         color: $brand-success;
@@ -18,14 +19,17 @@
         //background-color: $rl-medium-blue-gray;
         //color: $rl-white;
         text-decoration: none;
+
         .fa {
           display: inline;
         }
       }
+
       &:hover {
         background-color: $rl-blue-gray;
         color: $rl-white;
         text-decoration: none;
+
         .fa {
           color: $state-success-text;
         }
@@ -33,13 +37,46 @@
     }
   }
 
-  .nav-tabs > li > a {
-    padding-left: 30px;
-    padding-right: 30px;
+  .nav-tabs {
+    > li > a {
+      padding-left: 30px;
+      padding-right: 30px;
+    }
+
+    li {
+      width: 33%;
+      text-align: center;
+    }
   }
 
   .tab-content {
     padding-top: 10px;
+
+    .top-label {
+      font-size: 11px;
+      text-transform: uppercase;
+      text-align: center;
+    }
+
+    .campaign-tile,
+    .month-tile {
+      background-color: $label-info-bg;
+      color: $label-color;
+      margin: 3px;
+      padding: 5px;
+      text-align: center;
+
+      .cycle-name,
+      .month-date {
+        font-size: 24px;
+        color: $link-color;
+      }
+
+      .cycle-id,
+      .cycle-date-range {
+        color: $rl-blue-gray;
+      }
+    }
   }
 
   .datepicker {

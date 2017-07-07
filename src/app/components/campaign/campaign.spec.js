@@ -2,6 +2,7 @@ import mockCampaignOverview from './mock-data/campaign-overview';
 import mockCampaignCycles from '../../../../test/mocks/components/campaign/cycles/cycles';
 
 describe('components.campaign', () => {
+  let mockCampaignSettings = { breakdownType: 'cycles', start: 1, end: 10 };
 
   let $ctrl;
 
@@ -11,7 +12,8 @@ describe('components.campaign', () => {
 
     let bindings = {
       campaignCycles: mockCampaignCycles,
-      campaignOverview: mockCampaignOverview
+      campaignOverview: mockCampaignOverview,
+      campaignSettings: mockCampaignSettings
     };
 
     angular.mock.inject(($injector) => {

@@ -2,14 +2,19 @@ import uiRouter from 'angular-ui-router';
 import component from './campaign.component';
 import service from './campaign.service';
 import sidebar from './campaign.sidebar';
-import detail from './detail/detail.module';
-import creatives from './creatives/creatives.module';
+import DetailModule from './detail/detail.module';
+import DataSettingsModule from './data-settings/data-settings.module';
+import CreativesModule from './creatives/creatives.module';
+import DataSettingServiceModule from './data-settings/data-settings-service/data-settings-service.module';
+
 
 export default angular
   .module('campaign', [
     uiRouter,
-    detail,
-    creatives
+    DetailModule,
+    CreativesModule,
+    DataSettingServiceModule,
+    DataSettingsModule
   ])
   .config(($stateProvider) => {
     'ngInject';

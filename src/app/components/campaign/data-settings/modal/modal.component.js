@@ -2,10 +2,13 @@ import Template from './modal.html';
 
 
 class Controller {
-  constructor($scope, DateRangeService) {
+  constructor($scope, DataSettingsService) {
     'ngInject';
-    this.dateRangeService = DateRangeService;
-    $scope.$watchCollection(() => this.range, (newValue) => {
+    this.dataSettingsService = DataSettingsService;
+    this.monthsEnabled = true;
+    this.daysEnabled = false;
+    this.customRangeName = DataSettingsService.customRangeName;
+    $scope.$watchCollection(() => this.workingSettings, (newValue) => {
       this.getRangeName();
       this.options.start.maxDate = newValue.end;
       this.options.end.minDate = newValue.start;
@@ -13,18 +16,24 @@ class Controller {
   }
 
   $onInit() {
-    this.range = angular.copy(this.resolve.range);
+    this.workingSettings = angular.copy(this.resolve.settings);
     this.ranges = angular.copy(this.resolve.ranges);
-    this.options = {
+    this.dateLimits = this.dataSettingsService.getDateLimits(this.resolve.cycles);
+    this.options = this.getDatepickerOptions();
+  }
+
+  getDatepickerOptions(){
+    return {
       start: {
         customClass: (data) => this.customClass(data),
-        maxDate: this.range.end,
+        minDate: this.dateLimits.minDate,
+        maxDate: this.workingSettings.end,
         showWeeks: false
       },
       end: {
         customClass: (data) => this.customClass(data),
-        minDate: this.range.start,
-        maxDate: new Date(),
+        minDate: this.workingSettings.start,
+        maxDate: this.dateLimits.maxDate,
         showWeeks: false
       }
     };
@@ -32,6 +41,12 @@ class Controller {
 
   cancel() {
     this.dismiss();
+  }
+
+  selectTab(tabName){
+    if (this.workingSettings.breakdownType !== tabName){
+      this.workingSettings = this.dataSettingsService.getDefault(tabName);
+    }
   }
 
   customClass(data) {
@@ -49,11 +64,10 @@ class Controller {
       }
     }
     return '';
-
   }
 
   getRangeName() {
-    let match = this.dateRangeService.findRange(this.ranges, this.range);
+    let match = this.dataSettingsService.findRange(this.ranges, this.workingSettings);
     /*
     let match = this.ranges.cycles.find((range) => {
       let start = this.range.start.getTime() === range.start.getTime();
@@ -61,17 +75,17 @@ class Controller {
       return start && end;
     });
     */
-    this.range.name = angular.isDefined(match) ? match.name : null;
+    this.workingSettings.name = angular.isDefined(match) ? match.name : null;
   }
 
-  setRange(range) {
-    this.range = angular.copy(range);
+  setRange(workingSettings) {
+    this.workingSettings = angular.copy(workingSettings);
   }
 
   update() {
     this.close({
       $value: {
-        range: this.range
+        settings: this.workingSettings
       }
     });
   }

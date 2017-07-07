@@ -1,0 +1,4 @@
+<span class="data-settings-label"><b class="text-uppercase">{{$ctrl.dataSettings.breakdownType}}</b> | <b ng-if="$ctrl.dataSettings.name">{{$ctrl.dataSettings.name}}</b>
+  <span ng-if="$ctrl.dataSettings.breakdownType=='cycles'">Cycle {{$ctrl.dataSettings.start.cycleNumber}} <span class="text-muted">({{$ctrl.dataSettings.start.cycleId}})</span> &mdash; Cycle {{$ctrl.dataSettings.end.cycleNumber}} <span class="text-muted">({{$ctrl.dataSettings.end.cycleId}})</span></span>
+<span ng-if="$ctrl.dataSettings.breakdownType!='cycles'">{{$ctrl.dataSettings.displayStart}} &mdash; {{$ctrl.dataSettings.displayEnd}}</span>
+</span>

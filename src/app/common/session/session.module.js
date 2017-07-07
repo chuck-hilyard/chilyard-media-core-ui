@@ -1,10 +1,4 @@
-class Session {
-  constructor() {
-    'ngInject';
-    this.dateRange = {};
-    this.dataSettings = {};
-  }
-}
+import Session from './session.service.js';
 
 export default angular
   .module('common.session', [])

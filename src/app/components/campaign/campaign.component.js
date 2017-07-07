@@ -8,8 +8,8 @@ class Controller {
   }
 
   $onInit() {
-    this.campaign = this.campaignOverview.data;
-    this.header = setHeader(this.campaignOverview.data);
+    this.campaign = this.campaignOverview;
+    this.header = setHeader(this.campaignOverview);
   }
 
   handleSidebarToggle(status) {

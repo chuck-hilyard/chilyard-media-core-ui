@@ -34,8 +34,11 @@ class Controller {
   }
 
   build(data) {
+    if (data instanceof Error) {
+      this.charts = [];
+      return;
+    }
     let $ctrl = this;
-
     this.charts = [
       {
         type: 'horizontalBar',
@@ -65,7 +68,7 @@ class Controller {
   }
 
   getTotals(index, gender) {
-    if (!this.data) {
+    if (!this.data || this.data instanceof Error) {
       return {
         percentage: 0,
         total: 0
@@ -86,6 +89,9 @@ class Controller {
     };
   }
 
+  isError() {
+    return this.data instanceof Error;
+  }
 
   setDatasets(data, index) {
     let metric = this.metrics[index];

@@ -16,12 +16,12 @@
 
     <div class="navbar-collapse collapse" ng-class="{'in': !$ctrl.collapsed}">
       <ul class="nav navbar-nav">
-        <li ui-sref-active="active">
+        <li ui-sref-active="active" ng-if="$ctrl.featureFlags.dashboard">
           <a ui-sref="home" ng-click="$ctrl.collapse()" title="Home">
             <i class="fa fa-lg fa-home"></i>
           </a>
         </li>
-        <li ng-class="{'active': $ctrl.advertiser}">
+        <li ng-class="{'active': $ctrl.advertiser}" ng-if="$ctrl.featureFlags.advertisers">
           <a ui-sref="advertisers" ng-click="$ctrl.collapse()" title="Advertisers">
             <i class="fa fa-lg fa-users"></i>
           </a>
@@ -31,14 +31,14 @@
             <i class="fa fa-lg fa-folder"></i>
           </a>
         </li>
-        <li ng-class="{'active': $ctrl.order}">
+        <li ng-class="{'active': $ctrl.order}" ng-if="$ctrl.featureFlags.orders">
           <a ui-sref="orders" ng-click="$ctrl.collapse()" title="Orders">
             <i class="fa fa-lg fa-file-text"></i>
           </a>
         </li>
       </ul>
 
-      <ul class="nav navbar-nav navbar-right">
+      <ul class="nav navbar-nav navbar-right" ng-if="$ctrl.featureFlags.userData">
         <li class="dropdown" uib-dropdown>
           <a class="dropdown-toggle" uib-dropdown-toggle>
             Hello &lt;User&gt; <span class="caret"></span>

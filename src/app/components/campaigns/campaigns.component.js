@@ -3,15 +3,22 @@ import template from './campaigns.html';
 
 class Controller {
 
-  constructor() {
+  constructor(CampaignService) {
     'ngInject';
     this.rows = [];
+    this.service = CampaignService;
   }
 
-  $onInit() {
-    for(let i = 0; i < 25; i++) {
-      this.rows.push(Math.random() * 10);
+  search() {
+    if (!this.searchInput || this.searchInput.length === 0) {
+      this.rows = [];
     }
+    this.service.getCampaignOverview(this.searchInput)
+      .then((success) => {
+        this.rows = [
+          success.data
+        ];
+      });
   }
 
 }

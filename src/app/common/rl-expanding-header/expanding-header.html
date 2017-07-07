@@ -3,10 +3,13 @@
   <div class="row">
     <div class="col-xs-12">
       <h5 ng-if="$ctrl.data.subTitle">
-        {{$ctrl.data.subType}}:
-        <a ui-sref="{{$ctrl.data.subLink}}">
+        <i>{{$ctrl.data.subType}}</i>:
+        <a ui-sref="{{$ctrl.data.subLink}}" ng-if="$ctrl.data.subLink">
           {{$ctrl.data.subTitle}}
         </a>
+        <span ng-if="!$ctrl.data.subLink">
+          {{$ctrl.data.subTitle}}
+        </span>
       </h5>
       <h5 ng-if="!$ctrl.data.subTitle">&nbsp;</h5>
     </div>

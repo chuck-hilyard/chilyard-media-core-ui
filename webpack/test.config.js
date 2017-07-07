@@ -1,9 +1,10 @@
 const cleanPlugin = require('clean-webpack-plugin');
 const copyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
-const paths = require('./paths.js');
+const paths = require('./support/paths.js');
+const flags = require('./support/development.flags.json');
 
-let config = require('./default.config.js');
+let config = require('./support/default.config.js');
 
 config.entry = {
   app: [
@@ -28,6 +29,7 @@ config.plugins = [
   ]),
   new webpack.DefinePlugin({
     ENVIRONMENT: JSON.stringify('test'),
+    FEATURE_FLAGS: JSON.stringify(flags),
     LANGUAGES: JSON.stringify(['en']),
     GATEWAY_URL: JSON.stringify('')
   })

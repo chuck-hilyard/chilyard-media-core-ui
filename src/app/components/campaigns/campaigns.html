@@ -1,5 +1,5 @@
 <div class="rl-container">
-  <div class="rl-content">
+  <div class="rl-content campaigns">
 
     <div class="row">
       <div class="col-xs-12">
@@ -10,11 +10,15 @@
     </div>
 
     <div class="row">
-      <div class="col-lg-2">
-        <label class="hidden-md hidden-sm hidden-xs">&nbsp;</label>
-        <div class="form-group">
-          <input class="form-control" type="text" placeholder="Search">
-        </div>
+      <div class="col-lg-3">
+        <form class="input-group" ng-submit="$ctrl.search()">
+          <input class="form-control" type="text" placeholder="Enter campaign id" ng-model="$ctrl.searchInput">
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+              <span class="fa fa-search"></span>
+            </button>
+          </span>
+        </form>
       </div>
     </div>
 
@@ -24,9 +28,6 @@
           <table class="table table-striped table-dashboard">
             <thead>
               <tr>
-                <th>
-                  <input type="checkbox">
-                </th>
                 <th>
                   Campaign<br>
                   (Master Campaign ID)
@@ -52,92 +53,37 @@
                   Budget
                 </th>
               </tr>
-              <tr>
-                <th>&nbsp;</th>
-                <th>
-                  Totals - all 2,166,458 campaigns
-                </th>
-                <th>
-                  --
-                </th>
-                <th>
-                  --
-                </th>
-                <th>
-                  --
-                </th>
-                <th>
-                  --
-                </th>
-                <th>
-                  --
-                </th>
-                <th>
-                  $2,567,023
-                </th>
-              </tr>
             </thead>
             <tbody>
-              <tr>
-                <td>
-                  <input type="checkbox">
-                </td>
+              <tr ng-repeat="row in $ctrl.rows">
                 <td class="campaign">
-                  <a ui-sref="campaign.detail({mcid:2140702})">HARD CODED FOR DEMO</a><br>
-                  MCID: 2140702
+                  <a ui-sref="campaign.detail({mcid:row.masterCampaignId})">{{row.name}}</a><br>
+                  MCID: {{row.masterCampaignId}}
                 </td>
                 <td class="advertiser">
-                  <a ui-sref="advertiser.detail({maid:123456})"">My Advertiser {{$index}}</a><br>
-                  MAID: 123456
+                  {{row.advertiserName}}<br>
+                  MAID: {{row.masterAdvertiserId}}
                 </td>
                 <td class="offer">
-                  ReachOffer<br>
-                  OID: 1234
+                  ---
                 </td>
-                <td class="sategory">
-                  Stuff
+                <td class="category">
+                  {{row.businessCategoryName}}
                 </td>
                 <td class="sub-category">
-                  Things
+                  {{row.businessSubCategoryName}}
                 </td>
                 <td class="status">
-                  Running
+                  ---
                 </td>
                 <td class="budget">
-                  $7,777
+                  ---
                 </td>
               </tr>
-              <tr ng-repeat="row in $ctrl.rows">
-                <td>
-                  <input type="checkbox">
-                </td>
-                <td class="campaign">
-                  <a ui-sref="campaign.detail({mcid:123456})">My Campaign {{$index}}</a><br>
-                  MCID: 123456
-                </td>
-                <td class="advertiser">
-                  <a ui-sref="advertiser.detail({maid:123456})"">My Advertiser {{$index}}</a><br>
-                  MAID: 123456
-                </td>
-                <td class="offer">
-                  ReachOffer<br>
-                  OID: 1234
-                </td>
-                <td class="sategory">
-                  Stuff
-                </td>
-                <td class="sub-category">
-                  Things
-                </td>
-                <td class="status">
-                  Running
-                </td>
-                <td class="budget">
-                  $7,777
-                </td>
+              <tr ng-if="$ctrl.rows.length === 0">
+                <td colspan="8">No campaigns</td>
               </tr>
             </tbody>
-
           </table>
         </div>
       </div>

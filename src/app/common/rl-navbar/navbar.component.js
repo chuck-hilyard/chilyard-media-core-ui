@@ -3,9 +3,10 @@ import navbarTemplate from './navbar.html';
 
 class NavbarController {
 
-  constructor($state) {
+  constructor($state, rlConfig) {
     'ngInject';
     this.collapsed = true;
+    this.featureFlags = rlConfig.featureFlags;
     this.$state = $state;
   }
 

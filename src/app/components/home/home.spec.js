@@ -1,4 +1,4 @@
-describe('components.home', () => {
+xdescribe('components.home', () => {
 
   let $ctrl;
 

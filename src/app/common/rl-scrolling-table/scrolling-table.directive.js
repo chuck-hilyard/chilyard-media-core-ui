@@ -38,6 +38,7 @@ export default function rlScrollingTable($timeout) {
       // Assign delegates
       if(angular.isDefined(scope.delegate)) {
         scope.delegate.resize = this.handleResize;
+        scope.delegate.rebuild = this.handleRebuild;
       }
 
       // Set event listeners
@@ -63,6 +64,11 @@ export default function rlScrollingTable($timeout) {
       this.$timeout.cancel(this.resizing);
       this.resizing = this.$timeout(this.resize, 250);
       this.setHeight();
+    };
+
+    this.handleRebuild = () => {
+      scope.loading = true;
+      this.$timeout(this.build, 250);
     };
 
     this.setHeight = () => {

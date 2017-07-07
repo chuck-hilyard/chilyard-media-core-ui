@@ -73,7 +73,7 @@ class Controller {
 
   setLabels(data) {
     return data.map((item) => {
-      return item.cycleNumber;
+      return item.chartLabel;
     });
   }
 

@@ -1,136 +1,146 @@
-{
-  "$$hashKey": {
-    "hide": true
-  },
-  "campaignId": {
-    "hide": true
-  },
-  "dateRange": {
+[
+  {
+    "key": "tableLabel",
     "label": "Cycle",
     "sortable": true
   },
-  "startDate": {
-    "label": "Start Date"
-  },
-  "endDate": {
-    "label": "End Date"
-  },
-  "status": {
+  {
+    "key": "status",
     "label": "Status"
   },
-  "cycleNumber": {
-    "hide": true
-  },
-  "utilization": {
+  {
+    "key": "utilization",
     "label": "Utl...",
     "filter": "number"
   },
-  "budget": {
+  {
+    "key": "budget",
     "label": "Budget",
     "filter": "currency"
   },
-  "spend": {
+  {
+    "key": "spend",
     "label": "Spend",
     "filter": "currency"
   },
-  "impressions": {
+  {
+    "key": "impressions",
     "label": "Imp...",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "cpm": {
+  {
+    "key": "cpm",
     "label": "CPM",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "ctr": {
+  {
+    "key": "ctr",
     "label": "CTR",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "allClicks": {
+  {
+    "key": "allClicks",
     "label": "Clicks",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "frequency": {
+  {
+    "key": "frequency",
     "label": "Frequency",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "reach": {
+  { 
+    "key": "reach",
     "label": "Reach",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "socialReach": {
+  {
+    "key": "socialReach",
     "label": "Social Reach",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "socialImpressions": {
+  {
+    "key": "socialImpressions",
     "label": "Social Imp...",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "websiteClicks": {
+  {
+    "key": "websiteClicks",
     "label": " Website Cl...",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "buttonClicks": {
+  {
+    "key": "buttonClicks",
     "label": "Button Cl...",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "linkClicks": {
+  {
+    "key": "linkClicks",
     "label": "Link Cl...",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "socialClicks": {
+  {
+    "key": "socialClicks",
     "label": "Social Cl...",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "leadForms": {
+  {
+    "key": "leadForms",
     "label": "Lead Forms...",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "checkIns": {
+  {
+    "key": "checkIns",
     "label": "Check-Ins",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "postComments": {
+  {
+    "key": "postComments",
     "label": "Post Com...",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "postReactions": {
+  {
+    "key": "postReactions",
     "label": " Post Reac...",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "postShares": {
+  {
+    "key": "postShares",
     "label": "Post Shares",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "postEngagements": {
+  {
+    "key": "postEngagements",
     "label": "Post Eng...",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "pageLikes": {
+  {
+    "key": "pageLikes",
     "label": "Page Likes",
     "filter": "number",
     "icon": "fa-info-circle"
   },
-  "pageEngagements": {
+  {
+    "key": "pageEngagements",
     "label": "Page Eng...",
     "filter": "number",
     "icon": "fa-info-circle"
   }
-}
+]

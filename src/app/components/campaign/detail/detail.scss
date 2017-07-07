@@ -1,61 +1,9 @@
 @import './src/styles/variables';
 
-.trend-chart {
-  height: 350px;
-  margin-bottom: $grid-gutter-width;
-}
-
-.table-trend-metrics {
-  td {
-    width: 50%;
-
-    &:first-child {
-      text-align: right;
-    }
-  }
-}
-
-.demographic-chart {
-  height: 350px;
-}
-
 .device-chart {
   display: inline-block;
   width: 60%;
   height: 263px;
 }
 
-.table-report {
-  thead,
-  tbody {
-    background-color: $rl-pale-gray;
-  }
 
-  th, td {
-    white-space: nowrap;
-  }
-
-  .utilization,
-  .budget,
-  .spend,
-  .impressions,
-  .cpm,
-  .ctr,
-  .allClicks,
-  .socialReach,
-  .socialImpressions,
-  .websiteClicks,
-  .buttonClicks,
-  .linkClicks,
-  .socialClicks,
-  .leadForms,
-  .checkIns,
-  .postComments,
-  .postReactions,
-  .postShares,
-  .postEngagement,
-  .pageLikes,
-  .pageEngagement {
-    text-align: right;
-  }
-}

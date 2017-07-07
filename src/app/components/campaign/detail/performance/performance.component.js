@@ -44,7 +44,6 @@ class Controller {
         this.delegate.resize();
       }
     });
-
   }
 
   $onChanges(changes) {
@@ -57,18 +56,9 @@ class Controller {
   configureTable(data) {
     this.columns = [];
     let keys = Object.keys(data[0]);
-    angular.forEach(keys, (value) => {
-      let keyOptions = this.columnsConfig [value];
-      let column = {
-        key: value
-      };
-      if (keyOptions) {
-        angular.extend(column, keyOptions);
-      } else {
-        column.label = value;
-      }
-      if (column.hide !== true) {
-        this.columns.push(column);
+    angular.forEach(this.columnsConfig, (value) => {
+      if (keys.indexOf(value.key) > -1) {
+        this.columns.push(angular.copy(value));
       }
     });
   }

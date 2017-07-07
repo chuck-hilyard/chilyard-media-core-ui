@@ -1,7 +1,8 @@
 [
   {
+    "tableLabel": "2017-06-01 - 2017-06-30\r\n1000023",
+    "chartLabel": "Cycle 10",
     "campaignId": "1000023",
-    "dateRange": "2017-06-01 - 2017-06-30",
     "status": "Running",
     "cycleNumber": 10,
     "utilization": 75,
@@ -29,8 +30,9 @@
     "pageEngagements": 15
   },
   {
+    "tableLabel": "2017-05-01 - 2017-05-31\r\n1000022",
+    "chartLabel": "Cycle 9",
     "campaignId": "1000022",
-    "dateRange": "2017-05-01 - 2017-05-31",
     "status": "Ended",
     "cycleNumber": 9,
     "utilization": 75,
@@ -58,8 +60,9 @@
     "pageEngagements": 15
   },
   {
+    "tableLabel": "2017-04-01 - 2017-04-30\r\n1000021",
+    "chartLabel": "Cycle 8",
     "campaignId": "1000021",
-    "dateRange": "2017-04-01 - 2017-04-30",
     "status": "Ended",
     "cycleNumber": 8,
     "utilization": 75,
@@ -87,8 +90,9 @@
     "pageEngagements": 15
   },
   {
+    "tableLabel": "2017-03-01 - 2017-03-31\r\n1000020",
+    "chartLabel": "Cycle 7",
     "campaignId": "1000020",
-    "dateRange": "2017-03-01 - 2017-03-31",
     "status": "Ended",
     "cycleNumber": 7,
     "utilization": 75,
@@ -116,8 +120,9 @@
     "pageEngagements": 15
   },
   {
+    "tableLabel": "2017-03-01 - 2017-03-31\r\n1000020",
+    "chartLabel": "Cycle 6",
     "campaignId": "1000020",
-    "dateRange": "2017-03-01 - 2017-03-31",
     "status": "Ended",
     "cycleNumber": 6,
     "utilization": 75,
@@ -145,8 +150,9 @@
     "pageEngagements": 15
   },
   {
+    "tableLabel": "2017-02-01 - 2017-02-28\r\n1000019",
+    "chartLabel": "Cycle 5",
     "campaignId": "1000019",
-    "dateRange": "2017-02-01 - 2017-02-28",
     "status": "Ended",
     "cycleNumber": 5,
     "utilization": 75,
@@ -174,8 +180,9 @@
     "pageEngagements": 15
   },
   {
+    "tableLabel": "2017-01-01 - 2017-01-31\r\n1000018",
+    "chartLabel": "Cycle 4",
     "campaignId": "1000018",
-    "dateRange": "2017-01-01 - 2017-02-31",
     "status": "Ended",
     "cycleNumber": 4,
     "utilization": 75,
@@ -203,8 +210,9 @@
     "pageEngagements": 15
   },
   {
+    "tableLabel": "2017-05-01 - 2017-05-31\r\n1000022",
+    "chartLabel": "Cycle 3",
     "campaignId": "1000022",
-    "dateRange": "2017-05-01 - 2017-05-31",
     "status": "Ended",
     "cycleNumber": 3,
     "utilization": 75,
@@ -232,8 +240,9 @@
     "pageEngagements": 15
   },
   {
+    "tableLabel": "2017-04-01 - 2017-04-30\r\n1000021",
+    "chartLabel": "Cycle 2",
     "campaignId": "1000021",
-    "dateRange": "2017-04-01 - 2017-04-30",
     "status": "Ended",
     "cycleNumber": 2,
     "utilization": 75,
@@ -261,8 +270,9 @@
     "pageEngagements": 15
   },
   {
+    "tableLabel": "2017-03-01 - 2017-03-31\r\n1000020",
+    "chartLabel": "Cycle 1",
     "campaignId": "1000020",
-    "dateRange": "2017-03-01 - 2017-03-31",
     "status": "Ended",
     "cycleNumber": 1,
     "utilization": 75,

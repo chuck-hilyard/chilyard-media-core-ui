@@ -1,9 +1,9 @@
 import ngMockE2E from 'angular-mocks/ngMockE2E';
-import ageGenderData from './age-gender/age-gender';
+import data from './age-gender';
 
 
 export default angular
-  .module('mocks.campaign.getAgeGender', [
+  .module('mocks.campaign.ageGender', [
     ngMockE2E
   ])
   .run(($httpBackend) => {
@@ -11,7 +11,7 @@ export default angular
 
     $httpBackend
       .when('GET', /\/campaigns\/\d+\/age-gender-stats-summary\/cycles\?end=\d+\&start=\d+$/)
-      .respond(ageGenderData);
+      .respond(data);
 
   })
   .name;

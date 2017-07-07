@@ -1,0 +1,30 @@
+[
+  {
+    "id": "impressions",
+    "format": "int",
+    "label": "Impressions",
+    "total": "sum",
+    "type": "line"
+  },
+  {
+    "id": "allClicks",
+    "format": "int",
+    "label": "Clicks",
+    "total": "sum",
+    "type": "line"
+  },
+  {
+    "id": "ctr",
+    "format": "float",
+    "label": "CTR",
+    "total": "average",
+    "type": "line"
+  },
+  {
+    "id": "spend",
+    "format": "currency",
+    "label": "Spend",
+    "total": "sum",
+    "type": "bar"
+  }
+]

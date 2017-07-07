@@ -1,9 +1,9 @@
 import ngMockE2E from 'angular-mocks/ngMockE2E';
-import cycleData from './cycles/cycles';
+import data from './cycles';
 
 
 export default angular
-  .module('mocks.campaign.getCampaignCycles', [
+  .module('mocks.campaign.cycles', [
     ngMockE2E
   ])
   .run(($httpBackend) => {
@@ -11,7 +11,7 @@ export default angular
 
     $httpBackend
       .when('GET', /\/campaigns\/\d+\/cycles$/)
-      .respond(cycleData);
+      .respond(data);
 
   })
   .name;

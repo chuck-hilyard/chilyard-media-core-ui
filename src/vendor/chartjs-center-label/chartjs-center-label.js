@@ -15,8 +15,8 @@ Chart.pluginService.register({
       ctx.save();
       var fontSize = helpers.getValueOrDefault(centerConfig.minFontSize, 1);
       var maxFontSize = helpers.getValueOrDefault(centerConfig.maxFontSize, 256);
-      var line1Size = getFontSize(centerConfig.line1, centerConfig.line1Padding);
-      var line2Size = getFontSize(centerConfig.line2, centerConfig.line2Padding);
+      var line1Size = centerConfig.line1Size ? centerConfig.line1Size : getFontSize(centerConfig.line1, centerConfig.line1Padding);
+      var line2Size = centerConfig.line2Size ? centerConfig.line2Size : getFontSize(centerConfig.line2, centerConfig.line2Padding);
 
       // save properties
       chart.center = {

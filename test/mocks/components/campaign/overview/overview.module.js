@@ -1,9 +1,9 @@
 import ngMockE2E from 'angular-mocks/ngMockE2E';
-import overviewData from './overview/overview';
+import data from './overview';
 
 
 export default angular
-  .module('mocks.campaign.getCampaignOverview', [
+  .module('mocks.campaign.overview', [
     ngMockE2E
   ])
   .run(($httpBackend) => {
@@ -11,7 +11,7 @@ export default angular
 
     $httpBackend
       .when('GET', /\/campaigns\/\d+\/campaign-overview$/)
-      .respond(overviewData);
+      .respond(data);
 
   })
   .name;

@@ -1,0 +1,64 @@
+[
+  {
+    "metric": "impressions",
+    "displayName": "Impressions",
+    "total": 4000,
+    "breakdowns": [
+      {
+        "type": "mobile",
+        "displayName": "Mobile",
+        "value": 10000,
+        "percentage": 50
+      },
+      {
+        "type": "desktop",
+        "displayName": "Desktop",
+        "value": 10000,
+        "percentage": 30
+      },
+      {
+        "type": "tablet",
+        "displayName": "Tablet",
+        "value": 10000,
+        "percentage": 15
+      },
+      {
+        "type": "other",
+        "displayName": "Other",
+        "value": 10000,
+        "percentage": 5
+      }
+    ]
+  },
+  {
+    "metric": "allClicks",
+    "displayName": "Clicks",
+    "total": 6000,
+    "breakdowns": [
+      {
+        "type": "mobile",
+        "displayName": "Mobile",
+        "value": 10000,
+        "percentage": 25
+      },
+      {
+        "type": "desktop",
+        "displayName": "Desktop",
+        "value": 10000,
+        "percentage": 25
+      },
+      {
+        "type": "tablet",
+        "displayName": "Tablet",
+        "value": 10000,
+        "percentage": 25
+      },
+      {
+        "type": "other",
+        "displayName": "Other",
+        "value": 10000,
+        "percentage": 25
+      }
+    ]
+  }
+]

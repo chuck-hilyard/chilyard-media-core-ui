@@ -1,9 +1,9 @@
 import ngMockE2E from 'angular-mocks/ngMockE2E';
-import performanceData from './performance-data/performance-data';
+import data from './performance';
 
 
 export default angular
-  .module('mocks.campaign.getPerformance', [
+  .module('mocks.campaign.performance', [
     ngMockE2E
   ])
   .run(($httpBackend) => {
@@ -11,7 +11,7 @@ export default angular
 
     $httpBackend
       .when('GET', /\/campaigns\/\d+\/stats\/cycles\?end=\d+\&start=\d+$/)
-      .respond(performanceData);
+      .respond(data);
 
   })
   .name;

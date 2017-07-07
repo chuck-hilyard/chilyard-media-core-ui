@@ -45,6 +45,7 @@ class Controller {
     this.campaign = this.campaignOverview;
     this.getPerformanceData();
     this.getAgeGenderData();
+    this.getDeviceData();
   }
 
   dateToString(date) {
@@ -60,6 +61,18 @@ class Controller {
       })
       .catch((error) => {
         this.ageGenderData = new Error(JSON.stringify(error));
+      });
+  }
+
+  getDeviceData() {
+    let breakdown = this.session.dateRange.breakdownType;
+    let params = this.getUrlParams();
+    this.service.getDeviceData(this.campaign.masterCampaignId, breakdown, params)
+      .then((response) => {
+        this.deviceData = response.data;
+      })
+      .catch((error) => {
+        this.deviceData = new Error(JSON.stringify(error));
       });
   }
 

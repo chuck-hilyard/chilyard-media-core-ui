@@ -8,6 +8,7 @@ class service {
   constructor() {
     this.languages = LANGUAGES;
     this.gatewayUrl = GATEWAY_URL;
+    this.featureFlags = FEATURE_FLAGS;
   }
 
 }

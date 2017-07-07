@@ -10,8 +10,9 @@
   ],
   "globals": {
     "angular": true,
-    "LANGUAGES": true,
-    "GATEWAY_URL": true
+    "GATEWAY_URL": true,
+    "FEATURE_FLAGS": true,
+    "LANGUAGES": true
   },
   "parserOptions": {
     "sourceType": "module"

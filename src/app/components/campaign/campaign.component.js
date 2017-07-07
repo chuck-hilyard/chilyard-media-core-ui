@@ -26,7 +26,6 @@ function setHeader(overview) {
     title: overview.name,
     subType: 'Advertiser',
     subTitle: overview.advertiserName,
-    subLink: `advertiser.detail({maid:${overview.masterAdvertiserId}})`,
     columns: [{
       title: 'Advertiser',
       rows: [{
@@ -63,25 +62,6 @@ function setHeader(overview) {
       }, {
         name: 'Business Sub Category',
         value: overview.businessSubCategoryName
-      }]
-    }, {
-      title: 'Order Information',
-      rows: [{
-        name: 'Order ID',
-        value: overview.oid,
-        link: `order.detail({oid:${overview.oid}})`
-      }, {
-        name: 'Payment Type',
-        value: overview.payment
-      }, {
-        name: 'Current Budget',
-        value: overview.budget
-      }, {
-        name: 'Current Cycle',
-        value: overview.cycle
-      }, {
-        name: 'Auto Renew Type',
-        value: overview.renew
       }]
     }]
   };

@@ -1,5 +1,11 @@
 import Template from './modal.html';
 
+const tabNumber = {
+  cycles: 0,
+  months: 1,
+  days: 2
+};
+
 
 class Controller {
   constructor($scope, $log, DataSettingsService) {
@@ -12,6 +18,7 @@ class Controller {
 
   $onInit() {
     this.workingSettings = angular.copy(this.resolve.settings);
+    this.activeTab = tabNumber[this.workingSettings.breakdownType];
     this.ranges = angular.copy(this.resolve.ranges);
     this.cycles = angular.copy(this.resolve.cycles);
     this.dateLimits = this.dataSettingsService.getDateLimits(this.cycles);
@@ -115,7 +122,7 @@ class Controller {
   onWorkingSettingsChange() {
     let breakdownType = this.workingSettings.breakdownType;
     this.getRangeName();
-    if ( breakdownType === 'days' || breakdownType === 'months') {
+    if (breakdownType === 'days' || breakdownType === 'months') {
       this.options.start.maxDate = this.workingSettings.end;
       this.options.end.minDate = this.workingSettings.start;
     }

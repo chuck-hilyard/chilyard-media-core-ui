@@ -5,7 +5,7 @@ import mockRlConfig from '../mock-data/rlConfig.json';
 
 describe('components.campaign.detail', () => {
 
-  let $ctrl, service;
+  let $ctrl, service, dataSettings;
 
   beforeEach(() => {
     angular.mock.module('campaign.detail', ($provide) => {
@@ -24,6 +24,8 @@ describe('components.campaign.detail', () => {
         mcid: 123456
       };
       service = $injector.get('CampaignDetailService');
+      dataSettings = $injector.get('DataSettingsService');
+
       $ctrl = $componentController('campaign.detail', {
         $stateParams: stateParams
       }, bindings);
@@ -37,14 +39,18 @@ describe('components.campaign.detail', () => {
   });
 
   it('$onChanges', () => {
+    let breakdown = 'cycles';
+    let params = {start: '2017/3', end: '2017/5'};
     spyOn(service, 'getPerformanceData').and.callThrough();
+    spyOn(dataSettings, 'getSelectedBreakdownType').and.callFake(() => breakdown);
+    spyOn(dataSettings, 'getSelectedRangeParams').and.callFake(() => params);
     $ctrl.$onChanges({
       campaignOverview: {
         currentValue: mockCampaignOverview
       }
     });
     expect($ctrl.campaign).toEqual(mockCampaignOverview);
-    expect(service.getPerformanceData).toHaveBeenCalledWith(mockCampaignOverview.masterCampaignId, '', {});
+    expect(service.getPerformanceData).toHaveBeenCalledWith(mockCampaignOverview.masterCampaignId, breakdown, params);
   });
 
 });

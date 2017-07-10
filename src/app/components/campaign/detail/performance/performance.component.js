@@ -61,6 +61,7 @@ class Controller {
         this.columns.push(angular.copy(value));
       }
     });
+    this.delegate.rebuild();
   }
 
   handleSort(state) {

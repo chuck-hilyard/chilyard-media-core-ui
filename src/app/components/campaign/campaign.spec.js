@@ -34,9 +34,9 @@ describe('components.campaign', () => {
 
   it('$onInit', () => {
     $ctrl.$onInit();
-    expect($ctrl.campaign).toEqual(mockCampaignOverview.data);
-    expect($ctrl.header.title).toEqual(mockCampaignOverview.data.name);
-    expect($ctrl.header.subTitle).toEqual(mockCampaignOverview.data.advertiserName);
+    expect($ctrl.campaign).toEqual(mockCampaignOverview);
+    expect($ctrl.header.title).toEqual(mockCampaignOverview.name);
+    expect($ctrl.header.subTitle).toEqual(mockCampaignOverview.advertiserName);
   });
 
   describe('handleSidebarToggle', () => {

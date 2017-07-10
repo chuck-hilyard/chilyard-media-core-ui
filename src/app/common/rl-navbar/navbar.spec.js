@@ -3,6 +3,7 @@ describe('common.navbar', () => {
   let $ctrl;
 
   beforeEach(() => {
+    angular.mock.module('common.rlConfig');
     angular.mock.module('common.navbar');
 
     angular.mock.inject(($injector) => {

@@ -14,12 +14,9 @@ class Controller {
     this.dataSettingsService = DataSettingsService;
     this.service = CampaignDetailService;
 
-    $scope.$watch(() => DataSettingsService.selectedSettings,
-      () => {
-        $scope.$ctrl.updateData();
-      },
-      false
-    );
+    $scope.$watch(() => DataSettingsService.selectedSettings, () => {
+      $scope.$ctrl.updateData();
+    }, false);
   }
 
   $onInit() {

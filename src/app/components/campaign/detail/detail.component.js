@@ -1,6 +1,9 @@
 import template from './detail.html';
 
-const apiDateFilter = 'yyyy-MM-dd';
+const apiDateFilter = {
+  days: 'yyyy-MM-dd',
+  months: 'yyyy-MM'
+};
 class Controller {
 
   constructor($filter, $scope, CampaignDetailService, CampaignSidebar, DataSettingsService) {

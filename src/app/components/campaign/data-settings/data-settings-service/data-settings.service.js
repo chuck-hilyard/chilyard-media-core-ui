@@ -59,7 +59,8 @@ export default class DataSettings {
     return '';
   }
 
-  getSelectedRangeParams(dateFilter) {
+  getSelectedRangeParams(dateFilters) {
+    let dateFilter = dateFilters[this.selectedSettings.breakdownType];
     let rangeParams = {};
     if (this.selectedSettings) {
       if (this.selectedSettings.breakdownType === 'cycles') {
@@ -67,7 +68,7 @@ export default class DataSettings {
         rangeParams.end = this.selectedSettings.end.cycleNumber;
       } else {
         rangeParams.start = this.dateToString(this.selectedSettings.start, dateFilter);
-        rangeParams.end = this.dateToString(this.selectedSettings.start, dateFilter);
+        rangeParams.end = this.dateToString(this.selectedSettings.end, dateFilter);
       }
     }
     return rangeParams;

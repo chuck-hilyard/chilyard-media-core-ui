@@ -175,6 +175,7 @@ $btn-default-border:             $border-color;
 $btn-primary-color:              #fff !default;
 $btn-primary-bg:                 #60a3f0;
 $btn-primary-border:             $btn-primary-bg;
+$btn-primary-bg-hover:           darken($btn-primary-bg, 5%);
 
 $btn-success-color:              #fff !default;
 $btn-success-bg:                 $brand-success !default;

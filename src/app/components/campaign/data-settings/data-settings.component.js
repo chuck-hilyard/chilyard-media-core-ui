@@ -9,12 +9,12 @@ class Controller {
   }
 
   $onInit() {
-    //this.updateSettingsData(this.cycles);
+    this.cycles = mapCycles(this.campaignCycles);
   }
 
   $onChanges(changes) {
-    if (changes.cycles) {
-      this.cycles = angular.copy(changes.cycles.currentValue);
+    if (changes.campaignCycles) {
+      this.cycles = mapCycles(changes.campaignCycles.currentValue);
       this.updateSettingsData(this.cycles);
     }
   }
@@ -47,10 +47,28 @@ class Controller {
   }
 }
 
+function getDateRange(cycle) {
+  let range = cycle.startDate || '-/-/-';
+  range += ' to ';
+  range += cycle.endDate || '-/-/-';
+  return range;
+}
+
+function mapCycles(cycles) {
+  return {
+    currentCycleIndex: cycles.currentCycleIndex,
+    cycles: cycles.cycles.map((cycle) => {
+      return angular.extend({}, cycle, {
+        dateRange: getDateRange(cycle)
+      });
+    })
+  };
+}
+
 export default {
   template: Template,
   controller: Controller,
   bindings: {
-    cycles: '<'
+    campaignCycles: '<'
   }
 };

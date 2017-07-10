@@ -5,6 +5,8 @@ export default {
     cycles: 'Cycles',
     months: 'Months',
     days: 'Days',
-    calendarNotation: 'Indicates cycle start/end.'
+    calendarNotation: 'Indicates cycle start/end.',
+    selectStart: 'Select Start',
+    selectEnd: 'Select End'
   }
 };

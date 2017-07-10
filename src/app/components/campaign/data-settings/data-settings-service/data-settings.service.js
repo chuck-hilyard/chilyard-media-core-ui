@@ -18,9 +18,9 @@ export default class DataSettings {
       days: []
     };
 
-    this.selectedSettings = null; // TODO get from session store? would need to know it matches campaignid...
+    this.dateFilter = dateFilter;
 
-    this.customRangeName = 'Custom';
+    this.selectedSettings = null; // TODO get from session store? would need to know it matches campaignid...
   }
 
   showField(settings, fieldName) {
@@ -45,7 +45,7 @@ export default class DataSettings {
   }
 
   getDefault(breakdownType) {
-    return this.ranges[breakdownType][0];
+    return angular.copy(this.ranges[breakdownType][0]);
   }
 
   getSelectedSettings() {
@@ -74,10 +74,11 @@ export default class DataSettings {
   }
 
   getDateLimits(cycles) {
-    return {
+    let dateLimits = {
       maxDate: getMaxDate(cycles),
       minDate: getMinDate(cycles)
     };
+    return dateLimits;
   }
 
   findRange(ranges, findRange) {
@@ -105,7 +106,7 @@ function getMaxDate(cycles) {
       maxDate = endDate;
     }
   }
-  return undefined;
+  return maxDate;
 }
 
 function getMinDate(cycles) {
@@ -158,8 +159,8 @@ function newCycleRange(name, startCycle, endCycle) {
 function getMonthRanges() {
   let today = new Date();
   let monthRanges = [];
-  monthRanges.push(newMonthRange('All Months', monthStart(), today));
-  monthRanges.push(newMonthRange('This Month', monthStart(), today));
+  monthRanges.push(newMonthRange('This Year', yearStart(today), today));
+  monthRanges.push(newMonthRange('This Month', today, today));
   return monthRanges;
 }
 
@@ -167,8 +168,8 @@ function newMonthRange(name, startMonth, endMonth) {
   return {
     breakdownType: 'months',
     name: name,
-    start: startMonth,
-    end: endMonth
+    start: roundToMonthStart(startMonth),
+    end: roundToMonthStart(endMonth)
   };
 }
 
@@ -252,4 +253,12 @@ function weekStart() {
   let date = new Date();
   date.setDate(date.getDate() - date.getDay());
   return new Date(date);
+}
+
+function yearStart(date) {
+  return new Date(date.getFullYear(), 0, 1);
+}
+
+function roundToMonthStart(date) {
+  return new Date(date.getFullYear(), date.getMonth(), 1);
 }

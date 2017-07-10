@@ -1,0 +1,22 @@
+{
+  "options": {
+    "selected": {
+      "name": "testName",
+      "id": 12345
+    },
+    "list": [
+      {
+        "name": "testName",
+        "id": 12345
+      },
+      {
+        "name": "testName2",
+        "id": 23456
+      },
+      {
+        "name": "testName3",
+        "id": 34567
+      }
+    ]
+  }
+}

@@ -1,0 +1,79 @@
+@import './src/styles/variables';
+
+.rl-select {
+  padding: 10px;
+
+  .search-container {
+    margin-bottom: 10px;
+
+    .form-control {
+      padding-left: 45px;
+    }
+
+    .icon {
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+    }
+  }
+
+  .select-list {
+    height: 250px;
+    overflow: auto;
+  }
+
+  button.list-group-item {
+    padding: 5px 15px 5px 30px;
+
+    &:focus {
+      outline: none;
+    }
+
+    .icon {
+      display: none;
+      position: absolute;
+      left: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      z-index: 1;
+
+      .fa {
+        color: $state-success-text;
+      }
+    }
+
+    &.selected {
+      background-color: $btn-primary-bg;
+      color: $rl-bright-white;
+
+      .icon {
+        display: block;
+      }
+
+      .field {
+        color: $rl-bright-white;
+      }
+
+      &:hover {
+        background-color: $btn-primary-bg-hover;
+      }
+
+      div.field:first-child {
+        color: $rl-bright-white;
+      }
+    }
+
+    .field {
+      color: $rl-blue-gray;
+    }
+
+    div.fields {
+      :first-child {
+        font-size: $font-size-large;
+        color: $btn-primary-bg;
+      }
+    }
+  }
+}

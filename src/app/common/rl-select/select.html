@@ -1,0 +1,16 @@
+<div class="rl-select">
+  <div class="search-container">
+    <span class="icon"><i class="fa fa-search"></i></span>
+    <input class="form-control" ng-model="$ctrl.search" type="text" placeholder="Search">
+  </div>
+  <div class="select-list">
+    <div class="list-group">
+      <button ng-repeat="item in $ctrl.list | selectFilter:$ctrl.search:$ctrl.showFields" type="button" ng-click="$ctrl.selectItem(item)" class="list-group-item list-group-item-action" ng-class="{'selected': $ctrl.isSelected(item)}">
+        <span class="icon"><i class="fa fa-check"></i></span>
+        <div class="fields">
+           <div class="field" ng-class="'{{field}}'" ng-repeat="field in $ctrl.showFields">{{item[field]}}</div>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

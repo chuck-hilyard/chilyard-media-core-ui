@@ -1,30 +1,77 @@
 [
   {
     "id": "impressions",
-    "format": "int",
     "label": "Impressions",
-    "total": "sum",
-    "type": "line"
+    "format": "float"
   },
   {
-    "id": "allClicks",
-    "format": "int",
+    "id": "clicks",
     "label": "Clicks",
-    "total": "sum",
-    "type": "line"
+    "format": "float"
   },
   {
-    "id": "ctr",
-    "format": "float",
-    "label": "CTR",
-    "total": "average",
-    "type": "line"
+    "id": "socialImpressions",
+    "label": "Social Impressions",
+    "format": "float"
   },
   {
-    "id": "spend",
-    "format": "currency",
-    "label": "Spend",
-    "total": "sum",
-    "type": "bar"
+    "id": "websiteClicks",
+    "label": "Website Clicks",
+    "format": "float"
+  },
+  {
+    "id": "buttonClicks",
+    "label": "Button Clicks",
+    "format": "float"
+  },
+  {
+    "id": "linkClicks",
+    "label": "Link Clicks",
+    "format": "float"
+  },
+  {
+    "id": "socialClicks",
+    "label": "Social Clicks",
+    "format": "float"
+  },
+  {
+    "id": "leadForms",
+    "label": "Lead Forms",
+    "format": "float"
+  },
+  {
+    "id": "checkIns",
+    "label": "Check-Ins",
+    "format": "float"
+  },
+  {
+    "id": "postComments",
+    "label": "Post Comments",
+    "format": "float"
+  },
+  {
+    "id": "postReactions",
+    "label": "Post Reactions",
+    "format": "float"
+  },
+  {
+    "id": "postShares",
+    "label": "Post Shares",
+    "format": "float"
+  },
+  {
+    "id": "pageEngagements",
+    "label": "Page Engagements",
+    "format": "float"
+  },
+  {
+    "id": "pageLikes",
+    "label": "Page Likes",
+    "format": "float"
+  },
+  {
+    "id": "pageEngagements",
+    "label": "Page Engagements",
+    "format": "float"
   }
 ]

@@ -1,5 +1,26 @@
 [
   {
+    "id": "buttonClicks",
+    "format": "int",
+    "label": "Button Clicks",
+    "total": "sum",
+    "type": "line"
+  },
+  {
+    "id": "checkIns",
+    "format": "int",
+    "label": "Check-Ins",
+    "total": "sum",
+    "type": "line"
+  },
+  {
+    "id": "clicks",
+    "format": "int",
+    "label": "Clicks",
+    "total": "sum",
+    "type": "line"
+  },
+  {
     "id": "impressions",
     "format": "int",
     "label": "Impressions",
@@ -7,24 +28,80 @@
     "type": "line"
   },
   {
+    "id": "leadForms",
+    "format": "int",
+    "label": "Lead Forms",
+    "total": "sum",
+    "type": "line"
+  },
+  {
+    "id": "linkClicks",
+    "format": "int",
+    "label": "Link Clicks",
+    "total": "sum",
+    "type": "line"
+  },
+  {
+    "id": "pageEngagements",
+    "format": "int",
+    "label": "Page Engagements",
+    "total": "sum",
+    "type": "line"
+  },
+  {
+    "id": "pageLikes",
+    "format": "int",
+    "label": "Page Likes",
+    "total": "sum",
+    "type": "line"
+  },
+  {
+    "id": "postComments",
+    "format": "int",
+    "label": "Post Comments",
+    "total": "sum",
+    "type": "line"
+  },
+  {
+    "id": "postEngagements",
+    "format": "int",
+    "label": "Post Engagements",
+    "total": "sum",
+    "type": "line"
+  },
+  {
+    "id": "postReactions",
+    "format": "int",
+    "label": "Post Reactions",
+    "total": "sum",
+    "type": "line"
+  },
+  {
+    "id": "postShares",
+    "format": "int",
+    "label": "Post Shares",
+    "total": "sum",
+    "type": "line"
+  },
+  {
     "id": "socialClicks",
     "format": "int",
-    "label": "Clicks",
+    "label": "Social Clicks",
     "total": "sum",
     "type": "line"
   },
   {
-    "id": "ctr",
-    "format": "float",
-    "label": "CTR",
-    "total": "average",
+    "id": "socialImpressions",
+    "format": "int",
+    "label": "Social Impressions",
+    "total": "sum",
     "type": "line"
   },
   {
-    "id": "spend",
-    "format": "currency",
-    "label": "Spend",
+    "id": "websiteClicks",
+    "format": "int",
+    "label": "Website Clicks",
     "total": "sum",
-    "type": "bar"
+    "type": "line"
   }
 ]

@@ -22,7 +22,7 @@ class Controller {
     this.metricOptions = metricsConfig;
     this.metrics = [
       this.metricOptions.find((item) => item.id === 'impressions'),
-      this.metricOptions.find((item) => item.id === 'spend')
+      this.metricOptions.find((item) => item.id === 'pageEngagements')
     ];
   }
 

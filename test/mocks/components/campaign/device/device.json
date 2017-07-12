@@ -5,26 +5,22 @@
     "total": 4000,
     "breakdowns": [
       {
-        "type": "mobile",
-        "displayName": "Mobile",
+        "type": "Mobile",
         "value": 10000,
         "percentage": 50
       },
       {
-        "type": "desktop",
-        "displayName": "Desktop",
+        "type": "Desktop",
         "value": 10000,
         "percentage": 30
       },
       {
-        "type": "tablet",
-        "displayName": "Tablet",
+        "type": "Tablet",
         "value": 10000,
         "percentage": 15
       },
       {
-        "type": "other",
-        "displayName": "Other",
+        "type": "Other",
         "value": 10000,
         "percentage": 5
       }
@@ -36,26 +32,22 @@
     "total": 6000,
     "breakdowns": [
       {
-        "type": "mobile",
-        "displayName": "Mobile",
+        "type": "Mobile",
         "value": 10000,
         "percentage": 25
       },
       {
-        "type": "desktop",
-        "displayName": "Desktop",
+        "type": "Desktop",
         "value": 10000,
         "percentage": 25
       },
       {
-        "type": "tablet",
-        "displayName": "Tablet",
+        "type": "Tablet",
         "value": 10000,
         "percentage": 25
       },
       {
-        "type": "other",
-        "displayName": "Other",
+        "type": "Other",
         "value": 10000,
         "percentage": 25
       }

@@ -25,7 +25,7 @@ class Controller {
   $onChanges(changes) {
     let currentData = changes.data.currentValue;
     if(currentData) {
-      this.build(currentData);
+      this.build(this.sortData(currentData));
     }
   }
 
@@ -155,6 +155,16 @@ class Controller {
     return yAxes;
   }
 
+  sortData(data) {
+    let copy = angular.copy(data);
+    switch(this.breakdownType) {
+    case 'cycles':
+      return copy.sort((a, b) => a.cycleNumber - b.cycleNumber);
+    default:
+      return copy;
+    }
+  }
+
   updateChart() {
     this.build(this.data);
   }
@@ -165,6 +175,7 @@ export default {
   template: template,
   controller: Controller,
   bindings: {
-    data: '<'
+    data: '<',
+    breakdownType: '<'
   }
 };

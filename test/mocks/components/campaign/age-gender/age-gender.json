@@ -46,8 +46,8 @@
     }
   },
   {
-    "metricName": "spend",
-    "displayName": "Amount Spent",
+    "metricName": "pageEngagements",
+    "displayName": "Page Engagements",
     "male": {
       "total": 74.95,
       "percentage": 52,

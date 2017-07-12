@@ -13,13 +13,14 @@ class Controller {
 
     // Local Vars
     this.ageGenderData = null;
+    this.deviceData = null;
     this.performanceData = null;
     this.dataSettingsService = DataSettingsService;
     this.service = CampaignDetailService;
 
     $scope.$watch(() => DataSettingsService.selectedSettings, () => {
-      $scope.$ctrl.updateData();
-    }, false);
+      this.updateData();
+    }, true);
   }
 
   $onInit() {

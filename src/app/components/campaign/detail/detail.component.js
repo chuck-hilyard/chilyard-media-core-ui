@@ -6,7 +6,7 @@ const apiDateFilter = {
 };
 class Controller {
 
-  constructor($filter, $scope, CampaignDetailService, CampaignSidebar, DataSettingsService) {
+  constructor($filter, $scope, CampaignDetailService, CampaignSidebar, DataSettings) {
     'ngInject';
     // Angular
     this.$filter = $filter;
@@ -15,11 +15,11 @@ class Controller {
     this.ageGenderData = null;
     this.deviceData = null;
     this.performanceData = null;
-    this.dataSettingsService = DataSettingsService;
+    this.dataSettingsService = DataSettings;
     this.service = CampaignDetailService;
 
-    $scope.$watch(() => DataSettingsService.selectedSettings, () => {
-      this.updateData();
+    $scope.$watch(() => DataSettings.selectedSettings, () => {
+      $scope.$ctrl.updateData();
     }, true);
   }
 

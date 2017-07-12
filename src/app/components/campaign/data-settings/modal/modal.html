@@ -8,18 +8,18 @@
   </div>
   <div class="modal-body">
     <div class="row">
-      <div class="col-xs-12 no-padding">
+      <div class="col-xs-12">
         <uib-tabset active="$ctrl.activeTab">
           <uib-tab index="0" select="$ctrl.selectTab('cycles')" heading="{{'dateRange.cycles' | translate}}">
             <div class="row">
               <div class="col-sm-3 col-list-ranges">
                 <ul class="list-unstyled">
-                  <li ng-repeat="range in ::$ctrl.resolve.ranges.cycles" ng-click="$ctrl.setRange(range)" ng-class="{'active':$ctrl.workingSettings.name === range.name}">
+                  <li ng-repeat="range in ::$ctrl.ranges.cycles" ng-click="$ctrl.setRange(range)" ng-class="{'active':$ctrl.workingSettings.name === range.name}">
                     {{range.name}} <i class="fa fa-check"></i>
                   </li>
                 </ul>
               </div>
-              <div class="col-sm-4 no-padding">
+              <div class="col-sm-4">
                 <div class="top-label" translate>app.start</div>
                 <div class="range-tile">
                   <div class="tile-title"><span translate>campaignDataSettings.cycle</span> {{$ctrl.workingSettings.start.cycleNumber}}</div>
@@ -31,7 +31,7 @@
                   <rl-select on-select="$ctrl.handleCycleStartSelect(item)" options="$ctrl.options.start"></rl-select>
                 </div>
               </div>
-              <div class="col-sm-4 no-padding">
+              <div class="col-sm-4">
                 <div class="top-label" translate>app.end</div>
                 <div class="range-tile">
                   <div class="tile-title"><span translate>campaignDataSettings.cycle</span> {{$ctrl.workingSettings.end.cycleNumber}}</div>
@@ -49,12 +49,12 @@
             <div class="row" ng-if="$ctrl.workingSettings.breakdownType=='months'">
               <div class="col-sm-3 col-list-ranges">
                 <ul class="list-unstyled">
-                  <li ng-repeat="range in ::$ctrl.resolve.ranges.months" ng-click="$ctrl.setRange(range)" ng-class="{'active':$ctrl.workingSettings.name === range.name}">
+                  <li ng-repeat="range in ::$ctrl.ranges.months" ng-click="$ctrl.setRange(range)" ng-class="{'active':$ctrl.workingSettings.name === range.name}">
                     {{range.name}} <i class="fa fa-check"></i>
                   </li>
                 </ul>
               </div>
-              <div class="col-sm-4 no-padding">
+              <div class="col-sm-4">
                 <div class="top-label" translate>app.start</div>
                 <div class="range-tile">
                   <div class="tile-title date-title">{{$ctrl.workingSettings.start | date: 'MMM yyyy'}}</div>
@@ -64,7 +64,7 @@
                   <div class="datepicker" uib-datepicker ng-model="$ctrl.workingSettings.start" ng-change="$ctrl.onWorkingSettingsChange()" datepicker-options="$ctrl.options.start"></div>
                 </div>
               </div>
-              <div class="col-sm-4 no-padding">
+              <div class="col-sm-4">
                 <div class="top-label" translate>app.end</div>
                 <div class="range-tile">
                   <div class="tile-title date-title">{{$ctrl.workingSettings.end | date: 'MMM yyyy'}}</div>
@@ -80,12 +80,12 @@
             <div class="row" ng-if="$ctrl.workingSettings.breakdownType=='days'">
               <div class="col-sm-3 col-list-ranges">
                 <ul class="list-unstyled">
-                  <li ng-repeat="range in ::$ctrl.resolve.ranges.days" ng-click="$ctrl.setRange(range)" ng-class="{'active':$ctrl.workingSettings.name === range.name}">
+                  <li ng-repeat="range in ::$ctrl.ranges.days" ng-click="$ctrl.setRange(range)" ng-class="{'active':$ctrl.workingSettings.name === range.name}">
                     {{range.name}} <i class="fa fa-check"></i>
                   </li>
                 </ul>
               </div>
-              <div class="col-sm-4 no-padding">
+              <div class="col-sm-4">
                 <div class="top-label" translate>app.start</div>
                 <div class="range-tile">
                   <div class="tile-title date-title">{{$ctrl.workingSettings.start | date: $ctrl.service.dateFilter.days}}</div>
@@ -93,10 +93,10 @@
                 <div class="select-range">
                   <div class="select-label" translate>campaignDataSettings.selectStart</div>
                   <div class="datepicker" uib-datepicker ng-model="$ctrl.workingSettings.start" ng-change="$ctrl.onWorkingSettingsChange()" datepicker-options="$ctrl.options.start"></div>
-                  <div><em ng-if="$ctrl.resolve.cycles"><span class="bookend"><span>&nbsp;</span></span> <span translate>dateRange.calendarNotation</span></em></div>
+                  <div><em ng-if="$ctrl.cycles"><span class="bookend"><span>&nbsp;</span></span> <span translate>dateRange.calendarNotation</span></em></div>
                 </div>
               </div>
-              <div class="col-sm-4 no-padding">
+              <div class="col-sm-4">
                 <div class="top-label" translate>app.end</div>
                 <div class="range-tile">
                   <div class="tile-title date-title">{{$ctrl.workingSettings.end | date: $ctrl.service.dateFilter.days}}</div>

@@ -1,9 +1,9 @@
 import Template from './label.html';
 
 class Controller {
-  constructor(DataSettingsService) {
+  constructor(DataSettings) {
     'ngInject';
-    this.service = DataSettingsService;
+    this.service = DataSettings;
     this.dataSettings = {};
   }
 

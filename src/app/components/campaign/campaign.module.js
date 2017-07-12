@@ -5,7 +5,7 @@ import sidebar from './campaign.sidebar';
 import DetailModule from './detail/detail.module';
 import DataSettingsModule from './data-settings/data-settings.module';
 import CreativesModule from './creatives/creatives.module';
-import DataSettingServiceModule from './data-settings/data-settings-service/data-settings-service.module';
+import DataSettingsService from './data-settings/data-settings.service';
 
 
 export default angular
@@ -13,7 +13,6 @@ export default angular
     uiRouter,
     DetailModule,
     CreativesModule,
-    DataSettingServiceModule,
     DataSettingsModule
   ])
   .config(($stateProvider) => {
@@ -40,4 +39,5 @@ export default angular
   .component('campaign', component)
   .service('CampaignService', service)
   .service('CampaignSidebar', sidebar)
+  .service('DataSettings', DataSettingsService)
   .name;

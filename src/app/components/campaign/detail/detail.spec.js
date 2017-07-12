@@ -4,7 +4,6 @@ import mockCampaignCycles from '../../../../../test/mocks/components/campaign/cy
 import mockRlConfig from '../mock-data/rlConfig.json';
 
 describe('components.campaign.detail', () => {
-
   let $ctrl, $scope, service;
 
   let dataService = {
@@ -24,7 +23,7 @@ describe('components.campaign.detail', () => {
   beforeEach(() => {
     angular.mock.module('campaign.detail', ($provide) => {
       $provide.value('CampaignSidebar', {});
-      $provide.value('DataSettingsService', dataService);
+      $provide.value('DataSettings', dataService);
       $provide.value('rlConfig', mockRlConfig);
     });
 

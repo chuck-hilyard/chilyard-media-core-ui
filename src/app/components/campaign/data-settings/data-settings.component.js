@@ -1,26 +1,27 @@
 import Template from './data-settings.html';
 
 class Controller {
-  constructor(DataSettingsService, $uibModal) {
+  constructor(DataSettings, $uibModal, rlDateTime) {
     'ngInject';
-    this.service = DataSettingsService;
+    this.service = DataSettings;
+    this.rlDateTime = rlDateTime;
     this.$uibModal = $uibModal;
-    this.dataSettings = DataSettingsService.getSelectedSettings();
+    this.dataSettings = DataSettings.getSelectedSettings();
   }
 
   $onInit() {
-    this.cycles = mapCycles(this.campaignCycles);
+    this.cycles = mapCycles(this.rlDateTime, this.campaignCycles);
   }
 
   $onChanges(changes) {
     if (changes.campaignCycles) {
-      this.cycles = mapCycles(changes.campaignCycles.currentValue);
+      this.cycles = mapCycles(this.rlDateTime, changes.campaignCycles.currentValue);
       this.updateSettingsData(this.cycles);
     }
   }
 
   updateSettingsData(cycles) {
-    this.service.setRanges(cycles);
+    this.service.setRanges(cycles, this.mcid);
     this.dataSettings = this.service.getSelectedSettings();
   }
 
@@ -47,6 +48,20 @@ class Controller {
   }
 }
 
+function mapCycles(DateTime, cycles) {
+  return {
+    currentCycleIndex: cycles.currentCycleIndex,
+    cycles: cycles.cycles.map((cycle) => {
+      return angular.extend({}, cycle, {
+        dateRange: getDateRange(cycle),
+        startDateObj: DateTime.newDate(cycle.startDate),
+        endDateObj: DateTime.newDate(cycle.endDate),
+        cycleNumberStr: 'app.cycle ' + cycle.cycleNumber
+      });
+    })
+  };
+}
+
 function getDateRange(cycle) {
   let range = cycle.startDate || '-/-/-';
   range += ' to ';
@@ -54,21 +69,11 @@ function getDateRange(cycle) {
   return range;
 }
 
-function mapCycles(cycles) {
-  return {
-    currentCycleIndex: cycles.currentCycleIndex,
-    cycles: cycles.cycles.map((cycle) => {
-      return angular.extend({}, cycle, {
-        dateRange: getDateRange(cycle)
-      });
-    })
-  };
-}
-
 export default {
   template: Template,
   controller: Controller,
   bindings: {
-    campaignCycles: '<'
+    campaignCycles: '<',
+    mcid: '<'
   }
 };

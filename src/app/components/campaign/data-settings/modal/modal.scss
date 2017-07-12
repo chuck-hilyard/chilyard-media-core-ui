@@ -50,7 +50,11 @@
   }
 
   .tab-content {
-    padding: 10px;
+    padding: $panel-body-padding;
+    border: solid 1px $border-color;
+    border-top: none;
+    border-bottom-left-radius: $border-radius-base;
+    border-bottom-right-radius: $border-radius-base;
 
     .select-label,
     .top-label {
@@ -65,8 +69,8 @@
     }
 
     .range-tile {
-      background-color: $label-info-bg;
       color: $label-color;
+      border: solid 1px $border-color;
       margin: 3px;
       padding: 5px;
       text-align: center;

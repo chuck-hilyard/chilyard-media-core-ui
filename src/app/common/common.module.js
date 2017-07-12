@@ -1,5 +1,6 @@
 import sso from './rl-sso/sso.module';
 import config from './rl-config/rl-config.module';
+import dateTime from './rl-date-time/date-time.module';
 import navbar from './rl-navbar/navbar.module';
 import sidebar from './rl-sidebar/sidebar.module';
 import footer from './rl-footer/footer.module';
@@ -17,6 +18,7 @@ export default angular
   .module('common', [
     sso,
     config,
+    dateTime,
     navbar,
     sidebar,
     footer,

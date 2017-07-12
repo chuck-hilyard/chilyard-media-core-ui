@@ -8,10 +8,11 @@ const tabNumber = {
 
 
 class Controller {
-  constructor($scope, $log, DataSettingsService) {
+  constructor($scope, $log, DataSettings, rlDateTime) {
     'ngInject';
     this.$log = $log;
-    this.dataSettingsService = DataSettingsService;
+    this.rlDateTime = rlDateTime;
+    this.DataSettings = DataSettings;
     this.monthsEnabled = true;
     this.daysEnabled = true;
   }
@@ -21,7 +22,7 @@ class Controller {
     this.activeTab = tabNumber[this.workingSettings.breakdownType];
     this.ranges = angular.copy(this.resolve.ranges);
     this.cycles = angular.copy(this.resolve.cycles);
-    this.dateLimits = this.dataSettingsService.getDateLimits(this.cycles);
+    this.dateLimits = this.DataSettings.getDateLimits(this.cycles);
     this.options = this.getOptions(this.workingSettings.breakdownType);
   }
 
@@ -87,7 +88,7 @@ class Controller {
 
   selectTab(tabName) {
     if (this.workingSettings.breakdownType !== tabName) {
-      this.workingSettings = this.dataSettingsService.getDefault(tabName);
+      this.workingSettings = this.DataSettings.getDefault(tabName);
       this.options = this.getOptions(this.workingSettings.breakdownType);
     }
   }
@@ -95,12 +96,11 @@ class Controller {
   customClass(data) {
     let cycles = this.cycles.cycles;
     if (angular.isDefined(cycles) && data.mode === 'day') {
-      let dayToCheck = new Date(data.date).setHours(0, 0, 0, 0);
       let match = cycles
         .find((cycle) => {
-          let start = new Date(cycle.startDate).setHours(0, 0, 0, 0) === dayToCheck;
-          let end = new Date(cycle.endDate).setHours(0, 0, 0, 0) === dayToCheck;
-          return start || end;
+          let startMatch = this.rlDateTime.sameDay(data.date, cycle.startDateObj);
+          let endMatch = this.rlDateTime.sameDay(data.date, cycle.endDateObj);
+          return startMatch || endMatch;
         });
       if (angular.isDefined(match)) {
         return 'bookend';
@@ -110,7 +110,7 @@ class Controller {
   }
 
   getRangeName() {
-    let match = this.dataSettingsService.findRange(this.ranges, this.workingSettings);
+    let match = this.DataSettings.findRange(this.ranges, this.workingSettings);
     this.workingSettings.name = angular.isDefined(match) ? match.name : null;
   }
 

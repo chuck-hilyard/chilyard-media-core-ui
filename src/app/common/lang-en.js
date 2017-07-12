@@ -19,7 +19,9 @@ export default Object.assign(
       close: 'Close',
       cancel: 'Cancel',
       ok: 'Ok',
-      update: 'Update'
+      update: 'Update',
+      cycle: 'Cycle',
+      to: 'to'
     }
   }
 );

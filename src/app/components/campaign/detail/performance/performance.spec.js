@@ -8,7 +8,7 @@ describe('campaign.detail.performance', () => {
 
   let sidebar = {
     collapsed: false
-  }
+  };
 
   beforeEach(() => {
     angular.mock.module('campaign.detail.performance', ($provide) => {

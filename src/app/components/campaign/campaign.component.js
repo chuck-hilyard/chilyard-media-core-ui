@@ -1,10 +1,11 @@
 import template from './campaign.html';
 
 class Controller {
-  constructor(CampaignSidebar) {
+  constructor(CampaignSidebar, $stateParams) {
     'ngInject';
     this.header = {};
     this.sidebar = CampaignSidebar;
+    this.mcid = $stateParams.mcid;
   }
 
   $onInit() {

@@ -7,7 +7,7 @@
     "type": "line"
   },
   {
-    "id": "allClicks",
+    "id": "socialClicks",
     "format": "int",
     "label": "Clicks",
     "total": "sum",

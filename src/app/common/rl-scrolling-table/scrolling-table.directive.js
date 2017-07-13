@@ -51,7 +51,6 @@ export default function rlScrollingTable($timeout) {
     this.initChecker = () => {
       let bodyRows = this.body.querySelectorAll('tbody tr');
       if (bodyRows.length > 0) {
-        this.setHeight();
         this.$timeout(this.build, 250);
       }
       else {
@@ -63,7 +62,6 @@ export default function rlScrollingTable($timeout) {
       scope.loading = true;
       this.$timeout.cancel(this.resizing);
       this.resizing = this.$timeout(this.resize, 250);
-      this.setHeight();
     };
 
     this.handleRebuild = () => {
@@ -72,6 +70,7 @@ export default function rlScrollingTable($timeout) {
     };
 
     this.setHeight = () => {
+      this.body.style.height = 'auto';
       let headerHeight = window.getComputedStyle(this.header, null).getPropertyValue('height');
       let bodyHeight = window.getComputedStyle(this.body, null).getPropertyValue('height');
       let maxHeight = window.innerHeight * this.heightPercentage;
@@ -179,6 +178,8 @@ export default function rlScrollingTable($timeout) {
 
       // Remove temp header
       this.body.querySelector('thead').remove();
+
+      this.setHeight();
 
       scope.loading = false;
     };

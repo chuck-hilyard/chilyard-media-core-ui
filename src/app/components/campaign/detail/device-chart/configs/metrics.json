@@ -6,7 +6,7 @@
   },
   {
     "id": "clicks",
-    "label": "Clicks",
+    "label": "All Clicks",
     "format": "float"
   },
   {

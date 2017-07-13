@@ -41,9 +41,6 @@ class Controller {
         responsive: true,
         maintainAspectRatio: false,
         cutoutPercentage: 80,
-        tooltips: {
-          enabled: false
-        },
         legend: {
           display: false
         },
@@ -68,7 +65,7 @@ class Controller {
       line1: total,
       line1Padding: 50,
       line2: this.metric.label,
-      line2Size: 21,
+      line2Padding: 30,
       fontFamily: '\'Roboto\', sans-serif',
       fontColor: '#333'
     };

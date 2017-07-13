@@ -1,30 +1,140 @@
 [
   {
     "id": "impressions",
-    "format": "int",
     "label": "Impressions",
-    "total": "sum",
-    "type": "line"
-  },
-  {
-    "id": "allClicks",
     "format": "int",
-    "label": "Clicks",
-    "total": "sum",
-    "type": "line"
+    "total": "sum"
   },
   {
-    "id": "ctr",
-    "format": "float",
-    "label": "CTR",
-    "total": "average",
-    "type": "line"
+    "id": "budget",
+    "label": "Budget",
+    "format": "currency",
+    "total": "sum"
   },
   {
     "id": "spend",
-    "format": "currency",
     "label": "Spend",
-    "total": "sum",
-    "type": "bar"
+    "format": "currency",
+    "total": "sum"
+  },
+  {
+    "id": "utilization",
+    "label": "Utilization",
+    "format": "float",
+    "total": "average"
+  },
+  {
+    "id": "cpm",
+    "label": "CPM",
+    "format": "float",
+    "total": "average"
+  },
+  {
+    "id": "ctr",
+    "label": "CTR",
+    "format": "float",
+    "total": "average"
+  },
+  {
+    "id": "allClicks",
+    "label": "Clicks",
+    "format": "int",
+    "total": "sum"
+  },
+  {
+    "id": "frequency",
+    "label": "Frequency",
+    "format": "float",
+    "total": "sum"
+  },
+  {
+    "id": "reach",
+    "label": "Reach",
+    "format": "float",
+    "total": "sum"
+  },
+  {
+    "id": "socialReach",
+    "label": "Social Reach",
+    "format": "float",
+    "total": "sum"
+  },
+  {
+    "id": "socialImpressions",
+    "label": "Social Impressions",
+    "format": "int",
+    "total": "sum"
+  },
+  {
+    "id": "websiteClicks",
+    "label": "Website Clicks",
+    "format": "int",
+    "total": "sum"
+  },
+  {
+    "id": "buttonClicks",
+    "label": "Button Clicks",
+    "format": "int",
+    "total": "sum"
+  },
+  {
+    "id": "linkClicks",
+    "label": "Link Clicks",
+    "format": "int",
+    "total": "sum"
+  },
+  {
+    "id": "socialClicks",
+    "label": "Social Clicks",
+    "format": "int",
+    "total": "sum"
+  },
+  {
+    "id": "leadForms",
+    "label": "Lead Forms",
+    "format": "int",
+    "total": "sum"
+  },
+  {
+    "id": "checkIns",
+    "label": "Check Ins",
+    "format": "int",
+    "total": "sum"
+  },
+  {
+    "id": "postComments",
+    "label": "postComments",
+    "format": "int",
+    "total": "sum"
+  },
+  {
+    "id": "postReactions",
+    "label": "Post Reactions",
+    "format": "int",
+    "total": "sum"
+  },
+  {
+    "id": "postShares",
+    "label": "Post Shares",
+    "format": "int",
+    "total": "sum"
+  },
+  {
+    "id": "postEngagements",
+    "label": "Post Engagements",
+    "format": "int",
+    "total": "sum"
+  },
+  {
+    "id": "pageLikes",
+    "label": "Page Likes",
+    "format": "int",
+    "total": "sum"
+  },
+  {
+    "id": "pageEngagements",
+    "label": "Page Engagements",
+    "format": "int",
+    "total": "sum"
   }
 ]

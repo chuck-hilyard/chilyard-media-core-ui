@@ -25,17 +25,18 @@ class Controller {
   $onChanges(changes) {
     let currentData = changes.data.currentValue;
     if(currentData) {
-      this.build(this.sortData(currentData));
+      this.build(currentData);
     }
   }
 
   build(data) {
+    let chartData = this.sortData(data);
     let $ctrl = this;
     this.chart = {
       type: 'bar',
       data: {
-        labels: $ctrl.setLabels(data),
-        datasets: $ctrl.setData(data)
+        labels: $ctrl.setLabels(chartData),
+        datasets: $ctrl.setData(chartData)
       },
       options: $ctrl.setOptions()
     };
@@ -141,11 +142,13 @@ class Controller {
       switch(metric.format) {
       case 'currency':
         axis.ticks = {
+          beginAtZero: true,
           callback: (dataLabel) => this.$filter('currency')(dataLabel)
         };
         break;
-      case 'int':
+      default:
         axis.ticks = {
+          beginAtZero: true,
           callback: (dataLabel) => this.$filter('number')(dataLabel)
         };
         break;

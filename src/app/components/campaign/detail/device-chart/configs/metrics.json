@@ -2,7 +2,7 @@
   {
     "id": "impressions",
     "label": "Impressions",
-    "format": "float"
+    "format": "int"
   },
   {
     "id": "clicks",
@@ -60,8 +60,8 @@
     "format": "float"
   },
   {
-    "id": "pageEngagements",
-    "label": "Page Engagements",
+    "id": "postEngagements",
+    "label": "Post Engagements",
     "format": "float"
   },
   {

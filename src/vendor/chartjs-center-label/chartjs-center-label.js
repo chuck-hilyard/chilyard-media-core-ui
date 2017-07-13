@@ -14,7 +14,7 @@ Chart.pluginService.register({
 
       ctx.save();
       var fontSize = helpers.getValueOrDefault(centerConfig.minFontSize, 1);
-      var maxFontSize = helpers.getValueOrDefault(centerConfig.maxFontSize, 256);
+      var maxFontSize = helpers.getValueOrDefault(centerConfig.maxFontSize, 50);
       var line1Size = centerConfig.line1Size ? centerConfig.line1Size : getFontSize(centerConfig.line1, centerConfig.line1Padding);
       var line2Size = centerConfig.line2Size ? centerConfig.line2Size : getFontSize(centerConfig.line2, centerConfig.line2Padding);
 
@@ -39,7 +39,7 @@ Chart.pluginService.register({
       return size;
     }
   },
-  afterDraw: function (chart) {
+  beforeDraw: function (chart) {
     if (chart.center) {
       var ctx = chart.chart.ctx;
       var centerConfig = chart.config.options.elements.center;

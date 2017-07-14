@@ -44,7 +44,7 @@ function mapCycles(DateTime, cycles) {
         dateRange: getDateRange(cycle),
         startDateObj: DateTime.newDate(cycle.startDate),
         endDateObj: DateTime.newDate(cycle.endDate),
-        cycleNumberStr: 'app.cycle ' + cycle.cycleNumber
+        cycleNumberStr: 'Cycle ' + cycle.cycleNumber
       });
     })
   };

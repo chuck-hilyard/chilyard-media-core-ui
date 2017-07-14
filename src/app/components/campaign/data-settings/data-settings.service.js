@@ -15,9 +15,10 @@ const sessionKey = 'campaign:data-settings';
 
 export default class DataSettings {
 
-  constructor($filter, rlDateTime, Session) {
+  constructor($filter, $log, rlDateTime, Session) {
     'ngInject';
     this.$filter = $filter;
+    this.$log = $log;
     this.DateTime = rlDateTime;
     this.Session = Session;
 
@@ -91,7 +92,11 @@ export default class DataSettings {
   }
 
   getDefault(breakdownType) {
-    return angular.copy(this.ranges[breakdownType][0]);
+    if (this.ranges[breakdownType] && this.ranges[breakdownType].length) {
+      return angular.copy(this.ranges[breakdownType][0]);
+    } else {
+      this.$log.error('getDefault empty ranges for breakdownType is ' + breakdownType);
+    }
   }
 
   getSelectedSettings() {
@@ -228,13 +233,19 @@ function getMonthRanges(DateTime, minDate, maxDate) {
   addMonthRange(DateTime, monthRanges, 'Last 3 months', DateTime.subtractMonths(today, 2), today, minDate, maxDate);
   addMonthRange(DateTime, monthRanges, 'Last 6 months', DateTime.subtractMonths(today, 5), today, minDate, maxDate);
   addMonthRange(DateTime, monthRanges, 'Last 12 months', DateTime.subtractMonths(today, 11), today, minDate, maxDate);
-  addMonthRange(DateTime, monthRanges, 'This Year', DateTime.yearStart(today.getFullYear()), today, minDate, maxDate);
+  let yearStart = DateTime.yearStart(today.getFullYear());
+  let useStart = (minDate > yearStart) ? minDate : yearStart;
+  addMonthRange(DateTime, monthRanges, 'This Year', useStart, today, minDate, maxDate);
 
   let lastYearEnd = DateTime.yearEnd(today.getFullYear() - 1);
   if (minDate < lastYearEnd) {
     let lastYearStart = DateTime.yearStart(today.getFullYear() - 1);
     let startDate = (minDate > lastYearStart) ? minDate : lastYearStart;
     addMonthRange(DateTime, monthRanges, 'Last Year', startDate, lastYearEnd, minDate, maxDate);
+  }
+
+  if (monthRanges.length === 0) {
+    addMonthRange(DateTime, monthRanges, 'Custom', minDate, maxDate, minDate, maxDate);
   }
 
   return monthRanges;
@@ -282,6 +293,12 @@ function getDayRanges(DateTime, minDate, maxDate, cyclesObject) {
   let last6cycle = getLastCycle(cyclesObject, 5);
   if (last6cycle && last6cycle.startDate) {
     addDayRange(DateTime, dayRanges, 'Last 6 Cycles', DateTime.newDate(last6cycle.startDate), thisCycleEnd, minDate, maxDate);
+  }
+
+  if (dayRanges.length === 0) {
+    let monthBeforeMax = DateTime.subtractDays(maxDate, 30);
+    let useMin = (minDate > monthBeforeMax) ? minDate : monthBeforeMax;
+    addDayRange(DateTime, dayRanges, 'Custom', useMin, maxDate, minDate, maxDate);
   }
   return dayRanges;
 }

@@ -50,6 +50,7 @@ class Controller {
   $onChanges(changes) {
     let currentData = (changes.data) ? changes.data.currentValue : null;
     if(currentData && currentData.length > 0) {
+      this.sortState = {};
       this.configureTable(currentData);
     }
   }
@@ -84,6 +85,7 @@ class Controller {
 
   handleSort(state) {
     this.sortState = state;
+    this.data = this.$filter('orderBy')(this.data, `-${this.sortState.key}`, this.sortState.desc);
   }
 
   handleNextPage() {

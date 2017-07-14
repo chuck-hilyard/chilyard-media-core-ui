@@ -12,6 +12,7 @@ class Controller {
     this.columns = [];
     this.columnsConfig = columnsConfig;
     this.delegate = {};
+    this.init = false;
     this.sortState = {};
 
     // Tooltip templates
@@ -75,7 +76,10 @@ class Controller {
         this.columns.push(angular.copy(value));
       }
     });
-    this.delegate.rebuild();
+    if (this.init) {
+      this.delegate.rebuild();
+    }
+    this.init = true;
   }
 
   handleSort(state) {

@@ -18,11 +18,18 @@
       <rl-chart data="$ctrl.chart"></rl-chart>
     </div>
   </div>
-  <ul class="list-group">
-    <li class="list-group-item" ng-repeat="label in $ctrl.labels">
-      <b class="pull-right">{{$ctrl.chart.data.datasets[0].data[$index]}}&#37;</b>
-      <span class="fa fa-circle" ng-style="{'color': $ctrl.colors[$index]}"></span>
-      {{label}}
-    </li>
-  </ul>
+  <table class="table">
+    <tr ng-repeat="item in $ctrl.metricData">
+      <td>
+        <span class="fa fa-circle" ng-style="{'color': $ctrl.colors[$index]}"></span>
+        {{item.type}}
+      </td>
+      <td class="text-right col-sm">
+        <b>{{item.percentage}}&#37;</b>
+      </td>
+      <td class="text-right col-sm">
+        ({{item.value | number}})
+      </td>
+    </tr>
+  </tr>
 </div>

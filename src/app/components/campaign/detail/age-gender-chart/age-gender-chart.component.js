@@ -151,7 +151,8 @@ class Controller {
         drawBorder: false
       },
       ticks: {
-        beginAtZero: true
+        beginAtZero: true,
+        maxTicksLimit: 3
       }
     };
     if (metric.format === 'currency') {

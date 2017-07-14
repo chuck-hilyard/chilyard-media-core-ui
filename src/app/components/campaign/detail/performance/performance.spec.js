@@ -38,7 +38,7 @@ describe('campaign.detail.performance', () => {
     });
   });
 
-  it('configure table', () => {
+  xit('configure table', () => {
     spyOn($ctrl.delegate, 'rebuild');
     let changes = {
       data: {

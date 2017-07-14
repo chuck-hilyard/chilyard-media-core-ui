@@ -1,7 +1,7 @@
 import template from './device-chart.html';
 import metricsConfig from './configs/metrics';
 
-class Controller {
+class DeviceChartController {
 
   constructor($filter, rlColors) {
     'ngInject';
@@ -17,11 +17,12 @@ class Controller {
     this.labels = ['Mobile', 'Desktop', 'Tablet', 'Other'];
     this.options = metricsConfig;
     this.metric = this.options.find((item) => item.id === 'impressions');
+    this.metricData = [];
   }
 
   $onChanges(changes) {
-    let currentData = changes.data.currentValue;
-    if(currentData) {
+    let currentData = (changes.data) ? changes.data.currentValue : null;
+    if(currentData && currentData.length > 0) {
       this.build(currentData);
     }
   }
@@ -73,7 +74,17 @@ class Controller {
 
   setDataset(data) {
     let metricData = data.find((item) => item.metric === this.metric.id);
-    return metricData.breakdowns.map((item) => item.percentage);
+    if (metricData.breakdowns.length === 0) {
+      return;
+    }
+    let dataset = [];
+    this.metricData = [];
+    angular.forEach(this.labels, (label) => {
+      let type = metricData.breakdowns.find((item) => item.type === label);
+      dataset.push(type.percentage);
+      this.metricData.push(type);
+    });
+    return dataset;
   }
 
   updateChart() {
@@ -84,7 +95,7 @@ class Controller {
 
 export default {
   template: template,
-  controller: Controller,
+  controller: DeviceChartController,
   bindings: {
     data: '<'
   }

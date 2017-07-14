@@ -8,15 +8,15 @@
 
 <!-- <campaign-overview-panels></campaign-overview-panels> -->
 
-<campaign-trend-chart data="$ctrl.performanceData" breakdown-type="$ctrl.dataSettingsService.selectedSettings.breakdownType"></campaign-trend-chart>
+<campaign-trend-chart data="$ctrl.performanceData" breakdown-type="$ctrl.currentDataSettings.selectedSettings.breakdownType"></campaign-trend-chart>
 
 <div class="row row-striped padding-top-lg padding-bottom">
-  <div class="col-sm-9">
+  <div class="col-md-9">
     <campaign-age-gender-chart data="$ctrl.ageGenderData"></campaign-age-gender-chart>
   </div>
-  <div class="col-sm-3">
+  <div class="col-md-3 col-xs-6">
     <campaign-device-chart data="$ctrl.deviceData"></campaign-device-chart>
   </div>
 </div>
 
-<campaign-performance data="$ctrl.performanceData"></campaign-performance>
+<campaign-performance data="$ctrl.performanceData" breakdown-type="$ctrl.currentDataSettings.selectedSettings.breakdownType"></campaign-performance>

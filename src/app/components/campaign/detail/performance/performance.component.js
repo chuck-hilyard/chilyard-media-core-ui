@@ -47,8 +47,8 @@ class Controller {
   }
 
   $onChanges(changes) {
-    let currentData = changes.data.currentValue;
-    if(currentData) {
+    let currentData = (changes.data) ? changes.data.currentValue : null;
+    if(currentData && currentData.length > 0) {
       this.configureTable(currentData);
     }
   }
@@ -56,6 +56,20 @@ class Controller {
   configureTable(data) {
     this.columns = [];
     let keys = Object.keys(data[0]);
+    let label = this.columnsConfig.find((item) => item.key === 'tableLabel');
+    switch(this.breakdownType) {
+    case 'cycles':
+      label.label = 'Cycles';
+      break;
+    case 'months':
+      label.label = 'Months';
+      break;
+    case 'days':
+      label.label = 'Days';
+      break;
+    default:
+      label.label = 'Label';
+    }
     angular.forEach(this.columnsConfig, (value) => {
       if (keys.indexOf(value.key) > -1) {
         this.columns.push(angular.copy(value));
@@ -90,6 +104,7 @@ export default {
   template: template,
   controller: Controller,
   bindings: {
-    data: '<'
+    data: '<',
+    breakdownType: '<'
   }
 };

@@ -1,6 +1,9 @@
 <div class="row padding-top padding-bottom-lg" ng-hide="$ctrl.isError()">
   <div class="col-xs-12">
-    <h3>Cycle Performance</h3>
+    <h3>
+      <span translate>{{$ctrl.breakdownLabel}}</span>
+      <span translate>campaignDetails.performance</span>
+    </h3>
 
     <rl-scrolling-table delegate="$ctrl.delegate" on-next-page="$ctrl.handleNextPage()">
       <header-table>

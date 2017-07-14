@@ -1,6 +1,10 @@
 export default Object.assign(
   {
     campaignDetails: {
+      cycles: 'Cycles',
+      monthly: 'Monthly',
+      daily: 'Daily',
+      performance: 'Performance',
       utilizationTitle: 'Utilization',
       impressionsTitle: 'Impressions',
       impressionsMessage: 'The number of times client\'s ads were viewed.',

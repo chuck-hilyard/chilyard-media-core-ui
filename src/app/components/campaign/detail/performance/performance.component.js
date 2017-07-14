@@ -9,6 +9,7 @@ class Controller {
     this.$filter = $filter;
     this.$sce = $sce;
 
+    this.breakdownLabel = '';
     this.columns = [];
     this.columnsConfig = columnsConfig;
     this.delegate = {};
@@ -47,11 +48,18 @@ class Controller {
     });
   }
 
+  $onInit() {
+    this.setLabel(this.breakdownType);
+  }
+
   $onChanges(changes) {
     let currentData = (changes.data) ? changes.data.currentValue : null;
-    if(currentData && currentData.length > 0) {
+    if (currentData && currentData.length > 0) {
       this.sortState = {};
       this.configureTable(currentData);
+    }
+    if (changes.breakdownType) {
+      this.setLabel(changes.breakdownType.currentValue);
     }
   }
 
@@ -94,6 +102,20 @@ class Controller {
 
   isError() {
     return this.data instanceof Error;
+  }
+
+  setLabel(type) {
+    switch(type) {
+    case 'cycles':
+      this.breakdownLabel = 'campaignDetails.cycles';
+      break;
+    case 'months':
+      this.breakdownLabel = 'campaignDetails.monthly';
+      break;
+    case 'days':
+      this.breakdownLabel = 'campaignDetails.daily';
+      break;
+    }
   }
 
   tooltipHtml(titleKey, messageKey) {

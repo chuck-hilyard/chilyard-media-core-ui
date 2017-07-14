@@ -1,4 +1,4 @@
-<div class="panel panel-default" ng-hide="$ctrl.isError()">
+<div class="panel panel-default age-gender" ng-hide="$ctrl.isError()">
 
   <div class="panel-heading panel-heading--form">
     <div class="row">
@@ -24,11 +24,10 @@
   <div class="panel-body">
     <div class="row">
 
-      <div class="col-md-2 text-center">
-        <br><br>
-        <h2>{{$ctrl.metrics[0].label}}</h2>
+      <div class="col-md-2 text-center label-col">
+        <h4 class="wrap text-bold">{{$ctrl.metrics[0].label}}</h4>
         <br>
-        <h4>
+        <h5>
           <span class="fa fa-male" ng-style="{'color': $ctrl.colors[0].male}"></span>
           Male
         </h4>
@@ -36,10 +35,10 @@
           <b>{{$ctrl.getTotals(0, 'male').percentage}}&#37;</b>
           ({{$ctrl.getTotals(0, 'male').total}})
         </h5>
-        <h4>
+        <h5>
           <span class="fa fa-female" ng-style="{'color': $ctrl.colors[0].female}"></span>
           Female
-        </h4>
+        </h5>
         <h5>
           <b>{{$ctrl.getTotals(0, 'female').percentage}}&#37;</b>
           ({{$ctrl.getTotals(0, 'female').total}})
@@ -58,26 +57,25 @@
         </div>
       </div>
 
-      <div class="col-md-2 text-center">
-        <br><br>
-        <h2>{{$ctrl.metrics[1].label}}</h2>
+      <div class="col-md-2 text-center label-col">
+        <h4 class="wrap text-bold">{{$ctrl.metrics[1].label}}</h4>
         <br>
-        <h4>
+        <h5>
           <span class="fa fa-male" ng-style="{'color': $ctrl.colors[1].male}"></span>
           Male
-        </h4>
-        <h5>
+        </h5>
+        <h6>
           <b>{{$ctrl.getTotals(1, 'male').percentage}}&#37;</b>
           ({{$ctrl.getTotals(1, 'male').total}})
-        </h5>
-        <h4>
+        </h6>
+        <h5>
           <span class="fa fa-female" ng-style="{'color': $ctrl.colors[1].female}"></span>
           Female
-        </h4>
-        <h5>
+        </h5>
+        <h6>
           <b>{{$ctrl.getTotals(1, 'female').percentage}}&#37;</b>
           ({{$ctrl.getTotals(1, 'female').total}})
-        </h5>
+        </h6>
       </div>
 
     </div>

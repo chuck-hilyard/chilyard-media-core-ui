@@ -1,5 +1,14 @@
 @import './src/styles/variables';
 
 .demographic-chart {
-  height: 432px;
+  height: 416px;
+}
+
+.age-gender {
+  .label-col {
+    padding-top: ($grid-gutter-width * 3);
+  }
+  .wrap {
+    word-break: break-word;
+  }
 }

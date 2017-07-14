@@ -24,7 +24,7 @@ class TrendChartController {
 
   $onChanges(changes) {
     let currentData = (changes.data) ? changes.data.currentValue : null;
-    if(currentData) {
+    if(currentData && currentData.length > 0) {
       this.build(currentData);
     }
   }
@@ -86,7 +86,7 @@ class TrendChartController {
         data: data.map((item) => item[this.metrics[0].id]),
         fill: false,
         label: this.metrics[0].label,
-        lineTension: 0,
+        lineTension: 0.1,
         pointRadius: 0,
         type: 'line',
         yAxisID: 'left'
@@ -143,12 +143,14 @@ class TrendChartController {
       case 'currency':
         axis.ticks = {
           beginAtZero: true,
+          maxTicksLimit: 3,
           callback: (dataLabel) => this.$filter('currency')(dataLabel)
         };
         break;
       default:
         axis.ticks = {
           beginAtZero: true,
+          maxTicksLimit: 3,
           callback: (dataLabel) => this.$filter('number')(dataLabel)
         };
         break;
@@ -163,6 +165,7 @@ class TrendChartController {
     switch(this.breakdownType) {
     case 'cycles':
       return copy.sort((a, b) => a.cycleNumber - b.cycleNumber);
+    case 'months':
     case 'days':
       return copy.sort((a, b) => new Date(a.reportDate) - new Date(b.reportDate));
     default:

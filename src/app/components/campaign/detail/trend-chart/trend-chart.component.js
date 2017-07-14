@@ -1,7 +1,7 @@
 import template from './trend-chart.html';
 import metricsConfig from './configs/metrics';
 
-class Controller {
+class TrendChartController {
 
   constructor($filter, rlColors) {
     'ngInject';
@@ -23,7 +23,7 @@ class Controller {
   }
 
   $onChanges(changes) {
-    let currentData = changes.data.currentValue;
+    let currentData = (changes.data) ? changes.data.currentValue : null;
     if(currentData) {
       this.build(currentData);
     }
@@ -163,6 +163,8 @@ class Controller {
     switch(this.breakdownType) {
     case 'cycles':
       return copy.sort((a, b) => a.cycleNumber - b.cycleNumber);
+    case 'days':
+      return copy.sort((a, b) => new Date(a.reportDate) - new Date(b.reportDate));
     default:
       return copy;
     }
@@ -176,7 +178,7 @@ class Controller {
 
 export default {
   template: template,
-  controller: Controller,
+  controller: TrendChartController,
   bindings: {
     data: '<',
     breakdownType: '<'

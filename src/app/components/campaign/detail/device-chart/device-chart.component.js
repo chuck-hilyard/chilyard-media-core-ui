@@ -65,7 +65,7 @@ class Controller {
       line1: total,
       line1Padding: 50,
       line2: this.metric.label,
-      line2Padding: 30,
+      line2Padding: 35,
       fontFamily: '\'Roboto\', sans-serif',
       fontColor: '#333'
     };

@@ -1,80 +1,79 @@
 import template from './detail.html';
 
-const apiDateFilter = {
-  days: 'yyyy-MM-dd',
-  months: 'yyyy-MM'
-};
 class Controller {
 
-  constructor($filter, $scope, CampaignDetailService, CampaignSidebar, DataSettings) {
+  constructor($log, CampaignDetailService) {
     'ngInject';
-    // Angular
-    this.$filter = $filter;
+    // angular
+    this.$log = $log;
 
     // Local Vars
     this.ageGenderData = null;
     this.deviceData = null;
     this.performanceData = null;
-    this.dataSettingsService = DataSettings;
     this.service = CampaignDetailService;
-
-    $scope.$watch(() => DataSettings.selectedSettings, () => {
-      $scope.$ctrl.updateData();
-    }, true);
-  }
-
-  $onInit() {
-    this.updateData(this.campaignOverview);
   }
 
   $onChanges(changes) {
+    let reload = false;
     if (changes.campaignOverview) {
-      this.updateData(changes.campaignOverview.currentValue);
+      this.campaign = this.campaignOverview;
+      reload = true;
+    }
+    if (changes.currentDataSettings) {
+      this.dataSettings = this.currentDataSettings;
+      reload = true;
+    }
+    if (reload) {
+      this.getData();
     }
   }
 
-  updateData(campaignOverview) {
-    if (campaignOverview) {
-      this.campaign = campaignOverview;
-    }
-    this.getPerformanceData();
-    this.getAgeGenderData();
-    this.getDeviceData();
+  getData() {
+    let mcid = this.campaign.masterCampaignId;
+    let breakdown = this.dataSettings.breakdown;
+    let params = this.dataSettings.apiParams;
+    this.getPerformanceData(mcid, breakdown, params);
+    this.getAgeGenderData(mcid, breakdown, params);
+    this.getDeviceData(mcid, breakdown, params);
   }
 
-  getAgeGenderData() {
-    let breakdown = this.dataSettingsService.getSelectedBreakdownType();
-    let params = this.dataSettingsService.getSelectedRangeParams(apiDateFilter);
-    this.service.getAgeGenderData(this.campaign.masterCampaignId, breakdown, params)
+  getAgeGenderData(mcid, breakdown, params) {
+    this.service.getAgeGenderData(mcid, breakdown, params)
       .then((response) => {
         this.ageGenderData = response.data;
       })
       .catch((error) => {
-        this.ageGenderData = new Error(JSON.stringify(error));
+        this.ageGenderData = new Error('unable to load the age/gender data at this time');
+        this.$log.error('Error getting Age/Gender data', {
+          error: error
+        });
       });
   }
 
-  getDeviceData() {
-    let breakdown = this.dataSettingsService.getSelectedBreakdownType();
-    let params = this.dataSettingsService.getSelectedRangeParams(apiDateFilter);
-    this.service.getDeviceData(this.campaign.masterCampaignId, breakdown, params)
+  getDeviceData(mcid, breakdown, params) {
+    this.service.getDeviceData(mcid, breakdown, params)
       .then((response) => {
         this.deviceData = response.data;
       })
       .catch((error) => {
-        this.deviceData = new Error(JSON.stringify(error));
+        this.deviceData = new Error('unable to load device data at this time');
+        this.$log.error('Error getting the device data', {
+          error: error
+        });
       });
   }
 
-  getPerformanceData() {
-    let breakdown = this.dataSettingsService.getSelectedBreakdownType();
-    let params = this.dataSettingsService.getSelectedRangeParams(apiDateFilter);
-    this.service.getPerformanceData(this.campaign.masterCampaignId, breakdown, params)
+  getPerformanceData(mcid, breakdown, params) {
+    this.service.getPerformanceData(mcid, breakdown, params)
       .then((response) => {
         this.performanceData = response.data;
       })
       .catch((error) => {
-        this.performanceData = new Error(JSON.stringify(error));
+        this.performanceData = new Error('unable to load trend/performance data at this time');
+        this.$log.error('Error getting the trend/performance data', {
+          error: error
+        });
       });
   }
 }
@@ -84,5 +83,6 @@ export default {
   controller: Controller,
   bindings: {
     campaignOverview: '<',
+    currentDataSettings: '<'
   }
 };

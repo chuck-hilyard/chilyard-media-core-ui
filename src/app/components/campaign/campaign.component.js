@@ -1,25 +1,61 @@
 import template from './campaign.html';
-
 class Controller {
-  constructor(CampaignSidebar, $stateParams) {
+  constructor(CampaignSidebar, $stateParams, $log, rlDateTime, DataSettings) {
     'ngInject';
+    this.$log = $log;
     this.header = {};
     this.sidebar = CampaignSidebar;
+    this.DataSettings = DataSettings;
+    this.DateTime = rlDateTime;
     this.mcid = $stateParams.mcid;
+    this.badId = false;
+    this.selectedSettings = null;
   }
 
   $onInit() {
     this.campaign = this.campaignOverview;
-    this.cycles  = this.campaignCycles;
+    if (this.campaignOverview.masterCampaignId + '' !== this.mcid) {
+      this.badId = true;
+      this.$log.error('Master campaign id ' + this.mcid + ' is invalid.', {
+        campaignOverview: this.campaignOverview
+      });
+    }
+    this.cycles = mapCycles(this.DateTime, this.campaignCycles);
+    this.campaignDataSettings = this.DataSettings.initialize(this.cycles, this.mcid);
     this.header = setHeader(this.campaignOverview);
   }
 
   handleSidebarToggle(status) {
     this.sidebar.collapsed = status;
   }
+
+  handleUpdateDataSettings(settings) {
+    this.DataSettings.selectRange(settings);
+    this.campaignDataSettings = this.DataSettings.getSelectedSettings();
+  }
 }
 
 // Private Functions
+function mapCycles(DateTime, cycles) {
+  return {
+    currentCycleIndex: cycles.currentCycleIndex,
+    cycles: cycles.cycles.map((cycle) => {
+      return angular.extend({}, cycle, {
+        dateRange: getDateRange(cycle),
+        startDateObj: DateTime.newDate(cycle.startDate),
+        endDateObj: DateTime.newDate(cycle.endDate),
+        cycleNumberStr: 'app.cycle ' + cycle.cycleNumber
+      });
+    })
+  };
+}
+
+function getDateRange(cycle) {
+  let range = cycle.startDate || '-/-/-';
+  range += ' to ';
+  range += cycle.endDate || '-/-/-';
+  return range;
+}
 
 function setHeader(overview) {
   return {

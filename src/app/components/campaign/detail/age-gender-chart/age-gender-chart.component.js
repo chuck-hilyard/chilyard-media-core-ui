@@ -76,15 +76,18 @@ class Controller {
     }
     let metric = this.metrics[index];
     let metricData = this.data.find((item) => item.metricName === metric.id);
+
     let total = 0;
-    if (metric.format === 'currency') {
-      total = this.$filter('currency')(metricData[gender].total);
-    }
-    else {
-      total = this.$filter('number')(metricData[gender].total);
+    if (typeof(metricData) !== 'undefined') {
+      if (metric.format === 'currency') {
+        total = this.$filter('currency')(metricData[gender].total);
+      }
+      else {
+        total = this.$filter('number')(metricData[gender].total);
+      }
     }
     return {
-      percentage: metricData[gender].percentage,
+      percentage: (metricData) ? metricData[gender].percentage : 0,
       total: total
     };
   }
@@ -100,13 +103,13 @@ class Controller {
     return [
       {
         label: `Male ${metric.label}`,
-        data: metricData.male.ageGroups.map((item) => item.total * modifier),
+        data: (metricData) ? metricData.male.ageGroups.map((item) => item.total * modifier) : [],
         backgroundColor: this.colors[index].male,
         borderColor: this.colors[index].male,
       },
       {
         label: `Female ${metric.label}`,
-        data: metricData.female.ageGroups.map((item) => item.total * modifier),
+        data: (metricData) ? metricData.female.ageGroups.map((item) => item.total * modifier) : [],
         backgroundColor: this.colors[index].female,
         borderColor: this.colors[index].female,
       }

@@ -153,7 +153,7 @@ class Controller {
 }
 
 function getShowFields() {
-  return ['cycleNumber', 'cycleId', 'dateRange'];
+  return ['cycleNumberStr', 'cycleId', 'dateRange'];
 }
 
 export default {

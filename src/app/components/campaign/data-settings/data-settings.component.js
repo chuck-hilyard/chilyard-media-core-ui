@@ -1,28 +1,23 @@
 import Template from './data-settings.html';
 
 class Controller {
-  constructor(DataSettings, $uibModal, rlDateTime) {
+  constructor($uibModal) {
     'ngInject';
-    this.service = DataSettings;
-    this.rlDateTime = rlDateTime;
     this.$uibModal = $uibModal;
-    this.dataSettings = DataSettings.getSelectedSettings();
   }
 
   $onInit() {
-    this.cycles = mapCycles(this.rlDateTime, this.campaignCycles);
+    this.dataSettings = this.currentDataSettings;
+    this.cycles = this.campaignCycles;
   }
 
   $onChanges(changes) {
-    if (changes.campaignCycles) {
-      this.cycles = mapCycles(this.rlDateTime, changes.campaignCycles.currentValue);
-      this.updateSettingsData(this.cycles);
+    if (changes.currentDataSettings) {
+      this.dataSettings = changes.currentDataSettings.currentValue;
     }
-  }
-
-  updateSettingsData(cycles) {
-    this.service.setRanges(cycles, this.mcid);
-    this.dataSettings = this.service.getSelectedSettings();
+    if (changes.campaignCycles) {
+      this.cycles = changes.campaignCycles.currentValue;
+    }
   }
 
   dataSettingsModal() {
@@ -31,15 +26,16 @@ class Controller {
       size: 'lg',
       resolve: {
         cycles: () => this.cycles,
-        settings: () => this.service.getSelectedSettings(),
-        ranges: () => this.service.ranges
+        settings: () => this.dataSettings.selectedSettings,
+        ranges: () => this.dataSettings.ranges
       }
     });
 
     instance.result
       .then((response) => {
-        this.service.selectRange(response.settings);
-        this.dataSettings = this.service.getSelectedSettings();
+        this.onUpdateDataSettings({
+          settings: response.settings
+        });
       })
       .catch(() => {
         // Prevent unhandled rejection error
@@ -48,32 +44,12 @@ class Controller {
   }
 }
 
-function mapCycles(DateTime, cycles) {
-  return {
-    currentCycleIndex: cycles.currentCycleIndex,
-    cycles: cycles.cycles.map((cycle) => {
-      return angular.extend({}, cycle, {
-        dateRange: getDateRange(cycle),
-        startDateObj: DateTime.newDate(cycle.startDate),
-        endDateObj: DateTime.newDate(cycle.endDate),
-        cycleNumberStr: 'app.cycle ' + cycle.cycleNumber
-      });
-    })
-  };
-}
-
-function getDateRange(cycle) {
-  let range = cycle.startDate || '-/-/-';
-  range += ' to ';
-  range += cycle.endDate || '-/-/-';
-  return range;
-}
-
 export default {
   template: Template,
   controller: Controller,
   bindings: {
+    currentDataSettings: '<',
     campaignCycles: '<',
-    mcid: '<'
+    onUpdateDataSettings: '&'
   }
 };

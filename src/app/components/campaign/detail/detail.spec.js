@@ -1,44 +1,35 @@
 // Campaign level mocks
 import mockCampaignOverview from '../../../../../test/mocks/components/campaign/overview/overview';
-import mockCampaignCycles from '../../../../../test/mocks/components/campaign/cycles/cycles';
+import mockDataSettings from '../mock-data/mock-data-settings';
 import mockRlConfig from '../mock-data/rlConfig.json';
 
 describe('components.campaign.detail', () => {
-  let $ctrl, $scope, service;
-
-  let dataService = {
-    selectedSettings: {
-      breakdownType: 'cycles'
-    },
-    getSelectedBreakdownType: angular.noop,
-    getSelectedRangeParams: angular.noop
-  };
+  let $ctrl, service;
 
   let mockChange = {
     campaignOverview: {
       currentValue: mockCampaignOverview
+    },
+    currentDataSettings: {
+      currentValue: mockDataSettings
     }
   };
 
   beforeEach(() => {
     angular.mock.module('campaign.detail', ($provide) => {
       $provide.value('CampaignSidebar', {});
-      $provide.value('DataSettings', dataService);
       $provide.value('rlConfig', mockRlConfig);
     });
 
     let bindings = {
-      campaignCycles: mockCampaignCycles,
-      campaignOverview: mockCampaignOverview
+      campaignOverview: mockCampaignOverview,
+      currentDataSettings: mockDataSettings
     };
 
     angular.mock.inject(($injector) => {
       let $componentController = $injector.get('$componentController');
-      $scope = $injector.get('$rootScope').$new();
       service = $injector.get('CampaignDetailService');
-      $ctrl = $componentController('campaign.detail', {
-        $scope: $scope
-      }, bindings);
+      $ctrl = $componentController('campaign.detail', {}, bindings);
     });
     spyOn(service, 'getPerformanceData').and.callThrough();
     spyOn(service, 'getAgeGenderData').and.callThrough();
@@ -49,33 +40,25 @@ describe('components.campaign.detail', () => {
     expect($ctrl.ageGenderData).toBeNull();
     expect($ctrl.deviceData).toBeNull();
     expect($ctrl.performanceData).toBeNull();
-    expect($ctrl.dataSettingsService).toEqual(dataService);
     expect($ctrl.service).toEqual(service);
   });
 
-  it('$onChanges', () => {
-    let breakdown = 'cycles';
-    let params = {start: 1, end: 9};
-    spyOn(dataService, 'getSelectedBreakdownType').and.callFake(() => breakdown);
-    spyOn(dataService, 'getSelectedRangeParams').and.callFake(() => params);
-    $ctrl.$onChanges(mockChange);
-    expect($ctrl.campaign).toEqual(mockCampaignOverview);
-    expect(service.getPerformanceData).toHaveBeenCalledWith(mockCampaignOverview.masterCampaignId, breakdown, params);
-    expect(service.getPerformanceData).toHaveBeenCalledWith(mockCampaignOverview.masterCampaignId, breakdown, params);
-    expect(service.getPerformanceData).toHaveBeenCalledWith(mockCampaignOverview.masterCampaignId, breakdown, params);
-  });
-
-  it('$watch', () => {
-    let breakdown = 'days';
-    let params = {start: '2017-03-01', end: '2017-05-01'};
-    spyOn(dataService, 'getSelectedBreakdownType').and.callFake(() => breakdown);
-    spyOn(dataService, 'getSelectedRangeParams').and.callFake(() => params);
-    $ctrl.campaign = mockCampaignOverview;
-    dataService.selectedSettings.breakdownType = 'days';
-    $scope.$digest();
-    expect(service.getPerformanceData).toHaveBeenCalledWith(mockCampaignOverview.masterCampaignId, breakdown, params);
-    expect(service.getAgeGenderData).toHaveBeenCalledWith(mockCampaignOverview.masterCampaignId, breakdown, params);
-    expect(service.getDeviceData).toHaveBeenCalledWith(mockCampaignOverview.masterCampaignId, breakdown, params);
+  describe('$onChanges', () => {
+    describe('given changes object', () => {
+      it('when overview and data settings change, then it should load performance, device and age/gender data', () => {
+        $ctrl.$onChanges(mockChange);
+        expect($ctrl.campaign).toEqual(mockCampaignOverview);
+        expect(service.getPerformanceData).toHaveBeenCalledWith(mockCampaignOverview.masterCampaignId, mockDataSettings.breakdown, mockDataSettings.apiParams);
+        expect(service.getAgeGenderData).toHaveBeenCalledWith(mockCampaignOverview.masterCampaignId, mockDataSettings.breakdown, mockDataSettings.apiParams);
+        expect(service.getDeviceData).toHaveBeenCalledWith(mockCampaignOverview.masterCampaignId, mockDataSettings.breakdown, mockDataSettings.apiParams);
+      });
+      it('when neither overview and data settings have changed, then it should not load performance, device or age/gender data', () => {
+        $ctrl.$onChanges({somethingElse: {currentValue: 5}});
+        expect(service.getPerformanceData).not.toHaveBeenCalled();
+        expect(service.getAgeGenderData).not.toHaveBeenCalled();
+        expect(service.getDeviceData).not.toHaveBeenCalled();
+      });
+    });
   });
 
 });

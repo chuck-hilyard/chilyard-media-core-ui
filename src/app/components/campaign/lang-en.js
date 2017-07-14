@@ -6,7 +6,9 @@ export default Object.assign(
     campaign: {
       title: 'Campaigns',
       detail: 'Detail',
-      creatives: 'Creatives'
+      creatives: 'Creatives',
+      errorTitle: 'Campaign:',
+      errorMessage: 'Could not retrieve information for this master campaign.'
     }
   },
   details,

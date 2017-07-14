@@ -13,5 +13,13 @@ export default angular
       .when('GET', /\/campaigns\/\d+\/performance-stats\/cycles\?end=\d+\&start=\d+$/)
       .respond(data);
 
+    $httpBackend
+      .when('GET', /\/campaigns\/\d+\/performance-stats\/months\?end=\d{4}-\d{2}\&start=\d{4}-\d{2}$/)
+      .respond(data);
+
+    $httpBackend
+      .when('GET', /\/campaigns\/\d+\/performance-stats\/days\?end=\d{4}-\d{2}-\d{2}\&start=\d{4}-\d{2}-\d{2}$/)
+      .respond(data);
+
   })
   .name;

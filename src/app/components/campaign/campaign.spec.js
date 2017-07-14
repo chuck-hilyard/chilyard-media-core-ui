@@ -2,23 +2,29 @@ import mockCampaignOverview from './mock-data/campaign-overview';
 import mockCampaignCycles from '../../../../test/mocks/components/campaign/cycles/cycles';
 
 describe('components.campaign', () => {
-  let mockCampaignSettings = { breakdownType: 'cycles', start: 1, end: 10 };
-
+  let mockDateTime = {
+    newDate: angular.noop
+  };
+  let mockDataSettings = {
+    initialize: angular.noop
+  };
   let $ctrl;
 
   beforeEach(() => {
 
-    angular.mock.module('campaign', () => {});
+    angular.mock.module('campaign', ($provide) => {
+      $provide.value('DataSettings', mockDataSettings);
+      $provide.value('rlDateTime', mockDateTime);
+    });
 
     let bindings = {
       campaignCycles: mockCampaignCycles,
       campaignOverview: mockCampaignOverview,
-      campaignSettings: mockCampaignSettings
     };
 
     angular.mock.inject(($injector) => {
       let stateParams = {
-        mcid: 123456
+        mcid: 1842601
       };
       let $componentController = $injector.get('$componentController');
       $ctrl = $componentController('campaign', {

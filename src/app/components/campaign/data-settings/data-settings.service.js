@@ -6,6 +6,11 @@ const dateFilter = {
   months: 'MMM yyyy'
 };
 
+const apiDateFilter = {
+  days: 'yyyy-MM-dd',
+  months: 'yyyy-MM'
+};
+
 const sessionKey = 'campaign:data-settings';
 
 export default class DataSettings {
@@ -25,6 +30,35 @@ export default class DataSettings {
     this.dateFilter = dateFilter;
 
     this.selectedSettings = null;
+  }
+
+  initialize(cycles, mcid) {
+    this.mcid = mcid;
+    this.rangeLimits = this.getDateLimits(cycles);
+    this.ranges.cycles = getCycleRanges(cycles);
+    this.ranges.months = getMonthRanges(this.DateTime, this.rangeLimits.minDate, this.rangeLimits.maxDate);
+    this.ranges.days = getDayRanges(this.DateTime, this.rangeLimits.minDate, this.rangeLimits.maxDate, cycles);
+
+    let savedSettings = this.getSessionSettings();
+    if (validSettings(savedSettings)) {
+      this.selectedSettings = savedSettings;
+    } else {
+      this.selectedSettings = this.ranges.cycles[0];
+      this.saveSessionSettings();
+    }
+
+    let settings = {
+      selectedSettings: this.selectedSettings,
+      mcid: this.mcid,
+      ranges: this.ranges,
+      rangeLimits: this.rangeLimits,
+      dateFilter: this.dateFilter,
+      breakdown: this.getSelectedBreakdownType(),
+      apiParams: this.getSelectedRangeParams()
+    };
+
+    return settings;
+
   }
 
   showField(settings, fieldName) {
@@ -48,25 +82,11 @@ export default class DataSettings {
   }
 
   saveSessionSettings() {
-    this.Session.save(sessionKey, {
-      mcid: this.mcid,
-      settings: this.selectedSettings
-    });
-  }
-
-  setRanges(cycles, mcid) {
-    this.mcid = mcid;
-    this.rangeLimits = this.getDateLimits(cycles);
-    this.ranges.cycles = getCycleRanges(cycles);
-    this.ranges.months = getMonthRanges(this.DateTime, this.rangeLimits.minDate, this.rangeLimits.maxDate);
-    this.ranges.days = getDayRanges(this.DateTime, this.rangeLimits.minDate, this.rangeLimits.maxDate, cycles);
-
-    let savedSettings = this.getSessionSettings();
-    if (savedSettings) {
-      this.selectedSettings = savedSettings;
-    } else {
-      this.selectedSettings = this.ranges.cycles[0];
-      this.saveSessionSettings();
+    if (validSettings(this.selectedSettings)) {
+      this.Session.save(sessionKey, {
+        mcid: this.mcid,
+        settings: this.selectedSettings
+      });
     }
   }
 
@@ -75,7 +95,16 @@ export default class DataSettings {
   }
 
   getSelectedSettings() {
-    return angular.copy(this.selectedSettings);
+    let settings = {
+      selectedSettings: this.selectedSettings,
+      mcid: this.mcid,
+      ranges: this.ranges,
+      rangeLimits: this.rangeLimits,
+      dateFilter: this.dateFilter,
+      breakdown: this.getSelectedBreakdownType(),
+      apiParams: this.getSelectedRangeParams(this.dateFilter.apiDateFilter)
+    };
+    return settings;
   }
 
   getSelectedBreakdownType() {
@@ -86,7 +115,8 @@ export default class DataSettings {
   }
 
   getSelectedRangeParams(dateFilters) {
-    let dateFilter = dateFilters[this.selectedSettings.breakdownType];
+    let filters = dateFilters || apiDateFilter;
+    let dateFilter = filters[this.selectedSettings.breakdownType];
     let rangeParams = {};
     if (this.selectedSettings) {
       if (this.selectedSettings.breakdownType === cyclesType) {
@@ -120,6 +150,14 @@ export default class DataSettings {
 
 ////////////////////////////
 // Private Functions
+function validSettings(settings) {
+  if (settings && typeof(settings) === 'object') {
+    if (settings.breakdownType && settings.name && settings.start && settings.end) {
+      return true;
+    }
+  }
+  return false;
+}
 
 function getMaxDate(DateTime, cycles) {
   let maxDate = DateTime.dayOnly(new Date());

@@ -152,7 +152,9 @@ class Controller {
       },
       ticks: {
         beginAtZero: true,
-        maxTicksLimit: 3
+        maxTicksLimit: 3,
+        suggestedMin: (1 * modifier),
+        suggestedMax: 0
       }
     };
     if (metric.format === 'currency') {

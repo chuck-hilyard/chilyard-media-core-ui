@@ -93,6 +93,9 @@ class Controller {
 
   handleSort(state) {
     this.sortState = state;
+    if (this.breakdownType === 'cycles') {
+      this.sortState.key = 'cycleNumber';
+    }
     this.data = this.$filter('orderBy')(this.data, `-${this.sortState.key}`, this.sortState.desc);
   }
 

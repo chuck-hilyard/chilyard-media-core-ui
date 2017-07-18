@@ -1,6 +1,7 @@
 import ngMockE2E from 'angular-mocks/ngMockE2E';
-import data from './performance';
-
+import cycleData from './cycles';
+import monthsData from './months';
+import daysData from './days';
 
 export default angular
   .module('mocks.campaign.performance', [
@@ -11,15 +12,15 @@ export default angular
 
     $httpBackend
       .when('GET', /\/campaigns\/\d+\/performance-stats\/cycles\?end=\d+\&start=\d+$/)
-      .respond(data);
+      .respond(cycleData);
 
     $httpBackend
       .when('GET', /\/campaigns\/\d+\/performance-stats\/months\?end=\d{4}-\d{2}\&start=\d{4}-\d{2}$/)
-      .respond(data);
+      .respond(monthsData );
 
     $httpBackend
       .when('GET', /\/campaigns\/\d+\/performance-stats\/days\?end=\d{4}-\d{2}-\d{2}\&start=\d{4}-\d{2}-\d{2}$/)
-      .respond(data);
+      .respond(daysData);
 
   })
   .name;

@@ -1,4 +1,4 @@
-describe('Home', () => {
+xdescribe('Home', () => {
 
   beforeEach(() => {
     browser.get('index.html');

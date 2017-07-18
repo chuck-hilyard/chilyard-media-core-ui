@@ -4,9 +4,12 @@ exports.config = {
     './scenarios/**/*.js'
   ],
   capabilities: {
-    'browserName': 'chrome'
+    'browserName': 'chrome',
+    'chromeOptions': {
+        args: ['--window-size=1280,1024']
+    }
   },
-  baseUrl: 'http://localhost:8080/',
+  baseUrl: 'http://localhost:4000/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     defaultTimeoutInterval: 30000

@@ -16,8 +16,7 @@ class Controller {
         female: rlColors.charts[6].shades[0]
       }
     ];
-    this.chart1 = {};
-    this.chart2 = {};
+    this.charts = [];
     this.labels = ['13-17', '18-24', '24-34', '35-44', '45-54', '55-64', '65+'];
     this.metricOptions = metricsConfig;
     this.metrics = [
@@ -99,6 +98,7 @@ class Controller {
   setDatasets(data, index) {
     let metric = this.metrics[index];
     let metricData = data.find((item) => item.metricName === metric.id);
+     // Chart 1 data should have negative values to force right to left alignment
     let modifier = index === 0 ? -1 : 1;
     return [
       {
@@ -191,7 +191,6 @@ class Controller {
   }
 
 }
-
 export default {
   template: template,
   controller: Controller,

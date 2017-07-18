@@ -1,0 +1,42 @@
+[
+  {
+    "datasets": [
+      {
+        "label": "Male Impressions",
+        "data": [
+          -1000,
+          -1000,
+          -1000
+        ]
+      },
+      {
+        "label": "Female Impressions",
+        "data": [
+          -1000,
+          -1000,
+          -1000
+        ]
+      }
+    ]
+  },
+  {
+    "datasets": [
+      {
+        "label": "Male Page Engagements",
+        "data": [
+          1000,
+          1000,
+          1000
+        ]
+      },
+      {
+        "label": "Female Page Engagements",
+        "data": [
+          1000,
+          1000,
+          1000
+        ]
+      }
+    ]
+  }
+]

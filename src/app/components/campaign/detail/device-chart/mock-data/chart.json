@@ -1,0 +1,44 @@
+{
+  "data": [
+    50,
+    30,
+    15,
+    5
+  ],
+  "labels": [
+    "Mobile",
+    "Desktop",
+    "Tablet",
+    "Other"
+  ],
+  "center": {
+    "line1": "4,000",
+    "line1Padding": 50,
+    "line2": "Impressions",
+    "line2Padding": 35,
+    "fontFamily": "'Roboto', sans-serif",
+    "fontColor": "#333"
+  },
+  "metricData": [
+    {
+      "type": "Mobile",
+      "value": 10000,
+      "percentage": 50
+    },
+    {
+      "type": "Desktop",
+      "value": 10000,
+      "percentage": 30
+    },
+    {
+      "type": "Tablet",
+      "value": 10000,
+      "percentage": 15
+    },
+    {
+      "type": "Other",
+      "value": 10000,
+      "percentage": 5
+    }
+  ]
+}

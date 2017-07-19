@@ -11,14 +11,14 @@ export default angular
 
     $httpBackend
       .when('GET', /\/campaigns\/\d+\/age-gender-stats-summary\/cycles\?end=\d+\&start=\d+$/)
-      .respond(data);
+      .respond(200, data);
 
       $httpBackend
         .when('GET', /\/campaigns\/\d+\/age-gender-stats-summary\/months\?end=\d{4}-\d{2}\&start=\d{4}-\d{2}$/)
-        .respond(data);
+        .respond(200, data);
 
       $httpBackend
         .when('GET', /\/campaigns\/\d+\/age-gender-stats-summary\/days\?end=\d{4}-\d{2}-\d{2}\&start=\d{4}-\d{2}-\d{2}$/)
-        .respond(data);
+        .respond(500);
   })
   .name;

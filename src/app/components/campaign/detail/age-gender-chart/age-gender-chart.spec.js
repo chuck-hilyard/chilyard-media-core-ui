@@ -56,10 +56,24 @@ describe('campaign.detail.age-gender-chart', () => {
     expect(filtered).toEqual(expected);
   });
 
-  it('updates chart', () => {
-    spyOn($ctrl, 'build');
-    $ctrl.updateChart();
-    expect($ctrl.build).toHaveBeenCalledWith({});
+  describe('change chart metric', () => {
+    it('updates chart', () => {
+      spyOn($ctrl, 'build');
+      $ctrl.updateChart();
+      expect($ctrl.build).toHaveBeenCalledWith({});
+    });
+  });
+
+  describe('data is error', () => {
+    it('shows error message', () => {
+      spyOn($ctrl, 'build');
+      $ctrl.$onChanges({
+        data: {
+          currentValue: new Error('this is an error')
+        }
+      });
+      expect($ctrl.build).not.toHaveBeenCalled();
+    });
   });
 
 });

@@ -1,4 +1,4 @@
-import mockdata from '../../../../../../test/mocks/components/campaign/performance/performance';
+import mockdata from '../../../../../../test/mocks/components/campaign/performance/cycles';
 import mockChart from './mock-data/chart';
 import metricsConfig from './configs/metrics';
 
@@ -31,7 +31,6 @@ describe('campaign.detail.trend-chart', () => {
     expect($ctrl.metrics).toEqual(expectedMetrics);
   });
 
-
   it('builds chart json object', () => {
     $ctrl.build(mockdata);
     expect($ctrl.chart.type).toBe('bar');
@@ -55,10 +54,24 @@ describe('campaign.detail.trend-chart', () => {
     expect(filtered).toEqual(expected);
   });
 
-  it('updates chart', () => {
-    spyOn($ctrl, 'build');
-    $ctrl.updateChart();
-    expect($ctrl.build).toHaveBeenCalledWith({});
+  describe('change chart metric', () => {
+    it('updates chart', () => {
+      spyOn($ctrl, 'build');
+      $ctrl.updateChart();
+      expect($ctrl.build).toHaveBeenCalledWith({});
+    });
+  });
+
+  describe('data is error', () => {
+    it('shows error message', () => {
+      spyOn($ctrl, 'build');
+      $ctrl.$onChanges({
+        data: {
+          currentValue: new Error('this is an error')
+        }
+      });
+      expect($ctrl.build).not.toHaveBeenCalled();
+    });
   });
 
 });

@@ -1,4 +1,4 @@
-import mockdata from '../../../../../../test/mocks/components/campaign/performance/performance';
+import mockdata from '../../../../../../test/mocks/components/campaign/performance/cycles';
 import tooltips from './mock-data/tooltips';
 import columns from './mock-data/columns';
 
@@ -37,8 +37,25 @@ describe('campaign.detail.performance', () => {
   it('constructs', () => {
     expect($ctrl.columns).toEqual([]);
     expect($ctrl.sortState).toEqual({});
+    expect($ctrl.breakdownLabel).toBe('');
     angular.forEach($ctrl.tooltips, (value, key) => {
       expect($sce.getTrustedHtml(value)).toBe(tooltips[key]);
+    });
+  });
+
+  it('$onInit', () => {
+    $ctrl.$onInit();
+    expect($ctrl.breakdownLabel).toBe('campaignDetails.cycles');
+  });
+
+  describe('user changes breakdown type', () => {
+    it('updates label', () => {
+      $ctrl.$onChanges({
+        breakdownType: {
+          currentValue: 'months'
+        }
+      });
+      expect($ctrl.breakdownLabel).toBe('campaignDetails.monthly');
     });
   });
 
@@ -81,6 +98,18 @@ describe('campaign.detail.performance', () => {
         expect(item.cycleNumber).toBe(expected);
         expected++;
       });
+    });
+  });
+
+  describe('data is error', () => {
+    it('shows error message', () => {
+      spyOn($ctrl, 'configureTable');
+      $ctrl.$onChanges({
+        data: {
+          currentValue: new Error('this is an error')
+        }
+      });
+      expect($ctrl.configureTable).not.toHaveBeenCalled();
     });
   });
 

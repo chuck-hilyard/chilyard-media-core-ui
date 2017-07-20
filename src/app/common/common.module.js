@@ -1,5 +1,6 @@
 import sso from './rl-sso/sso.module';
 import config from './rl-config/rl-config.module';
+import datepicker from './rl-datepicker/datepicker.module';
 import dateTime from './rl-date-time/date-time.module';
 import navbar from './rl-navbar/navbar.module';
 import sidebar from './rl-sidebar/sidebar.module';
@@ -19,6 +20,7 @@ export default angular
     sso,
     config,
     dateTime,
+    datepicker,
     navbar,
     sidebar,
     footer,

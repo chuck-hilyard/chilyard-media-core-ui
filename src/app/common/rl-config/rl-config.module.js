@@ -9,6 +9,7 @@ class service {
     this.languages = LANGUAGES;
     this.gatewayUrl = GATEWAY_URL;
     this.featureFlags = FEATURE_FLAGS;
+    this.appName = 'Media Facebook UI';
   }
 
 }

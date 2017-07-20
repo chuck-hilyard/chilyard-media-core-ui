@@ -1,5 +1,6 @@
 import ngMockE2E from 'angular-mocks/ngMockE2E';
 import data from './cycles';
+import shortData from './one-cycle';
 
 
 export default angular

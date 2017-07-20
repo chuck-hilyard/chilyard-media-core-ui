@@ -1,0 +1,11 @@
+{
+  "currentCycleIndex" : null,
+  "cycles" : [ {
+    "cycleId" : 2292510,
+    "cycleNumber" : 1,
+    "startDate" : "2015-07-01",
+    "endDate" : "2015-07-31",
+    "active" : false,
+    "isActive" : false
+  } ]
+}

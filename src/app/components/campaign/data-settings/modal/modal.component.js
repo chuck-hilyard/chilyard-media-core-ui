@@ -6,80 +6,38 @@ const tabNumber = {
   days: 2
 };
 
-
 class Controller {
-  constructor($scope, $log, DataSettings, rlDateTime) {
+  constructor(ModalService) {
     'ngInject';
-    this.$log = $log;
-    this.rlDateTime = rlDateTime;
-    this.DataSettings = DataSettings;
-    this.monthsEnabled = true;
-    this.daysEnabled = true;
+    this.service = ModalService;
   }
 
   $onInit() {
     this.workingSettings = angular.copy(this.resolve.settings);
-    this.activeTab = tabNumber[this.workingSettings.breakdownType];
     this.ranges = angular.copy(this.resolve.ranges);
-    this.cycles = angular.copy(this.resolve.cycles);
-    this.dateLimits = this.DataSettings.getDateLimits(this.cycles);
-    this.options = this.getOptions(this.workingSettings.breakdownType);
+    this.activeTab = tabNumber[this.workingSettings.breakdownType];
+    this.service.initialize(this.resolve);
+    this.options = this.service.getOptions(this.workingSettings);
   }
 
-  getOptions(mode) {
-    if (mode === 'cycles') {
-      return this.getCycleSelectOptions();
+  onStartMonthClick(active) {
+    if (!this.options.start.minDate || active >= this.options.start.minDate) {
+      this.workingSettings.start = active;
+    } else {
+      this.workingSettings.start = this.options.start.minDate;
     }
-    return this.getDatepickerOptions(mode);
+    this.onWorkingSettingsChange();
   }
 
-  getCycleSelectOptions() {
-    let cycles = this.cycles.cycles;
-    let options = {
-      start: {
-        selected: this.workingSettings.start,
-        list: cycles.filter((cycle) => {
-          return cycle.cycleNumber <= this.workingSettings.end.cycleNumber;
-        }),
-        showFields: getShowFields()
-      },
-      end: {
-        selected: this.workingSettings.end,
-        list: cycles.filter((cycle) => {
-          return cycle.cycleNumber >= this.workingSettings.start.cycleNumber;
-        }),
-        showFields: getShowFields()
-      }
-    };
-    return options;
-  }
-
-  getDatepickerOptions(breakdown) {
-    let dateLimits = this.dateLimits;
-    let options = {
-      start: {
-        maxDate: this.workingSettings.end,
-        showWeeks: false
-      },
-      end: {
-        minDate: this.workingSettings.start,
-        maxDate: dateLimits.maxDate,
-        showWeeks: false
-      }
-    };
-    if (dateLimits.minDate) {
-      options.start.minDate = dateLimits.minDate;
+  onEndMonthClick(active) {
+    this.workingSettings.end = active;
+    if (active < this.options.end.minDate) {
+      this.workingSettings.end = this.options.end.minDate;
     }
-    if (breakdown === 'months') {
-      options.start.minMode = 'month';
-      options.end.minMode = 'month';
+    if (active > this.options.end.maxDate) {
+      this.workingSettings.end = this.options.end.maxDate;
     }
-    if (breakdown === 'days') {
-      options.start.customClass = (data) => this.customClass(data);
-      options.end.customClass = (data) => this.customClass(data);
-    }
-
-    return options;
+    this.onWorkingSettingsChange();
   }
 
   cancel() {
@@ -88,30 +46,9 @@ class Controller {
 
   selectTab(tabName) {
     if (this.workingSettings.breakdownType !== tabName) {
-      this.workingSettings = this.DataSettings.getDefault(tabName);
-      this.options = this.getOptions(this.workingSettings.breakdownType);
+      this.workingSettings = this.service.getDefaultSettings(tabName);
+      this.options = this.service.getOptions(this.workingSettings);
     }
-  }
-
-  customClass(data) {
-    let cycles = this.cycles.cycles;
-    if (angular.isDefined(cycles) && data.mode === 'day') {
-      let match = cycles
-        .find((cycle) => {
-          let startMatch = this.rlDateTime.sameDay(data.date, cycle.startDateObj);
-          let endMatch = this.rlDateTime.sameDay(data.date, cycle.endDateObj);
-          return startMatch || endMatch;
-        });
-      if (angular.isDefined(match)) {
-        return 'bookend';
-      }
-    }
-    return '';
-  }
-
-  getRangeName() {
-    let match = this.DataSettings.findRange(this.ranges, this.workingSettings);
-    this.workingSettings.name = angular.isDefined(match) ? match.name : null;
   }
 
   setRange(workingSettings) {
@@ -120,15 +57,8 @@ class Controller {
   }
 
   onWorkingSettingsChange() {
-    let breakdownType = this.workingSettings.breakdownType;
-    this.getRangeName();
-    if (breakdownType === 'days' || breakdownType === 'months') {
-      this.options.start.maxDate = this.workingSettings.end;
-      this.options.end.minDate = this.workingSettings.start;
-    }
-    if (breakdownType === 'cycles') {
-      this.options = this.getCycleSelectOptions();
-    }
+    this.service.setRangeName(this.workingSettings);
+    this.options = this.service.updateOptions(this.workingSettings);
     this.workingSettings = angular.copy(this.workingSettings);
   }
 
@@ -150,10 +80,6 @@ class Controller {
     });
   }
 
-}
-
-function getShowFields() {
-  return ['cycleNumberStr', 'cycleId', 'dateRange'];
 }
 
 export default {

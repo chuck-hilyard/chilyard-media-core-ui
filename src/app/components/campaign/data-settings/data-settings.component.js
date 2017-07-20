@@ -6,11 +6,6 @@ class Controller {
     this.$uibModal = $uibModal;
   }
 
-  $onInit() {
-    this.dataSettings = this.currentDataSettings;
-    this.cycles = this.campaignCycles;
-  }
-
   $onChanges(changes) {
     if (changes.currentDataSettings) {
       this.dataSettings = changes.currentDataSettings.currentValue;

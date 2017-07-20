@@ -1,4 +1,4 @@
-<div class="rl-date-range-modal">
+<div class="rl-date-settings-modal">
   <div class="modal-header">
     <div class="row">
       <div class="col-xs-12" translate>
@@ -45,7 +45,7 @@
               </div>
             </div>
           </uib-tab>
-          <uib-tab index="1" select="$ctrl.selectTab('months')" heading="{{'dateRange.months' | translate}}" disable="!$ctrl.monthsEnabled">
+          <uib-tab index="1" select="$ctrl.selectTab('months')" heading="{{'dateRange.months' | translate}}">
             <div class="row" ng-if="$ctrl.workingSettings.breakdownType=='months'">
               <div class="col-sm-3 col-list-ranges">
                 <ul class="list-unstyled">
@@ -57,7 +57,7 @@
               <div class="col-sm-4">
                 <div class="top-label" translate>app.start</div>
                 <div class="range-tile">
-                  <div class="tile-title date-title">{{$ctrl.workingSettings.start | date: 'MMM yyyy'}}</div>
+                  <div class="tile-title date-title">{{$ctrl.workingSettings.start | date: $ctrl.DataSettings.dateFilter.months}}</div>
                 </div>
                 <div class="select-range">
                   <div class="select-label" translate>campaignDataSettings.selectStart</div>
@@ -67,7 +67,7 @@
               <div class="col-sm-4">
                 <div class="top-label" translate>app.end</div>
                 <div class="range-tile">
-                  <div class="tile-title date-title">{{$ctrl.workingSettings.end | date: 'MMM yyyy'}}</div>
+                  <div class="tile-title date-title">{{$ctrl.workingSettings.end | date: $ctrl.DataSettings.dateFilter.months}}</div>
                 </div>
                 <div class="select-range">
                   <div class="select-label" translate>campaignDataSettings.selectEnd</div>
@@ -76,7 +76,7 @@
               </div>
             </div>
           </uib-tab>
-          <uib-tab index="2" select="$ctrl.selectTab('days')" heading="{{'dateRange.days' | translate}}" disable="!$ctrl.daysEnabled">
+          <uib-tab index="2" select="$ctrl.selectTab('days')" heading="{{'dateRange.days' | translate}}">
             <div class="row" ng-if="$ctrl.workingSettings.breakdownType=='days'">
               <div class="col-sm-3 col-list-ranges">
                 <ul class="list-unstyled">
@@ -88,22 +88,22 @@
               <div class="col-sm-4">
                 <div class="top-label" translate>app.start</div>
                 <div class="range-tile">
-                  <div class="tile-title date-title">{{$ctrl.workingSettings.start | date: $ctrl.service.dateFilter.days}}</div>
+                  <div class="tile-title date-title">{{$ctrl.workingSettings.start | date: $ctrl.DataSettings.dateFilter.days}}</div>
                 </div>
                 <div class="select-range">
                   <div class="select-label" translate>campaignDataSettings.selectStart</div>
-                  <div class="datepicker" uib-datepicker ng-model="$ctrl.workingSettings.start" ng-change="$ctrl.onWorkingSettingsChange()" datepicker-options="$ctrl.options.start"></div>
+                  <div class="datepicker" uib-datepicker ng-model="$ctrl.workingSettings.start" ng-change="$ctrl.onWorkingSettingsChange()" on-month-click="$ctrl.onStartMonthClick(active)" datepicker-options="$ctrl.options.start"></div>
                   <div><em ng-if="$ctrl.cycles"><span class="bookend"><span>&nbsp;</span></span> <span translate>dateRange.calendarNotation</span></em></div>
                 </div>
               </div>
               <div class="col-sm-4">
                 <div class="top-label" translate>app.end</div>
                 <div class="range-tile">
-                  <div class="tile-title date-title">{{$ctrl.workingSettings.end | date: $ctrl.service.dateFilter.days}}</div>
+                  <div class="tile-title date-title">{{$ctrl.workingSettings.end | date: $ctrl.DataSettings.dateFilter.days}}</div>
                 </div>
                 <div class="select-range">
                   <div class="select-label" translate>campaignDataSettings.selectEnd</div>
-                  <div class="datepicker" uib-datepicker ng-model="$ctrl.workingSettings.end" ng-change="$ctrl.onWorkingSettingsChange()" datepicker-options="$ctrl.options.end"></div>
+                  <div class="datepicker" uib-datepicker ng-model="$ctrl.workingSettings.end" ng-change="$ctrl.onWorkingSettingsChange()" on-month-click="$ctrl.onEndMonthClick(active)" datepicker-options="$ctrl.options.end"></div>
                 </div>
               </div>
             </div>

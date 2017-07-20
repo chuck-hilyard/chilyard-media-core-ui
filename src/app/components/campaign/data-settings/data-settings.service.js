@@ -11,7 +11,7 @@ const apiDateFilter = {
   months: 'yyyy-MM'
 };
 
-const sessionKey = 'campaign:data-settings';
+const sessionKey = 'campaign.data-settings';
 
 export default class DataSettings {
 
@@ -41,7 +41,7 @@ export default class DataSettings {
     this.ranges.days = getDayRanges(this.DateTime, this.rangeLimits.minDate, this.rangeLimits.maxDate, cycles);
 
     let savedSettings = this.getSessionSettings();
-    if (validSettings(savedSettings)) {
+    if (validSettings(savedSettings, this.$log)) {
       this.selectedSettings = savedSettings;
     } else {
       this.selectedSettings = this.ranges.cycles[0];
@@ -77,13 +77,29 @@ export default class DataSettings {
   getSessionSettings() {
     let savedSettings = this.Session.restore(sessionKey);
     if (savedSettings && savedSettings.mcid && savedSettings.mcid === this.mcid && savedSettings.settings) {
-      return savedSettings.settings;
+      return this.recoverDateObjects(savedSettings.settings);
     }
     return null;
   }
 
+  recoverDateObjects(settings) {
+    let convertedSettings = angular.copy(settings);
+    // JSON.stringify saves dates as utc string so new Date makes them back into the proper date object
+    if (convertedSettings.breakdownType !== 'cycles') {
+      convertedSettings.start = new Date(settings.start);
+      convertedSettings.end = new Date(settings.end);
+    } else {
+      // Just rederive these dates from their input strings (handles null better)
+      convertedSettings.start.startDateObj = this.DateTime.newDate(settings.start.startDate);
+      convertedSettings.start.endDateObj = this.DateTime.newDate(settings.start.endDate);
+      convertedSettings.end.startDateObj = this.DateTime.newDate(settings.end.startDate);
+      convertedSettings.end.endDateObj = this.DateTime.newDate(settings.end.endDate);
+    }
+    return convertedSettings;
+  }
+
   saveSessionSettings() {
-    if (validSettings(this.selectedSettings)) {
+    if (validSettings(this.selectedSettings, this.$log)) {
       this.Session.save(sessionKey, {
         mcid: this.mcid,
         settings: this.selectedSettings
@@ -155,19 +171,25 @@ export default class DataSettings {
 
 ////////////////////////////
 // Private Functions
-function validSettings(settings) {
+function validSettings(settings, $log) {
   if (settings && typeof(settings) === 'object') {
-    if (settings.breakdownType && settings.name && settings.start && settings.end) {
+    if (settings.hasOwnProperty('breakdownType') &&
+      settings.hasOwnProperty('name') &&
+      settings.hasOwnProperty('start') &&
+      settings.hasOwnProperty('end')) {
       return true;
     }
   }
+  $log.warn('invalidSettings', {
+    settings: settings
+  });
   return false;
 }
 
 function getMaxDate(DateTime, cycles) {
   let maxDate = DateTime.dayOnly(new Date());
   if (cycles.cycles[0].endDate) {
-    let endDate = new Date(cycles.cycles[0].endDate);
+    let endDate = DateTime.newDate(cycles.cycles[0].endDate);
     if (endDate < maxDate) {
       maxDate = endDate;
     }
@@ -177,25 +199,29 @@ function getMaxDate(DateTime, cycles) {
 
 function getMinDate(DateTime, cycles) {
   let startDateString = cycles.cycles[cycles.cycles.length - 1].startDate;
+
   if (startDateString) {
-    return DateTime.dayOnly(new Date(startDateString));
+    return DateTime.dayOnly(DateTime.newDate(startDateString));
   }
   return null;
 }
 
 function getThisCycle(cyclesObject) {
-  return cyclesObject.cycles[cyclesObject.currentCycleIndex];
+  if (cyclesObject.currentCycleIndex !== null) {
+    return cyclesObject.cycles[cyclesObject.currentCycleIndex];
+  }
+  return null;
 }
 
 function getLastCycle(cyclesObject, num) {
-  if (cyclesObject.currentCycleIndex + num < cyclesObject.cycles.length) {
+  if (cyclesObject.currentCycleIndex !== null && cyclesObject.currentCycleIndex + num < cyclesObject.cycles.length) {
     return cyclesObject.cycles[cyclesObject.currentCycleIndex + num];
   }
   return null;
 }
 
 function getCycleRanges(cyclesObject) {
-  let currentCycleIndex = cyclesObject.currentCycleIndex;
+  let currentCycleIndex = cyclesObject.currentCycleIndex || 0;
   let cycles = cyclesObject.cycles;
   let lastCycle = cycles.length - 1;
   let cycleRanges = [];
@@ -281,18 +307,20 @@ function getDayRanges(DateTime, minDate, maxDate, cyclesObject) {
   addDayRange(DateTime, dayRanges, 'Last month', DateTime.monthStart(lastMonth), DateTime.monthEnd(lastMonth), minDate, maxDate);
   addDayRange(DateTime, dayRanges, 'Last 3 months', DateTime.monthStart(DateTime.subtractMonths(today, 2)), today, minDate, maxDate);
   addDayRange(DateTime, dayRanges, 'Last 6 months', DateTime.monthStart(DateTime.subtractMonths(today, 5)), today, minDate, maxDate);
-  let thisCycleEnd = (thisCycle.endDate) ? DateTime.newDate(thisCycle.endDate) : today;
-  addDayRange(DateTime, dayRanges, 'This Cycle', DateTime.newDate(thisCycle.startDate), thisCycleEnd, minDate, maxDate);
-  if (lastCycle && lastCycle.startDate && lastCycle.endDate) {
-    addDayRange(DateTime, dayRanges, 'Last Cycle', DateTime.newDate(lastCycle.startDate), DateTime.newDate(lastCycle.endDate), minDate, maxDate);
-  }
-  let last3cycle = getLastCycle(cyclesObject, 2);
-  if (last3cycle && last3cycle.startDate) {
-    addDayRange(DateTime, dayRanges, 'Last 3 Cycles', DateTime.newDate(last3cycle.startDate), thisCycleEnd, minDate, maxDate);
-  }
-  let last6cycle = getLastCycle(cyclesObject, 5);
-  if (last6cycle && last6cycle.startDate) {
-    addDayRange(DateTime, dayRanges, 'Last 6 Cycles', DateTime.newDate(last6cycle.startDate), thisCycleEnd, minDate, maxDate);
+  if (thisCycle !== null) {
+    let thisCycleEnd = (thisCycle.endDate) ? DateTime.newDate(thisCycle.endDate) : today;
+    addDayRange(DateTime, dayRanges, 'This Cycle', DateTime.newDate(thisCycle.startDate), thisCycleEnd, minDate, maxDate);
+    if (lastCycle && lastCycle.startDate && lastCycle.endDate) {
+      addDayRange(DateTime, dayRanges, 'Last Cycle', DateTime.newDate(lastCycle.startDate), DateTime.newDate(lastCycle.endDate), minDate, maxDate);
+    }
+    let last3cycle = getLastCycle(cyclesObject, 2);
+    if (last3cycle && last3cycle.startDate) {
+      addDayRange(DateTime, dayRanges, 'Last 3 Cycles', DateTime.newDate(last3cycle.startDate), thisCycleEnd, minDate, maxDate);
+    }
+    let last6cycle = getLastCycle(cyclesObject, 5);
+    if (last6cycle && last6cycle.startDate) {
+      addDayRange(DateTime, dayRanges, 'Last 6 Cycles', DateTime.newDate(last6cycle.startDate), thisCycleEnd, minDate, maxDate);
+    }
   }
 
   if (dayRanges.length === 0) {

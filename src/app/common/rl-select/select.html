@@ -1,5 +1,5 @@
 <div class="rl-select">
-  <div class="search-container">
+  <div ng-if="!$ctrl.options.hideSearch" class="search-container">
     <span class="icon"><i class="fa fa-search"></i></span>
     <input class="form-control" ng-model="$ctrl.search" type="text" placeholder="Search">
   </div>

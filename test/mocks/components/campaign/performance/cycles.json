@@ -1,6 +1,6 @@
 [
   {
-    "tableLabel": "2017-06-01 - 2017-06-30\r\n1000023",
+    "tableLabel": "2017-06-01 - 2017-06-30",
     "chartLabel": "Cycle 10",
     "campaignId": "1000023",
     "status": "Running",
@@ -30,7 +30,7 @@
     "pageEngagements": 15
   },
   {
-    "tableLabel": "2017-05-01 - 2017-05-31\r\n1000022",
+    "tableLabel": "2017-05-01 - 2017-05-31",
     "chartLabel": "Cycle 9",
     "campaignId": "1000022",
     "status": "Ended",
@@ -60,7 +60,7 @@
     "pageEngagements": 15
   },
   {
-    "tableLabel": "2017-04-01 - 2017-04-30\r\n1000021",
+    "tableLabel": "2017-04-01 - 2017-04-30",
     "chartLabel": "Cycle 8",
     "campaignId": "1000021",
     "status": "Ended",
@@ -90,7 +90,7 @@
     "pageEngagements": 15
   },
   {
-    "tableLabel": "2017-03-01 - 2017-03-31\r\n1000020",
+    "tableLabel": "2017-03-01 - 2017-03-31",
     "chartLabel": "Cycle 7",
     "campaignId": "1000020",
     "status": "Ended",
@@ -120,7 +120,7 @@
     "pageEngagements": 15
   },
   {
-    "tableLabel": "2017-03-01 - 2017-03-31\r\n1000020",
+    "tableLabel": "2017-03-01 - 2017-03-31",
     "chartLabel": "Cycle 6",
     "campaignId": "1000020",
     "status": "Ended",
@@ -150,7 +150,7 @@
     "pageEngagements": 15
   },
   {
-    "tableLabel": "2017-02-01 - 2017-02-28\r\n1000019",
+    "tableLabel": "2017-02-01 - 2017-02-28",
     "chartLabel": "Cycle 5",
     "campaignId": "1000019",
     "status": "Ended",
@@ -180,7 +180,7 @@
     "pageEngagements": 15
   },
   {
-    "tableLabel": "2017-01-01 - 2017-01-31\r\n1000018",
+    "tableLabel": "2017-01-01 - 2017-01-31",
     "chartLabel": "Cycle 4",
     "campaignId": "1000018",
     "status": "Ended",
@@ -210,7 +210,7 @@
     "pageEngagements": 15
   },
   {
-    "tableLabel": "2017-05-01 - 2017-05-31\r\n1000022",
+    "tableLabel": "2017-05-01 - 2017-05-31",
     "chartLabel": "Cycle 3",
     "campaignId": "1000022",
     "status": "Ended",
@@ -240,7 +240,7 @@
     "pageEngagements": 15
   },
   {
-    "tableLabel": "2017-04-01 - 2017-04-30\r\n1000021",
+    "tableLabel": "2017-04-01 - 2017-04-30",
     "chartLabel": "Cycle 2",
     "campaignId": "1000021",
     "status": "Ended",
@@ -270,7 +270,7 @@
     "pageEngagements": 15
   },
   {
-    "tableLabel": "2017-03-01 - 2017-03-31\r\n1000020",
+    "tableLabel": "2017-03-01 - 2017-03-31",
     "chartLabel": "Cycle 1",
     "campaignId": "1000020",
     "status": "Ended",

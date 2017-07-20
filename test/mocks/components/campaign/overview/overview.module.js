@@ -11,7 +11,7 @@ export default angular
 
     $httpBackend
       .when('GET', /\/campaigns\/\d+\/campaign-overview$/)
-      .respond(data);
+      .respond(200, data);
 
   })
   .name;

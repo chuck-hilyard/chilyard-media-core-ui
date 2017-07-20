@@ -1,4 +1,4 @@
-<div class="panel panel-default">
+<div class="panel panel-default" ng-hide="$ctrl.isError()">
   <div class="panel-heading panel-heading--form">
     <div class="row">
       <div class="col-md-7">
@@ -31,5 +31,10 @@
         ({{item.value | number}})
       </td>
     </tr>
-  </tr>
+  </table>
+</div>
+
+<div class="alert alert-danger" ng-show="$ctrl.isError()">
+  <h4 style="margin-top:0;">There was an error fetching the campaign device data.</h4>
+  <p>{{$ctrl.data}}</p>
 </div>

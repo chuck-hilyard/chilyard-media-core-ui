@@ -54,7 +54,7 @@ class Controller {
 
   $onChanges(changes) {
     let currentData = (changes.data) ? changes.data.currentValue : null;
-    if (currentData && currentData.length > 0) {
+    if (currentData && !this.isError(currentData)) {
       this.sortState = {};
       this.configureTable(currentData);
     }
@@ -103,8 +103,9 @@ class Controller {
     angular.noop();
   }
 
-  isError() {
-    return this.data instanceof Error;
+  isError(data) {
+    let object = data || this.data;
+    return object instanceof Error;
   }
 
   setLabel(type) {

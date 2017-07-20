@@ -27,7 +27,7 @@ class Controller {
 
   $onChanges(changes) {
     let currentData = changes.data.currentValue;
-    if(currentData) {
+    if(currentData && !this.isError(currentData)) {
       this.build(currentData);
     }
   }
@@ -91,8 +91,9 @@ class Controller {
     };
   }
 
-  isError() {
-    return this.data instanceof Error;
+  isError(data) {
+    let object = data || this.data;
+    return object instanceof Error;
   }
 
   setDatasets(data, index) {

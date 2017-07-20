@@ -22,7 +22,7 @@ class DeviceChartController {
 
   $onChanges(changes) {
     let currentData = (changes.data) ? changes.data.currentValue : null;
-    if(currentData && currentData.length > 0) {
+    if (currentData && !this.isError(currentData)) {
       this.build(currentData);
     }
   }
@@ -50,6 +50,11 @@ class DeviceChartController {
         }
       }
     };
+  }
+
+  isError(data) {
+    let object = data || this.data;
+    return object instanceof Error;
   }
 
   setCenterData(data) {

@@ -24,7 +24,7 @@ class TrendChartController {
 
   $onChanges(changes) {
     let currentData = (changes.data) ? changes.data.currentValue : null;
-    if(currentData && currentData.length > 0) {
+    if (currentData && !this.isError(currentData)) {
       this.build(currentData);
     }
   }
@@ -68,8 +68,9 @@ class TrendChartController {
     return this.$filter('number')(total);
   }
 
-  isError() {
-    return this.data instanceof Error;
+  isError(data) {
+    let object = data || this.data;
+    return object instanceof Error;
   }
 
   setLabels(data) {

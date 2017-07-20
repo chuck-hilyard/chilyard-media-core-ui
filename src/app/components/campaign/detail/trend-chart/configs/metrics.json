@@ -37,7 +37,7 @@
   },
   {
     "id": "allClicks",
-    "label": "Clicks",
+    "label": "All Clicks",
     "format": "int",
     "total": "sum"
   },

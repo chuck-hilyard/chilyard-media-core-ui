@@ -43,7 +43,7 @@
   },
   {
     "key": "allClicks",
-    "label": "Clicks",
+    "label": "All Clicks",
     "filter": "number",
     "icon": "fa-info-circle"
   },

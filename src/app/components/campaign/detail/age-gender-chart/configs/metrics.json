@@ -14,9 +14,9 @@
     "type": "line"
   },
   {
-    "id": "clicks",
+    "id": "allClicks",
     "format": "int",
-    "label": "Clicks",
+    "label": "All Clicks",
     "total": "sum",
     "type": "line"
   },

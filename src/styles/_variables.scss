@@ -521,21 +521,21 @@ $jumbotron-heading-font-size:    ceil(($font-size-base * 4.5)) !default;
 //
 //## Define colors for form feedback states and, by default, alerts.
 
-$state-success-text:             #3c763d !default;
-$state-success-bg:               #dff0d8 !default;
-$state-success-border:           darken(adjust-hue($state-success-bg, -10), 5%) !default;
+$state-success-text:             $rl-medium-blue-gray;
+$state-success-bg:               #e0f3e4;
+$state-success-border:           #d8d8d8;
 
-$state-info-text:                $rl-bright-white;
-$state-info-bg:                  $brand-info;
-$state-info-border:              $brand-info;
+$state-info-text:                $rl-slate;
+$state-info-bg:                  #eff5fd;
+$state-info-border:              #d8d8d8;
 
-$state-warning-text:             #8a6d3b !default;
-$state-warning-bg:               #fcf8e3 !default;
-$state-warning-border:           darken(adjust-hue($state-warning-bg, -10), 5%) !default;
+$state-warning-text:             #f67002;
+$state-warning-bg:               #fdedd3;
+$state-warning-border:           #d8d8d8;
 
-$state-danger-text:              $rl-bright-white;
-$state-danger-bg:                $brand-danger;
-$state-danger-border:            $brand-danger;
+$state-danger-text:              $rl-black;
+$state-danger-bg:                #f8cdd1;
+$state-danger-border:            #d8d8d8;
 
 
 //== Tooltips

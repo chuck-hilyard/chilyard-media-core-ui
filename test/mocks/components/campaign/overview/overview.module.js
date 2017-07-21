@@ -10,6 +10,10 @@ export default angular
     'ngInject';
 
     $httpBackend
+      .when('GET', /\/campaigns\/1000040\/campaign-overview$/)
+      .respond(500);
+
+    $httpBackend
       .when('GET', /\/campaigns\/\d+\/campaign-overview$/)
       .respond(200, data);
 

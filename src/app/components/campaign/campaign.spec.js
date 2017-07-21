@@ -42,7 +42,7 @@ describe('components.campaign', () => {
 
   it('$onInit', () => {
     $ctrl.$onInit();
-    expect($ctrl.campaign).toEqual(mockCampaignOverview);
+    expect($ctrl.campaignOverview).toEqual(mockCampaignOverview);
     expect($ctrl.header.title).toEqual(mockCampaignOverview.name);
     expect($ctrl.header.subTitle).toEqual(mockCampaignOverview.advertiserName);
   });

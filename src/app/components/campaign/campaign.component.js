@@ -1,8 +1,9 @@
 import template from './campaign.html';
+let me = 'Campaign Component';
 class Controller {
-  constructor(CampaignSidebar, $stateParams, $log, rlDateTime, DataSettings) {
+  constructor(CampaignSidebar, $stateParams, rlLogger, rlDateTime, DataSettings) {
     'ngInject';
-    this.$log = $log;
+    this.Logger = rlLogger;
     this.header = {};
     this.sidebar = CampaignSidebar;
     this.DataSettings = DataSettings;
@@ -13,12 +14,13 @@ class Controller {
   }
 
   $onInit() {
+    this.Logger.trace('$onInit', {campaignOverview: this.campaignOverview, campaignCycles: this.campaignCycles}, me);
     this.campaign = this.campaignOverview;
     if (this.campaignOverview.masterCampaignId + '' !== this.mcid) {
       this.badId = true;
-      this.$log.error('Master campaign id ' + this.mcid + ' is invalid.', {
+      this.Logger.error('Master campaign id ' + this.mcid + ' is invalid.', {
         campaignOverview: this.campaignOverview
-      });
+      }, me);
     }
     this.cycles = mapCycles(this.DateTime, this.campaignCycles);
     this.campaignDataSettings = this.DataSettings.initialize(this.cycles, this.mcid);

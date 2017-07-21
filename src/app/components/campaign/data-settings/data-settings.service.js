@@ -1,6 +1,7 @@
+const me = 'DataSettings Service';
+
 const cyclesType = 'cycles';
-//const monthsType = 'months';
-//const daysType = 'days';
+
 const dateFilter = {
   days: 'MMM d, yyyy',
   months: 'MMM yyyy'
@@ -15,10 +16,10 @@ const sessionKey = 'campaign.data-settings';
 
 export default class DataSettings {
 
-  constructor($filter, $log, rlDateTime, Session) {
+  constructor($filter, rlLogger, rlDateTime, Session) {
     'ngInject';
     this.$filter = $filter;
-    this.$log = $log;
+    this.Logger = rlLogger;
     this.DateTime = rlDateTime;
     this.Session = Session;
 
@@ -34,6 +35,10 @@ export default class DataSettings {
   }
 
   initialize(cycles, mcid) {
+    this.Logger.trace('initialize', {
+      cycles: cycles,
+      mcid: mcid
+    }, me);
     this.mcid = mcid;
     this.rangeLimits = this.getDateLimits(cycles);
     this.ranges.cycles = getCycleRanges(cycles);
@@ -41,7 +46,7 @@ export default class DataSettings {
     this.ranges.days = getDayRanges(this.DateTime, this.rangeLimits.minDate, this.rangeLimits.maxDate, cycles);
 
     let savedSettings = this.getSessionSettings();
-    if (validSettings(savedSettings, this.$log)) {
+    if (validSettings(savedSettings, this.Logger)) {
       this.selectedSettings = savedSettings;
     } else {
       this.selectedSettings = this.ranges.cycles[0];
@@ -99,7 +104,7 @@ export default class DataSettings {
   }
 
   saveSessionSettings() {
-    if (validSettings(this.selectedSettings, this.$log)) {
+    if (validSettings(this.selectedSettings, this.Logger)) {
       this.Session.save(sessionKey, {
         mcid: this.mcid,
         settings: this.selectedSettings
@@ -108,10 +113,15 @@ export default class DataSettings {
   }
 
   getDefault(breakdownType) {
-    if (this.ranges[breakdownType] && this.ranges[breakdownType].length) {
-      return angular.copy(this.ranges[breakdownType][0]);
-    } else {
-      this.$log.error('getDefault empty ranges for breakdownType is ' + breakdownType);
+    try {
+      if (this.ranges[breakdownType] && this.ranges[breakdownType].length) {
+        return angular.copy(this.ranges[breakdownType][0]);
+      }
+    } catch (err) {
+      this.Logger.error('getDefault error', {
+        breakdownType: breakdownType,
+        err: err
+      }, me);
     }
   }
 
@@ -171,7 +181,7 @@ export default class DataSettings {
 
 ////////////////////////////
 // Private Functions
-function validSettings(settings, $log) {
+function validSettings(settings, Logger) {
   if (settings && typeof(settings) === 'object') {
     if (settings.hasOwnProperty('breakdownType') &&
       settings.hasOwnProperty('name') &&
@@ -180,9 +190,9 @@ function validSettings(settings, $log) {
       return true;
     }
   }
-  $log.warn('invalidSettings', {
+  Logger.warning('invalid settings', {
     settings: settings
-  });
+  }, me);
   return false;
 }
 

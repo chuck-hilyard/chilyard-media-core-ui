@@ -4,18 +4,18 @@ describe('components.campaign.data-settings.modal', () => {
     getOptions: () => mockOptions,
     setRangeName: angular.noop,
     updateOptions: angular.noop,
-    getDefaultSettings: (name) => mockSettings
+    getDefaultSettings: () => mockSettings
   };
   let mockSettings = {
     breakdownType: 'days',
     start: new Date(2017, 2, 5, 0, 0, 0),
     end: new Date(2017, 3, 7, 0, 0, 0)
-  }
+  };
   let mockRanges = {
     cycles: [],
     months: [],
     days: []
-  }
+  };
   let mockOptions = {
     start: {
       minDate: new Date(2017, 1, 5, 0, 0, 0)
@@ -24,16 +24,22 @@ describe('components.campaign.data-settings.modal', () => {
       minDate: new Date(2017, 1, 5, 0, 0, 0),
       maxDate: new Date(2017, 4, 7, 0, 0, 0)
     }
-  }
+  };
   let mockResolve = {
     settings: mockSettings,
     ranges: mockRanges
-  }
+  };
+  let mockLogger = {
+    error: angular.noop,
+    info: angular.noop,
+    trace: angular.noop
+  };
   let $ctrl;
 
   beforeEach(() => {
     angular.mock.module('campaign.data-settings.modal', ($provide) => {
       $provide.value('ModalService', mockModalService);
+      $provide.value('rlLogger', mockLogger);
     });
 
     let bindings = {

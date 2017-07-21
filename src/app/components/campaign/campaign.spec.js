@@ -1,5 +1,6 @@
 import mockCampaignOverview from './mock-data/campaign-overview';
 import mockCampaignCycles from '../../../../test/mocks/components/campaign/cycles/cycles';
+import mockLogger from '../../../../test/mocks/common/mock-logger';
 
 describe('components.campaign', () => {
   let mockDateTime = {
@@ -14,6 +15,7 @@ describe('components.campaign', () => {
 
     angular.mock.module('campaign', ($provide) => {
       $provide.value('DataSettings', mockDataSettings);
+      $provide.value('rlLogger', mockLogger);
       $provide.value('rlDateTime', mockDateTime);
     });
 

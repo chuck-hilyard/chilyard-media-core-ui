@@ -1,4 +1,5 @@
 import Template from './modal.html';
+const me = 'Modal Component';
 
 const tabNumber = {
   cycles: 0,
@@ -7,12 +8,14 @@ const tabNumber = {
 };
 
 class Controller {
-  constructor(ModalService) {
+  constructor(ModalService, rlLogger) {
     'ngInject';
     this.service = ModalService;
+    this.Logger = rlLogger;
   }
 
   $onInit() {
+    this.Logger.trace('$onInit', this.resolve, me);
     this.workingSettings = angular.copy(this.resolve.settings);
     this.ranges = angular.copy(this.resolve.ranges);
     this.activeTab = tabNumber[this.workingSettings.breakdownType];
@@ -21,6 +24,7 @@ class Controller {
   }
 
   onStartMonthClick(active) {
+    this.Logger.trace('onStartMonthClick', active, me);
     if (!this.options.start.minDate || active >= this.options.start.minDate) {
       this.workingSettings.start = active;
     } else {
@@ -30,6 +34,7 @@ class Controller {
   }
 
   onEndMonthClick(active) {
+    this.Logger.trace('onEndMonthClick', active, me);
     this.workingSettings.end = active;
     if (active < this.options.end.minDate) {
       this.workingSettings.end = this.options.end.minDate;
@@ -45,6 +50,7 @@ class Controller {
   }
 
   selectTab(tabName) {
+    this.Logger.trace('selectTab', tabName, me);
     if (this.workingSettings.breakdownType !== tabName) {
       this.workingSettings = this.service.getDefaultSettings(tabName);
       this.options = this.service.getOptions(this.workingSettings);
@@ -52,11 +58,13 @@ class Controller {
   }
 
   setRange(workingSettings) {
+    this.Logger.trace('setRange', workingSettings, me);
     this.workingSettings = angular.copy(workingSettings);
     this.onWorkingSettingsChange();
   }
 
   onWorkingSettingsChange() {
+    this.Logger.trace('onWorkingSettingsChange', this.workingSettings, me);
     this.service.setRangeName(this.workingSettings);
     this.options = this.service.updateOptions(this.workingSettings);
     this.workingSettings = angular.copy(this.workingSettings);

@@ -17,4 +17,4 @@ export default ($delegate, exceptionHandler, rlLogger) => {
 
     rlLogger.error(appErrorPrefix + exception.message, errorData, me);
   };
-}
+};

@@ -1,6 +1,9 @@
-import mockdata from '../../../../../../test/mocks/components/campaign/performance/cycles';
+import cycleData from '../../../../../../test/mocks/components/campaign/performance/cycles';
+import monthlyData from '../../../../../../test/mocks/components/campaign/performance/months';
+import cycleColumns from './mock-data/cycleColumns';
+import monthlyColumns from './mock-data/monthlyColumns';
 import tooltips from './mock-data/tooltips';
-import columns from './mock-data/columns';
+
 
 describe('campaign.detail.performance', () => {
 
@@ -22,10 +25,7 @@ describe('campaign.detail.performance', () => {
       let locals = {
         $scope: $scope
       };
-      let bindings = {
-        breakdownType: 'cycles'
-      };
-      $ctrl = $componentController('campaignPerformance', locals, bindings);
+      $ctrl = $componentController('campaignPerformance', locals);
     });
     $ctrl.delegate = {
       rebuild: angular.noop,
@@ -43,11 +43,6 @@ describe('campaign.detail.performance', () => {
     });
   });
 
-  it('$onInit', () => {
-    $ctrl.$onInit();
-    expect($ctrl.breakdownLabel).toBe('campaignDetails.cycles');
-  });
-
   describe('user changes breakdown type', () => {
     it('updates label', () => {
       $ctrl.$onChanges({
@@ -62,16 +57,20 @@ describe('campaign.detail.performance', () => {
   describe('data binding changes', () => {
     it('configures the table', () => {
       spyOn($ctrl.delegate, 'rebuild');
-      let changes = {
+      $ctrl.$onChanges({
         data: {
-          currentValue: mockdata
+          currentValue: cycleData
         }
-      };
-      $ctrl.$onChanges(changes);
-      expect($ctrl.columns).toEqual(columns);
+      });
+      expect($ctrl.columns).toEqual(cycleColumns);
       // First change doesn't call rebuild
       expect($ctrl.delegate.rebuild).not.toHaveBeenCalled();
-      $ctrl.$onChanges(changes);
+      $ctrl.$onChanges({
+        data: {
+          currentValue: monthlyData
+        }
+      });
+      expect($ctrl.columns).toEqual(monthlyColumns);
       // Subsequent changes call rebuild
       expect($ctrl.delegate.rebuild).toHaveBeenCalled();
     });
@@ -88,7 +87,8 @@ describe('campaign.detail.performance', () => {
 
   describe('users sorts column', () => {
     it('reorders data objects', () => {
-      $ctrl.data = mockdata;
+      $ctrl.breakdownType = 'cycles';
+      $ctrl.data = cycleData;
       $ctrl.handleSort({
         key: 'tableLabel',
         desc: true

@@ -1,6 +1,6 @@
 describe('common.datepicker', () => {
 
-  var compile, scope, directiveElem;
+  let compile, scope, directiveElem;
 
   beforeEach(() => {
     angular.mock.module('common.rl-datepicker');
@@ -17,12 +17,12 @@ describe('common.datepicker', () => {
 
   describe('given a bootstrap datepicker directive', () => {
     it('when directive exist, then it will add onMonthClick callback', () => {
-      var isolatedScope = directiveElem.isolateScope();
+      let isolatedScope = directiveElem.isolateScope();
       expect(typeof(isolatedScope.onMonthClick)).toEqual('function');
     });
 
     it('when mode changes from month to day, then it will call the onMonthClick callback', () => {
-      var isolatedScope = directiveElem.isolateScope();
+      let isolatedScope = directiveElem.isolateScope();
       isolatedScope.datepickerMode = 'month';
       scope.$apply();
       isolatedScope.datepickerMode = 'day';
@@ -31,7 +31,7 @@ describe('common.datepicker', () => {
     });
 
     it('when mode changes from day to month, then it will not call the onMonthClick callback', () => {
-      var isolatedScope = directiveElem.isolateScope();
+      let isolatedScope = directiveElem.isolateScope();
       isolatedScope.datepickerMode = 'day';
       scope.$apply();
       isolatedScope.datepickerMode = 'month';
@@ -41,9 +41,9 @@ describe('common.datepicker', () => {
   });
 
   function getCompiledElement() {
-    var element = angular.element('<div uib-datepicker ng-model="mockModel" on-month-click="handleMonthClick(active)"></div>');
+    let element = angular.element('<div uib-datepicker ng-model="mockModel" on-month-click="handleMonthClick(active)"></div>');
 
-    var compiledElement = compile(element)(scope);
+    let compiledElement = compile(element)(scope);
     scope.$digest();
     return compiledElement;
   }

@@ -27,7 +27,7 @@ class Controller {
 
   $onChanges(changes) {
     let currentData = changes.data.currentValue;
-    if(currentData && !this.isError(currentData)) {
+    if (currentData && !this.isError(currentData)) {
       this.build(currentData);
     }
   }
@@ -106,13 +106,13 @@ class Controller {
         label: `Male ${metric.label}`,
         data: (metricData) ? metricData.male.ageGroups.map((item) => item.total * modifier) : [],
         backgroundColor: this.colors[index].male,
-        borderColor: this.colors[index].male,
+        borderColor: this.colors[index].male
       },
       {
         label: `Female ${metric.label}`,
         data: (metricData) ? metricData.female.ageGroups.map((item) => item.total * modifier) : [],
         backgroundColor: this.colors[index].female,
-        borderColor: this.colors[index].female,
+        borderColor: this.colors[index].female
       }
     ];
   }

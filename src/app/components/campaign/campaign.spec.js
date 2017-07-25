@@ -21,7 +21,7 @@ describe('components.campaign', () => {
 
     let bindings = {
       campaignCycles: mockCampaignCycles,
-      campaignOverview: mockCampaignOverview,
+      campaignOverview: mockCampaignOverview
     };
 
     angular.mock.inject(($injector) => {

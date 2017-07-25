@@ -13,7 +13,7 @@ export default angular
     // advertisers,
     // advertiser,
     campaigns,
-    campaign,
+    campaign
     //orders,
     //order
   ])

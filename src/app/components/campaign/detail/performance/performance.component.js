@@ -67,7 +67,7 @@ class Controller {
     this.columns = [];
     let keys = Object.keys(data[0]);
     let label = this.columnsConfig.find((item) => item.key === 'tableLabel');
-    switch(this.breakdownType) {
+    switch (this.breakdownType) {
     case 'cycles':
       label.label = 'Cycles';
       break;
@@ -109,7 +109,7 @@ class Controller {
   }
 
   setLabel(type) {
-    switch(type) {
+    switch (type) {
     case 'cycles':
       this.breakdownLabel = 'campaignDetails.cycles';
       break;

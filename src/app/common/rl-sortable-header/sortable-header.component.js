@@ -22,7 +22,8 @@ class SortableHeaderController {
     if (this.state.key !== this.key) {
       this.state.key = this.key;
       this.state.desc = true;
-    } else {
+    }
+    else {
       this.state.desc = !this.state.desc;
     }
     this.onSort({state: this.state});
@@ -36,7 +37,7 @@ export default {
   bindings: {
     key: '<',
     sortState: '<',
-    onSort: '&',
-  },
+    onSort: '&'
+  }
 };
 

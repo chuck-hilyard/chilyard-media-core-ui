@@ -22,7 +22,8 @@ export default function(items, searchText, showFields) {
         filtered.push(item);
       }
     });
-  } else {
+  }
+  else {
     filtered = items;
   }
   return filtered;

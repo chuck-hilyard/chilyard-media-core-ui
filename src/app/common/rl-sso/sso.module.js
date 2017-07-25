@@ -12,6 +12,7 @@ import './sso.scss';
  * that will catch the SSO redirect and pass the token
  * back to Angular.
  **/
+
 let sso = angular
   .module('rl.sso', [
     ngHttpAuth,
@@ -19,7 +20,7 @@ let sso = angular
   ])
 
   // Add the auth token to the Authorization head of every REST request
-  .factory('authTokenInterceptor', [ '$window', function ($window) {
+  .factory('authTokenInterceptor', ['$window', function ($window) {
     return {
       'request': function (config) {
         config.headers = config.headers || {};
@@ -36,7 +37,7 @@ let sso = angular
   }])
 
   .run(['$rootScope', '$document', '$window', 'authService', 'jwtHelper', function ($rootScope, $document, $window, authService, jwtHelper) {
-    var iframe, response,
+    let iframe, response,
       findParent = function () {
         return angular.element(document.getElementsByTagName('body')[0]);
       },
@@ -68,10 +69,10 @@ let sso = angular
      *   1.  A token (login successful)
      *   2.  A rejection message (login failed)
      */
-    var messageHandlers = {};
+    let messageHandlers = {};
     messageHandlers.token = function (event) {
-      var token = event.data.value;
-      var decodedToken = jwtHelper.decodeToken(token);
+      let token = event.data.value;
+      let decodedToken = jwtHelper.decodeToken(token);
       $window.sessionStorage.setItem('user', decodedToken.email);
       $window.sessionStorage.setItem('exp', decodedToken.exp);
       $window.sessionStorage.setItem('token', token);
@@ -86,7 +87,7 @@ let sso = angular
      * Setup the routing to catch messages from our iframe and pass them to the right handler
      */
     $window.addEventListener('message', function (event) {
-      var messageType = event.data.type;
+      let messageType = event.data.type;
       if (messageHandlers.hasOwnProperty(messageType)) {
         messageHandlers[messageType](event);
         removeIframe();

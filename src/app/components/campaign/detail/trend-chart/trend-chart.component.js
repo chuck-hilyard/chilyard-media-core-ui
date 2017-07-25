@@ -58,10 +58,10 @@ class TrendChartController {
     angular.forEach(this.data, (item) => {
       total +=item[metric.id];
     });
-    if(metric.format === 'currency') {
+    if (metric.format === 'currency') {
       return this.$filter('currency')(total);
     }
-    if(metric.total === 'average') {
+    if (metric.total === 'average') {
       total = total / this.data.length;
       return this.$filter('number')(total);
     }
@@ -115,7 +115,7 @@ class TrendChartController {
         xAxes: [
           {
             gridLines: {
-              display: false,
+              display: false
             }
           }
         ],
@@ -140,7 +140,7 @@ class TrendChartController {
           drawTicks: false
         }
       };
-      switch(metric.format) {
+      switch (metric.format) {
       case 'currency':
         axis.ticks = {
           beginAtZero: true,
@@ -163,7 +163,7 @@ class TrendChartController {
 
   sortData(data) {
     let copy = angular.copy(data);
-    switch(this.breakdownType) {
+    switch (this.breakdownType) {
     case 'cycles':
       return copy.sort((a, b) => a.cycleNumber - b.cycleNumber);
     case 'months':

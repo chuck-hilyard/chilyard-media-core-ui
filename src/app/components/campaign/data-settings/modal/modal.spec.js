@@ -170,9 +170,9 @@ describe('components.campaign.data-settings.modal', () => {
       });
     });
 
-    describe('handleCycleStartSelect',()=>{
-      describe('given selected item of cycle 3',()=>{
-        it('should set working settings start to a copy of the selected item',()=>{
+    describe('handleCycleStartSelect', () => {
+      describe('given selected item of cycle 3', () => {
+        it('should set working settings start to a copy of the selected item', () => {
           let selectedItem = {cycleNumber: 3};
           $ctrl.$onInit();
           $ctrl.handleCycleStartSelect(selectedItem);
@@ -182,9 +182,9 @@ describe('components.campaign.data-settings.modal', () => {
       });
     });
 
-    describe('handleCycleEndSelect',()=>{
-      describe('given selected item of cycle 3',()=>{
-        it('should set working settings end to a copy of the selected item',()=>{
+    describe('handleCycleEndSelect', () => {
+      describe('given selected item of cycle 3', () => {
+        it('should set working settings end to a copy of the selected item', () => {
           let selectedItem = {cycleNumber: 3};
           $ctrl.$onInit();
           $ctrl.handleCycleEndSelect(selectedItem);

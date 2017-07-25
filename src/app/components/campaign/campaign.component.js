@@ -1,5 +1,6 @@
 import template from './campaign.html';
-let me = 'Campaign Component';
+
+
 class Controller {
   constructor(CampaignSidebar, $stateParams, rlDateTime, DataSettings) {
     'ngInject';
@@ -72,7 +73,7 @@ function setHeader(overview) {
         value: overview.masterAdvertiserId
       }, {
         name: 'Current Advertiser ID',
-        value: overview.currentAdvertiserId,
+        value: overview.currentAdvertiserId
       }, {
         name: 'Advertiser Business',
         value: overview.businessId

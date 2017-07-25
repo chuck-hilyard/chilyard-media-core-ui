@@ -18,7 +18,8 @@ class Controller {
     this.dateRanges = angular.copy(this.service.ranges);
     if (angular.isDefined(this.cycles)) {
       this.session.dateRange = angular.copy(this.dateRanges.cycles[0]);
-    } else {
+    }
+    else {
       this.session.dateRange = angular.copy(this.dateRanges.days[2]);
     }
   }

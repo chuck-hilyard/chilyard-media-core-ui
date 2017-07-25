@@ -27,7 +27,8 @@ class Controller {
     this.Logger.trace('onStartMonthClick', active, me);
     if (!this.options.start.minDate || active >= this.options.start.minDate) {
       this.workingSettings.start = active;
-    } else {
+    }
+    else {
       this.workingSettings.start = this.options.start.minDate;
     }
     this.onWorkingSettingsChange();

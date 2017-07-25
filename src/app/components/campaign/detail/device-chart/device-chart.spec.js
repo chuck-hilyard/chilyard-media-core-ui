@@ -14,7 +14,7 @@ describe('campaign.detail.device-chart', () => {
       let $componentController = $injector.get('$componentController');
       let locals = {};
       let bindings = {
-        data: {},
+        data: {}
       };
       $ctrl = $componentController('campaignDeviceChart', locals, bindings);
     });

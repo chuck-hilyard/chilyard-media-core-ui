@@ -9,7 +9,7 @@ class Controller {
   }
 
   $onInit() {
-    for(let i = 0; i < 25; i++) {
+    for (let i = 0; i < 25; i++) {
       this.rows.push(Math.random() * 10);
     }
   }

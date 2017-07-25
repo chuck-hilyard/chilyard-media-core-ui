@@ -56,7 +56,8 @@ export default class Logger {
   setLogLevel(level) {
     if (typeof(level) === 'string' && levels.hasOwnProperty(level)) {
       logLevel = levels[level];
-    } else {
+    }
+    else {
       this.$log.warn('setLogLevel invalid level string: ' + level);
     }
   }

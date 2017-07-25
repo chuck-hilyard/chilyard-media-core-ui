@@ -45,7 +45,8 @@ export default class DateTime {
       if (dateStr !== null) {
         this.$log.error('Invalid date string ' + dateStr);
       }
-    } else {
+    }
+    else {
       let parts = dateStr.split('-');
       date = new Date(parts[0], parts[1] - 1, parts[2]);
       date.setHours(0, 0, 0, 0);

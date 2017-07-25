@@ -1,3 +1,4 @@
+/* eslint-disable */
 import Chart from 'chart.js';
 
 
@@ -64,3 +65,4 @@ Chart.pluginService.register({
     }
   },
 });
+/* eslint-enable */

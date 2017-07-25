@@ -34,7 +34,7 @@ class Controller {
             },
             {
               name: 'Current Advertiser ID',
-              value: this.order.data.advertiser.caid,
+              value: this.order.data.advertiser.caid
             },
             {
               name: 'Advertiser Business',
@@ -70,8 +70,6 @@ class Controller {
       ]
     };
   }
-
-
 
 }
 

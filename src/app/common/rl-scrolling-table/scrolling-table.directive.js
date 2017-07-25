@@ -39,7 +39,7 @@ export default function rlScrollingTable($timeout, rlLogger) {
       scope.loading = true;
 
       // Assign delegates
-      if(angular.isDefined(scope.delegate)) {
+      if (angular.isDefined(scope.delegate)) {
         scope.delegate.resize = this.handleResize;
         scope.delegate.rebuild = this.handleRebuild;
       }
@@ -55,7 +55,8 @@ export default function rlScrollingTable($timeout, rlLogger) {
 
       if (scope.staticTable === 'true') {
         this.build();
-      } else {
+      }
+      else {
         this.initChecker();
       }
     };
@@ -64,7 +65,8 @@ export default function rlScrollingTable($timeout, rlLogger) {
       let bodyRows = this.body.querySelectorAll('tbody tr');
       if (bodyRows.length > 0) {
         this.$timeout(this.build, 250);
-      } else {
+      }
+      else {
         this.$timeout(this.initChecker, 250);
       }
     };
@@ -131,7 +133,7 @@ export default function rlScrollingTable($timeout, rlLogger) {
       // Set row heights and remove static columns cell from scrolling tables
       let rowSelectors = [
         '.header tr',
-        '.body tr',
+        '.body tr'
       ];
       let otherRows = this.container.querySelectorAll(rowSelectors.join());
       angular.forEach(otherRows, (row, index) => {

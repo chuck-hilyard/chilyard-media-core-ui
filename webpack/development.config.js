@@ -8,6 +8,13 @@ let config = require('./support/default.config.js');
 
 config.devtool = 'source-map';
 
+config.module.rules.push({
+  enforce: 'pre',
+  test: /\.js$/,
+  exclude: /node_modules/,
+  loader: 'eslint-loader',
+});
+
 config.plugins = [
   new cleanPlugin([paths.dist], {
     root: paths.root

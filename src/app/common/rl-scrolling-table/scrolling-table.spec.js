@@ -53,7 +53,7 @@ describe('common.scrolling-table', () => {
     expect(directiveElem).toBeDefined();
     expect(mockLogger.error).toHaveBeenCalledWith(
       'rlScrollingTable trancluded HTML is missing required header table elements',
-      { headerTable: jasmine.anything() },
+      {headerTable: jasmine.anything()},
       'Scrolling Table Directive'
     );
   });
@@ -63,12 +63,9 @@ describe('common.scrolling-table', () => {
     expect(directiveElem).toBeDefined();
     expect(mockLogger.error).toHaveBeenCalledWith(
       'rlScrollingTable trancluded HTML is missing required body table elements',
-      { bodyTable: jasmine.anything() },
+      {bodyTable: jasmine.anything()},
       'Scrolling Table Directive'
     );
   });
 
-
-
 });
-

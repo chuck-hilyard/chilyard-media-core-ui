@@ -58,10 +58,10 @@ class TrendChartController {
     angular.forEach(this.data, (item) => {
       total +=item[metric.id];
     });
-    if(metric.format === 'currency') {
+    if (metric.format === 'currency') {
       return this.$filter('currency')(total);
     }
-    if(metric.total === 'average') {
+    if (metric.total === 'average') {
       total = total / this.data.length;
       return this.$filter('number')(total);
     }
@@ -115,7 +115,7 @@ class TrendChartController {
         xAxes: [
           {
             gridLines: {
-              display: false,
+              display: false
             }
           }
         ],
@@ -140,21 +140,20 @@ class TrendChartController {
           drawTicks: false
         }
       };
-      switch(metric.format) {
-      case 'currency':
-        axis.ticks = {
-          beginAtZero: true,
-          maxTicksLimit: 3,
-          callback: (dataLabel) => this.$filter('currency')(dataLabel)
-        };
-        break;
-      default:
-        axis.ticks = {
-          beginAtZero: true,
-          maxTicksLimit: 3,
-          callback: (dataLabel) => this.$filter('number')(dataLabel)
-        };
-        break;
+      switch (metric.format) {
+        case 'currency':
+          axis.ticks = {
+            beginAtZero: true,
+            maxTicksLimit: 3,
+            callback: (dataLabel) => this.$filter('currency')(dataLabel)
+          };
+          break;
+        default:
+          axis.ticks = {
+            beginAtZero: true,
+            maxTicksLimit: 3,
+            callback: (dataLabel) => this.$filter('number')(dataLabel)
+          };
       }
       yAxes.push(axis);
     });
@@ -163,14 +162,14 @@ class TrendChartController {
 
   sortData(data) {
     let copy = angular.copy(data);
-    switch(this.breakdownType) {
-    case 'cycles':
-      return copy.sort((a, b) => a.cycleNumber - b.cycleNumber);
-    case 'months':
-    case 'days':
-      return copy.sort((a, b) => new Date(a.reportDate) - new Date(b.reportDate));
-    default:
-      return copy;
+    switch (this.breakdownType) {
+      case 'cycles':
+        return copy.sort((a, b) => a.cycleNumber - b.cycleNumber);
+      case 'months':
+      case 'days':
+        return copy.sort((a, b) => new Date(a.reportDate) - new Date(b.reportDate));
+      default:
+        return copy;
     }
   }
 

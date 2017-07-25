@@ -56,6 +56,6 @@ export default {
   controller: SelectController,
   bindings: {
     options: '<',
-    onSelect: '&',
-  },
+    onSelect: '&'
+  }
 };

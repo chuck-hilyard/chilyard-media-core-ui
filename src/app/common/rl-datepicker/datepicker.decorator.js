@@ -10,7 +10,7 @@
  */
 export default function($delegate) {
   'ngInject';
-  var directive = $delegate[0],
+  let directive = $delegate[0],
     link = directive.link;
 
   angular.extend(directive.scope, {

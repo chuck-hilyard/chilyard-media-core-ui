@@ -14,7 +14,7 @@ describe('campaign.detail.age-gender-chart', () => {
       let $componentController = $injector.get('$componentController');
       let locals = {};
       let bindings = {
-        data: {},
+        data: {}
       };
       $ctrl = $componentController('campaignAgeGenderChart', locals, bindings);
     });

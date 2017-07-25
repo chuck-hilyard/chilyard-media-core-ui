@@ -42,7 +42,8 @@ export default class modalService {
   getOptions(settings) {
     if (settings.breakdownType === 'cycles') {
       this.options = this.getCycleSelectOptions(settings);
-    } else {
+    }
+    else {
       this.options = this.getDatepickerOptions(settings);
     }
     return this.options;

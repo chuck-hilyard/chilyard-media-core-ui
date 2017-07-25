@@ -7,4 +7,4 @@ export default {
   debug: angular.noop,
   trace: angular.noop,
   setLogLevel: angular.noop
-}
+};

@@ -22,7 +22,7 @@ describe('common.date-time', () => {
 
       it('when the date is 2/27/2017 and the filter is \'MMM yyyy\', then it will return \'Feb 2017\'', () => {
         let testDate = new Date(2017, 1, 27, 0, 0, 0);
-        expect(rlDateTimeService.dateToString(testDate,'MMM yyyy')).toEqual('Feb 2017');
+        expect(rlDateTimeService.dateToString(testDate, 'MMM yyyy')).toEqual('Feb 2017');
       });
     });
   });

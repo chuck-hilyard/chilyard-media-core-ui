@@ -48,7 +48,8 @@ export default class DataSettings {
     let savedSettings = this.getSessionSettings();
     if (validSettings(savedSettings, this.Logger)) {
       this.selectedSettings = savedSettings;
-    } else {
+    }
+    else {
       this.selectedSettings = this.ranges.cycles[0];
       this.saveSessionSettings();
     }
@@ -93,7 +94,8 @@ export default class DataSettings {
     if (convertedSettings.breakdownType !== 'cycles') {
       convertedSettings.start = new Date(settings.start);
       convertedSettings.end = new Date(settings.end);
-    } else {
+    }
+    else {
       // Just rederive these dates from their input strings (handles null better)
       convertedSettings.start.startDateObj = this.DateTime.newDate(settings.start.startDate);
       convertedSettings.start.endDateObj = this.DateTime.newDate(settings.start.endDate);
@@ -117,7 +119,8 @@ export default class DataSettings {
       if (this.ranges[breakdownType] && this.ranges[breakdownType].length) {
         return angular.copy(this.ranges[breakdownType][0]);
       }
-    } catch (err) {
+    }
+    catch (err) {
       this.Logger.error('getDefault error', {
         breakdownType: breakdownType,
         err: err
@@ -153,7 +156,8 @@ export default class DataSettings {
       if (this.selectedSettings.breakdownType === cyclesType) {
         rangeParams.start = this.selectedSettings.start.cycleNumber;
         rangeParams.end = this.selectedSettings.end.cycleNumber;
-      } else {
+      }
+      else {
         rangeParams.start = this.DateTime.dateToString(this.selectedSettings.start, dateFilter);
         rangeParams.end = this.DateTime.dateToString(this.selectedSettings.end, dateFilter);
       }
@@ -258,7 +262,7 @@ function newCycleRange(name, startCycle, endCycle) {
     breakdownType: 'cycles',
     name: name,
     start: startCycle,
-    end: endCycle,
+    end: endCycle
   };
 }
 

@@ -137,6 +137,7 @@ export default {
   controller: Controller,
   bindings: {
     data: '<',
-    breakdownType: '<'
+    breakdownType: '<',
+    loading: '<'
   }
 };

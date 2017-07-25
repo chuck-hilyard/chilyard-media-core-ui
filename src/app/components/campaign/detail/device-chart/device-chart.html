@@ -4,7 +4,7 @@
       <div class="col-md-7">
         <h3 class="panel-title">Devices</h3>
       </div>
-      <div class="col-md-5" ng-hide="$ctrl.isError()">
+      <div class="col-md-5" ng-hide="$ctrl.isError() || $ctrl.loading">
         <select class="form-control input-sm"
           ng-model="$ctrl.metric"
           ng-change="$ctrl.updateChart()"
@@ -14,8 +14,11 @@
     </div>
   </div>
   <div class="panel-body text-center">
-    <div class="device-chart" ng-hide="$ctrl.isError()">
+    <div class="device-chart" ng-hide="$ctrl.isError()  || $ctrl.loading">
       <rl-chart data="$ctrl.chart"></rl-chart>
+    </div>
+    <div class="loading" ng-show="$ctrl.loading">
+      <i class="fa fa-spinner fa-pulse fa-5x"></i>
     </div>
     <div class="alert alert-danger text-left no-margin" ng-show="$ctrl.isError()">
       <h4 class="alert-title">
@@ -25,7 +28,7 @@
       <p>{{$ctrl.data}}</p>
     </div>
   </div>
-  <table class="table" ng-hide="$ctrl.isError()">
+  <table class="table" ng-hide="$ctrl.isError() || $ctrl.loading">
     <tr ng-repeat="item in $ctrl.metricData">
       <td>
         <span class="fa fa-circle" ng-style="{'color': $ctrl.colors[$index]}"></span>

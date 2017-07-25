@@ -31,6 +31,7 @@ describe('components.campaign.detail', () => {
       service = $injector.get('CampaignDetailService');
       $ctrl = $componentController('campaign.detail', {}, bindings);
     });
+
     spyOn(service, 'getPerformanceData').and.callThrough();
     spyOn(service, 'getAgeGenderData').and.callThrough();
     spyOn(service, 'getDeviceData').and.callThrough();
@@ -57,6 +58,23 @@ describe('components.campaign.detail', () => {
         expect(service.getPerformanceData).not.toHaveBeenCalled();
         expect(service.getAgeGenderData).not.toHaveBeenCalled();
         expect(service.getDeviceData).not.toHaveBeenCalled();
+      });
+    });
+
+    describe('loading indicators', () => {
+      it('shows while waiting for promise', () => {
+        let loadingLoop = (boolean) => {
+          angular.forEach($ctrl.loading, (item) => {
+            expect(item).toBe(boolean);
+          });
+        };
+        loadingLoop(false);
+        $ctrl.$onChanges(mockChange);
+        $ctrl.getData();
+        loadingLoop(true);
+        expect(service.getPerformanceData).toHaveBeenCalled();
+        expect(service.getAgeGenderData).toHaveBeenCalled();
+        expect(service.getDeviceData).toHaveBeenCalled();
       });
     });
   });

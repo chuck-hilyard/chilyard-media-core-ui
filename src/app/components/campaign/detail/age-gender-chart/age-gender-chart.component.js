@@ -1,7 +1,7 @@
 import template from './age-gender-chart.html';
 import metricsConfig from './configs/metrics';
 
-class Controller {
+class AgeGenderController {
 
   constructor($filter, rlColors) {
     'ngInject';
@@ -26,17 +26,13 @@ class Controller {
   }
 
   $onChanges(changes) {
-    let currentData = changes.data.currentValue;
+    let currentData = (changes.data) ? changes.data.currentValue : null;
     if (currentData && !this.isError(currentData)) {
       this.build(currentData);
     }
   }
 
   build(data) {
-    if (data instanceof Error) {
-      this.charts = [];
-      return;
-    }
     let $ctrl = this;
     this.charts = [
       {
@@ -194,8 +190,9 @@ class Controller {
 }
 export default {
   template: template,
-  controller: Controller,
+  controller: AgeGenderController,
   bindings: {
-    data: '<'
+    data: '<',
+    loading: '<'
   }
 };

@@ -10,6 +10,11 @@ class Controller {
     // Local Vars
     this.ageGenderData = null;
     this.deviceData = null;
+    this.loading = {
+      ageGender: false,
+      device: false,
+      performance: false
+    };
     this.performanceData = null;
     this.service = CampaignDetailService;
   }
@@ -39,12 +44,15 @@ class Controller {
   }
 
   getAgeGenderData(mcid, breakdown, params) {
+    this.loading.ageGender = true;
     this.service.getAgeGenderData(mcid, breakdown, params)
       .then((response) => {
         this.ageGenderData = response.data;
+        this.loading.ageGender = false;
       })
       .catch((error) => {
         this.ageGenderData = new Error('unable to load the age/gender data at this time');
+        this.loading.ageGender = false;
         this.$log.error('Error getting Age/Gender data', {
           error: error
         });
@@ -52,12 +60,15 @@ class Controller {
   }
 
   getDeviceData(mcid, breakdown, params) {
+    this.loading.device = true;
     this.service.getDeviceData(mcid, breakdown, params)
       .then((response) => {
         this.deviceData = response.data;
+        this.loading.device = false;
       })
       .catch((error) => {
         this.deviceData = new Error('unable to load device data at this time');
+        this.loading.device = false;
         this.$log.error('Error getting the device data', {
           error: error
         });
@@ -65,12 +76,15 @@ class Controller {
   }
 
   getPerformanceData(mcid, breakdown, params) {
+    this.loading.performance = true;
     this.service.getPerformanceData(mcid, breakdown, params)
       .then((response) => {
         this.performanceData = response.data;
+        this.loading.performance = false;
       })
       .catch((error) => {
         this.performanceData = new Error('unable to load trend/performance data at this time');
+        this.loading.performance = false;
         this.$log.error('Error getting the trend/performance data', {
           error: error
         });

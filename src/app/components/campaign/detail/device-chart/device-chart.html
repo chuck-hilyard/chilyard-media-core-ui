@@ -1,10 +1,10 @@
-<div class="panel panel-default" ng-hide="$ctrl.isError()">
+<div class="panel panel-default">
   <div class="panel-heading panel-heading--form">
     <div class="row">
       <div class="col-md-7">
         <h3 class="panel-title">Devices</h3>
       </div>
-      <div class="col-md-5">
+      <div class="col-md-5" ng-hide="$ctrl.isError()">
         <select class="form-control input-sm"
           ng-model="$ctrl.metric"
           ng-change="$ctrl.updateChart()"
@@ -14,11 +14,18 @@
     </div>
   </div>
   <div class="panel-body text-center">
-    <div class="device-chart">
+    <div class="device-chart" ng-hide="$ctrl.isError()">
       <rl-chart data="$ctrl.chart"></rl-chart>
     </div>
+    <div class="alert alert-danger text-left no-margin" ng-show="$ctrl.isError()">
+      <h4 class="alert-title">
+        <i class="fa fa-exclamation-triangle"></i>
+        There was an error fetching the campaign device data.
+      </h4>
+      <p>{{$ctrl.data}}</p>
+    </div>
   </div>
-  <table class="table">
+  <table class="table" ng-hide="$ctrl.isError()">
     <tr ng-repeat="item in $ctrl.metricData">
       <td>
         <span class="fa fa-circle" ng-style="{'color': $ctrl.colors[$index]}"></span>
@@ -32,9 +39,4 @@
       </td>
     </tr>
   </table>
-</div>
-
-<div class="alert alert-danger" ng-show="$ctrl.isError()">
-  <h4 style="margin-top:0;">There was an error fetching the campaign device data.</h4>
-  <p>{{$ctrl.data}}</p>
 </div>

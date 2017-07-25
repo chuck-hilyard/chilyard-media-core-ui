@@ -1,15 +1,18 @@
 <div class="rl-container rl-container__sidebar" ng-class="{'rl-container__sidebar--collapse': $ctrl.sidebar.collapsed}">
   <rl-sidebar links="$ctrl.sidebar.links" on-toggle="$ctrl.handleSidebarToggle(collapsed)" ></rl-sidebar>
-    <div ng-if="$ctrl.badId" class="rl-content">
-      <h1 translate>campaign.errorTitle</h1>
-      <p class="lead"><span translate>campaign.errorMessage</span> </p>
-      <p>({{$ctrl.mcid}})</p>
+  <div ng-if="$ctrl.isError()" class="rl-content">
+    <h1 translate>campaign.errorTitle</h1>
+    <div class="alert alert-danger">
+      <h4 class="alert-title no-margin">
+        <i class="fa fa-exclamation-triangle"></i>
+        <span translate>campaign.errorMessage</span>
+      </h4>
     </div>
-  <div ng-if="!$ctrl.badId" class="rl-content">
+  </div>
+  <div ng-if="!$ctrl.isError()" class="rl-content">
     <rl-expanding-header data="$ctrl.header">
       <campaign-data-settings class="pull-right" campaign-cycles="$ctrl.cycles" current-data-settings="$ctrl.campaignDataSettings" on-update-data-settings="$ctrl.handleUpdateDataSettings(settings)"></campaign-data-settings>
     </rl-expanding-header>
-    <div class="rl-expading-header__body" current-data-settings="$ctrl.campaignDataSettings"  ui-view></div>
-
+    <div class="rl-expading-header__body" current-data-settings="$ctrl.campaignDataSettings" ui-view></div>
   </div>
 </div>

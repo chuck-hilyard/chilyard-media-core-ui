@@ -35,3 +35,13 @@ h3.panel-title {
     }
   }
 }
+
+.alert {
+  .alert-title {
+    margin-top: 0;
+  }
+}
+
+.alert-danger .fa {
+  color: $brand-danger;
+}

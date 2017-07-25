@@ -1,9 +1,8 @@
 import template from './campaign.html';
 let me = 'Campaign Component';
 class Controller {
-  constructor(CampaignSidebar, $stateParams, rlLogger, rlDateTime, DataSettings) {
+  constructor(CampaignSidebar, $stateParams, rlDateTime, DataSettings) {
     'ngInject';
-    this.Logger = rlLogger;
     this.header = {};
     this.sidebar = CampaignSidebar;
     this.DataSettings = DataSettings;
@@ -14,17 +13,14 @@ class Controller {
   }
 
   $onInit() {
-    this.Logger.trace('$onInit', {campaignOverview: this.campaignOverview, campaignCycles: this.campaignCycles}, me);
-    this.campaign = this.campaignOverview;
-    if (this.campaignOverview.masterCampaignId + '' !== this.mcid) {
-      this.badId = true;
-      this.Logger.error('Master campaign id ' + this.mcid + ' is invalid.', {
-        campaignOverview: this.campaignOverview
-      }, me);
-    }
     this.cycles = mapCycles(this.DateTime, this.campaignCycles);
     this.campaignDataSettings = this.DataSettings.initialize(this.cycles, this.mcid);
     this.header = setHeader(this.campaignOverview);
+  }
+
+  isError(data) {
+    let object = data || this.campaignOverview;
+    return object instanceof Error;
   }
 
   handleSidebarToggle(status) {

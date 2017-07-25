@@ -1,18 +1,18 @@
-<div class="panel panel-default age-gender" ng-hide="$ctrl.isError()">
+<div class="panel panel-default age-gender">
 
   <div class="panel-heading panel-heading--form">
     <div class="row">
       <div class="col-sm-8">
         <h3 class="panel-title">Age &amp; Gender</h3>
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-2" ng-hide="$ctrl.isError()">
         <select class="form-control input-sm"
           ng-model="$ctrl.metrics[0]"
           ng-change="$ctrl.updateChart()"
           ng-options="item as item.label for item in $ctrl.filterOptions(1)">
         </select>
       </div>
-      <div class="col-sm-2">
+      <div class="col-sm-2" ng-hide="$ctrl.isError()">
         <select class="form-control input-sm"
           ng-model="$ctrl.metrics[1]"
           ng-change="$ctrl.updateChart()"
@@ -22,7 +22,7 @@
     </div>
   </div>
   <div class="panel-body">
-    <div class="row">
+    <div class="row" ng-hide="$ctrl.isError()">
 
       <div class="col-md-2 text-center label-col">
         <h4 class="wrap text-bold">{{$ctrl.metrics[0].label}}</h4>
@@ -77,12 +77,15 @@
           ({{$ctrl.getTotals(1, 'female').total}})
         </h6>
       </div>
-
     </div>
-  </div>
-</div>
 
-<div class="alert alert-danger" ng-show="$ctrl.isError()">
-  <h4 style="margin-top:0;">There was an error fetching the campaign age &amp; gender data.</h4>
-  <p>{{$ctrl.data}}</p>
+    <div class="alert alert-danger no-margin" ng-show="$ctrl.isError()">
+      <h4 class="alert-title">
+        <i class="fa fa-exclamation-triangle"></i>
+        There was an error fetching the campaign age &amp; gender data.
+      </h4>
+      <p>{{$ctrl.data}}</p>
+    </div>
+
+  </div>
 </div>

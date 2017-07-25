@@ -61,11 +61,11 @@ class DeviceChartController {
     let metricData = data.find((item) => item.metric === this.metric.id);
     let total = 0;
     switch (this.metric.format) {
-    case 'currency':
-      total = this.$filter('currency')(metricData.total);
-      break;
-    default:
-      total = this.$filter('number')(metricData.total);
+      case 'currency':
+        total = this.$filter('currency')(metricData.total);
+        break;
+      default:
+        total = this.$filter('number')(metricData.total);
     }
     return {
       line1: total,

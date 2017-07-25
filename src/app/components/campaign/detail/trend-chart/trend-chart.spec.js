@@ -1,5 +1,7 @@
-import mockdata from '../../../../../../test/mocks/components/campaign/performance/cycles';
-import mockChart from './mock-data/chart';
+import cycleData from '../../../../../../test/mocks/components/campaign/performance/cycles';
+import monthsData from '../../../../../../test/mocks/components/campaign/performance/months';
+import cyclesChart from './mock-data/cyclesChart';
+import monthsChart from './mock-data/monthsChart';
 import metricsConfig from './configs/metrics';
 
 describe('campaign.detail.trend-chart', () => {
@@ -32,19 +34,22 @@ describe('campaign.detail.trend-chart', () => {
   });
 
   it('builds chart json object', () => {
-    $ctrl.build(mockdata);
-    expect($ctrl.chart.type).toBe('bar');
-    expect($ctrl.chart.data.labels).toEqual(mockChart.labels);
+    $ctrl.build(cycleData);
+    expect($ctrl.chart.data.labels).toEqual(cyclesChart.labels);
     angular.forEach($ctrl.chart.data.datasets, (item, index) => {
-      expect(item.data).toEqual(mockChart.datasets[index]);
+      expect(item.data).toEqual(cyclesChart.datasets[index]);
     });
     let yAxes = $ctrl.chart.options.scales.yAxes;
-    expect(yAxes[0].id).toBe('left');
     expect(yAxes[0].position).toBe('left');
     expect(yAxes[0].ticks.callback(1000)).toBe('1,000');
-    expect(yAxes[1].id).toBe('right');
     expect(yAxes[1].position).toBe('right');
     expect(yAxes[1].ticks.callback(1000)).toBe('$1,000.00');
+
+    $ctrl.build(monthsData);
+    expect($ctrl.chart.data.labels).toEqual(monthsChart.labels);
+    angular.forEach($ctrl.chart.data.datasets, (item, index) => {
+      expect(item.data).toEqual(monthsChart.datasets[index]);
+    });
   });
 
   it('dropdowns filter out other selected metrics', () => {

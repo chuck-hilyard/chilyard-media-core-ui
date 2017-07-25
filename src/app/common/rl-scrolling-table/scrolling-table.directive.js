@@ -1,7 +1,8 @@
 import template from './scrolling-table.html';
 
 
-export default function rlScrollingTable($timeout) {
+const me = 'Scrolling Table Directive';
+export default function rlScrollingTable($timeout, rlLogger) {
   'ngInject';
 
   return {
@@ -14,13 +15,15 @@ export default function rlScrollingTable($timeout) {
     },
     scope: {
       delegate: '=',
-      onNextPage: '&'
+      onNextPage: '&',
+      staticTable: '<'
     }
   };
 
   function link(scope, element) {
     this.borderWidth = 1;
     this.heightPercentage = 0.6;
+    this.logger = rlLogger;
     this.resizing;
     this.$timeout = $timeout;
 
@@ -45,15 +48,23 @@ export default function rlScrollingTable($timeout) {
       this.body.addEventListener('scroll', this.scroll.bind(null, scope));
       window.addEventListener('resize', this.handleResize);
 
-      this.initChecker();
+      if (!this.validateTransclude()) {
+        scope.loading = false;
+        return;
+      }
+
+      if (scope.staticTable === 'true') {
+        this.build();
+      } else {
+        this.initChecker();
+      }
     };
 
     this.initChecker = () => {
       let bodyRows = this.body.querySelectorAll('tbody tr');
       if (bodyRows.length > 0) {
         this.$timeout(this.build, 250);
-      }
-      else {
+      } else {
         this.$timeout(this.initChecker, 250);
       }
     };
@@ -182,6 +193,25 @@ export default function rlScrollingTable($timeout) {
       this.setHeight();
 
       scope.loading = false;
+    };
+
+    this.validateTransclude = () => {
+      let valid = true;
+      let headerCells = this.header.querySelectorAll('thead th').length;
+      let bodyCells = this.body.querySelectorAll('tbody td').length;
+      if (headerCells < 2) {
+        rlLogger.error('rlScrollingTable trancluded HTML is missing required header table elements', {
+          headerTable: this.header
+        }, me);
+        valid = false;
+      }
+      if (bodyCells < 2) {
+        rlLogger.error('rlScrollingTable trancluded HTML is missing required body table elements', {
+          bodyTable: this.body
+        }, me);
+        valid = false;
+      }
+      return valid;
     };
 
     this.init();

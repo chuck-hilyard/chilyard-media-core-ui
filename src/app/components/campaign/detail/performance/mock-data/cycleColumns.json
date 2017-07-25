@@ -1,7 +1,7 @@
 [
   {
     "key": "tableLabel",
-    "label": "Cycles",
+    "label": "Label",
     "sortable": true
   },
   {

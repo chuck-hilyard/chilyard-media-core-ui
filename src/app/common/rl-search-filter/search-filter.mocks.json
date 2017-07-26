@@ -1,0 +1,22 @@
+{
+  "list": [
+    {"name": "Flopsy", "id": 123, "email": "flopsy@gmail.com"},
+    {"name": "Mopsy", "id": 124, "email": "mopsy@yahoo.com"},
+    {"name": "Cotton Tail", "id": 125, "email": "ctail@mopsy.org"}
+  ],
+  "showFieldsName": [
+    {"field": "name"}
+  ],
+  "showFieldsNameEmail": [
+    {"field": "name"},
+    {"field": "email"}
+  ],
+  "showFieldsAll": [
+    {"field": "name"},
+    {"field": "email"},
+    {"field": "id"}
+  ],
+  "showFieldsId": [
+    {"field": "id"}
+  ]
+}

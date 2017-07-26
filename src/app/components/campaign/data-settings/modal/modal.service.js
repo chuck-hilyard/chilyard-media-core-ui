@@ -1,4 +1,13 @@
-const showFields = ['cycleNumberStr', 'cycleId', 'dateRange'];
+
+const showFieldLabels = [{
+  class: 'cycleNumber',
+  field: 'cycleNumberStr'
+}, {
+  class: 'cycleId',
+  field: 'cycleId'
+}, {
+  field: 'dateRange'
+}];
 
 export default class modalService {
   constructor($log, rlDateTime, DataSettings) {
@@ -69,14 +78,16 @@ export default class modalService {
         list: cycles.filter((cycle) => {
           return cycle.cycleNumber <= settings.end.cycleNumber;
         }),
-        showFields: showFields
+        showFields: showFieldLabels,
+        customClass: 'modal-dropdown-body'
       },
       end: {
         selected: settings.end,
         list: cycles.filter((cycle) => {
           return cycle.cycleNumber >= settings.start.cycleNumber;
         }),
-        showFields: showFields
+        showFields: showFieldLabels,
+        customClass: 'modal-dropdown-body'
       }
     };
     return options;

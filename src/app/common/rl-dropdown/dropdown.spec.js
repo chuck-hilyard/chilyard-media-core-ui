@@ -1,12 +1,12 @@
-import mocks from './select.mocks';
+import mocks from './dropdown.mocks';
 import mockLogger from '../../../../test/mocks/common/mock-logger';
 
-describe('common.select', () => {
+describe('common.dropdown', () => {
 
   let $ctrl;
 
   beforeEach(() => {
-    angular.mock.module('common.select', ($provide) => {
+    angular.mock.module('common.dropdown', ($provide) => {
       $provide.value('rlLogger', mockLogger);
     });
 
@@ -16,7 +16,7 @@ describe('common.select', () => {
         options: mocks.options,
         onSelect: angular.noop
       };
-      $ctrl = $componentController('rlSelect', {}, bindings);
+      $ctrl = $componentController('rlDropdown', {}, bindings);
     });
   });
 

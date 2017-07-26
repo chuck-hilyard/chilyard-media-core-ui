@@ -102,10 +102,6 @@
       vertical-align: middle;
     }
 
-    .cycleNumber::before {
-      content: 'Cycle ';
-    }
-
     .cycleId {
       display: inline-block;
       vertical-align: middle;
@@ -113,7 +109,7 @@
     }
 
     .cycleId::before {
-      content: ' (';
+      content: '(';
     }
 
     .cycleId::after {
@@ -140,5 +136,15 @@
 
   .modal-footer span.rl-range-label {
     margin-right: ($grid-gutter-width / 2);
+  }
+}
+
+.modal-dropdown-body {
+  .cycleId::before {
+    content: ' (';
+  }
+
+  .cycleId::after {
+    content: ') ';
   }
 }

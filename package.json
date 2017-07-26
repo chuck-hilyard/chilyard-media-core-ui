@@ -21,6 +21,7 @@
     "angular-cookies": "^1.6.4",
     "angular-http-auth": "^1.5.0",
     "angular-jwt": "^0.1.9",
+    "angular-sanitize": "^1.6.4",
     "angular-translate": "^2.15.1",
     "angular-ui-bootstrap": "^2.5.0",
     "angular-ui-router": "1.0.0-rc.1",
@@ -38,7 +39,9 @@
     "ng-annotate-loader": "^0.2.0",
     "node-sass": "^4.5.0",
     "sass-loader": "^6.0.3",
+    "select2": "^3.4.5",
     "style-loader": "^ 0.14.0",
+    "ui-select": "^0.19.8",
     "webpack": "^2.2.1"
   },
   "devDependencies": {

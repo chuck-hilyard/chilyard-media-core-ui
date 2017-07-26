@@ -33,7 +33,7 @@ let config = {
         use: 'html-loader'
       },
       {
-        test: /\.(eot|svg|ttf|woff|woff2)$/,
+        test: /\.(eot|svg|ttf|woff|woff2|png|gif)$/,
         use: 'file-loader?name=fonts/[name].[ext]'
       }
     ],

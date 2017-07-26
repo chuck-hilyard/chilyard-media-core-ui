@@ -72,6 +72,7 @@ class Controller {
   }
 
   handleCycleStartSelect(item) {
+    this.Logger.trace('handleCycleStartSelect', item, me);
     this.workingSettings.start = angular.copy(item);
     this.onWorkingSettingsChange();
   }

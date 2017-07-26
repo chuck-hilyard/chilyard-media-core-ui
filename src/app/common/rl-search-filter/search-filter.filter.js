@@ -1,5 +1,4 @@
 export default function(items, searchText, showFields) {
-
   let filtered = [];
 
   if (searchText && searchText !== '') {
@@ -11,8 +10,8 @@ export default function(items, searchText, showFields) {
       parts.forEach((part) => {
         let partMatch = false;
         showFields.forEach((field) => {
-          let regex = new RegExp(part);
-          if (regex.test(item[field] + '')){
+          let regex = new RegExp(part, 'i');
+          if (regex.test(item[field.field] + '')) {
             partMatch = true;
           }
         });

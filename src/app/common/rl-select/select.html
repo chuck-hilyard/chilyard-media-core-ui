@@ -5,10 +5,10 @@
   </div>
   <div class="select-list">
     <div class="list-group">
-      <button ng-repeat="item in $ctrl.list | selectFilter:$ctrl.search:$ctrl.showFields" type="button" ng-click="$ctrl.selectItem(item)" class="list-group-item list-group-item-action" ng-class="{'selected': $ctrl.isSelected(item)}">
+      <button ng-repeat="item in $ctrl.list | rlSearchFilter:$ctrl.search:$ctrl.showFields" type="button" ng-click="$ctrl.selectItem(item)" class="list-group-item list-group-item-action" ng-class="{'selected': $ctrl.isSelected(item)}">
         <span class="icon"><i class="fa fa-check"></i></span>
         <div class="fields">
-           <div class="field" ng-class="'{{field}}'" ng-repeat="field in $ctrl.showFields">{{item[field]}}</div>
+           <div class="field" ng-class="'{{field.class}}'" ng-repeat="field in $ctrl.showFields"><span ng-if="field.label">{{field.label}}: </span>{{item[field.field]}}</div>
         </div>
       </button>
     </div>

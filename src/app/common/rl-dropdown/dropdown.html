@@ -1,0 +1,12 @@
+<div class="rl-dropdown">
+  <ui-select ng-model="$ctrl.selected" ng-change="$ctrl.selectItem()" theme="select2" ng-class="{'rl-dropdown-body': true, '{{$ctrl.customClass}}': $ctrl.customClass}" title="Choose an item" append-to-body="true">
+    <ui-select-match placeholder="Select...">{{$select.selected[$ctrl.mainField]}}</ui-select-match>
+    <ui-select-choices repeat="item in $ctrl.list | rlSearchFilter:$select.search:$ctrl.showFields">
+      <span class="icon"><i class="fa fa-check"></i></span>
+      <div ng-bind-html="item[$ctrl.mainField] | highlight: $select.search"></div>
+      <small class="fields">
+        <div class="field" ng-class="'{{field.class}}'" ng-if="$index > 0" ng-repeat="field in $ctrl.showFields"><span ng-if="field.label">{{field.label}}: </span><span ng-bind-html="''+item[field.field] | highlight: $select.search"></span></div>
+      </small>
+    </ui-select-choices>
+  </ui-select>
+</div>

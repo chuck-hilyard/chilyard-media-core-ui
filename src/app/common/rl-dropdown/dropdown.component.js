@@ -1,6 +1,6 @@
 /**
- *  This component provides a general, non-dropdown way to select
- *  an item from a list of objects
+ *  This component wraps the angular ui-select directive in a general way
+ *  which can be used with any array of objects.
  *
  *  It allows you to configure which fields to show, including custom
  *  labels if desired.
@@ -15,23 +15,30 @@
  *          [{field: 'name'},
  *           {field: 'other', label: 'Color', class: 'otherClass'}
  *          ]
+ *    customClass: 'unique-global-classname' // Dropdown is on the body if you
+ *                                              want to customize the styling
+ *                                              include a unique class name
  *  }
+ *  The first field in the showFields list is treated as the "main" field that
+ *  shows when the dropdown is closed.
  *
  *  onSelect is the callback to select the item. (uses one-way data flow)
  */
-import selectTemplate from './select.html';
-const me = 'Select Controller';
 
-class SelectController {
+import dropdownTemplate from './dropdown.html';
+const me = 'Dropdown Controller';
+
+class DropdownController {
   constructor(rlLogger) {
     'ngInject';
     this.Logger = rlLogger;
-
     this.list = [];
     this.selected = {};
+    this.customClass = '';
     this.showFields = [{
       field: 'name'
     }];
+    this.mainField = 'name';
     this.search = '';
   }
 
@@ -42,10 +49,10 @@ class SelectController {
     }
   }
 
-  selectItem(item) {
-    this.selected = item;
+  selectItem() {
+    this.Logger.trace('selectItem', this.selected, me);
     this.onSelect({
-      item: item
+      item: this.selected
     });
   }
 
@@ -64,16 +71,21 @@ class SelectController {
       if (options.showFields) {
         this.showFields = options.showFields;
       }
+      if (options.customClass) {
+        this.customClass = options.customClass;
+      }
+      this.mainField = this.showFields[0].field;
     }
     catch (err) {
       this.Logger.warning('updateData - bad options', options, me);
     }
   }
+
 }
 
 export default {
-  template: selectTemplate,
-  controller: SelectController,
+  template: dropdownTemplate,
+  controller: DropdownController,
   bindings: {
     options: '<',
     onSelect: '&'

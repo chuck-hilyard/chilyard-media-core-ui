@@ -2,19 +2,16 @@
   {
     "metricName": "impressions",
     "displayName": "Impressions",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   },
   {
     "metricName": "ctr",
     "displayName": "CTR",
-    "format": "float",
-    "total": "average"
+    "format": "float"
   },
   {
     "metricName": "pageEngagements",
     "displayName": "Page Engagements",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   }
 ]

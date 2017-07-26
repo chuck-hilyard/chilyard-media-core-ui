@@ -2,109 +2,91 @@
   {
     "metricName": "impressions",
     "displayName": "Impressions",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   },
   {
     "metricName": "spend",
     "displayName": "Spend",
-    "format": "currency",
-    "total": "sum"
+    "format": "currency"
   },
   {
     "metricName": "cpm",
     "displayName": "CPM",
-    "format": "float",
-    "total": "average"
+    "format": "float"
   },
   {
     "metricName": "ctr",
     "displayName": "CTR",
-    "format": "float",
-    "total": "average"
+    "format": "float"
   },
   {
     "metricName": "allClicks",
     "displayName": "All Clicks",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   },
   {
     "metricName": "socialImpressions",
     "displayName": "Social Impressions",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   },
   {
     "metricName": "websiteClicks",
     "displayName": "Website Clicks",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   },
   {
     "metricName": "buttonClicks",
     "displayName": "Button Clicks",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   },
   {
     "metricName": "linkClicks",
     "displayName": "Link Clicks",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   },
   {
     "metricName": "socialClicks",
     "displayName": "Social Clicks",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   },
   {
     "metricName": "leadForms",
     "displayName": "Lead Forms",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   },
   {
     "metricName": "checkIns",
     "displayName": "Check Ins",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   },
   {
     "metricName": "postComments",
     "displayName": "Post Comments",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   },
   {
     "metricName": "postReactions",
     "displayName": "Post Reactions",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   },
   {
     "metricName": "postShares",
     "displayName": "Post Shares",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   },
   {
     "metricName": "postEngagements",
     "displayName": "Post Engagements",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   },
   {
     "metricName": "pageLikes",
     "displayName": "Page Likes",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   },
   {
     "metricName": "pageEngagements",
     "displayName": "Page Engagements",
-    "format": "int",
-    "total": "sum"
+    "format": "int"
   }
 ]

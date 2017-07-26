@@ -13,7 +13,7 @@ class TrendChartController {
     'ngInject';
     this.$filter = $filter;
     this.chart = {};
-    this.chartData = {};
+    this.chartData = [];
     this.colors = [
       rlColors.charts[4].shades[0],
       rlColors.charts[2].shades[0]

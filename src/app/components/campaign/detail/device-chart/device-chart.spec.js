@@ -1,6 +1,8 @@
-import mockdata from '../../../../../../test/mocks/components/campaign/device/device';
-import mockChart from './mock-data/chart';
+import mockData from '../../../../../../test/mocks/components/campaign/device/device';
+import cyclesMetrics from './mock-data/cyclesMetrics';
+import cyclesChart from './mock-data/cyclesChart';
 import metricsConfig from './configs/metrics';
+
 
 describe('campaign.detail.device-chart', () => {
 
@@ -21,24 +23,39 @@ describe('campaign.detail.device-chart', () => {
   });
 
   it('constructs', () => {
-    let expectedMetric = metricsConfig.find((item) => item.id === 'impressions');
     expect($ctrl.chart).toEqual({});
-    expect($ctrl.options).toEqual(metricsConfig);
-    expect($ctrl.metric).toEqual(expectedMetric);
+    expect($ctrl.chartData).toEqual([]);
+    expect($ctrl.metricOptions).toEqual([]);
+    expect($ctrl.metric).toEqual({});
   });
 
-  it('builds chart json object', () => {
-    $ctrl.build(mockdata);
-    expect($ctrl.metricData).toEqual(mockChart.metricData);
-    expect($ctrl.chart.data.datasets[0].data).toEqual(mockChart.data);
-    expect($ctrl.chart.options.elements.center).toEqual(mockChart.center);
+  describe('intial data load `$onChange`', () => {
+    beforeEach(() => {
+      $ctrl.$onChanges({
+        data: {
+          currentValue: mockData
+        }
+      });
+    });
+
+    it('populates metricOptions and metrics arrays', () => {
+      let expectedMetrics = metricsConfig.find((item) => item.metricName === 'impressions');
+      expect($ctrl.metricOptions).toEqual(cyclesMetrics);
+      expect($ctrl.metric).toEqual(expectedMetrics);
+    });
+
+    it('builds chart json object', () => {
+      expect($ctrl.metricData).toEqual(cyclesChart.metricData);
+      expect($ctrl.chart.data.datasets[0].data).toEqual(cyclesChart.data);
+      expect($ctrl.chart.options.elements.center).toEqual(cyclesChart.center);
+    });
   });
 
   describe('change chart metric', () => {
     it('updates chart', () => {
       spyOn($ctrl, 'build');
       $ctrl.updateChart();
-      expect($ctrl.build).toHaveBeenCalledWith({});
+      expect($ctrl.build).toHaveBeenCalled();
     });
   });
 

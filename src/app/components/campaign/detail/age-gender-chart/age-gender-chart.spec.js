@@ -24,6 +24,7 @@ describe('campaign.detail.age-gender-chart', () => {
 
   it('constructs', () => {
     expect($ctrl.charts).toEqual([]);
+    expect($ctrl.chartData).toEqual([]);
     expect($ctrl.metricOptions).toEqual([]);
     expect($ctrl.metrics).toEqual([]);
   });

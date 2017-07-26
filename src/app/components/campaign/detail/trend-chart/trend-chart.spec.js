@@ -27,6 +27,7 @@ describe('campaign.detail.trend-chart', () => {
 
   it('constructs', () => {
     expect($ctrl.chart).toEqual({});
+    expect($ctrl.chartData).toEqual([]);
     expect($ctrl.metricOptions).toEqual([]);
     expect($ctrl.metrics).toEqual([]);
   });

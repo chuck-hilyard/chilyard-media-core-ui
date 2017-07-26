@@ -102,6 +102,7 @@ export default {
   template: template,
   controller: DeviceChartController,
   bindings: {
-    data: '<'
+    data: '<',
+    loading: '<'
   }
 };

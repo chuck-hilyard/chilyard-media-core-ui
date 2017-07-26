@@ -7,6 +7,7 @@ class TrendChartController {
     'ngInject';
     this.$filter = $filter;
     this.chart = {};
+    this.chartData = {};
     this.colors = [
       rlColors.charts[4].shades[0],
       rlColors.charts[2].shades[0]
@@ -25,18 +26,19 @@ class TrendChartController {
   $onChanges(changes) {
     let currentData = (changes.data) ? changes.data.currentValue : null;
     if (currentData && !this.isError(currentData)) {
-      this.build(currentData);
+      this.chartData = angular.copy(currentData);
+      this.chartData.reverse();
+      this.build();
     }
   }
 
-  build(data) {
-    let chartData = this.sortData(data);
+  build() {
     let $ctrl = this;
     this.chart = {
       type: 'bar',
       data: {
-        labels: $ctrl.setLabels(chartData),
-        datasets: $ctrl.setData(chartData)
+        labels: $ctrl.setLabels(),
+        datasets: $ctrl.setData()
       },
       options: $ctrl.setOptions()
     };
@@ -73,18 +75,18 @@ class TrendChartController {
     return object instanceof Error;
   }
 
-  setLabels(data) {
-    return data.map((item) => {
+  setLabels() {
+    return this.chartData.map((item) => {
       return item.chartLabel;
     });
   }
 
-  setData(data) {
+  setData() {
     return [
       {
         backgroundColor: this.colors[0],
         borderColor: this.colors[0],
-        data: data.map((item) => item[this.metrics[0].id]),
+        data: this.chartData.map((item) => item[this.metrics[0].id]),
         fill: false,
         label: this.metrics[0].label,
         lineTension: 0.1,
@@ -95,7 +97,7 @@ class TrendChartController {
       {
         backgroundColor: this.colors[1],
         borderColor: this.colors[1],
-        data: data.map((item) => item[this.metrics[1].id]),
+        data: this.chartData.map((item) => item[this.metrics[1].id]),
         hoverBackgroundColor: this.hoverColors[1],
         hoverBorderColor: this.hoverColors[1],
         label: this.metrics[1].label,
@@ -110,6 +112,9 @@ class TrendChartController {
       maintainAspectRatio: false,
       legend: {
         display: false
+      },
+      animation: {
+        duration: 0
       },
       scales: {
         xAxes: [
@@ -160,21 +165,8 @@ class TrendChartController {
     return yAxes;
   }
 
-  sortData(data) {
-    let copy = angular.copy(data);
-    switch (this.breakdownType) {
-      case 'cycles':
-        return copy.sort((a, b) => a.cycleNumber - b.cycleNumber);
-      case 'months':
-      case 'days':
-        return copy.sort((a, b) => new Date(a.reportDate) - new Date(b.reportDate));
-      default:
-        return copy;
-    }
-  }
-
   updateChart() {
-    this.build(this.data);
+    this.build();
   }
 
 }
@@ -184,6 +176,7 @@ export default {
   controller: TrendChartController,
   bindings: {
     data: '<',
-    breakdownType: '<'
+    breakdownType: '<',
+    loading: '<'
   }
 };

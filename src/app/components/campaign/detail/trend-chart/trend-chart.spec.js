@@ -34,7 +34,11 @@ describe('campaign.detail.trend-chart', () => {
   });
 
   it('builds chart json object', () => {
-    $ctrl.build(cycleData);
+    $ctrl.$onChanges({
+      data: {
+        currentValue: cycleData
+      }
+    });
     expect($ctrl.chart.data.labels).toEqual(cyclesChart.labels);
     angular.forEach($ctrl.chart.data.datasets, (item, index) => {
       expect(item.data).toEqual(cyclesChart.datasets[index]);
@@ -45,10 +49,14 @@ describe('campaign.detail.trend-chart', () => {
     expect(yAxes[1].position).toBe('right');
     expect(yAxes[1].ticks.callback(1000)).toBe('$1,000.00');
 
-    $ctrl.build(monthsData);
-    expect($ctrl.chart.data.labels).toEqual(monthsChart.labels);
+    $ctrl.$onChanges({
+      data: {
+        currentValue: monthsData
+      }
+    });
+    expect($ctrl.chart.data.labels).toEqual(monthsChart.labels.reverse());
     angular.forEach($ctrl.chart.data.datasets, (item, index) => {
-      expect(item.data).toEqual(monthsChart.datasets[index]);
+      expect(item.data).toEqual(monthsChart.datasets[index].reverse());
     });
   });
 
@@ -63,7 +71,7 @@ describe('campaign.detail.trend-chart', () => {
     it('updates chart', () => {
       spyOn($ctrl, 'build');
       $ctrl.updateChart();
-      expect($ctrl.build).toHaveBeenCalledWith({});
+      expect($ctrl.build).toHaveBeenCalled();
     });
   });
 

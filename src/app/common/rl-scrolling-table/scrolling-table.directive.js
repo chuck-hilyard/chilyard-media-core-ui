@@ -48,11 +48,6 @@ export default function rlScrollingTable($timeout, rlLogger) {
       this.body.addEventListener('scroll', this.scroll.bind(null, scope));
       window.addEventListener('resize', this.handleResize);
 
-      if (!this.validateTransclude()) {
-        scope.loading = false;
-        return;
-      }
-
       if (scope.staticTable === 'true') {
         this.build();
       }
@@ -101,6 +96,11 @@ export default function rlScrollingTable($timeout, rlLogger) {
     };
 
     this.build = () => {
+      if (!this.validateTransclude()) {
+        scope.loading = false;
+        return;
+      }
+
       let staticHeaderWidth = window.getComputedStyle(this.staticHead.querySelector('th:first-child'), null).getPropertyValue('width');
       let staticBodyWidth = window.getComputedStyle(this.staticBody.querySelector('td:first-child'), null).getPropertyValue('width');
       let staticWidth = `${Math.max(parseInt(staticHeaderWidth), parseInt(staticBodyWidth))}px`;

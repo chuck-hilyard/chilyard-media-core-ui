@@ -6,22 +6,10 @@
     "total": "sum"
   },
   {
-    "metricName": "budget",
-    "displayName": "Budget",
-    "format": "currency",
-    "total": "sum"
-  },
-  {
     "metricName": "spend",
     "displayName": "Spend",
     "format": "currency",
     "total": "sum"
-  },
-  {
-    "metricName": "utilization",
-    "displayName": "Utilization",
-    "format": "float",
-    "total": "average"
   },
   {
     "metricName": "cpm",
@@ -39,24 +27,6 @@
     "metricName": "allClicks",
     "displayName": "All Clicks",
     "format": "int",
-    "total": "sum"
-  },
-  {
-    "metricName": "frequency",
-    "displayName": "Frequency",
-    "format": "float",
-    "total": "sum"
-  },
-  {
-    "metricName": "reach",
-    "displayName": "Reach",
-    "format": "float",
-    "total": "sum"
-  },
-  {
-    "metricName": "socialReach",
-    "displayName": "Social Reach",
-    "format": "float",
     "total": "sum"
   },
   {

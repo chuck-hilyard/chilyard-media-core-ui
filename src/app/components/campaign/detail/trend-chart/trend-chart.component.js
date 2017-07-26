@@ -1,6 +1,7 @@
 import template from './trend-chart.html';
 import metricsConfig from './configs/metrics';
 
+
 const metricDefaults = [
   'impressions',
   'spend'

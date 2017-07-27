@@ -1,10 +1,8 @@
 import Template from './modal.html';
 
-
 class Controller {
-  constructor($scope, DateRangeService) {
+  constructor($scope) {
     'ngInject';
-    this.dateRangeService = DateRangeService;
     $scope.$watchCollection(() => this.range, (newValue) => {
       this.getRangeName();
       this.options.start.maxDate = newValue.end;
@@ -35,15 +33,14 @@ class Controller {
   }
 
   customClass(data) {
-    let cycles = this.resolve.cycles.cycles;
+    let cycles = this.resolve.cycles;
     if (angular.isDefined(cycles) && data.mode === 'day') {
       let dayToCheck = new Date(data.date).setHours(0, 0, 0, 0);
-      let match = cycles
-        .find((cycle) => {
-          let start = new Date(cycle.start).setHours(0, 0, 0, 0) === dayToCheck;
-          let end = new Date(cycle.end).setHours(0, 0, 0, 0) === dayToCheck;
-          return start || end;
-        });
+      let match = cycles.find((cycle) => {
+        let start = new Date(cycle.start).setHours(0, 0, 0, 0) === dayToCheck;
+        let end = new Date(cycle.end).setHours(0, 0, 0, 0) === dayToCheck;
+        return start || end;
+      });
       if (angular.isDefined(match)) {
         return 'bookend';
       }
@@ -53,14 +50,11 @@ class Controller {
   }
 
   getRangeName() {
-    let match = this.dateRangeService.findRange(this.ranges, this.range);
-    /*
-    let match = this.ranges.cycles.find((range) => {
+    let match = this.ranges.find((range) => {
       let start = this.range.start.getTime() === range.start.getTime();
       let end = this.range.end.getTime() === range.end.getTime();
       return start && end;
     });
-    */
     this.range.name = angular.isDefined(match) ? match.name : null;
   }
 

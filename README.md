@@ -12,10 +12,12 @@ JavaScript framework written for modular architecture. See [Angular Styleguide](
  - [Webpack 2.x](https://webpack.js.org/) - Module bundler
  - [Babel](https://babeljs.io/) - ES2015 compiler
  - [AngularJS](https://angularjs.org)
- - [Angular Translate](https://angular-translate.github.io/) - i18n library 
+ - [Angular Translate](https://angular-translate.github.io/) - i18n library
+ - [Angular Sanitize](https://docs.angularjs.org/api/ngSanitize/service/$sanitize) - sanitize html
  - [UI Router](https://ui-router.github.io/ng1/) - Angular router
  - [Bootstrap](http://getbootstrap.com/) - Responsive HTML/CSS framework
- - [UI Bootstrap](https://angular-ui.github.io/bootstrap/) - Bootstrap components written in Angular
+ - [UI Bootstrap](https://angular-ui.github.io/bootstrap/) - Bootstrap components written in AngularJS
+ - [UI Select](https://angular-ui.github.io/ui-select/) -  Select element for AngularJS
  - [Jasmine](https://jasmine.github.io/) - BDD test framework
  - [Karma](https://karma-runner.github.io/1.0/index.html) - Unit test runner
  - [Protractor](http://www.protractortest.org/#/) - End to end test runner

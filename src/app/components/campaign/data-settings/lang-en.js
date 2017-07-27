@@ -1,12 +1,32 @@
 export default {
   campaignDataSettings: {
-    modalHeading: 'Select the breakdown (show data by cycles, months, days), then select the range of data to show.',
+    allMonths: 'All months',
+    allCycles: 'All cycles',
+    calendarNotation: 'Indicates cycle start/end.',
+    custom: 'Custom',
     cycle: 'Cycle',
     cycles: 'Cycles',
-    months: 'Months',
     days: 'Days',
-    calendarNotation: 'Indicates cycle start/end.',
+    last3Cycles: 'Last 3 cycles',
+    last6Cycles: 'Last 6 cycles',
+    last12Cycles: 'Last 12 cycles',
+    last7Days: 'Last 7 days',
+    last14Days: 'Last 14 days',
+    last30Days: 'Last 30 days',
+    last3Months: 'Last 3 months',
+    last6Months: 'Last 6 months',
+    last12Months: 'Last 12 months',
+    lastCycle: 'Last cycle',
+    lastMonth: 'Last month',
+    lastWeek: 'Last week',
+    lastYear: 'Last year',
+    modalHeading: 'Select the breakdown (show data by cycles, months, days), then select the range of data to show.',
+    months: 'Months',
+    selectEnd: 'Select End',
     selectStart: 'Select Start',
-    selectEnd: 'Select End'
+    thisCycle: 'This cycle',
+    thisMonth: 'This month',
+    thisWeek: 'This week',
+    thisYear: 'This year'
   }
 };

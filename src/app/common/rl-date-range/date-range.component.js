@@ -9,18 +9,18 @@ class Controller {
     this.$uibModal = $uibModal;
   }
 
-  showField(field) {
-    return field; //this.service.showField();
-  }
-
   $onInit() {
-    this.service.setRanges(this.cycles);
     this.dateRanges = angular.copy(this.service.ranges);
     if (angular.isDefined(this.cycles)) {
-      this.session.dateRange = angular.copy(this.dateRanges.cycles[0]);
+      let thisCycle = angular.copy(this.cycles[0]);
+      thisCycle.name = 'This Cycle';
+      let lastCycle = angular.copy(this.cycles[1]);
+      lastCycle.name = 'Last Cycle';
+      this.dateRanges.unshift(thisCycle, lastCycle);
+      this.session.dateRange = angular.copy(this.dateRanges[1]);
     }
     else {
-      this.session.dateRange = angular.copy(this.dateRanges.days[2]);
+      this.session.dateRange = angular.copy(this.dateRanges[2]);
     }
   }
 

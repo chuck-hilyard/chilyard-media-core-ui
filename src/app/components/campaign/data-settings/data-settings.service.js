@@ -1,6 +1,8 @@
 const me = 'DataSettings Service';
 
 const cyclesType = 'cycles';
+const monthsType = 'months';
+const daysType = 'days';
 
 const dateFilter = {
   days: 'MMM d, yyyy',
@@ -91,7 +93,7 @@ export default class DataSettings {
   recoverDateObjects(settings) {
     let convertedSettings = angular.copy(settings);
     // JSON.stringify saves dates as utc string so new Date makes them back into the proper date object
-    if (convertedSettings.breakdownType !== 'cycles') {
+    if (convertedSettings.breakdownType !== cyclesType) {
       convertedSettings.start = new Date(settings.start);
       convertedSettings.end = new Date(settings.end);
     }
@@ -241,25 +243,27 @@ function getCycleRanges(cyclesObject) {
   let cycleRanges = [];
   if (cycles && cycles.length) {
     if (currentCycleIndex >= 0 && currentCycleIndex < cycles.length - 2) {
-      cycleRanges.push(newCycleRange('Last 3 Cycles', cycles[currentCycleIndex + 2], cycles[currentCycleIndex]));
+      cycleRanges.push(newCycleRange('campaignDataSettings.last3Cycles', cycles[currentCycleIndex + 2], cycles[currentCycleIndex]));
     }
 
     if (currentCycleIndex >= 0 && currentCycleIndex < cycles.length - 5) {
-      cycleRanges.push(newCycleRange('Last 6 Cycles', cycles[currentCycleIndex + 5], cycles[currentCycleIndex]));
+      cycleRanges.push(newCycleRange('campaignDataSettings.last6Cycles', cycles[currentCycleIndex + 5], cycles[currentCycleIndex]));
     }
 
     if (currentCycleIndex >= 0 && currentCycleIndex < cycles.length - 11) {
-      cycleRanges.push(newCycleRange('Last 12 Cycles', cycles[currentCycleIndex + 11], cycles[currentCycleIndex]));
+      cycleRanges.push(newCycleRange('campaignDataSettings.last12Cycles', cycles[currentCycleIndex + 11], cycles[currentCycleIndex]));
     }
 
-    cycleRanges.push(newCycleRange('All Cycles', cycles[lastCycle], cycles[0]));
+    if (cycles.length < 25) {
+      cycleRanges.push(newCycleRange('campaignDataSettings.allCycles', cycles[lastCycle], cycles[0]));
+    }
   }
   return cycleRanges;
 }
 
 function newCycleRange(name, startCycle, endCycle) {
   return {
-    breakdownType: 'cycles',
+    breakdownType: cyclesType,
     name: name,
     start: startCycle,
     end: endCycle
@@ -270,22 +274,22 @@ function getMonthRanges(DateTime, minDate, maxDate) {
   let today = DateTime.dayOnly(new Date());
   let monthRanges = [];
 
-  addMonthRange(DateTime, monthRanges, 'Last 3 months', DateTime.subtractMonths(today, 2), today, minDate, maxDate);
-  addMonthRange(DateTime, monthRanges, 'Last 6 months', DateTime.subtractMonths(today, 5), today, minDate, maxDate);
-  addMonthRange(DateTime, monthRanges, 'Last 12 months', DateTime.subtractMonths(today, 11), today, minDate, maxDate);
+  addMonthRange(DateTime, monthRanges, 'campaignDataSettings.last3Months', DateTime.subtractMonths(today, 2), today, minDate, maxDate);
+  addMonthRange(DateTime, monthRanges, 'campaignDataSettings.last6Months', DateTime.subtractMonths(today, 5), today, minDate, maxDate);
+  addMonthRange(DateTime, monthRanges, 'campaignDataSettings.last12Months', DateTime.subtractMonths(today, 11), today, minDate, maxDate);
   let yearStart = DateTime.yearStart(today.getFullYear());
   let useStart = (minDate > yearStart) ? minDate : yearStart;
-  addMonthRange(DateTime, monthRanges, 'This Year', useStart, today, minDate, maxDate);
+  addMonthRange(DateTime, monthRanges, 'campaignDataSettings.thisYear', useStart, today, minDate, maxDate);
 
   let lastYearEnd = DateTime.yearEnd(today.getFullYear() - 1);
   if (minDate < lastYearEnd) {
     let lastYearStart = DateTime.yearStart(today.getFullYear() - 1);
     let startDate = (minDate > lastYearStart) ? minDate : lastYearStart;
-    addMonthRange(DateTime, monthRanges, 'Last Year', startDate, lastYearEnd, minDate, maxDate);
+    addMonthRange(DateTime, monthRanges, 'campaignDataSettings.lastYear', startDate, lastYearEnd, minDate, maxDate);
   }
 
   if (monthRanges.length === 0) {
-    addMonthRange(DateTime, monthRanges, 'Custom', minDate, maxDate, minDate, maxDate);
+    addMonthRange(DateTime, monthRanges, 'campaignDataSettings.allMonths', minDate, maxDate, minDate, maxDate);
   }
 
   return monthRanges;
@@ -296,7 +300,7 @@ function addMonthRange(DateTime, months, name, startMonth, endMonth, minDate, ma
   let end = DateTime.roundToMonthStart(endMonth);
   if (start >= DateTime.roundToMonthStart(minDate) && end <= maxDate) {
     let newMonth = {
-      breakdownType: 'months',
+      breakdownType: monthsType,
       name: name,
       start: start,
       end: end
@@ -312,35 +316,35 @@ function getDayRanges(DateTime, minDate, maxDate, cyclesObject) {
   let thisCycle = getThisCycle(cyclesObject);
   let lastCycle = getLastCycle(cyclesObject, 1);
   let dayRanges = [];
-  addDayRange(DateTime, dayRanges, 'Last 30 days', DateTime.subtractDays(today, 30), today, minDate, maxDate);
-  addDayRange(DateTime, dayRanges, 'Last 14 days', DateTime.subtractDays(today, 14), today, minDate, maxDate);
-  addDayRange(DateTime, dayRanges, 'Last 7 days', DateTime.subtractDays(today, 7), today, minDate, maxDate);
-  addDayRange(DateTime, dayRanges, 'This week', DateTime.weekStart(today), today, minDate, maxDate);
-  addDayRange(DateTime, dayRanges, 'Last week', DateTime.weekStart(lastWeek), DateTime.weekEnd(lastWeek), minDate, maxDate);
-  addDayRange(DateTime, dayRanges, 'This month', DateTime.monthStart(today), today, minDate, maxDate);
-  addDayRange(DateTime, dayRanges, 'Last month', DateTime.monthStart(lastMonth), DateTime.monthEnd(lastMonth), minDate, maxDate);
-  addDayRange(DateTime, dayRanges, 'Last 3 months', DateTime.monthStart(DateTime.subtractMonths(today, 2)), today, minDate, maxDate);
-  addDayRange(DateTime, dayRanges, 'Last 6 months', DateTime.monthStart(DateTime.subtractMonths(today, 5)), today, minDate, maxDate);
+  addDayRange(DateTime, dayRanges, 'campaignDataSettings.last30Days', DateTime.subtractDays(today, 30), today, minDate, maxDate);
+  addDayRange(DateTime, dayRanges, 'campaignDataSettings.last14Days', DateTime.subtractDays(today, 14), today, minDate, maxDate);
+  addDayRange(DateTime, dayRanges, 'campaignDataSettings.last7Days', DateTime.subtractDays(today, 7), today, minDate, maxDate);
+  addDayRange(DateTime, dayRanges, 'campaignDataSettings.thisWeek', DateTime.weekStart(today), today, minDate, maxDate);
+  addDayRange(DateTime, dayRanges, 'campaignDataSettings.lastWeek', DateTime.weekStart(lastWeek), DateTime.weekEnd(lastWeek), minDate, maxDate);
+  addDayRange(DateTime, dayRanges, 'campaignDataSettings.thisMonth', DateTime.monthStart(today), today, minDate, maxDate);
+  addDayRange(DateTime, dayRanges, 'campaignDataSettings.lastMonth', DateTime.monthStart(lastMonth), DateTime.monthEnd(lastMonth), minDate, maxDate);
+  addDayRange(DateTime, dayRanges, 'campaignDataSettings.last3Months', DateTime.monthStart(DateTime.subtractMonths(today, 2)), today, minDate, maxDate);
+  addDayRange(DateTime, dayRanges, 'campaignDataSettings.last6Months', DateTime.monthStart(DateTime.subtractMonths(today, 5)), today, minDate, maxDate);
   if (thisCycle !== null) {
     let thisCycleEnd = (thisCycle.endDate) ? DateTime.newDate(thisCycle.endDate) : today;
-    addDayRange(DateTime, dayRanges, 'This Cycle', DateTime.newDate(thisCycle.startDate), thisCycleEnd, minDate, maxDate);
+    addDayRange(DateTime, dayRanges, 'campaignDataSettings.thisCycle', DateTime.newDate(thisCycle.startDate), thisCycleEnd, minDate, maxDate);
     if (lastCycle && lastCycle.startDate && lastCycle.endDate) {
-      addDayRange(DateTime, dayRanges, 'Last Cycle', DateTime.newDate(lastCycle.startDate), DateTime.newDate(lastCycle.endDate), minDate, maxDate);
+      addDayRange(DateTime, dayRanges, 'campaignDataSettings.lastCycle', DateTime.newDate(lastCycle.startDate), DateTime.newDate(lastCycle.endDate), minDate, maxDate);
     }
     let last3cycle = getLastCycle(cyclesObject, 2);
     if (last3cycle && last3cycle.startDate) {
-      addDayRange(DateTime, dayRanges, 'Last 3 Cycles', DateTime.newDate(last3cycle.startDate), thisCycleEnd, minDate, maxDate);
+      addDayRange(DateTime, dayRanges, 'campaignDataSettings.last3Cycles', DateTime.newDate(last3cycle.startDate), thisCycleEnd, minDate, maxDate);
     }
     let last6cycle = getLastCycle(cyclesObject, 5);
     if (last6cycle && last6cycle.startDate) {
-      addDayRange(DateTime, dayRanges, 'Last 6 Cycles', DateTime.newDate(last6cycle.startDate), thisCycleEnd, minDate, maxDate);
+      addDayRange(DateTime, dayRanges, 'campaignDataSettings.last6Cycles', DateTime.newDate(last6cycle.startDate), thisCycleEnd, minDate, maxDate);
     }
   }
 
   if (dayRanges.length === 0) {
     let monthBeforeMax = DateTime.subtractDays(maxDate, 30);
     let useMin = (minDate > monthBeforeMax) ? minDate : monthBeforeMax;
-    addDayRange(DateTime, dayRanges, 'Custom', useMin, maxDate, minDate, maxDate);
+    addDayRange(DateTime, dayRanges, 'campaignDataSettings.custom', useMin, maxDate, minDate, maxDate);
   }
   return dayRanges;
 }
@@ -350,7 +354,7 @@ function addDayRange(DateTime, days, name, startDay, endDay, minDate, maxDate) {
   let end = DateTime.dayOnly(endDay);
   if (start >= minDate && end <= maxDate) {
     let newDay = {
-      breakdownType: 'days',
+      breakdownType: daysType,
       name: name,
       start: start,
       end: end

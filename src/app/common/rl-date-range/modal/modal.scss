@@ -4,42 +4,17 @@
   .col-list-ranges {
     li {
       display: block;
-      user-select: none;
       padding: 5px ($grid-gutter-width / 2);
       color: $text-color;
       cursor: pointer;
-      .fa {
-        margin-left: 2px;
-        color: $brand-success;
-        display: none;
-      }
 
-      &.active {
-        //background-color: $rl-medium-blue-gray;
-        //color: $rl-white;
-        text-decoration: none;
-        .fa {
-          display: inline;
-        }
-      }
+      &.active,
       &:hover {
-        background-color: $rl-blue-gray;
+        background-color: $rl-medium-blue-gray;
         color: $rl-white;
         text-decoration: none;
-        .fa {
-          color: $state-success-text;
-        }
       }
     }
-  }
-
-  .nav-tabs > li > a {
-    padding-left: 30px;
-    padding-right: 30px;
-  }
-
-  .tab-content {
-    padding-top: 10px;
   }
 
   .datepicker {
@@ -59,7 +34,7 @@
     color: $text-color;
   }
 
-  .modal-footer span.rl-range-label {
+  .modal-footer span {
     margin-right: ($grid-gutter-width / 2);
   }
 }

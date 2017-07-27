@@ -1,6 +1,9 @@
 import template from './device-chart.html';
 import metricsConfig from './configs/metrics';
 
+
+const metricDefault = 'impressions';
+
 class DeviceChartController {
 
   constructor($filter, rlColors) {
@@ -8,6 +11,7 @@ class DeviceChartController {
     this.$filter = $filter;
 
     this.chart = {};
+    this.chartData = [];
     this.colors = [
       rlColors.charts[4].shades[0],
       rlColors.charts[4].shades[1],
@@ -15,25 +19,27 @@ class DeviceChartController {
       rlColors.charts[4].shades[3]
     ];
     this.labels = ['Mobile', 'Desktop', 'Tablet', 'Other'];
-    this.options = metricsConfig;
-    this.metric = this.options.find((item) => item.id === 'impressions');
+    this.metricOptions = [];
+    this.metric = {};
     this.metricData = [];
   }
 
   $onChanges(changes) {
     let currentData = (changes.data) ? changes.data.currentValue : null;
     if (currentData && !this.isError(currentData)) {
-      this.build(currentData);
+      this.chartData = currentData;
+      this.setMetric();
+      this.build();
     }
   }
 
-  build(data) {
+  build() {
     let $ctrl = this;
     this.chart = {
       type: 'doughnut',
       data: {
         datasets: [{
-          data: $ctrl.setDataset(data),
+          data: $ctrl.setDataset(),
           backgroundColor: this.colors
         }],
         labels: this.labels
@@ -46,7 +52,7 @@ class DeviceChartController {
           display: false
         },
         elements: {
-          center: $ctrl.setCenterData(data)
+          center: $ctrl.setCenterData()
         }
       }
     };
@@ -57,8 +63,8 @@ class DeviceChartController {
     return object instanceof Error;
   }
 
-  setCenterData(data) {
-    let metricData = data.find((item) => item.metric === this.metric.id);
+  setCenterData() {
+    let metricData = this.chartData.find((item) => item.metricName === this.metric.metricName);
     let total = 0;
     switch (this.metric.format) {
       case 'currency':
@@ -70,15 +76,15 @@ class DeviceChartController {
     return {
       line1: total,
       line1Padding: 50,
-      line2: this.metric.label,
+      line2: this.metric.displayName,
       line2Padding: 35,
       fontFamily: '\'Roboto\', sans-serif',
       fontColor: '#333'
     };
   }
 
-  setDataset(data) {
-    let metricData = data.find((item) => item.metric === this.metric.id);
+  setDataset() {
+    let metricData = this.chartData.find((item) => item.metricName === this.metric.metricName);
     if (metricData.breakdowns.length === 0) {
       return;
     }
@@ -92,8 +98,19 @@ class DeviceChartController {
     return dataset;
   }
 
+  setMetric() {
+    this.metricOptions = [];
+    let keys = this.chartData.map((item) => item.metricName);
+    angular.forEach(metricsConfig, (value) => {
+      if (keys.indexOf(value.metricName) > -1) {
+        this.metricOptions.push(angular.copy(value));
+      }
+    });
+    this.metric = this.metricOptions.find((item) => item.metricName === metricDefault);
+  }
+
   updateChart() {
-    this.build(this.data);
+    this.build();
   }
 
 }

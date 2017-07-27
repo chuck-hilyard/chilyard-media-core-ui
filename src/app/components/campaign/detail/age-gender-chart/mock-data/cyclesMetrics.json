@@ -1,0 +1,17 @@
+[
+  {
+    "metricName": "impressions",
+    "displayName": "Impressions",
+    "format": "int"
+  },
+  {
+    "metricName": "ctr",
+    "displayName": "CTR",
+    "format": "float"
+  },
+  {
+    "metricName": "pageEngagements",
+    "displayName": "Page Engagements",
+    "format": "int"
+  }
+]

@@ -9,14 +9,14 @@
         <select class="form-control input-sm"
           ng-model="$ctrl.metrics[0]"
           ng-change="$ctrl.updateChart()"
-          ng-options="item as item.label for item in $ctrl.filterOptions(1)">
+          ng-options="item as item.displayName for item in $ctrl.filterOptions(1)">
         </select>
       </div>
       <div class="col-sm-2" ng-hide="$ctrl.isError() || $ctrl.loading">
         <select class="form-control input-sm"
           ng-model="$ctrl.metrics[1]"
           ng-change="$ctrl.updateChart()"
-          ng-options="item as item.label for item in $ctrl.filterOptions(0)">
+          ng-options="item as item.displayName for item in $ctrl.filterOptions(0)">
         </select>
       </div>
     </div>
@@ -25,7 +25,7 @@
     <div class="row" ng-hide="$ctrl.isError() || $ctrl.loading">
 
       <div class="col-md-2 text-center label-col">
-        <h4 class="wrap text-bold">{{$ctrl.metrics[0].label}}</h4>
+        <h4 class="wrap text-bold">{{$ctrl.metrics[0].displayName}}</h4>
         <br>
         <h5>
           <span class="fa fa-male" ng-style="{'color': $ctrl.colors[0].male}"></span>
@@ -58,7 +58,7 @@
       </div>
 
       <div class="col-md-2 text-center label-col">
-        <h4 class="wrap text-bold">{{$ctrl.metrics[1].label}}</h4>
+        <h4 class="wrap text-bold">{{$ctrl.metrics[1].displayName}}</h4>
         <br>
         <h5>
           <span class="fa fa-male" ng-style="{'color': $ctrl.colors[1].male}"></span>

@@ -1,6 +1,8 @@
-import mockdata from '../../../../../../test/mocks/components/campaign/age-gender/age-gender';
-import mockChart from './mock-data/chart';
+import mockData from '../../../../../../test/mocks/components/campaign/age-gender/age-gender';
+import cyclesMetrics from './mock-data/cyclesMetrics';
+import cyclesChart from './mock-data/cyclesChart';
 import metricsConfig from './configs/metrics';
+
 
 describe('campaign.detail.age-gender-chart', () => {
 
@@ -21,46 +23,60 @@ describe('campaign.detail.age-gender-chart', () => {
   });
 
   it('constructs', () => {
-    let expectedMetrics = [
-      metricsConfig.find((item) => item.id === 'impressions'),
-      metricsConfig.find((item) => item.id === 'pageEngagements')
-    ];
     expect($ctrl.charts).toEqual([]);
-    expect($ctrl.metricOptions).toEqual(metricsConfig);
-    expect($ctrl.metrics).toEqual(expectedMetrics);
+    expect($ctrl.chartData).toEqual([]);
+    expect($ctrl.metricOptions).toEqual([]);
+    expect($ctrl.metrics).toEqual([]);
   });
 
-  it('builds charts array of json objects', () => {
-    $ctrl.build(mockdata);
+  describe('intial data load `$onChange`', () => {
+    beforeEach(() => {
+      $ctrl.$onChanges({
+        data: {
+          currentValue: mockData
+        }
+      });
+    });
 
-    // Chart 1 data should have negative values to spoof right to left alignment
-    expect($ctrl.charts[0].data.datasets[0].label).toBe(mockChart[0].datasets[0].label);
-    expect($ctrl.charts[0].data.datasets[0].data).toEqual(mockChart[0].datasets[0].data);
-    expect($ctrl.charts[0].data.datasets[1].label).toBe(mockChart[0].datasets[1].label);
-    expect($ctrl.charts[0].data.datasets[1].data).toEqual(mockChart[0].datasets[1].data);
-    expect($ctrl.charts[0].options.scales.xAxes[0].ticks.suggestedMin).toBe(-1);
-    expect($ctrl.charts[0].options.scales.xAxes[0].ticks.callback(-1000)).toBe('1,000');
+    it('populates metricOptions and metrics arrays', () => {
+      let expectedMetrics = [
+        metricsConfig.find((item) => item.metricName === 'impressions'),
+        metricsConfig.find((item) => item.metricName === 'pageEngagements')
+      ];
+      expect($ctrl.metricOptions).toEqual(cyclesMetrics);
+      expect($ctrl.metrics).toEqual(expectedMetrics);
+    });
 
-    expect($ctrl.charts[1].data.datasets[0].label).toBe(mockChart[1].datasets[0].label);
-    expect($ctrl.charts[1].data.datasets[0].data).toEqual(mockChart[1].datasets[0].data);
-    expect($ctrl.charts[1].data.datasets[1].label).toBe(mockChart[1].datasets[1].label);
-    expect($ctrl.charts[1].data.datasets[1].data).toEqual(mockChart[1].datasets[1].data);
-    expect($ctrl.charts[1].options.scales.xAxes[0].ticks.suggestedMin).toBe(1);
-    expect($ctrl.charts[1].options.scales.xAxes[0].ticks.callback(1000)).toBe('1,000');
-  });
+    it('builds charts array of json objects', () => {
+      // Chart 1 data should have negative values to spoof right to left alignment
+      expect($ctrl.charts[0].data.datasets[0].label).toBe(cyclesChart[0].datasets[0].label);
+      expect($ctrl.charts[0].data.datasets[0].data).toEqual(cyclesChart[0].datasets[0].data);
+      expect($ctrl.charts[0].data.datasets[1].label).toBe(cyclesChart[0].datasets[1].label);
+      expect($ctrl.charts[0].data.datasets[1].data).toEqual(cyclesChart[0].datasets[1].data);
+      expect($ctrl.charts[0].options.scales.xAxes[0].ticks.suggestedMin).toBe(-1);
+      expect($ctrl.charts[0].options.scales.xAxes[0].ticks.callback(-1000)).toBe('1,000');
 
-  it('dropdowns filter out other selected metrics', () => {
-    let filtered = $ctrl.filterOptions(1);
-    let expected = metricsConfig;
-    expected.splice(6, 1);
-    expect(filtered).toEqual(expected);
+      expect($ctrl.charts[1].data.datasets[0].label).toBe(cyclesChart[1].datasets[0].label);
+      expect($ctrl.charts[1].data.datasets[0].data).toEqual(cyclesChart[1].datasets[0].data);
+      expect($ctrl.charts[1].data.datasets[1].label).toBe(cyclesChart[1].datasets[1].label);
+      expect($ctrl.charts[1].data.datasets[1].data).toEqual(cyclesChart[1].datasets[1].data);
+      expect($ctrl.charts[1].options.scales.xAxes[0].ticks.suggestedMin).toBe(1);
+      expect($ctrl.charts[1].options.scales.xAxes[0].ticks.callback(1000)).toBe('1,000');
+    });
+
+    it('dropdowns filter out other selected metrics', () => {
+      let filtered = $ctrl.filterOptions(1);
+      let expected = $ctrl.metricOptions;
+      expected.splice(2, 1);
+      expect(filtered).toEqual(expected);
+    });
   });
 
   describe('change chart metric', () => {
     it('updates chart', () => {
       spyOn($ctrl, 'build');
       $ctrl.updateChart();
-      expect($ctrl.build).toHaveBeenCalledWith({});
+      expect($ctrl.build).toHaveBeenCalled();
     });
   });
 

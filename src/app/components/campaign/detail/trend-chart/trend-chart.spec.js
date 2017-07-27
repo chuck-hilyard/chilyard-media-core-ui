@@ -1,6 +1,8 @@
 import cycleData from '../../../../../../test/mocks/components/campaign/performance/cycles';
 import monthsData from '../../../../../../test/mocks/components/campaign/performance/months';
+import cyclesMetrics from './mock-data/cyclesMetrics';
 import cyclesChart from './mock-data/cyclesChart';
+import monthsMetrics from './mock-data/monthsMetrics';
 import monthsChart from './mock-data/monthsChart';
 import metricsConfig from './configs/metrics';
 
@@ -24,47 +26,67 @@ describe('campaign.detail.trend-chart', () => {
   });
 
   it('constructs', () => {
-    let expectedMetrics = [
-      metricsConfig.find((item) => item.id === 'impressions'),
-      metricsConfig.find((item) => item.id === 'spend')
-    ];
     expect($ctrl.chart).toEqual({});
-    expect($ctrl.options).toEqual(metricsConfig);
-    expect($ctrl.metrics).toEqual(expectedMetrics);
+    expect($ctrl.chartData).toEqual([]);
+    expect($ctrl.metricOptions).toEqual([]);
+    expect($ctrl.metrics).toEqual([]);
   });
 
-  it('builds chart json object', () => {
-    $ctrl.$onChanges({
-      data: {
-        currentValue: cycleData
-      }
+  describe('intial data load `$onChange`', () => {
+    beforeEach(() => {
+      $ctrl.$onChanges({
+        data: {
+          currentValue: cycleData
+        }
+      });
     });
-    expect($ctrl.chart.data.labels).toEqual(cyclesChart.labels);
-    angular.forEach($ctrl.chart.data.datasets, (item, index) => {
-      expect(item.data).toEqual(cyclesChart.datasets[index]);
-    });
-    let yAxes = $ctrl.chart.options.scales.yAxes;
-    expect(yAxes[0].position).toBe('left');
-    expect(yAxes[0].ticks.callback(1000)).toBe('1,000');
-    expect(yAxes[1].position).toBe('right');
-    expect(yAxes[1].ticks.callback(1000)).toBe('$1,000.00');
 
-    $ctrl.$onChanges({
-      data: {
-        currentValue: monthsData
-      }
-    });
-    expect($ctrl.chart.data.labels).toEqual(monthsChart.labels.reverse());
-    angular.forEach($ctrl.chart.data.datasets, (item, index) => {
-      expect(item.data).toEqual(monthsChart.datasets[index].reverse());
-    });
-  });
+    it('builds chart json object', () => {
+      expect($ctrl.chart.data.labels).toEqual(cyclesChart.labels);
+      angular.forEach($ctrl.chart.data.datasets, (item, index) => {
+        expect(item.data).toEqual(cyclesChart.datasets[index]);
+      });
+      let yAxes = $ctrl.chart.options.scales.yAxes;
+      expect(yAxes[0].position).toBe('left');
+      expect(yAxes[0].ticks.callback(1000)).toBe('1,000');
+      expect(yAxes[1].position).toBe('right');
+      expect(yAxes[1].ticks.callback(1000)).toBe('$1,000.00');
 
-  it('dropdowns filter out other selected metrics', () => {
-    let filtered = $ctrl.filterOptions(1);
-    let expected = metricsConfig;
-    expected.splice(2, 1);
-    expect(filtered).toEqual(expected);
+      $ctrl.$onChanges({
+        data: {
+          currentValue: monthsData
+        }
+      });
+      expect($ctrl.chart.data.labels).toEqual(monthsChart.labels.reverse());
+      angular.forEach($ctrl.chart.data.datasets, (item, index) => {
+        expect(item.data).toEqual(monthsChart.datasets[index].reverse());
+      });
+    });
+
+    it('populates metricOptions and metrics arrays', () => {
+      let expectedMetrics = [
+        metricsConfig.find((item) => item.metricName === 'impressions'),
+        metricsConfig.find((item) => item.metricName === 'spend')
+      ];
+      expect($ctrl.metricOptions).toEqual(cyclesMetrics);
+      expect($ctrl.metrics).toEqual(expectedMetrics);
+
+      $ctrl.metrics = [];
+      $ctrl.$onChanges({
+        data: {
+          currentValue: monthsData
+        }
+      });
+      expect($ctrl.metricOptions).toEqual(monthsMetrics);
+      expect($ctrl.metrics).toEqual(expectedMetrics);
+    });
+
+    it('dropdowns filter out other selected metrics', () => {
+      let filtered = $ctrl.filterOptions(1);
+      let expected = $ctrl.metricOptions;
+      expected.splice(2, 1);
+      expect(filtered).toEqual(expected);
+    });
   });
 
   describe('change chart metric', () => {

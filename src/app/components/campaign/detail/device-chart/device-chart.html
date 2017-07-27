@@ -8,13 +8,13 @@
         <select class="form-control input-sm"
           ng-model="$ctrl.metric"
           ng-change="$ctrl.updateChart()"
-          ng-options="item as item.label for item in $ctrl.options">
+          ng-options="item as item.displayName for item in $ctrl.metricOptions">
         </select>
       </div>
     </div>
   </div>
   <div class="panel-body text-center">
-    <div class="device-chart" ng-hide="$ctrl.isError()  || $ctrl.loading">
+    <div class="device-chart" ng-hide="$ctrl.isError() || $ctrl.loading">
       <rl-chart data="$ctrl.chart"></rl-chart>
     </div>
     <div class="loading" ng-show="$ctrl.loading">

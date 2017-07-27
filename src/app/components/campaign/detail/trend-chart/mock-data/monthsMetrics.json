@@ -5,19 +5,9 @@
     "format": "int"
   },
   {
-    "metricName": "budget",
-    "displayName": "Budget",
-    "format": "currency"
-  },
-  {
     "metricName": "spend",
     "displayName": "Spend",
     "format": "currency"
-  },
-  {
-    "metricName": "utilization",
-    "displayName": "Utilization",
-    "format": "float"
   },
   {
     "metricName": "cpm",
@@ -33,21 +23,6 @@
     "metricName": "allClicks",
     "displayName": "All Clicks",
     "format": "int"
-  },
-  {
-    "metricName": "frequency",
-    "displayName": "Frequency",
-    "format": "float"
-  },
-  {
-    "metricName": "reach",
-    "displayName": "Reach",
-    "format": "float"
-  },
-  {
-    "metricName": "socialReach",
-    "displayName": "Social Reach",
-    "format": "float"
   },
   {
     "metricName": "socialImpressions",

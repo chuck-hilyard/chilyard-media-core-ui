@@ -1,0 +1,12 @@
+[
+  {
+    "metricName": "impressions",
+    "displayName": "Impressions",
+    "format": "int"
+  },
+  {
+    "metricName": "allClicks",
+    "displayName": "All Clicks",
+    "format": "int"
+  }
+]

@@ -1,77 +1,117 @@
 [
   {
-    "id": "impressions",
-    "label": "Impressions",
+    "metricName": "impressions",
+    "displayName": "Impressions",
     "format": "int"
   },
   {
-    "id": "allClicks",
-    "label": "All Clicks",
+    "metricName": "budget",
+    "displayName": "Budget",
+    "format": "currency"
+  },
+  {
+    "metricName": "spend",
+    "displayName": "Spend",
+    "format": "currency"
+  },
+  {
+    "metricName": "utilization",
+    "displayName": "Utilization",
     "format": "float"
   },
   {
-    "id": "socialImpressions",
-    "label": "Social Impressions",
+    "metricName": "cpm",
+    "displayName": "CPM",
     "format": "float"
   },
   {
-    "id": "websiteClicks",
-    "label": "Website Clicks",
+    "metricName": "ctr",
+    "displayName": "CTR",
     "format": "float"
   },
   {
-    "id": "buttonClicks",
-    "label": "Button Clicks",
+    "metricName": "allClicks",
+    "displayName": "All Clicks",
+    "format": "int"
+  },
+  {
+    "metricName": "frequency",
+    "displayName": "Frequency",
     "format": "float"
   },
   {
-    "id": "linkClicks",
-    "label": "Link Clicks",
+    "metricName": "reach",
+    "displayName": "Reach",
     "format": "float"
   },
   {
-    "id": "socialClicks",
-    "label": "Social Clicks",
+    "metricName": "socialReach",
+    "displayName": "Social Reach",
     "format": "float"
   },
   {
-    "id": "leadForms",
-    "label": "Lead Forms",
-    "format": "float"
+    "metricName": "socialImpressions",
+    "displayName": "Social Impressions",
+    "format": "int"
   },
   {
-    "id": "checkIns",
-    "label": "Check-Ins",
-    "format": "float"
+    "metricName": "websiteClicks",
+    "displayName": "Website Clicks",
+    "format": "int"
   },
   {
-    "id": "postComments",
-    "label": "Post Comments",
-    "format": "float"
+    "metricName": "buttonClicks",
+    "displayName": "Button Clicks",
+    "format": "int"
   },
   {
-    "id": "postReactions",
-    "label": "Post Reactions",
-    "format": "float"
+    "metricName": "linkClicks",
+    "displayName": "Link Clicks",
+    "format": "int"
   },
   {
-    "id": "postShares",
-    "label": "Post Shares",
-    "format": "float"
+    "metricName": "socialClicks",
+    "displayName": "Social Clicks",
+    "format": "int"
   },
   {
-    "id": "postEngagements",
-    "label": "Post Engagements",
-    "format": "float"
+    "metricName": "leadForms",
+    "displayName": "Lead Forms",
+    "format": "int"
   },
   {
-    "id": "pageLikes",
-    "label": "Page Likes",
-    "format": "float"
+    "metricName": "checkIns",
+    "displayName": "Check Ins",
+    "format": "int"
   },
   {
-    "id": "pageEngagements",
-    "label": "Page Engagements",
-    "format": "float"
+    "metricName": "postComments",
+    "displayName": "Post Comments",
+    "format": "int"
+  },
+  {
+    "metricName": "postReactions",
+    "displayName": "Post Reactions",
+    "format": "int"
+  },
+  {
+    "metricName": "postShares",
+    "displayName": "Post Shares",
+    "format": "int"
+  },
+  {
+    "metricName": "postEngagements",
+    "displayName": "Post Engagements",
+    "format": "int"
+  },
+  {
+    "metricName": "pageLikes",
+    "displayName": "Page Likes",
+    "format": "int"
+  },
+  {
+    "metricName": "pageEngagements",
+    "displayName": "Page Engagements",
+    "format": "int"
   }
 ]

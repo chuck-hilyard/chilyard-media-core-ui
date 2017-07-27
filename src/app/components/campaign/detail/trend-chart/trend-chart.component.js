@@ -1,13 +1,19 @@
 import template from './trend-chart.html';
 import metricsConfig from './configs/metrics';
 
+
+const metricDefaults = [
+  'impressions',
+  'spend'
+];
+
 class TrendChartController {
 
   constructor($filter, rlColors) {
     'ngInject';
     this.$filter = $filter;
     this.chart = {};
-    this.chartData = {};
+    this.chartData = [];
     this.colors = [
       rlColors.charts[4].shades[0],
       rlColors.charts[2].shades[0]
@@ -16,11 +22,8 @@ class TrendChartController {
       rlColors.charts[4].shades[1],
       rlColors.charts[2].shades[1]
     ];
-    this.options = metricsConfig;
-    this.metrics = [
-      this.options.find((item) => item.id === 'impressions'),
-      this.options.find((item) => item.id === 'spend')
-    ];
+    this.metricOptions = [];
+    this.metrics = [];
   }
 
   $onChanges(changes) {
@@ -28,6 +31,7 @@ class TrendChartController {
     if (currentData && !this.isError(currentData)) {
       this.chartData = angular.copy(currentData);
       this.chartData.reverse();
+      this.setMetrics();
       this.build();
     }
   }
@@ -45,29 +49,15 @@ class TrendChartController {
   }
 
   filterOptions(index) {
-    return this.options.filter((item) => {
-      if (this.metrics[index].id !== item.id) {
+    return this.metricOptions.filter((item) => {
+      if (this.metrics[index].metricName !== item.metricName) {
         return item;
       }
     });
   }
 
-  getTotals(metric) {
-    if (!this.data) {
-      return 0;
-    }
-    let total = 0;
-    angular.forEach(this.data, (item) => {
-      total +=item[metric.id];
-    });
-    if (metric.format === 'currency') {
-      return this.$filter('currency')(total);
-    }
-    if (metric.total === 'average') {
-      total = total / this.data.length;
-      return this.$filter('number')(total);
-    }
-    return this.$filter('number')(total);
+  getTotals() {
+    return 0;
   }
 
   isError(data) {
@@ -86,7 +76,7 @@ class TrendChartController {
       {
         backgroundColor: this.colors[0],
         borderColor: this.colors[0],
-        data: this.chartData.map((item) => item[this.metrics[0].id]),
+        data: this.chartData.map((item) => item[this.metrics[0].metricName]),
         fill: false,
         label: this.metrics[0].label,
         lineTension: 0.1,
@@ -97,12 +87,26 @@ class TrendChartController {
       {
         backgroundColor: this.colors[1],
         borderColor: this.colors[1],
-        data: this.chartData.map((item) => item[this.metrics[1].id]),
+        data: this.chartData.map((item) => item[this.metrics[1].metricName]),
         hoverBackgroundColor: this.hoverColors[1],
         hoverBorderColor: this.hoverColors[1],
         label: this.metrics[1].label,
         yAxisID: 'right'
       }
+    ];
+  }
+
+  setMetrics() {
+    this.metricOptions = [];
+    let keys = Object.keys(this.chartData[0]);
+    angular.forEach(metricsConfig, (value) => {
+      if (keys.indexOf(value.metricName) > -1) {
+        this.metricOptions.push(angular.copy(value));
+      }
+    });
+    this.metrics = [
+      this.metricOptions.find((item) => item.metricName === metricDefaults[0]),
+      this.metricOptions.find((item) => item.metricName === metricDefaults[1])
     ];
   }
 

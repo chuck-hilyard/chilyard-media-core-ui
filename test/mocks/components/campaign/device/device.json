@@ -1,6 +1,6 @@
 [
   {
-    "metric": "impressions",
+    "metricName": "impressions",
     "displayName": "Impressions",
     "total": 4000,
     "breakdowns": [
@@ -27,7 +27,7 @@
     ]
   },
   {
-    "metric": "allClicks",
+    "metricName": "allClicks",
     "displayName": "Clicks",
     "total": 6000,
     "breakdowns": [

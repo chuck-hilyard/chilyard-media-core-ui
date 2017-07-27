@@ -1,6 +1,12 @@
 import template from './age-gender-chart.html';
 import metricsConfig from './configs/metrics';
 
+
+const metricDefaults = [
+  'impressions',
+  'pageEngagements'
+];
+
 class AgeGenderController {
 
   constructor($filter, rlColors) {
@@ -17,29 +23,29 @@ class AgeGenderController {
       }
     ];
     this.charts = [];
+    this.chartData = [];
     this.labels = ['13-17', '18-24', '24-34', '35-44', '45-54', '55-64', '65+'];
-    this.metricOptions = metricsConfig;
-    this.metrics = [
-      this.metricOptions.find((item) => item.id === 'impressions'),
-      this.metricOptions.find((item) => item.id === 'pageEngagements')
-    ];
+    this.metricOptions = [];
+    this.metrics = [];
   }
 
   $onChanges(changes) {
     let currentData = (changes.data) ? changes.data.currentValue : null;
     if (currentData && !this.isError(currentData)) {
-      this.build(currentData);
+      this.chartData = currentData;
+      this.setMetrics();
+      this.build();
     }
   }
 
-  build(data) {
+  build() {
     let $ctrl = this;
     this.charts = [
       {
         type: 'horizontalBar',
         data: {
           labels: this.labels,
-          datasets: $ctrl.setDatasets(data, 0)
+          datasets: $ctrl.setDatasets(0)
         },
         options: $ctrl.setOptions(0)
       },
@@ -47,7 +53,7 @@ class AgeGenderController {
         type: 'horizontalBar',
         data: {
           labels: this.labels,
-          datasets: $ctrl.setDatasets(data, 1)
+          datasets: $ctrl.setDatasets(1)
         },
         options: $ctrl.setOptions(1)
       }
@@ -56,21 +62,21 @@ class AgeGenderController {
 
   filterOptions(index) {
     return this.metricOptions.filter((item) => {
-      if (this.metrics[index].id !== item.id) {
+      if (this.metrics[index].metricName !== item.metricName) {
         return item;
       }
     });
   }
 
   getTotals(index, gender) {
-    if (!this.data || this.data instanceof Error) {
+    if (!this.chartData || this.isError()) {
       return {
         percentage: 0,
         total: 0
       };
     }
     let metric = this.metrics[index];
-    let metricData = this.data.find((item) => item.metricName === metric.id);
+    let metricData = this.chartData.find((item) => item.metricName === metric.metricName);
 
     let total = 0;
     if (typeof(metricData) !== 'undefined') {
@@ -92,24 +98,38 @@ class AgeGenderController {
     return object instanceof Error;
   }
 
-  setDatasets(data, index) {
+  setDatasets(index) {
     let metric = this.metrics[index];
-    let metricData = data.find((item) => item.metricName === metric.id);
+    let metricData = this.chartData.find((item) => item.metricName === metric.metricName);
      // Chart 1 data should have negative values to force right to left alignment
     let modifier = index === 0 ? -1 : 1;
     return [
       {
-        label: `Male ${metric.label}`,
+        label: `Male ${metric.displayName}`,
         data: (metricData) ? metricData.male.ageGroups.map((item) => item.total * modifier) : [],
         backgroundColor: this.colors[index].male,
         borderColor: this.colors[index].male
       },
       {
-        label: `Female ${metric.label}`,
+        label: `Female ${metric.displayName}`,
         data: (metricData) ? metricData.female.ageGroups.map((item) => item.total * modifier) : [],
         backgroundColor: this.colors[index].female,
         borderColor: this.colors[index].female
       }
+    ];
+  }
+
+  setMetrics() {
+    this.metricOptions = [];
+    let keys = this.chartData.map((item) => item.metricName);
+    angular.forEach(metricsConfig, (value) => {
+      if (keys.indexOf(value.metricName) > -1) {
+        this.metricOptions.push(angular.copy(value));
+      }
+    });
+    this.metrics = [
+      this.metricOptions.find((item) => item.metricName === metricDefaults[0]),
+      this.metricOptions.find((item) => item.metricName === metricDefaults[1])
     ];
   }
 
@@ -184,7 +204,7 @@ class AgeGenderController {
   }
 
   updateChart() {
-    this.build(this.data);
+    this.build();
   }
 
 }

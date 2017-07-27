@@ -7,8 +7,6 @@ import DataSettingsModule from './data-settings/data-settings.module';
 import CreativesModule from './creatives/creatives.module';
 import DataSettingsService from './data-settings/data-settings.service';
 
-
-const me = 'Campaign Module';
 export default angular
   .module('campaign', [
     uiRouter,
@@ -24,27 +22,11 @@ export default angular
         url: '/campaign/:mcid',
         component: 'campaign',
         resolve: {
-          campaignCycles: (CampaignService, rlLogger, $stateParams) => {
-            rlLogger.trace('Resolve campaignCycles', {mcid: $stateParams.mcid}, me);
-            return CampaignService.getCampaignCycles($stateParams.mcid)
-              .then((success) => success.data)
-              .catch((error) => {
-                rlLogger.error(`Error getting campaignCycles data for ${$stateParams.mcid}`, {
-                  error: error
-                });
-                return new Error(error);
-              });
+          campaignCycles: (CampaignService, $stateParams) => {
+            return CampaignService.getCampaignCycles($stateParams.mcid);
           },
-          campaignOverview: (CampaignService, rlLogger, $stateParams) => {
-            rlLogger.trace('Resolve campaignOverview', {mcid: $stateParams.mcid}, me);
-            return CampaignService.getCampaignOverview($stateParams.mcid)
-              .then((success) => success.data)
-              .catch((error) => {
-                rlLogger.error(`Error getting campaignOverview data for ${$stateParams.mcid}`, {
-                  error: error
-                });
-                return new Error(error);
-              });
+          campaignOverview: (CampaignService, $stateParams) => {
+            return CampaignService.getCampaignOverview($stateParams.mcid);
           }
         }
       });

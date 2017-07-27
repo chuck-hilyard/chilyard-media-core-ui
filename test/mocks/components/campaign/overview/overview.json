@@ -7,5 +7,7 @@
   "advertiserName": "Imagix",
   "businessCategoryName": "Dentists & Dental Services",
   "businessSubCategoryName": "General Dentistry",
-  "businessId": 15022
+  "businessId": 15022,
+  "offerId": 1,
+  "offerName": "Search Engine Marketing"
 }

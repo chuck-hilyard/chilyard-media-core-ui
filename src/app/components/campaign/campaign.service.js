@@ -1,17 +1,35 @@
-export default class Service {
+const me = 'Campaign Service';
 
-  constructor($http, rlConfig) {
+export default class Service {
+  constructor($http, rlConfig, rlLogger) {
     'ngInject';
     this.$http = $http;
+    this.Logger = rlLogger;
     this.gatewayUrl = rlConfig.gatewayUrl;
   }
 
   getCampaignCycles(mcid) {
-    return this.$http.get(`${this.gatewayUrl}/campaigns/${mcid}/cycles`);
+    this.Logger.trace('apiGetCampaignCycles', mcid, me);
+    return this.$http.get(`${this.gatewayUrl}/campaigns/${mcid}/cycles`)
+      .then((success) => success.data)
+      .catch((error) => {
+        this.Logger.error(`Error getting campaignCycles data for ${mcid}`, {
+          error: error
+        }, me);
+        return new Error(error);
+      });
   }
 
   getCampaignOverview(mcid) {
-    return this.$http.get(`${this.gatewayUrl}/campaigns/${mcid}/campaign-overview`);
+    this.Logger.trace('apiGetCampaignOverview', mcid, me);
+    return this.$http.get(`${this.gatewayUrl}/campaigns/${mcid}/campaign-overview`)
+      .then((success) => success.data)
+      .catch((error) => {
+        this.Logger.error(`Error getting campaignOverview data for ${mcid}`, {
+          error: error
+        }, me);
+        return new Error(error);
+      });
   }
 
 }

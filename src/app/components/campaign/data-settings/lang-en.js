@@ -1,4 +1,4 @@
-export default {
+export default Object.assign({
   campaignDataSettings: {
     allMonths: 'All months',
     allCycles: 'All cycles',
@@ -29,4 +29,4 @@ export default {
     thisWeek: 'This week',
     thisYear: 'This year'
   }
-};
+});

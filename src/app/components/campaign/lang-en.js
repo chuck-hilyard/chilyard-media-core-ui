@@ -8,7 +8,19 @@ export default Object.assign(
       detail: 'Detail',
       creatives: 'Creatives',
       errorTitle: 'Campaign:',
-      errorMessage: 'Could not retrieve information for this campaign.'
+      errorMessage: 'Could not retrieve information for this campaign.',
+      campaign: 'Campaign',
+      advertiser: 'Advertiser',
+      advertiserName: 'Advertiser Name',
+      masterAdvertiserId: 'Master Advertiser ID',
+      currentAdvertiserId: 'Current Advertiser ID',
+      businessId: 'Advertiser Business',
+      masterCampaignId: 'Master Campaign ID',
+      activeCampaignId: 'Current Campaign ID',
+      offerName: 'Offer Name',
+      offerId: 'Offer ID',
+      businessCategoryName: 'Business Category',
+      businessSubCategoryName: 'Business Sub Category'
     }
   },
   details,

@@ -1,27 +1,46 @@
 import template from './campaign.html';
-
+const me = 'Campaign Controller';
 
 class Controller {
-  constructor(CampaignSidebar, $stateParams, rlDateTime, DataSettings) {
+  constructor(rlLogger, CampaignSidebar, $stateParams, $translate, rlDateTime, DataSettings) {
     'ngInject';
-    this.header = {};
+    this.Logger = rlLogger;
     this.sidebar = CampaignSidebar;
     this.DataSettings = DataSettings;
     this.DateTime = rlDateTime;
+
+    this.to = $translate.instant('app.to');
+    this.cycleString = $translate.instant('app.cycle');
+    this.translatedTitles = setTitles($translate);
     this.mcid = $stateParams.mcid;
-    this.badId = false;
-    this.selectedSettings = null;
+    this.cycles = null;
+    this.campaignDataSettings = {};
+    this.header = {};
   }
 
   $onInit() {
-    this.cycles = mapCycles(this.DateTime, this.campaignCycles);
-    this.campaignDataSettings = this.DataSettings.initialize(this.cycles, this.mcid);
-    this.header = setHeader(this.campaignOverview);
+    this.Logger.trace('$onInit', {
+      campaignCycles: this.campaignCycles,
+      campaignOverview: this.campaignOverview
+    }, me);
+
+    if (!this.isError()) {
+      this.cycles = mapCycles(this.DateTime, this.campaignCycles, this.cycleString, this.to);
+      this.campaignDataSettings = this.DataSettings.initialize(this.cycles, this.mcid);
+      this.header = setHeader(this.campaignOverview, this.translatedTitles);
+    }
+
+    this.Logger.trace('$onInit complete', {
+      cycles: this.cycles,
+      campaignDataSettings: this.campaignDataSettings,
+      header: this.header
+    }, me);
   }
 
-  isError(data) {
-    let object = data || this.campaignOverview;
-    return object instanceof Error;
+  isError() {
+    return (this.campaignOverview instanceof Error ||
+      this.campaignCycles instanceof Error ||
+      this.campaignOverview.masterCampaignId + '' !== this.mcid);
   }
 
   handleSidebarToggle(status) {
@@ -35,71 +54,88 @@ class Controller {
 }
 
 // Private Functions
-function mapCycles(DateTime, cycles) {
+function mapCycles(DateTime, cycles, cycleString, toString) {
   return {
     currentCycleIndex: cycles.currentCycleIndex,
     cycles: cycles.cycles.map((cycle) => {
       return angular.extend({}, cycle, {
-        dateRange: getDateRange(cycle),
+        dateRange: getDateRange(cycle, toString),
         startDateObj: DateTime.newDate(cycle.startDate),
         endDateObj: DateTime.newDate(cycle.endDate),
-        cycleNumberStr: 'Cycle ' + cycle.cycleNumber
+        cycleNumberStr: cycleString + ' ' + cycle.cycleNumber
       });
     })
   };
 }
 
-function getDateRange(cycle) {
+function getDateRange(cycle, toString) {
   let range = cycle.startDate || '-/-/-';
-  range += ' to ';
+  range += ' ' + toString + ' ';
   range += cycle.endDate || '-/-/-';
   return range;
 }
 
-function setHeader(overview) {
+function setHeader(overview, titles) {
   return {
-    type: 'Campaign',
+    type: titles.campaign,
     title: overview.name,
-    subType: 'Advertiser',
+    subType: titles.advertiser,
     subTitle: overview.advertiserName,
     columns: [{
-      title: 'Advertiser',
+      title: titles.advertiser,
       rows: [{
-        name: 'Advertiser Name',
+        name: titles.advertiserName,
         value: overview.advertiserName,
         link: `advertiser.detail({maid:${overview.masterAdvertiserId}})`
       }, {
-        name: 'Master Advertiser ID',
+        name: titles.masterAdvertiserId,
         value: overview.masterAdvertiserId
       }, {
-        name: 'Current Advertiser ID',
+        name: titles.currentAdvertiserId,
         value: overview.currentAdvertiserId
       }, {
-        name: 'Advertiser Business',
+        name: titles.businessId,
         value: overview.businessId
       }]
     }, {
-      title: 'Campaign',
+      title: titles.campaign,
       rows: [{
-        name: 'Master Campaign ID',
+        name: titles.masterCampaignId,
         value: overview.masterCampaignId
       }, {
-        name: 'Current Campaign ID',
+        name: titles.activeCampaignId,
         value: overview.activeCampaignId
       }, {
-        name: 'Offer Name',
+        name: titles.offerName,
         value: overview.offerName
       }, {
-        name: 'Offer ID',
+        name: titles.offerId,
         value: overview.offerId
       }, {
-        name: 'Business Category',
+        name: titles.businessCategoryName,
         value: overview.businessCategoryName
       }, {
-        name: 'Business Sub Category',
+        name: titles.businessSubCategoryName,
         value: overview.businessSubCategoryName
       }]
     }]
+  };
+}
+
+function setTitles(translate) {
+  return {
+    campaign: translate.instant('campaign.campaign'),
+    advertiser: translate.instant('campaign.advertiser'),
+    advertiserName: translate.instant('campaign.advertiserName'),
+    masterAdvertiserId: translate.instant('campaign.masterAdvertiserId'),
+    currentAdvertiserId: translate.instant('campaign.currentAdvertiserId'),
+    businessId: translate.instant('campaign.businessId'),
+    masterCampaignId: translate.instant('campaign.masterCampaignId'),
+    activeCampaignId: translate.instant('campaign.activeCampaignId'),
+    offerName: translate.instant('campaign.offerName'),
+    offerId: translate.instant('campaign.offerId'),
+    businessCategoryName: translate.instant('campaign.businessCategoryName'),
+    businessSubCategoryName: translate.instant('campaign.businessSubCategoryName')
   };
 }
 

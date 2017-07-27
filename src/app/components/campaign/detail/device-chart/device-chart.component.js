@@ -51,6 +51,12 @@ class DeviceChartController {
         legend: {
           display: false
         },
+        tooltips: {
+          callbacks: {
+            title: (item, data) => data.labels[item[0].index],
+            label: (item, data) => `${data.datasets[item.datasetIndex].data[item.index]}%`
+          }
+        },
         elements: {
           center: $ctrl.setCenterData()
         }

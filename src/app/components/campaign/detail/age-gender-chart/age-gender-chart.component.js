@@ -98,6 +98,15 @@ class AgeGenderController {
     return object instanceof Error;
   }
 
+  metricFormat(metric, data) {
+    switch (metric.format) {
+      case 'currency':
+        return this.$filter('currency')(data);
+      default:
+        return this.$filter('number')(data);
+    }
+  }
+
   setDatasets(index) {
     let metric = this.metrics[index];
     let metricData = this.chartData.find((item) => item.metricName === metric.metricName);
@@ -150,10 +159,12 @@ class AgeGenderController {
         ]
       },
       tooltips: {
+        mode: 'index',
         callbacks: {
           label: (tooltipItem, data) => {
             let di = tooltipItem.datasetIndex;
-            return `${data.datasets[di].label}: ${tooltipItem.xLabel * modifier}`;
+            let modifiedLabel = this.metricFormat(this.metrics[index], (tooltipItem.xLabel * modifier));
+            return `${data.datasets[di].label}: ${modifiedLabel}`;
           }
         }
       }
@@ -171,15 +182,10 @@ class AgeGenderController {
         beginAtZero: true,
         maxTicksLimit: 3,
         suggestedMin: (1 * modifier),
-        suggestedMax: 0
+        suggestedMax: 0,
+        callback: (value) => this.metricFormat(metric, (value * modifier))
       }
     };
-    if (metric.format === 'currency') {
-      xAxis.ticks.callback = (value) => this.$filter('currency')(value * modifier);
-    }
-    else {
-      xAxis.ticks.callback = (value) => this.$filter('number')(value * modifier);
-    }
     return xAxis;
   }
 

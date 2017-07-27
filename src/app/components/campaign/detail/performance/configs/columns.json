@@ -1,8 +1,12 @@
 [
   {
     "key": "tableLabel",
-    "label": "Cycle",
+    "label": "",
     "sortable": true
+  },
+  {
+    "key": "cycleId",
+    "label": "Cycle ID"
   },
   {
     "key": "status",

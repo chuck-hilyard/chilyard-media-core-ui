@@ -5,6 +5,10 @@
     "sortable": true
   },
   {
+    "key": "cycleId",
+    "label": "Cycle ID"
+  },
+  {
     "key": "status",
     "label": "Status"
   },

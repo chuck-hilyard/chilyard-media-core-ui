@@ -17,6 +17,11 @@
         "name": "testName3",
         "id": 34567
       }
+    ],
+    "showFields": [
+      {"field": "name"},
+      {"field": "email"},
+      {"field": "id"}
     ]
   }
 }

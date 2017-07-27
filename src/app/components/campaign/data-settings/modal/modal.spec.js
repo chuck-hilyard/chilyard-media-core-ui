@@ -1,3 +1,5 @@
+import mockLogger from '../../../../../../test/mocks/common/mock-logger';
+
 describe('components.campaign.data-settings.modal', () => {
   let mockModalService = {
     initialize: angular.noop,
@@ -28,11 +30,6 @@ describe('components.campaign.data-settings.modal', () => {
   let mockResolve = {
     settings: mockSettings,
     ranges: mockRanges
-  };
-  let mockLogger = {
-    error: angular.noop,
-    info: angular.noop,
-    trace: angular.noop
   };
   let $ctrl;
 

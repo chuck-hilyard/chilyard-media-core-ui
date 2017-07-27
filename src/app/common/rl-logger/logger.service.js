@@ -48,7 +48,6 @@ export default class Logger {
   constructor($log, $state, $window) {
     'ngInject';
     this.$log = $log;
-    this.$location = 4;
     this.$state = $state;
     this.$window = $window;
   }
@@ -65,32 +64,26 @@ export default class Logger {
   error(message, data, source) {
     counts.error++;
     if (logLevel >= levels.error) {
-      this.$log.error('Error: ' + message, this.formatData(data), this.formatSource(source));
-      log.push({
-        type: 'Error',
-        message: message,
-        data: this.formatData(data),
-        source: this.formatSource(source)
-      });
+      let logData = formatData(data, this.$window);
+      let logSource = formatSource(source, this.$state);
+      this.$log.error('Error: ' + message, logData, logSource);
+      addToLog('Error', message, logData, logSource);
     }
   }
 
   success(message, data, source) {
     if (logLevel >= levels.success) {
-      this.$log.info('Success: ' + message, this.formatData(data), this.formatSource(source));
+      this.$log.info('Success: ' + message, formatData(data, this.$window), formatSource(source, this.$state));
     }
   }
 
   warning(message, data, source) {
     counts.warning++;
     if (logLevel >= levels.warning) {
-      this.$log.warn('Warning: ' + message, this.formatData(data), this.formatSource(source));
-      log.push({
-        type: 'Warning',
-        message: message,
-        data: this.formatData(data),
-        source: this.formatSource(source)
-      });
+      let logData = formatData(data, this.$window);
+      let logSource = formatSource(source, this.$state);
+      this.$log.warn('Warning: ' + message, logData, logSource);
+      addToLog('Warning', message, logData, logSource);
     }
   }
 
@@ -100,44 +93,55 @@ export default class Logger {
 
   info(message, data, source) {
     if (logLevel >= levels.info) {
-      this.$log.info('Info: ' + message, this.formatData(data), this.formatSource(source));
+      this.$log.info('Info: ' + message, formatData(data, this.$window), formatSource(source, this.$state));
     }
   }
 
   debug(message, data, source) {
     if (logLevel >= levels.debug) {
-      this.$log.info('Debug: ' + message, this.formatData(data), this.formatSource(source));
+      this.$log.info('Debug: ' + message, formatData(data, this.$window), formatSource(source, this.$state));
     }
   }
 
   trace(message, data, source) {
     if (logLevel >= levels.trace) {
-      this.$log.info('Trace: ' + message, this.formatData(data), this.formatSource(source));
+      this.$log.info('Trace: ' + message, formatData(data, this.$window), formatSource(source, this.$state));
     }
   }
 
-  formatData(data) {
-    let dataObj = {
-      url: this.$window.document.URL,
-      time: Date.now(),
-      sessionStart: startTime,
-      counts: angular.copy(counts)
-    };
-    if (!fullLogging) {
-      dataObj = {};
-    }
-    if (data) {
-      dataObj.data = data;
-    }
-    return dataObj;
-  }
+}
 
-  formatSource(source) {
-    let msg = this.$state.current.name;
-    if (source && typeof(source) === 'string' && source.trim()) {
-      msg += ' | ' + source.trim();
-    }
-    return '[' + msg + ']';
+function formatData(data, window) {
+  let dataObj = {
+    url: window.document.URL,
+    time: Date.now(),
+    sessionStart: startTime,
+    counts: angular.copy(counts)
+  };
+  if (!fullLogging) {
+    dataObj = {};
   }
+  if (data) {
+    dataObj.data = data;
+  }
+  return dataObj;
+}
 
+function formatSource(source, state) {
+  let msg = state.current.name;
+  if (source && typeof(source) === 'string' && source.trim()) {
+    msg += ' | ' + source.trim();
+  }
+  return '[' + msg + ']';
+}
+
+function addToLog(logType, message, data, source) {
+  if (fullLogging) {
+    log.push({
+      type: logType,
+      message: message,
+      data: data,
+      source: source
+    });
+  }
 }

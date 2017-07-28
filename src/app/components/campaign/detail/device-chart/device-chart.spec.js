@@ -45,9 +45,21 @@ describe('campaign.detail.device-chart', () => {
     });
 
     it('builds chart json object', () => {
+      let tooltipItem = {
+        index: 0,
+        datasetIndex: 0
+      };
+      let data = {
+        datasets: [{
+          data: [10, 20]
+        }]
+      };
       expect($ctrl.metricData).toEqual(cyclesChart.metricData);
       expect($ctrl.chart.data.datasets[0].data).toEqual(cyclesChart.data);
       expect($ctrl.chart.options.elements.center).toEqual(cyclesChart.center);
+      expect($ctrl.chart.options.tooltips.callbacks.label(tooltipItem, data)).toBe('10%');
+      tooltipItem.index = 1;
+      expect($ctrl.chart.options.tooltips.callbacks.label(tooltipItem, data)).toBe('20%');
     });
   });
 

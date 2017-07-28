@@ -48,6 +48,17 @@ describe('campaign.detail.age-gender-chart', () => {
     });
 
     it('builds charts array of json objects', () => {
+      let tooltipItem = {
+        xLabel: 1000,
+        datasetIndex: 0
+      };
+      let data = {
+        datasets: [{
+          label: 'Male Impressions'
+        }, {
+          label: 'Female Impressions'
+        }]
+      };
       // Chart 1 data should have negative values to spoof right to left alignment
       expect($ctrl.charts[0].data.datasets[0].label).toBe(cyclesChart[0].datasets[0].label);
       expect($ctrl.charts[0].data.datasets[0].data).toEqual(cyclesChart[0].datasets[0].data);
@@ -55,13 +66,21 @@ describe('campaign.detail.age-gender-chart', () => {
       expect($ctrl.charts[0].data.datasets[1].data).toEqual(cyclesChart[0].datasets[1].data);
       expect($ctrl.charts[0].options.scales.xAxes[0].ticks.suggestedMin).toBe(-1);
       expect($ctrl.charts[0].options.scales.xAxes[0].ticks.callback(-1000)).toBe('1,000');
+      expect($ctrl.charts[0].options.tooltips.callbacks.label(tooltipItem, data)).toBe('Male Impressions: -1,000');
+      tooltipItem.datasetIndex = 1;
+      expect($ctrl.charts[0].options.tooltips.callbacks.label(tooltipItem, data)).toBe('Female Impressions: -1,000');
 
+      // Chart 2 tests
       expect($ctrl.charts[1].data.datasets[0].label).toBe(cyclesChart[1].datasets[0].label);
       expect($ctrl.charts[1].data.datasets[0].data).toEqual(cyclesChart[1].datasets[0].data);
       expect($ctrl.charts[1].data.datasets[1].label).toBe(cyclesChart[1].datasets[1].label);
       expect($ctrl.charts[1].data.datasets[1].data).toEqual(cyclesChart[1].datasets[1].data);
       expect($ctrl.charts[1].options.scales.xAxes[0].ticks.suggestedMin).toBe(1);
       expect($ctrl.charts[1].options.scales.xAxes[0].ticks.callback(1000)).toBe('1,000');
+      tooltipItem.datasetIndex = 0;
+      expect($ctrl.charts[1].options.tooltips.callbacks.label(tooltipItem, data)).toBe('Male Impressions: 1,000');
+      tooltipItem.datasetIndex = 1;
+      expect($ctrl.charts[1].options.tooltips.callbacks.label(tooltipItem, data)).toBe('Female Impressions: 1,000');
     });
 
     it('dropdowns filter out other selected metrics', () => {

@@ -72,6 +72,15 @@ class TrendChartController {
     return object instanceof Error;
   }
 
+  metricFormat(metric, data) {
+    switch (metric.format) {
+      case 'currency':
+        return this.$filter('currency')(data);
+      default:
+        return this.$filter('number')(data);
+    }
+  }
+
   setLabels() {
     return this.chartData.map((item) => {
       return item.chartLabel;
@@ -137,7 +146,10 @@ class TrendChartController {
       },
       tooltips: {
         bodySpacing: 4,
-        mode: 'index'
+        mode: 'index',
+        callbacks: {
+          label: (tooltipItem) => this.metricFormat(this.metrics[tooltipItem.datasetIndex], tooltipItem.yLabel)
+        }
       }
     };
   }
@@ -152,23 +164,13 @@ class TrendChartController {
         gridLines: {
           drawBorder: false,
           drawTicks: false
+        },
+        ticks: {
+          beginAtZero: true,
+          maxTicksLimit: 3,
+          callback: (dataLabel) => this.metricFormat(metric, dataLabel)
         }
       };
-      switch (metric.format) {
-        case 'currency':
-          axis.ticks = {
-            beginAtZero: true,
-            maxTicksLimit: 3,
-            callback: (dataLabel) => this.$filter('currency')(dataLabel)
-          };
-          break;
-        default:
-          axis.ticks = {
-            beginAtZero: true,
-            maxTicksLimit: 3,
-            callback: (dataLabel) => this.$filter('number')(dataLabel)
-          };
-      }
       yAxes.push(axis);
     });
     return yAxes;

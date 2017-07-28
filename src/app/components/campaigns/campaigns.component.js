@@ -15,9 +15,7 @@ class Controller {
     }
     this.service.getCampaignOverview(this.searchInput)
       .then((success) => {
-        this.rows = [
-          success.data
-        ];
+        this.rows = [success];
       });
   }
 

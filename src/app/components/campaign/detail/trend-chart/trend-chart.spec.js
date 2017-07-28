@@ -45,6 +45,10 @@ describe('campaign.detail.trend-chart', () => {
     });
 
     it('builds chart json object', () => {
+      let tooltipItem = {
+        datasetIndex: 0,
+        yLabel: 1000
+      };
       expect($ctrl.chart.data.labels).toEqual(cyclesChart.labels);
       angular.forEach($ctrl.chart.data.datasets, (item, index) => {
         expect(item.data).toEqual(cyclesChart.datasets[index]);
@@ -54,6 +58,10 @@ describe('campaign.detail.trend-chart', () => {
       expect(yAxes[0].ticks.callback(1000)).toBe('1,000');
       expect(yAxes[1].position).toBe('right');
       expect(yAxes[1].ticks.callback(1000)).toBe('$1,000.00');
+      expect($ctrl.chart.options.tooltips.callbacks.label(tooltipItem)).toBe('1,000');
+      tooltipItem.datasetIndex = 1;
+      expect($ctrl.chart.options.tooltips.callbacks.label(tooltipItem)).toBe('$1,000.00');
+
       $ctrl.breakdownType = 'months';
       $ctrl.$onChanges({
         data: {

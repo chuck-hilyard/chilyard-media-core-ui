@@ -53,8 +53,8 @@ class DeviceChartController {
         },
         tooltips: {
           callbacks: {
-            title: (item, data) => data.labels[item[0].index],
-            label: (item, data) => `${data.datasets[item.datasetIndex].data[item.index]}%`
+            title: (tooltipItem, data) => data.labels[tooltipItem[0].index],
+            label: (tooltipItem, data) => `${data.datasets[tooltipItem.datasetIndex].data[tooltipItem.index]}%`
           }
         },
         elements: {

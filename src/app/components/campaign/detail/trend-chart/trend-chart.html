@@ -25,7 +25,7 @@
         <td ng-repeat="trend in $ctrl.metrics">
           <span class="fa fa-circle" ng-style="{'color': $ctrl.colors[$index]}"></span>
           {{trend.displayName}}:
-          <b>{{$ctrl.getTotals()}}</b>
+          <b>{{$ctrl.getTotals(trend.metricName)}}</b>
         </td>
       </tr>
     </table>

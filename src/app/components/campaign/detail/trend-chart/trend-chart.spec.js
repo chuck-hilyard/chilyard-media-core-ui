@@ -1,3 +1,4 @@
+import mockLogger from '../../../../../../test/mocks/common/mock-logger';
 import cycleData from '../../../../../../test/mocks/components/campaign/performance/cycles';
 import monthsData from '../../../../../../test/mocks/components/campaign/performance/months';
 import cyclesMetrics from './mock-data/cyclesMetrics';
@@ -12,7 +13,9 @@ describe('campaign.detail.trend-chart', () => {
 
   beforeEach(() => {
     angular.mock.module('common.colors');
-    angular.mock.module('campaign.detail.trend-chart');
+    angular.mock.module('campaign.detail.trend-chart', ($provide) => {
+      $provide.value('rlLogger', mockLogger);
+    });
 
     angular.mock.inject(($injector) => {
       let $componentController = $injector.get('$componentController');
@@ -51,7 +54,7 @@ describe('campaign.detail.trend-chart', () => {
       expect(yAxes[0].ticks.callback(1000)).toBe('1,000');
       expect(yAxes[1].position).toBe('right');
       expect(yAxes[1].ticks.callback(1000)).toBe('$1,000.00');
-
+      $ctrl.breakdownType = 'months';
       $ctrl.$onChanges({
         data: {
           currentValue: monthsData
@@ -72,6 +75,7 @@ describe('campaign.detail.trend-chart', () => {
       expect($ctrl.metrics).toEqual(expectedMetrics);
 
       $ctrl.metrics = [];
+      $ctrl.breakdownType = 'months';
       $ctrl.$onChanges({
         data: {
           currentValue: monthsData

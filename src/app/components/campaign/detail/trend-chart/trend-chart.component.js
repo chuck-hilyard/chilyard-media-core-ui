@@ -1,7 +1,7 @@
 import template from './trend-chart.html';
 import metricsConfig from './configs/metrics';
 
-
+const me = 'Trend Chart Controller';
 const metricDefaults = [
   'impressions',
   'spend'
@@ -9,9 +9,10 @@ const metricDefaults = [
 
 class TrendChartController {
 
-  constructor($filter, rlColors) {
+  constructor($filter, rlColors, rlLogger) {
     'ngInject';
     this.$filter = $filter;
+    this.Logger = rlLogger;
     this.chart = {};
     this.chartData = [];
     this.colors = [
@@ -28,8 +29,14 @@ class TrendChartController {
 
   $onChanges(changes) {
     let currentData = (changes.data) ? changes.data.currentValue : null;
+    this.Logger.trace('$onChanges', {breakdownType: this.breakdownType, changes: changes, currentData: currentData}, me);
     if (currentData && !this.isError(currentData)) {
-      this.chartData = angular.copy(currentData);
+      if (this.breakdownType === 'cycles') {
+        this.chartData = angular.copy(currentData.data);
+      }
+      else {
+        this.chartData = angular.copy(currentData);
+      }
       this.chartData.reverse();
       this.setMetrics();
       this.build();
@@ -121,13 +128,11 @@ class TrendChartController {
         duration: 0
       },
       scales: {
-        xAxes: [
-          {
-            gridLines: {
-              display: false
-            }
+        xAxes: [{
+          gridLines: {
+            display: false
           }
-        ],
+        }],
         yAxes: this.setYAxes()
       },
       tooltips: {

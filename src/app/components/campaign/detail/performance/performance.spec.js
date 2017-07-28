@@ -3,6 +3,7 @@ import monthlyData from '../../../../../../test/mocks/components/campaign/perfor
 import cycleColumns from './mock-data/cycleColumns';
 import monthlyColumns from './mock-data/monthlyColumns';
 import tooltips from './mock-data/tooltips';
+import mockLogger from '../../../../../../test/mocks/common/mock-logger';
 
 
 describe('campaign.detail.performance', () => {
@@ -16,6 +17,7 @@ describe('campaign.detail.performance', () => {
   beforeEach(() => {
     angular.mock.module('campaign.detail.performance', ($provide) => {
       $provide.value('CampaignSidebar', sidebar);
+      $provide.value('rlLogger', mockLogger);
     });
 
     angular.mock.inject(($injector) => {
@@ -88,7 +90,7 @@ describe('campaign.detail.performance', () => {
   describe('users sorts column', () => {
     it('reorders data objects', () => {
       $ctrl.breakdownType = 'cycles';
-      $ctrl.data = cycleData;
+      $ctrl.data = cycleData.data;
       $ctrl.handleSort({
         key: 'tableLabel',
         desc: true

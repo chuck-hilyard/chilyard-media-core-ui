@@ -1,13 +1,14 @@
 import template from './performance.html';
 import columnsConfig from './configs/columns';
-
+const me = 'Performance Controller';
 
 class Controller {
 
-  constructor($filter, $sce, $scope, CampaignSidebar) {
+  constructor($filter, $sce, $scope, rlLogger, CampaignSidebar) {
     'ngInject';
     this.$filter = $filter;
     this.$sce = $sce;
+    this.Logger = rlLogger;
 
     this.breakdownLabel = '';
     this.columns = [];
@@ -63,7 +64,14 @@ class Controller {
     }
   }
 
-  configureTable(data) {
+  configureTable(dataObj) {
+    let data = dataObj;
+    this.Logger.trace('configureTable', {dataObj: dataObj, breakdownType: this.breakdownType, breakdownLabel: this.breakdownLabel}, me);
+    //TODO remove this when all breakdownTypes follow this convention
+    if (dataObj.hasOwnProperty('data')) {
+      data = dataObj.data;
+      this.data = data;
+    }
     this.columns = [];
     let keys = Object.keys(data[0]);
     let label = this.columnsConfig.find((item) => item.key === 'tableLabel');
@@ -92,6 +100,7 @@ class Controller {
   }
 
   handleSort(state) {
+    this.Logger.info('handleSort', state, me);
     this.sortState = state;
     if (this.breakdownType === 'cycles') {
       this.sortState.key = 'cycleNumber';

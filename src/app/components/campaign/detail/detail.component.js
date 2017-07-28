@@ -1,11 +1,13 @@
 import template from './detail.html';
+const me = 'Campaign Detail Controller';
 
 class Controller {
 
-  constructor($log, CampaignDetailService) {
+  constructor(rlLogger, CampaignDetailService) {
     'ngInject';
-    // angular
-    this.$log = $log;
+    // services
+    this.Logger = rlLogger;
+    this.service = CampaignDetailService;
 
     // Local Vars
     this.ageGenderData = null;
@@ -16,7 +18,6 @@ class Controller {
       performance: false
     };
     this.performanceData = null;
-    this.service = CampaignDetailService;
   }
 
   $onChanges(changes) {
@@ -53,9 +54,9 @@ class Controller {
       .catch((error) => {
         this.ageGenderData = new Error('unable to load the age/gender data at this time');
         this.loading.ageGender = false;
-        this.$log.error('Error getting Age/Gender data', {
+        this.Logger.error('Error getting Age/Gender data', {
           error: error
-        });
+        }, me);
       });
   }
 
@@ -69,9 +70,9 @@ class Controller {
       .catch((error) => {
         this.deviceData = new Error('unable to load device data at this time');
         this.loading.device = false;
-        this.$log.error('Error getting the device data', {
+        this.Logger.error('Error getting the device data', {
           error: error
-        });
+        }, me);
       });
   }
 
@@ -85,9 +86,9 @@ class Controller {
       .catch((error) => {
         this.performanceData = new Error('unable to load trend/performance data at this time');
         this.loading.performance = false;
-        this.$log.error('Error getting the trend/performance data', {
+        this.Logger.error('Error getting the trend/performance data', {
           error: error
-        });
+        }, me);
       });
   }
 }

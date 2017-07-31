@@ -55,9 +55,9 @@ class Controller {
 
   $onChanges(changes) {
     let currentData = (changes.data) ? changes.data.currentValue : null;
-    if (currentData && !this.isError(currentData)) {
+    if (currentData && currentData.data && !this.isError(currentData)) {
       this.sortState = {};
-      this.configureTable(currentData);
+      this.configureTable(currentData.data);
     }
     if (changes.breakdownType) {
       this.setLabel(changes.breakdownType.currentValue);
@@ -67,11 +67,6 @@ class Controller {
   configureTable(dataObj) {
     let data = dataObj;
     this.Logger.trace('configureTable', {dataObj: dataObj, breakdownType: this.breakdownType, breakdownLabel: this.breakdownLabel}, me);
-    //TODO remove this when all breakdownTypes follow this convention
-    if (dataObj.hasOwnProperty('data')) {
-      data = dataObj.data;
-      this.data = data;
-    }
     this.columns = [];
     let keys = Object.keys(data[0]);
     let label = this.columnsConfig.find((item) => item.key === 'tableLabel');

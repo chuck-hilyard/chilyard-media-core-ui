@@ -99,6 +99,25 @@ describe('campaign.detail.trend-chart', () => {
       expected.splice(2, 1);
       expect(filtered).toEqual(expected);
     });
+
+    it('getTotals displays totals for current metrics', () => {
+      expect($ctrl.getTotals('impressions')).toBe(3333);
+      expect($ctrl.getTotals('budget')).toBe(1000);
+      $ctrl.breakdownType = 'months';
+      $ctrl.$onChanges({
+        data: {
+          currentValue: monthsData
+        }
+      });
+      expect($ctrl.getTotals('impressions')).toBe(2500);
+      expect($ctrl.getTotals('budget')).toBe(0);
+      expect($ctrl.getTotals('spend')).toBe(750);
+    });
+
+    it('getTotals displays 0 for undefined metrics', () => {
+      expect($ctrl.getTotals('foo')).toBe(0);
+    });
+
   });
 
   describe('change chart metric', () => {
@@ -110,7 +129,7 @@ describe('campaign.detail.trend-chart', () => {
   });
 
   describe('data is error', () => {
-    it('shows error message', () => {
+    it('does not build chart object', () => {
       spyOn($ctrl, 'build');
       $ctrl.$onChanges({
         data: {
@@ -118,6 +137,19 @@ describe('campaign.detail.trend-chart', () => {
         }
       });
       expect($ctrl.build).not.toHaveBeenCalled();
+    });
+  });
+
+  describe('chartData.data is missing', () => {
+    it('shows error message', () => {
+      spyOn($ctrl, 'build');
+      $ctrl.$onChanges({
+        data: {
+          currentValue: {}
+        }
+      });
+      expect($ctrl.build).not.toHaveBeenCalled();
+      expect($ctrl.isError).toBeTruthy();
     });
   });
 

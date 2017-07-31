@@ -25,21 +25,29 @@ class TrendChartController {
     ];
     this.metricOptions = [];
     this.metrics = [];
+    this.totals = [];
   }
 
   $onChanges(changes) {
     let currentData = (changes.data) ? changes.data.currentValue : null;
     this.Logger.trace('$onChanges', {breakdownType: this.breakdownType, changes: changes, currentData: currentData}, me);
     if (currentData && !this.isError(currentData)) {
-      if (this.breakdownType === 'cycles') {
+      if (currentData.data && currentData.data.length > 0) {
         this.chartData = angular.copy(currentData.data);
+        this.chartData.reverse();
+        this.setMetrics();
+        this.build();
       }
       else {
-        this.chartData = angular.copy(currentData);
+        this.Logger.error('Trend data not found', {breakdownType: this.breakdownType, changes: changes, currentData: currentData}, me);
+        this.data = new Error('Trend data not found');
       }
-      this.chartData.reverse();
-      this.setMetrics();
-      this.build();
+      if (currentData.totals && currentData.totals.length > 0) {
+        this.totals = currentData.totals;
+      }
+      else {
+        this.totals = [];
+      }
     }
   }
 
@@ -63,8 +71,9 @@ class TrendChartController {
     });
   }
 
-  getTotals() {
-    return 0;
+  getTotals(metric) {
+    let object = this.totals.find((item) => item.metricName === metric);
+    return object ? object.total : 0;
   }
 
   isError(data) {

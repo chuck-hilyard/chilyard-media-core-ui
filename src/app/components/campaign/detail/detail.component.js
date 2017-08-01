@@ -1,5 +1,5 @@
 import template from './detail.html';
-const me = 'Campaign Detail Controller';
+
 
 class Controller {
 
@@ -51,10 +51,9 @@ class Controller {
         this.ageGenderData = response.data;
         this.loading.ageGender = false;
       })
-      .catch((error) => {
-        this.ageGenderData = new Error('unable to load the age/gender data at this time');
+      .catch(() => {
+        this.ageGenderData = new Error();
         this.loading.ageGender = false;
-        this.Logger.error('Error getting Age/Gender data', {error: error}, me);
       });
   }
 
@@ -65,10 +64,9 @@ class Controller {
         this.deviceData = response.data;
         this.loading.device = false;
       })
-      .catch((error) => {
-        this.deviceData = new Error('unable to load device data at this time');
+      .catch(() => {
+        this.deviceData = new Error();
         this.loading.device = false;
-        this.Logger.error('Error getting the device data', {error: error}, me);
       });
   }
 
@@ -79,10 +77,9 @@ class Controller {
         this.performanceData = response.data;
         this.loading.performance = false;
       })
-      .catch((error) => {
-        this.performanceData = new Error('unable to load trend/performance data at this time');
+      .catch(() => {
+        this.performanceData = new Error();
         this.loading.performance = false;
-        this.Logger.error('Error getting the trend/performance data', {error: error}, me);
       });
   }
 }

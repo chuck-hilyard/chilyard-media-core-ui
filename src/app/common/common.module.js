@@ -1,5 +1,6 @@
 import sso from './rl-sso/sso.module';
 import config from './rl-config/rl-config.module';
+import api from './rl-api/api.module';
 import datepicker from './rl-datepicker/datepicker.module';
 import dateTime from './rl-date-time/date-time.module';
 import navbar from './rl-navbar/navbar.module';
@@ -22,6 +23,7 @@ export default angular
   .module('common', [
     sso,
     config,
+    api,
     dateTime,
     datepicker,
     navbar,

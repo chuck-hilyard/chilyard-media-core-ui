@@ -1,14 +1,14 @@
 import template from './device-chart.html';
 import metricsConfig from './configs/metrics';
-
-
+const me = 'Device Chart Controller';
 const metricDefault = 'impressions';
 
 class DeviceChartController {
 
-  constructor($filter, rlColors) {
+  constructor($filter, rlColors, rlLogger) {
     'ngInject';
     this.$filter = $filter;
+    this.Logger = rlLogger;
 
     this.chart = {};
     this.chartData = [];
@@ -26,6 +26,7 @@ class DeviceChartController {
 
   $onChanges(changes) {
     let currentData = (changes.data) ? changes.data.currentValue : null;
+    this.Logger.trace('$onChanges', {changes: changes, currentData: currentData}, me);
     if (currentData && !this.isError(currentData)) {
       this.chartData = currentData;
       this.setMetric();
@@ -115,7 +116,8 @@ class DeviceChartController {
     this.metric = this.metricOptions.find((item) => item.metricName === metricDefault);
   }
 
-  updateChart() {
+  updateChart(metric) {
+    this.Logger.trace('updateChart', metric, me);
     this.build();
   }
 

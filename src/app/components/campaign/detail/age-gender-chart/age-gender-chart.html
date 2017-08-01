@@ -8,14 +8,14 @@
       <div class="col-sm-2" ng-hide="$ctrl.isError() || $ctrl.loading">
         <select class="form-control input-sm"
           ng-model="$ctrl.metrics[0]"
-          ng-change="$ctrl.updateChart()"
+          ng-change="$ctrl.updateChart($ctrl.metrics[0])"
           ng-options="item as item.displayName for item in $ctrl.filterOptions(1)">
         </select>
       </div>
       <div class="col-sm-2" ng-hide="$ctrl.isError() || $ctrl.loading">
         <select class="form-control input-sm"
           ng-model="$ctrl.metrics[1]"
-          ng-change="$ctrl.updateChart()"
+          ng-change="$ctrl.updateChart($ctrl.metrics[1])"
           ng-options="item as item.displayName for item in $ctrl.filterOptions(0)">
         </select>
       </div>

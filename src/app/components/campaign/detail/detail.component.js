@@ -54,9 +54,7 @@ class Controller {
       .catch((error) => {
         this.ageGenderData = new Error('unable to load the age/gender data at this time');
         this.loading.ageGender = false;
-        this.Logger.error('Error getting Age/Gender data', {
-          error: error
-        }, me);
+        this.Logger.error('Error getting Age/Gender data', {error: error}, me);
       });
   }
 
@@ -70,9 +68,7 @@ class Controller {
       .catch((error) => {
         this.deviceData = new Error('unable to load device data at this time');
         this.loading.device = false;
-        this.Logger.error('Error getting the device data', {
-          error: error
-        }, me);
+        this.Logger.error('Error getting the device data', {error: error}, me);
       });
   }
 
@@ -86,9 +82,7 @@ class Controller {
       .catch((error) => {
         this.performanceData = new Error('unable to load trend/performance data at this time');
         this.loading.performance = false;
-        this.Logger.error('Error getting the trend/performance data', {
-          error: error
-        }, me);
+        this.Logger.error('Error getting the trend/performance data', {error: error}, me);
       });
   }
 }

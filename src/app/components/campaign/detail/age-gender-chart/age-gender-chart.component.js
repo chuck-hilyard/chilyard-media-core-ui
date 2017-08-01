@@ -1,7 +1,6 @@
 import template from './age-gender-chart.html';
 import metricsConfig from './configs/metrics';
-
-
+const me = 'Age & Trend Chart Controller';
 const metricDefaults = [
   'impressions',
   'pageEngagements'
@@ -9,9 +8,10 @@ const metricDefaults = [
 
 class AgeGenderController {
 
-  constructor($filter, rlColors) {
+  constructor($filter, rlColors, rlLogger) {
     'ngInject';
     this.$filter = $filter;
+    this.Logger = rlLogger;
     this.colors = [
       {
         male: rlColors.charts[4].shades[0],
@@ -31,6 +31,7 @@ class AgeGenderController {
 
   $onChanges(changes) {
     let currentData = (changes.data) ? changes.data.currentValue : null;
+    this.Logger.trace('$onChanges', {changes: changes, currentData: currentData}, me);
     if (currentData && !this.isError(currentData)) {
       this.chartData = currentData;
       this.setMetrics();
@@ -209,7 +210,8 @@ class AgeGenderController {
     return yAxis;
   }
 
-  updateChart() {
+  updateChart(metric) {
+    this.Logger.trace('updateChart', metric, me);
     this.build();
   }
 

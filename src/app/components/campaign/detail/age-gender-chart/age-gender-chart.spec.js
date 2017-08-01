@@ -1,3 +1,4 @@
+import mockLogger from '../../../../../../test/mocks/common/mock-logger';
 import mockData from '../../../../../../test/mocks/components/campaign/age-gender/age-gender';
 import cyclesMetrics from './mock-data/cyclesMetrics';
 import cyclesChart from './mock-data/cyclesChart';
@@ -10,7 +11,9 @@ describe('campaign.detail.age-gender-chart', () => {
 
   beforeEach(() => {
     angular.mock.module('common.colors');
-    angular.mock.module('campaign.detail.age-gender-chart');
+    angular.mock.module('campaign.detail.age-gender-chart', ($provide) => {
+      $provide.value('rlLogger', mockLogger);
+    });
 
     angular.mock.inject(($injector) => {
       let $componentController = $injector.get('$componentController');

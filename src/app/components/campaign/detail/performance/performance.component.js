@@ -55,6 +55,7 @@ class Controller {
 
   $onChanges(changes) {
     let currentData = (changes.data) ? changes.data.currentValue : null;
+    this.Logger.trace('$onChanges', {changes: changes, currentData: currentData}, me);
     if (currentData && currentData.data && !this.isError(currentData)) {
       this.sortState = {};
       this.configureTable(currentData.data);

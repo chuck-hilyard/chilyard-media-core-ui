@@ -1,6 +1,5 @@
 import template from './trend-chart.html';
 import metricsConfig from './configs/metrics';
-
 const me = 'Trend Chart Controller';
 const metricDefaults = [
   'impressions',
@@ -155,6 +154,7 @@ class TrendChartController {
       },
       tooltips: {
         bodySpacing: 4,
+        intersect: false,
         mode: 'index',
         callbacks: {
           label: (tooltipItem) => this.metricFormat(this.metrics[tooltipItem.datasetIndex], tooltipItem.yLabel)
@@ -185,7 +185,8 @@ class TrendChartController {
     return yAxes;
   }
 
-  updateChart() {
+  updateChart(metric) {
+    this.Logger.trace('updateChart', metric, me);
     this.build();
   }
 

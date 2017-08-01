@@ -1,12 +1,15 @@
+const me = 'Campaign Detail Service';
 export default class Service {
 
-  constructor($http, rlConfig) {
+  constructor($http, rlConfig, rlLogger) {
     'ngInject';
     this.$http = $http;
     this.gatewayUrl = rlConfig.gatewayUrl;
+    this.Logger = rlLogger;
   }
 
   getAgeGenderData(mcid, breakdown, params) {
+    this.Logger.trace('getAgeGenderData', {mcid: mcid, breakdown: breakdown, params: params}, me);
     let config = {
       params: params
     };
@@ -14,6 +17,7 @@ export default class Service {
   }
 
   getDeviceData(mcid, breakdown, params) {
+    this.Logger.trace('getDeviceData', {mcid: mcid, breakdown: breakdown, params: params}, me);
     let config = {
       params: params
     };
@@ -21,6 +25,7 @@ export default class Service {
   }
 
   getPerformanceData(mcid, breakdown, params) {
+    this.Logger.trace('getPerformanceData', {mcid: mcid, breakdown: breakdown, params: params}, me);
     let config = {
       params: params
     };

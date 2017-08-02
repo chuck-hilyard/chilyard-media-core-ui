@@ -44,6 +44,9 @@ class Controller {
     if (this.campaignCycles instanceof Error) {
       return true;
     }
+    if (this.campaignOverview.masterCampaignId !== parseInt(this.mcid)) {
+      return true;
+    }
     return false;
   }
 

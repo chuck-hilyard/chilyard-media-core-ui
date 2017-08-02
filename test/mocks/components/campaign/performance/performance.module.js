@@ -19,7 +19,12 @@ export default angular
 
     $httpBackend
       .when('GET', /\/campaigns\/\d+\/performance-stats\/days\?end=\d{4}-\d{2}-\d{2}\&start=\d{4}-\d{2}-\d{2}$/)
-      .respond(500);
+      .respond(500, {
+        headers: {
+          correlationid: 1234,
+          date: new Date()
+        }
+      });
 
   })
   .name;

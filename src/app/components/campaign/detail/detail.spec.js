@@ -1,6 +1,5 @@
 // Campaign level mocks
-import mockLogger from '../../../../../test/mocks/common/mock-logger';
-import mockApi from '../../../../../test/mocks/common/mock-api';
+import commonMocks from '../../../../../test/mocks/common/common.mocks';
 import mockCampaignOverview from '../../../../../test/mocks/components/campaign/overview/overview';
 import mockDataSettings from '../mock-data/mock-data-settings';
 
@@ -17,12 +16,11 @@ describe('components.campaign.detail', () => {
     }
   };
 
-
   beforeEach(() => {
     angular.mock.module('campaign.detail', ($provide) => {
       $provide.value('CampaignSidebar', {});
-      $provide.value('rlApi', mockApi);
-      $provide.value('rlLogger', mockLogger);
+      $provide.value('rlApi', commonMocks.api);
+      $provide.value('rlLogger', commonMocks.logger);
     });
 
     let bindings = {
@@ -37,15 +35,9 @@ describe('components.campaign.detail', () => {
       $ctrl = $componentController('campaign.detail', {}, bindings);
     });
 
-    let fakeService = () => {
-      let deferred = $q.defer();
-      deferred.resolve();
-      return deferred.promise;
-    };
-
-    spyOn(service, 'getPerformanceData').and.callFake(fakeService);
-    spyOn(service, 'getAgeGenderData').and.callFake(fakeService);
-    spyOn(service, 'getDeviceData').and.callFake(fakeService);
+    spyOn(service, 'getPerformanceData').and.returnValue($q.when());
+    spyOn(service, 'getAgeGenderData').and.returnValue($q.when());
+    spyOn(service, 'getDeviceData').and.returnValue($q.when());
   });
 
   it('constructs', () => {

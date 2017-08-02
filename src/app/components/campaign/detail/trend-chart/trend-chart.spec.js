@@ -1,4 +1,4 @@
-import mockLogger from '../../../../../../test/mocks/common/mock-logger';
+import commonMocks from '../../../../../../test/mocks/common/common.mocks';
 import cycleData from '../../../../../../test/mocks/components/campaign/performance/cycles';
 import monthsData from '../../../../../../test/mocks/components/campaign/performance/months';
 import cyclesMetrics from './mock-data/cyclesMetrics';
@@ -14,7 +14,7 @@ describe('campaign.detail.trend-chart', () => {
   beforeEach(() => {
     angular.mock.module('common.colors');
     angular.mock.module('campaign.detail.trend-chart', ($provide) => {
-      $provide.value('rlLogger', mockLogger);
+      $provide.value('rlLogger', commonMocks.logger);
     });
 
     angular.mock.inject(($injector) => {

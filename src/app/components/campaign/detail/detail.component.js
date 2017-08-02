@@ -3,10 +3,9 @@ import template from './detail.html';
 
 class Controller {
 
-  constructor(rlLogger, CampaignDetailService) {
+  constructor(CampaignDetailService) {
     'ngInject';
     // services
-    this.Logger = rlLogger;
     this.service = CampaignDetailService;
 
     // Local Vars

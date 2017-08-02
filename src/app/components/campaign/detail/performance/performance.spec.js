@@ -3,7 +3,7 @@ import monthlyData from '../../../../../../test/mocks/components/campaign/perfor
 import cycleColumns from './mock-data/cycleColumns';
 import monthlyColumns from './mock-data/monthlyColumns';
 import tooltips from './mock-data/tooltips';
-import mockLogger from '../../../../../../test/mocks/common/mock-logger';
+import commonMocks from '../../../../../../test/mocks/common/common.mocks';
 
 
 describe('campaign.detail.performance', () => {
@@ -17,7 +17,7 @@ describe('campaign.detail.performance', () => {
   beforeEach(() => {
     angular.mock.module('campaign.detail.performance', ($provide) => {
       $provide.value('CampaignSidebar', sidebar);
-      $provide.value('rlLogger', mockLogger);
+      $provide.value('rlLogger', commonMocks.logger);
     });
 
     angular.mock.inject(($injector) => {

@@ -1,4 +1,4 @@
-import mockLogger from '../../../../../../test/mocks/common/mock-logger';
+import commonMocks from '../../../../../../test/mocks/common/common.mocks';
 import mockData from '../../../../../../test/mocks/components/campaign/device/device';
 import cyclesMetrics from './mock-data/cyclesMetrics';
 import cyclesChart from './mock-data/cyclesChart';
@@ -12,7 +12,7 @@ describe('campaign.detail.device-chart', () => {
   beforeEach(() => {
     angular.mock.module('common.colors');
     angular.mock.module('campaign.detail.device-chart', ($provide) => {
-      $provide.value('rlLogger', mockLogger);
+      $provide.value('rlLogger', commonMocks.logger);
     });
 
     angular.mock.inject(($injector) => {

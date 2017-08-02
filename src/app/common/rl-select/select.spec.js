@@ -1,5 +1,5 @@
 import mocks from './select.mocks';
-import mockLogger from '../../../../test/mocks/common/mock-logger';
+import commonMocks from '../../../../test/mocks/common/common.mocks';
 
 describe('common.select', () => {
 
@@ -7,7 +7,7 @@ describe('common.select', () => {
 
   beforeEach(() => {
     angular.mock.module('common.select', ($provide) => {
-      $provide.value('rlLogger', mockLogger);
+      $provide.value('rlLogger', commonMocks.logger);
     });
 
     angular.mock.inject(($injector) => {

@@ -1,11 +1,11 @@
 // Campaign level mocks
-import mockLogger from '../../../../../test/mocks/common/mock-logger';
+import commonMocks from '../../../../../test/mocks/common/common.mocks';
 import mockCampaignOverview from '../../../../../test/mocks/components/campaign/overview/overview';
 import mockDataSettings from '../mock-data/mock-data-settings';
-import mockRlConfig from '../mock-data/rlConfig.json';
+
 
 describe('components.campaign.detail', () => {
-  let $ctrl, service;
+  let $ctrl, $q, service;
 
   let mockChange = {
     campaignOverview: {
@@ -19,8 +19,8 @@ describe('components.campaign.detail', () => {
   beforeEach(() => {
     angular.mock.module('campaign.detail', ($provide) => {
       $provide.value('CampaignSidebar', {});
-      $provide.value('rlLogger', mockLogger);
-      $provide.value('rlConfig', mockRlConfig);
+      $provide.value('rlApi', commonMocks.api);
+      $provide.value('rlLogger', commonMocks.logger);
     });
 
     let bindings = {
@@ -29,14 +29,15 @@ describe('components.campaign.detail', () => {
     };
 
     angular.mock.inject(($injector) => {
+      $q = $injector.get('$q');
       let $componentController = $injector.get('$componentController');
       service = $injector.get('CampaignDetailService');
       $ctrl = $componentController('campaign.detail', {}, bindings);
     });
 
-    spyOn(service, 'getPerformanceData').and.callThrough();
-    spyOn(service, 'getAgeGenderData').and.callThrough();
-    spyOn(service, 'getDeviceData').and.callThrough();
+    spyOn(service, 'getPerformanceData').and.returnValue($q.when());
+    spyOn(service, 'getAgeGenderData').and.returnValue($q.when());
+    spyOn(service, 'getDeviceData').and.returnValue($q.when());
   });
 
   it('constructs', () => {

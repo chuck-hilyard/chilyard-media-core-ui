@@ -1,5 +1,5 @@
 import mocks from './dropdown.mocks';
-import mockLogger from '../../../../test/mocks/common/mock-logger';
+import commonMocks from '../../../../test/mocks/common/common.mocks.js';
 
 describe('common.dropdown', () => {
 
@@ -7,7 +7,7 @@ describe('common.dropdown', () => {
 
   beforeEach(() => {
     angular.mock.module('common.dropdown', ($provide) => {
-      $provide.value('rlLogger', mockLogger);
+      $provide.value('rlLogger', commonMocks.logger);
     });
 
     angular.mock.inject(($injector) => {

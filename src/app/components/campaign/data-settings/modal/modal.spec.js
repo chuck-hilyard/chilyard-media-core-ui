@@ -1,4 +1,5 @@
-import mockLogger from '../../../../../../test/mocks/common/mock-logger';
+import commonMocks from '../../../../../../test/mocks/common/common.mocks.js';
+
 
 describe('components.campaign.data-settings.modal', () => {
   let mockModalService = {
@@ -36,7 +37,7 @@ describe('components.campaign.data-settings.modal', () => {
   beforeEach(() => {
     angular.mock.module('campaign.data-settings.modal', ($provide) => {
       $provide.value('ModalService', mockModalService);
-      $provide.value('rlLogger', mockLogger);
+      $provide.value('rlLogger', commonMocks.logger);
     });
 
     let bindings = {

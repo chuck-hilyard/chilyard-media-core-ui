@@ -38,9 +38,16 @@ class Controller {
   }
 
   isError() {
-    return (this.campaignOverview instanceof Error ||
-      this.campaignCycles instanceof Error ||
-      this.campaignOverview.masterCampaignId + '' !== this.mcid);
+    if (this.campaignOverview instanceof Error) {
+      return true;
+    }
+    if (this.campaignCycles instanceof Error) {
+      return true;
+    }
+    if (this.campaignOverview.masterCampaignId !== parseInt(this.mcid)) {
+      return true;
+    }
+    return false;
   }
 
   handleSidebarToggle(status) {

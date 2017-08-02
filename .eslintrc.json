@@ -9,10 +9,7 @@
     "eslint:recommended"
   ],
   "globals": {
-    "angular": true,
-    "GATEWAY_URL": true,
-    "FEATURE_FLAGS": true,
-    "LANGUAGES": true
+    "angular": true
   },
   "parserOptions": {
     "sourceType": "module"

@@ -44,7 +44,7 @@ config.plugins = [
 
 config.devServer = {
   contentBase: `${paths.dist}`,
-  port: 4000
+  port: 4001
 };
 
 module.exports = config;

@@ -1,10 +1,10 @@
 {
-  "name": "media-facebook-ui",
+  "name": "media-core-ui",
   "version": "0.1.0",
-  "description": "Facebook reporting UI",
+  "description": "Media core UI",
   "repository": {
     "type": "git",
-    "url": "https://github.com/reachlocal/media-facebook-ui"
+    "url": "https://github.com/reachlocal/media-core-ui"
   },
   "scripts": {
     "build": "webpack --config ./webpack/production.config.js",

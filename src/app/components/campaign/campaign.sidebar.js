@@ -2,9 +2,9 @@ export default class Sidebar {
   constructor() {
     this.links = [
       {
-        translateKey: 'campaign.detail',
+        translateKey: 'campaign.overview',
         state: 'campaign.detail',
-        icon: 'fa-line-chart',
+        icon: 'fa-folder',
         order: 0,
         children: []
       }

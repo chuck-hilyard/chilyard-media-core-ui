@@ -1,5 +1,5 @@
 {
-  "dashboard": false,
+  "dashboard": true,
   "advertisers": false,
   "orders": false,
   "userData": false

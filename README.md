@@ -1,6 +1,20 @@
-# Media Facebook UI
+# Media Core UI
 
+- This is the main app in the collection of media apps.
+- This app is responsible for campaign level functionality and above
+- Campaign type specific apps are to be linked to this app such as
+
+  | App (SPA)        | When     | Responsibility           |
+  | ---------------- |:--------:| ------------------------ |
+  | media-social-ui  | future   | social specific pages    |
+  | madmin           | existing | existing full app        |
+  | media-search-ui  | future   | search specific pages    |
+  | media-display-ui | future   | display specific pages   |
+
+## Styleguide
 JavaScript framework written for modular architecture. See [Angular Styleguide](https://github.com/toddmotto/angular-styleguide#modular-architecture) for more details.
+
+One-way data flow
 
 ## Requires
 
@@ -29,7 +43,7 @@ $ npm install
 
 ## Commands
 
-- `$ npm start` Start local server at http://localhost:4000
+- `$ npm start` Start local server at http://localhost:4001
 - `$ npm run build` Build /dist directory
 - `$ npm run lint` Lint js and scss files
 - `$ npm run start:test` Start local server with mocked gateway calls
@@ -41,6 +55,8 @@ $ npm install
 Located in `/src/app/common/rl-sso` this module will handle the authentication with ReachLocal services. It listens for 401 responses and will open an authentication modal when needed.
 
 ## Translations
+*Text used in the app should come from the appropriate lang-xx.js file.  Text should not be hard coded into html, javascript or css.*
+
 See [Angular Translate](https://angular-translate.github.io/) for more information. Translation are configured and ran from `/src/app/root.module.js`
 #### Additional Languages
 Additional languages should be added to root module. Add the new language translation to the provider. *ie* `.translations('xx', xx)`.

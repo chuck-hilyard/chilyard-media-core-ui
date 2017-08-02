@@ -196,9 +196,11 @@ function validSettings(settings, Logger) {
       return true;
     }
   }
-  Logger.warning('invalid settings', {
-    settings: settings
-  }, me);
+  if (settings !== null) {
+    Logger.warning('invalid settings', {
+      settings: settings
+    }, me);
+  }
   return false;
 }
 

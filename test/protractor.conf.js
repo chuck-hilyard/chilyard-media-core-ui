@@ -9,7 +9,7 @@ exports.config = {
         args: ['--window-size=1280,1024']
     }
   },
-  baseUrl: 'http://localhost:4000/',
+  baseUrl: 'http://localhost:4001/',
   framework: 'jasmine',
   jasmineNodeOpts: {
     defaultTimeoutInterval: 30000

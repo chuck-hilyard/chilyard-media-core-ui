@@ -7,7 +7,7 @@
 export default function() {
   'ngInject';
   this.config = {
-    appErrorPrefix: 'Media Facebook UI'
+    appErrorPrefix: 'Media Core UI'
   };
 
   this.$get = () => {

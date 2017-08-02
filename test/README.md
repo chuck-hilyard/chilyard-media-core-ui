@@ -15,7 +15,7 @@ First, we need the application to be running via the web-server with mocked api 
 npm start:test
 ```
 
-The application should now be available at http://localhost:4000/index.html.
+The application should now be available at http://localhost:4001/index.html.
 
 ## Testing with Protractor
 

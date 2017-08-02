@@ -24,7 +24,7 @@ config.plugins = [
     ENVIRONMENT: JSON.stringify('production'),
     FEATURE_FLAGS: JSON.stringify(flags),
     LANGUAGES: JSON.stringify(['en']),
-    GATEWAY_URL: JSON.stringify('???')
+    GATEWAY_URL: JSON.stringify('BAMBOOMEDIACOREGATEWAY')
   }),
   new webpack.optimize.UglifyJsPlugin({
     compress: true

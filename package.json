@@ -7,13 +7,17 @@
     "url": "https://github.com/reachlocal/media-core-ui"
   },
   "scripts": {
-    "build": "webpack --config ./webpack/production.config.js",
     "lint": "eslint ./src/app/**/* ./test/app/**/* --ext=js,json; stylelint ./src/app/**/*.scss; exit 0;",
-    "pretest:e2e": "webdriver-manager update",
     "start": "webpack-dev-server --config ./webpack/development.config.js --hot",
     "start:test": "webpack-dev-server --config ./webpack/test.config.js --hot",
+    "pretest:e2e": "webdriver-manager update",
+    "test": "npm run lint; npm run test:unit:single-run; npm run pretest:e2e; npm run test:e2e:headless;",
     "test:e2e": "npm run start:test & protractor test/protractor.conf.js; exit 0;",
-    "test:unit": "karma start ./karma.conf.js; exit 0;"
+    "test:e2e:headless": "npm run start:test & protractor test/headless-protractor.conf.js; exit 0;",
+    "test:unit": "karma start ./karma.conf.js; exit 0;",
+    "test:unit:single-run": "karma start ./karma.conf.js --single-run; exit 0;",
+    "build": "webpack --config ./webpack/production.config.js",
+    "build:bamboo": "npm install;  npm run test; npm run build;"
   },
   "dependencies": {
     "angular": "^1.6.4",

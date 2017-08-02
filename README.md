@@ -43,13 +43,31 @@ $ npm install
 
 ## Commands
 
-- `$ npm start` Start local server at http://localhost:4001
-- `$ npm run build` Build /dist directory
-- `$ npm run lint` Lint js and scss files
-- `$ npm run start:test` Start local server with mocked gateway calls
-- `$ npm run test:e2e` Run protractor tests
-- `$ npm run test:unit` Run karma tests
+###### linter
+- $ `npm run lint` Lint js and scss files
 
+###### webpack dev servers
+- $ `npm start` Start local server at http://localhost:4001
+- $ `npm run start:test` Start local server with mocked gateway calls
+
+###### end to end Protractor tests
+- $ `npm run test:e2e` Run protractor tests
+
+###### Karma unit tests
+- $ `npm run test:unit` Run karma tests continuously (development mode)
+- $ `npm run test:unit:single-run` Run karma tests once
+
+###### linter & test suite
+- $ `npm run test` Lint js and scss files, run karama test suite once, run end to end test suite once
+
+###### build / package application
+- $ `npm run build` Production Build /dist directory
+- $ `npm run build:bamboo` Build process for Bamboo:
+  - `npm install` will install all third party library dependencies
+  - `npm run test` (see above)
+  - `npm run build` (see above)
+
+    *NOTE: before running build:bamboo, run killall node to kill any remaining node processes*
 
 ## RL SSO Module
 Located in `/src/app/common/rl-sso` this module will handle the authentication with ReachLocal services. It listens for 401 responses and will open an authentication modal when needed.

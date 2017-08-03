@@ -3,17 +3,24 @@ import template from './home.html';
 
 class Controller {
 
-  constructor() {
+  constructor($state) {
     'ngInject';
-    this.rows = [];
+    this.$state = $state;
   }
 
   $onInit() {
-    for (let i = 0; i < 25; i++) {
-      this.rows.push(Math.random() * 10);
-    }
   }
 
+  // Dashboard state checker
+  // @return bool
+  //
+  get tabIndex() {
+    this.tabIndexValue = this.$state.current.name.indexOf('search') > -1 ? 0 : 1;
+    return this.tabIndexValue;
+  }
+
+  set tabIndex(index) {
+  }
 }
 
 export default {

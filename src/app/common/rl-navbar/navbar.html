@@ -16,8 +16,8 @@
 
     <div class="navbar-collapse collapse" ng-class="{'in': !$ctrl.collapsed}">
       <ul class="nav navbar-nav">
-        <li ui-sref-active="active" ng-if="$ctrl.featureFlags.dashboard">
-          <a ui-sref="home" ng-click="$ctrl.collapse()" title="Home">
+        <li ng-class="{'active': $ctrl.home}" ng-if="$ctrl.featureFlags.dashboard">
+          <a ui-sref="home.searchdashboard" ng-click="$ctrl.collapse()" title="Home">
             <i class="fa fa-lg fa-dashboard"></i>
           </a>
         </li>

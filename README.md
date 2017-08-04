@@ -89,6 +89,9 @@ Unit test are written in Jasmine and run by Karma. The test files (`*.spec.js`) 
 ## [End to End Testing (e2e)](https://github.com/reachlocal/search-campaigns-client/blob/master/test/README.md)
 E2e tests are also written in Jasmine but run by protractor. See the [e2e readme](https://github.com/reachlocal/search-campaigns-client/blob/master/test/README.md) for more details.
 
+## Design Style guide
+Use styles/variables.   See [ReachUI](https://reachlocal.github.io/style-guide/)
+
 ## File Structure
 
  - `dist/` - Production build files

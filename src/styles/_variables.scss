@@ -41,6 +41,7 @@ $brand-warning:         #f7a700 !default;
 $brand-danger:          #d0021b;
 
 
+
 //== Scaffolding
 //
 //## Settings for some of the most global styles.
@@ -194,6 +195,16 @@ $btn-danger-bg:                  $brand-danger;
 $btn-danger-border:              $brand-danger;
 
 $btn-link-disabled-color:        $gray-light !default;
+
+// Dashboard indicator colors
+$scheme1-bad-indicator:          #c26a56;
+$scheme1-warning-indicator:      #dace60;
+$scheme1-good-indicator:         #519986;
+$scheme1-neutral-indicator:      #9da5a5;
+$scheme2-bad-indicator:          #b71f12;
+$scheme2-warning-indicator:      #fdd900;
+$scheme2-good-indicator:         #68bb5e;
+$scheme2-neutral-indicator:      $scheme1-neutral-indicator;
 
 // Allows for customizing button radius independently from global border radius
 $btn-border-radius-base:         $border-radius-base !default;

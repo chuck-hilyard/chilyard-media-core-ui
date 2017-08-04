@@ -1,0 +1,57 @@
+<div class="rl-color-theme-picker">
+  <div class="theme-panel hidden-xs hidden-sm">
+    <div ng-class="['toggler', {hidden: $ctrl.isSettingsBoxOpened}]" ng-click="$ctrl.openSettingsBox()">
+      <i class="fa fa-cog fa-2x" aria-hidden="true"></i>
+    </div>
+    <div ng-class="['toggler-close', {hidden: !$ctrl.isSettingsBoxOpened}]" ng-click="$ctrl.closeSettingsBox()">
+      <i class="fa fa-times" aria-hidden="true"></i>
+    </div>
+    <div ng-class="['theme-options', {hidden: !$ctrl.isSettingsBoxOpened}]">
+      <div class="theme-option theme-colors clearfix">
+        <span translate>colorThemePicker.colorPreferences</span>
+        <ul>
+          <li>
+            <input type="radio" name="scheme" value="scheme1" ng-click="$ctrl.setColorScheme('scheme1')" checked>
+            <label class="theme-indicators-container">
+              <span class="red-indicator">
+                <i class="fa fa-circle scheme1" aria-hidden="true"></i>
+              </span>
+              <span class="vertical-divider"></span>
+              <span class="yellow-indicator">
+                <i class="fa fa-circle scheme1" aria-hidden="true"></i>
+              </span>
+              <span class="vertical-divider"></span>
+              <span class="green-indicator">
+                <i class="fa fa-circle scheme1" aria-hidden="true"></i>
+              </span>
+              <span class="vertical-divider"></span>
+              <span class="grey-indicator">
+                <i class="fa fa-circle scheme1" aria-hidden="true"></i>
+              </span>
+            </label>
+          </li>
+          <li>
+            <input type="radio" name="scheme" value="scheme2" ng-click="$ctrl.setColorScheme('scheme2')">
+            <label class="theme-indicators-container">
+              <span class="red-indicator">
+                <i class="fa fa-circle scheme2" aria-hidden="true"></i>
+              </span>
+              <span class="vertical-divider"></span>
+              <span class="yellow-indicator">
+                <i class="fa fa-circle scheme2" aria-hidden="true"></i>
+              </span>
+              <span class="vertical-divider"></span>
+              <span class="green-indicator">
+                <i class="fa fa-circle scheme2" aria-hidden="true"></i>
+              </span>
+              <span class="vertical-divider"></span>
+              <span class="grey-indicator">
+                <i class="fa fa-circle scheme2" aria-hidden="true"></i>
+              </span>
+            </label>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>

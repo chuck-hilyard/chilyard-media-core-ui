@@ -1,0 +1,109 @@
+@import './src/styles/variables';
+
+.rl-color-theme-picker
+  .red-indicator {
+    .scheme1 {
+      color: $scheme1_red;
+    }
+    .scheme2 {
+      color:$scheme2_red;
+    }
+  }
+  .green-indicator {
+    .scheme1 {
+      color: $scheme1_green;
+    }
+    .scheme2 {
+      color: $scheme2_green;
+    }
+  }
+  .yellow-indicator {
+    .scheme1 {
+      color: $scheme1_yellow;
+    }
+    .scheme2 {
+      color: $scheme2_yellow;
+    }
+  }
+  .grey-indicator {
+    .scheme1,.scheme2 {
+      color: $schemes_gray;
+    }
+  }
+
+  .theme-panel {
+    .toggler {
+      right: 0;
+      position: absolute;
+      padding: 6px;
+      top: 4px;
+      cursor: pointer;
+      background: center no-repeat #536881;
+      color: white;
+    }
+    .toggler-close {
+      right: 0;
+      z-index: 101;
+      position: absolute;
+      background: center no-repeat #2b3643;
+      border-radius: $border-radius-base;
+      padding: 20px;
+      top: 4px;
+      cursor: pointer;
+      color: white;
+    }
+    .theme-options {
+      .theme-option {
+        > span:first-child {
+          text-transform: uppercase;
+          display: inline-block;
+          width: 145px;
+          font-size: 14px;
+          font-weight: bold;
+        }
+        width: 420px;
+        color: #c6cfda;
+        padding: 15px;
+        border-top: 1px solid #354353;
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+      .theme-option.theme-colors {
+        > span:first-child {
+          display: block;
+          width: auto;
+        }
+        ul {
+          list-style: none;
+          padding: 0;
+          display: block;
+          margin-bottom: 10px;
+          margin-top: 15px;
+        }
+        .theme-indicators-container {
+          span {
+            margin-left: 8%;
+          }
+          background-color: white;
+          color: black;
+          width: 80%;
+          border-radius: 20px;
+          margin-left: 18px;
+        }
+        border-top: 0;
+        padding-top: 20px;
+      }
+
+      top: 4px;
+      right: 0;
+      position: absolute;
+      z-index: 100;
+      background: #2b3643;
+      border-radius: 4px;
+    }
+    position: absolute;
+    margin-right: 20px;
+    right: 0;
+    width: 420px;
+    z-index: 100;
+  }

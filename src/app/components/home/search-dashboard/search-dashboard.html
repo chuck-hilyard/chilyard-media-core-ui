@@ -1,7 +1,28 @@
 <div class="rl-search-dashboard">
-	<div class="rl-container">
-	  <div class="rl-content">
-	  	Search Dashboard
-	  </div>
-	</div>
+
+  <div class="rl-container">
+    <div class="rl-content">
+      <header>
+        <div class="page-header row">
+          <h1 class="col-md-8 pull-left" translate>searchDashboard.searchDashboard</h1>
+          <!-- References section -->
+          <div class="col-md-3 doc-reference-container">
+            <span class="doc-reference-title" translate>searchDashboard.references</span>
+            <ul>
+              <li>
+                  <a href="https://docs.google.com/a/reachlocal.com/document/d/1s3mhyIwG-P41y--f28Icye57AAYimCO8Tx6X0jvNs/edit?usp=sharing" target="_blank" translate>searchDashboard.searchDashboardLogic</a><br/>
+              </li>
+              <li>
+                  <a href="https://docs.google.com/a/reachlocal.com/document/d/1D-n7z89LJ3NIxrFocKk1BVgyeCtnB1y0WHo8vG1Qg/edit?usp=sharing" target="_blank" translate>searchDashboard.decisionTree</a>
+              </li>
+            </ul>
+          </div>
+          <!-- Theme panel -->
+          <div class="col-md-1">
+            <rl-color-theme-picker on-theme-change="$ctrl.changeDashboardTheme(newTheme)"></rl-color-theme-picker>
+          </div>
+        </div>
+      </header>
+    </div>
+  </div>
 </div>

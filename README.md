@@ -2,7 +2,7 @@
 
 - This is the main app in the collection of media apps.
 - This app is responsible for campaign level functionality and above
-- Campaign type specific apps are to be linked to this app such as
+- Campaign type specific apps (wpc level) are to be linked to this app such as
 
   | App (SPA)        | When     | Responsibility           |
   | ---------------- |:--------:| ------------------------ |
@@ -14,7 +14,7 @@
 ## Styleguide
 JavaScript framework written for modular architecture. See [Angular Styleguide](https://github.com/toddmotto/angular-styleguide#modular-architecture) for more details.
 
-One-way data flow
+One-way data flow. [See above Styleguide]
 
 ## Requires
 

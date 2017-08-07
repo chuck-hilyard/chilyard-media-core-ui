@@ -65,23 +65,15 @@ describe('common.logger', () => {
       it('should call $log error', () => {
         rlLoggerService.setLogLevel('info');
         spyOn(mockLog, 'error');
-        rlLoggerService.error('error message', {
-          test: 'test'
-        }, 'test');
-        expect(mockLog.error).toHaveBeenCalledWith('Error: error message', {
-          data: {
-            test: 'test'
-          }
-        }, '[testCurrentState | test]');
+        rlLoggerService.error('error message', {test: 'test'}, 'test');
+        expect(mockLog.error).toHaveBeenCalledWith('Error: error message', {test: 'test'}, '[testCurrentState | test]');
       });
     });
     describe('given the log level is off', () => {
       it('should NOT call $log error', () => {
         rlLoggerService.setLogLevel('off');
         spyOn(mockLog, 'error');
-        rlLoggerService.error('error message', {
-          test: 'test'
-        }, 'test');
+        rlLoggerService.error('error message', {test: 'test'}, 'test');
         expect(mockLog.error).not.toHaveBeenCalled();
       });
     });
@@ -92,23 +84,15 @@ describe('common.logger', () => {
       it('should call $log warn', () => {
         rlLoggerService.setLogLevel('info');
         spyOn(mockLog, 'warn');
-        rlLoggerService.warning('warning message', {
-          test: 'test'
-        }, 'test');
-        expect(mockLog.warn).toHaveBeenCalledWith('Warning: warning message', {
-          data: {
-            test: 'test'
-          }
-        }, '[testCurrentState | test]');
+        rlLoggerService.warning('warning message', {test: 'test'}, 'test');
+        expect(mockLog.warn).toHaveBeenCalledWith('Warning: warning message', {test: 'test'}, '[testCurrentState | test]');
       });
     });
     describe('given the log level is error', () => {
       it('should NOT call $log warn', () => {
         rlLoggerService.setLogLevel('error');
         spyOn(mockLog, 'warn');
-        rlLoggerService.warning('warning message', {
-          test: 'test'
-        }, 'test');
+        rlLoggerService.warning('warning message', {test: 'test'}, 'test');
         expect(mockLog.warn).not.toHaveBeenCalled();
       });
     });
@@ -119,23 +103,15 @@ describe('common.logger', () => {
       it('should call $log warn', () => {
         rlLoggerService.setLogLevel('info');
         spyOn(mockLog, 'warn');
-        rlLoggerService.warn('warn message', {
-          test: 'test'
-        }, 'test');
-        expect(mockLog.warn).toHaveBeenCalledWith('Warning: warn message', {
-          data: {
-            test: 'test'
-          }
-        }, '[testCurrentState | test]');
+        rlLoggerService.warn('warn message', {test: 'test'}, 'test');
+        expect(mockLog.warn).toHaveBeenCalledWith('Warning: warn message', {test: 'test'}, '[testCurrentState | test]');
       });
     });
     describe('given the log level is error', () => {
       it('should NOT call $log warn', () => {
         rlLoggerService.setLogLevel('error');
         spyOn(mockLog, 'warn');
-        rlLoggerService.warn('warning message', {
-          test: 'test'
-        }, 'test');
+        rlLoggerService.warn('warning message', {test: 'test'}, 'test');
         expect(mockLog.warn).not.toHaveBeenCalled();
       });
     });
@@ -149,20 +125,14 @@ describe('common.logger', () => {
         rlLoggerService.info('info message', {
           test: 'test'
         }, 'test');
-        expect(mockLog.info).toHaveBeenCalledWith('Info: info message', {
-          data: {
-            test: 'test'
-          }
-        }, '[testCurrentState | test]');
+        expect(mockLog.info).toHaveBeenCalledWith('Info: info message', {test: 'test'}, '[testCurrentState | test]');
       });
     });
     describe('given the log level is warning', () => {
       it('should NOT call $log info', () => {
         rlLoggerService.setLogLevel('warning');
         spyOn(mockLog, 'info');
-        rlLoggerService.info('info message', {
-          test: 'test'
-        }, 'test');
+        rlLoggerService.info('info message', {test: 'test'}, 'test');
         expect(mockLog.info).not.toHaveBeenCalled();
       });
     });
@@ -176,20 +146,14 @@ describe('common.logger', () => {
         rlLoggerService.debug('debug message', {
           test: 'test'
         }, 'test');
-        expect(mockLog.info).toHaveBeenCalledWith('Debug: debug message', {
-          data: {
-            test: 'test'
-          }
-        }, '[testCurrentState | test]');
+        expect(mockLog.info).toHaveBeenCalledWith('Debug: debug message', {test: 'test'}, '[testCurrentState | test]');
       });
     });
     describe('given the log level is info', () => {
       it('should NOT call $log info', () => {
         rlLoggerService.setLogLevel('info');
         spyOn(mockLog, 'info');
-        rlLoggerService.debug('debug message', {
-          test: 'test'
-        }, 'test');
+        rlLoggerService.debug('debug message', {test: 'test'}, 'test');
         expect(mockLog.info).not.toHaveBeenCalled();
       });
     });
@@ -200,23 +164,15 @@ describe('common.logger', () => {
       it('should call $log info', () => {
         rlLoggerService.setLogLevel('trace');
         spyOn(mockLog, 'info');
-        rlLoggerService.trace('trace message', {
-          test: 'test'
-        }, 'test');
-        expect(mockLog.info).toHaveBeenCalledWith('Trace: trace message', {
-          data: {
-            test: 'test'
-          }
-        }, '[testCurrentState | test]');
+        rlLoggerService.trace('trace message', {test: 'test'}, 'test');
+        expect(mockLog.info).toHaveBeenCalledWith('Trace: trace message', {test: 'test'}, '[testCurrentState | test]');
       });
     });
     describe('given the log level is info', () => {
       it('should NOT call $log info', () => {
         rlLoggerService.setLogLevel('info');
         spyOn(mockLog, 'info');
-        rlLoggerService.trace('trace message', {
-          test: 'test'
-        }, 'test');
+        rlLoggerService.trace('trace message', {test: 'test'}, 'test');
         expect(mockLog.info).not.toHaveBeenCalled();
       });
     });

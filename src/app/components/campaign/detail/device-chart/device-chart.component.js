@@ -117,7 +117,7 @@ class DeviceChartController {
   }
 
   updateChart(metric) {
-    this.Logger.trace('updateChart', metric, me);
+    this.Logger.info('Device chart metric changed', metric.displayName, me);
     this.build();
   }
 

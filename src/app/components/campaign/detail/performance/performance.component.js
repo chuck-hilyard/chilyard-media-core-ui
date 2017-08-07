@@ -96,7 +96,7 @@ class Controller {
   }
 
   handleSort(state) {
-    this.Logger.info('handleSort', state, me);
+    this.Logger.info('Grid sorted', state, me);
     this.sortState = state;
     if (this.breakdownType === 'cycles') {
       this.sortState.key = 'cycleNumber';

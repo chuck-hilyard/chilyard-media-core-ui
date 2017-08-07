@@ -123,8 +123,10 @@ describe('campaign.detail.trend-chart', () => {
   describe('change chart metric', () => {
     it('updates chart', () => {
       spyOn($ctrl, 'build');
-      $ctrl.updateChart();
+      spyOn(commonMocks.logger, 'info');
+      $ctrl.updateChart({displayName: 'foo'});
       expect($ctrl.build).toHaveBeenCalled();
+      expect(commonMocks.logger.info).toHaveBeenCalledWith('Trend chart metric changed', 'foo', 'Trend Chart Controller');
     });
   });
 

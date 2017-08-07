@@ -32,6 +32,8 @@ config.plugins = [
     ENVIRONMENT: JSON.stringify('development'),
     FEATURE_FLAGS: JSON.stringify(flags),
     LANGUAGES: JSON.stringify(['en']),
+    LOG_LEVEL: JSON.stringify('info'),
+    LOGGING_URL: JSON.stringify(''),
     // NOTE: need to add CORS allow origin * to gateway to run locally
     GATEWAY_URL: JSON.stringify('http://localhost:8081/media-core-gateway')
   }),

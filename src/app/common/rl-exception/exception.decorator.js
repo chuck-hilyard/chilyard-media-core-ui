@@ -5,7 +5,7 @@
  * @description adds decorator for custom exception handler, uses logger
  */
 const me = 'exceptionHandler';
-export default ($delegate, exceptionHandler, rlLogger) => {
+export default ($delegate, $log, exceptionHandler) => {
   'ngInject';
   return (exception, cause) => {
     let appErrorPrefix = '[' + exceptionHandler.config.appErrorPrefix + '] ';
@@ -15,6 +15,6 @@ export default ($delegate, exceptionHandler, rlLogger) => {
     };
     $delegate(exception, cause);
 
-    rlLogger.error(appErrorPrefix + exception.message, errorData, me);
+    $log.error(appErrorPrefix + exception.message, errorData, me);
   };
 };

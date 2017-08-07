@@ -31,30 +31,39 @@ const levels = {
   trace: 5
 };
 
-let logLevel = levels.info;
-
-let counts = {
-  error: 0,
-  warning: 0
-};
-
-let fullLogging = false;
-
-let startTime = Date.now();
-
 let log = [];
 
 export default class Logger {
-  constructor($log, $state, $window) {
+  constructor($interval, $log, $http, $state, $window, rlConfig) {
     'ngInject';
     this.$log = $log;
     this.$state = $state;
     this.$window = $window;
+    this.logLevel = levels[rlConfig.logLevel];
+    this.loggingUrl = rlConfig.loggingUrl;
+    this.sendInterval = $interval(this.checkLog.bind(null, this), 1000);
+  }
+
+  checkLog(service) {
+    if (log.length > 0) {
+      service.sendLog();
+    }
+  }
+
+  sendLog() {
+    this.$http({
+      method: 'POST',
+      url: this.loggingUrl,
+      data: log
+    })
+      .then(() => {
+        log = [];
+      });
   }
 
   setLogLevel(level) {
     if (typeof(level) === 'string' && levels.hasOwnProperty(level)) {
-      logLevel = levels[level];
+      this.logLevel = levels[level];
     }
     else {
       this.$log.warn('setLogLevel invalid level string: ' + level);
@@ -62,28 +71,18 @@ export default class Logger {
   }
 
   error(message, data, source) {
-    counts.error++;
-    if (logLevel >= levels.error) {
-      let logData = formatData(data, this.$window);
+    if (this.logLevel >= levels.error) {
       let logSource = formatSource(source, this.$state);
-      this.$log.error('Error: ' + message, logData, logSource);
-      addToLog('Error', message, logData, logSource);
-    }
-  }
-
-  success(message, data, source) {
-    if (logLevel >= levels.success) {
-      this.$log.info('Success: ' + message, formatData(data, this.$window), formatSource(source, this.$state));
+      this.$log.error('Error: ' + message, data, logSource);
+      this.addToLog('Error', message, data, logSource);
     }
   }
 
   warning(message, data, source) {
-    counts.warning++;
-    if (logLevel >= levels.warning) {
-      let logData = formatData(data, this.$window);
+    if (this.logLevel >= levels.warning) {
       let logSource = formatSource(source, this.$state);
-      this.$log.warn('Warning: ' + message, logData, logSource);
-      addToLog('Warning', message, logData, logSource);
+      this.$log.warn('Warning: ' + message, data, logSource);
+      this.addToLog('Warning', message, data, logSource);
     }
   }
 
@@ -92,40 +91,49 @@ export default class Logger {
   }
 
   info(message, data, source) {
-    if (logLevel >= levels.info) {
-      this.$log.info('Info: ' + message, formatData(data, this.$window), formatSource(source, this.$state));
+    if (this.logLevel >= levels.info) {
+      let logSource = formatSource(source, this.$state);
+      this.$log.info('Info: ' + message, data, logSource);
+      this.addToLog('Info', message, data, logSource);
+    }
+  }
+
+  success(message, data, source) {
+    if (this.logLevel >= levels.success) {
+      this.$log.info('Success: ' + message, data, this.$window, formatSource(source, this.$state));
     }
   }
 
   debug(message, data, source) {
-    if (logLevel >= levels.debug) {
-      this.$log.info('Debug: ' + message, formatData(data, this.$window), formatSource(source, this.$state));
+    if (this.logLevel >= levels.debug) {
+      this.$log.info('Debug: ' + message, data, formatSource(source, this.$state));
     }
   }
 
   trace(message, data, source) {
-    if (logLevel >= levels.trace) {
-      this.$log.info('Trace: ' + message, formatData(data, this.$window), formatSource(source, this.$state));
+    if (this.logLevel >= levels.trace) {
+      this.$log.info('Trace: ' + message, data, formatSource(source, this.$state));
+    }
+  }
+
+  addToLog(level, message, data, source) {
+    if (this.loggingUrl) {
+      log.push({
+        level: level,
+        url: this.$window.document.URL,
+        timestamp: Date.now(),
+        message: message,
+        data: (typeof data === 'string' ? data : JSON.stringify(data)),
+        source: source
+      });
+      if (log.length > 50) {
+        this.sendLog();
+      }
     }
   }
 
 }
 
-function formatData(data, window) {
-  let dataObj = {
-    url: window.document.URL,
-    time: Date.now(),
-    sessionStart: startTime,
-    counts: angular.copy(counts)
-  };
-  if (!fullLogging) {
-    dataObj = {};
-  }
-  if (data) {
-    dataObj.data = data;
-  }
-  return dataObj;
-}
 
 function formatSource(source, state) {
   let msg = state.current.name;
@@ -133,15 +141,4 @@ function formatSource(source, state) {
     msg += ' | ' + source.trim();
   }
   return '[' + msg + ']';
-}
-
-function addToLog(logType, message, data, source) {
-  if (fullLogging) {
-    log.push({
-      type: logType,
-      message: message,
-      data: data,
-      source: source
-    });
-  }
 }

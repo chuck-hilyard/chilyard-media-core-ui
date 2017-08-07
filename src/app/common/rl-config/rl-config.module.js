@@ -10,6 +10,8 @@ class service {
     this.languages = LANGUAGES;
     this.gatewayUrl = GATEWAY_URL;
     this.featureFlags = FEATURE_FLAGS;
+    this.logLevel = LOG_LEVEL;
+    this.loggingUrl = LOGGING_URL;
     this.appName = 'Media Facebook UI';
   }
 

@@ -211,7 +211,7 @@ class AgeGenderController {
   }
 
   updateChart(metric) {
-    this.Logger.trace('updateChart', metric, me);
+    this.Logger.info('Age & Gender chart metric changed', metric.displayName, me);
     this.build();
   }
 

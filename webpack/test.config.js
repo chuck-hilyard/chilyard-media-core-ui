@@ -38,6 +38,8 @@ config.plugins = [
     ENVIRONMENT: JSON.stringify('test'),
     FEATURE_FLAGS: JSON.stringify(flags),
     LANGUAGES: JSON.stringify(['en']),
+    LOG_LEVEL: JSON.stringify('info'),
+    LOGGING_URL: JSON.stringify(''),
     GATEWAY_URL: JSON.stringify('')
   })
 ];

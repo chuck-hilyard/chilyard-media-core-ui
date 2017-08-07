@@ -69,8 +69,10 @@ describe('campaign.detail.device-chart', () => {
   describe('change chart metric', () => {
     it('updates chart', () => {
       spyOn($ctrl, 'build');
-      $ctrl.updateChart();
+      spyOn(commonMocks.logger, 'info');
+      $ctrl.updateChart({displayName: 'foo'});
       expect($ctrl.build).toHaveBeenCalled();
+      expect(commonMocks.logger.info).toHaveBeenCalledWith('Device chart metric changed', 'foo', 'Device Chart Controller');
     });
   });
 

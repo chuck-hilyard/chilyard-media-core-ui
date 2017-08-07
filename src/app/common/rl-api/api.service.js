@@ -16,7 +16,7 @@ export default class ApiService {
     this.Logger.trace('apiRequest', config, source);
     return this.$http(config)
       .catch((error) => {
-        this.Logger.error('apiRequest Error', {error: error}, source);
+        this.Logger.error('API Service Request Error', {error: error}, source);
       });
   }
 

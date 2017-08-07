@@ -24,6 +24,13 @@ class NavbarController {
     this.collapsed = !this.collapsed;
   }
 
+  // Home state checker
+  // @return bool
+  //
+  get home() {
+    return this.$state.current.name.indexOf('home') > -1;
+  }
+
   // Advertiser state checker
   // @return bool
   //

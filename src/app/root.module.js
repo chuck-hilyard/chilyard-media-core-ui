@@ -22,7 +22,7 @@ export default angular
   .config(($urlRouterProvider, $translateProvider) => {
     'ngInject';
     /* Default path is to /components/home/home.module.js */
-    $urlRouterProvider.otherwise('/campaigns');
+    $urlRouterProvider.otherwise('/home');
 
     $translateProvider
       .useSanitizeValueStrategy(null)

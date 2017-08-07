@@ -1,43 +1,7 @@
 @import './src/styles/variables';
 
-
-.table.table-dashboard {
-
-  td {
-    vertical-align: middle;
-
-    .fa {
-      color: $brand-success;
-
-      &.fa-square-o {
-        color: $gray-light;
-      }
-    }
-
-    &.expand {
-      text-align: center;
-
-      .fa {
-        color: $brand-info;
-      }
-    }
-
-    &.blue {
-      .fa {
-        color: $brand-info;
-      }
-    }
-
-    &.yellow {
-      .fa {
-        color: $brand-warning;
-      }
-    }
-
-    &.red {
-      .fa {
-        color: $brand-danger;
-      }
-    }
-  }
+.rl-home {
+	.nav-tabs > li.dashboard-tab.active > a {
+	  background-color: $rl-white;
+	}
 }

@@ -1,5 +1,7 @@
 export default {
   home: {
-    title: 'Dashboard'
+    title: 'Dashboard',
+    socialDashboard: 'Social Dashboard',
+    searchDashboard: 'Search Dashboard'
   }
 };

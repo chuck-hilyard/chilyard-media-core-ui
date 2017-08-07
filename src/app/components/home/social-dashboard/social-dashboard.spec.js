@@ -14,5 +14,5 @@ describe('components.home.social-dashboard', () => {
   it('constructs', () => {
     expect($ctrl).toBeDefined();
   });
-  
+
 });

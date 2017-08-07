@@ -1,5 +1,7 @@
 @import './src/styles/variables';
 
-.nav-tabs > li.dashboard-tab.active > a {
-  background-color: $rl-white;
+.rl-home {
+	.nav-tabs > li.dashboard-tab.active > a {
+	  background-color: $rl-white;
+	}
 }

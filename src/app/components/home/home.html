@@ -1,23 +1,25 @@
-<div class="rl-container">
-  <div class="rl-content">
+<div class="rl-home">
+  <div class="rl-container">
+    <div class="rl-content">
 
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="page-header">
-          <h1>{{'home.title' | translate}}</h1>
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="page-header">
+            <h1>{{'home.title' | translate}}</h1>
+          </div>
         </div>
       </div>
-    </div>
 
-    <div class="row">
-      <uib-tabset active="$ctrl.tabIndex">
-        <uib-tab index="0" ui-sref="home.searchdashboard" class="dashboard-tab" heading="{{'home.searchDashboard' | translate}}">
-          <div ui-view="searchView"></div>
-        </uib-tab>
-        <uib-tab index="1" ui-sref="home.socialdashboard" class="dashboard-tab" heading="{{'home.socialDashboard' | translate}}">
-          <div ui-view="socialView"></div>
-        </uib-tab>
-      </uib-tabset>
+      <div class="row">
+        <uib-tabset active="$ctrl.tabIndex">
+          <uib-tab index="0" ui-sref="home.searchdashboard" class="dashboard-tab" heading="{{'home.searchDashboard' | translate}}">
+            <div ui-view="searchView"></div>
+          </uib-tab>
+          <uib-tab index="1" ui-sref="home.socialdashboard" class="dashboard-tab" heading="{{'home.socialDashboard' | translate}}">
+            <div ui-view="socialView"></div>
+          </uib-tab>
+        </uib-tabset>
+      </div>
     </div>
-  </div><!-- close .rl-content -->
-</div><!-- close .rl-container -->
+  </div>
+</div>

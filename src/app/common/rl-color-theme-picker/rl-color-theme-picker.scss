@@ -38,19 +38,19 @@
       padding: 6px;
       top: 4px;
       cursor: pointer;
-      background: center no-repeat #536881;
-      color: white;
+      background-color: $togler_gray;
+      color: $rl-bright-white;
     }
     .toggler-close {
       right: 0;
-      z-index: 101;
+      z-index: 101; //when the color picker is open the close btn should be visible
       position: absolute;
-      background: center no-repeat #2b3643;
+      background-color: $theme_picker_black;
       border-radius: $border-radius-base;
       padding: 20px;
       top: 4px;
       cursor: pointer;
-      color: white;
+      color: $rl-bright-white;
     }
     .theme-options {
       .theme-option {
@@ -62,9 +62,8 @@
           font-weight: bold;
         }
         width: 420px;
-        color: #c6cfda;
+        color: $theme_picker_text;
         padding: 15px;
-        border-top: 1px solid #354353;
         margin-top: 0;
         margin-bottom: 0;
       }
@@ -84,7 +83,7 @@
           span {
             margin-left: 8%;
           }
-          background-color: white;
+          background-color: $rl-bright-white;
           color: black;
           width: 80%;
           border-radius: 20px;
@@ -97,13 +96,11 @@
       top: 4px;
       right: 0;
       position: absolute;
-      z-index: 100;
-      background: #2b3643;
+      background: $theme_picker_black;
       border-radius: 4px;
     }
     position: absolute;
     margin-right: 20px;
     right: 0;
     width: 420px;
-    z-index: 100;
   }

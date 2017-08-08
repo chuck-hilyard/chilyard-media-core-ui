@@ -18,6 +18,7 @@ import logger from './rl-logger/logger.module';
 import sortableHeader from './rl-sortable-header/sortable-header.module';
 import session from './session/session.module';
 import colors from './rl-colors/colors.module';
+import colorThemePicker from './rl-color-theme-picker/rl-color-theme-picker.module';
 
 export default angular
   .module('common', [
@@ -40,6 +41,7 @@ export default angular
     select,
     dropdown,
     searchFilter,
-    colors
+    colors,
+    colorThemePicker
   ])
   .name;

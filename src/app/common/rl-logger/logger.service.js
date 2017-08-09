@@ -41,7 +41,7 @@ export default class Logger {
     this.$window = $window;
     this.logLevel = levels[rlConfig.logLevel];
     this.loggingUrl = rlConfig.loggingUrl;
-    this.sendInterval = $interval(this.checkLog.bind(null, this), 1000);
+    this.sendInterval = $interval(this.checkLog.bind(null, this), 120000); // 2 minutes
   }
 
   checkLog(service) {
@@ -100,7 +100,7 @@ export default class Logger {
 
   success(message, data, source) {
     if (this.logLevel >= levels.success) {
-      this.$log.info('Success: ' + message, data, this.$window, formatSource(source, this.$state));
+      this.$log.info('Success: ' + message, data, formatSource(source, this.$state));
     }
   }
 

@@ -1,4 +1,12 @@
 @import './src/styles/variables';
 
 .rl-search-dashboard {
+  .doc-reference-container {
+    background-color: $references_box_blue;
+    padding: 5px;
+  }
+  .doc-reference-title {
+    font-weight: bold;
+    padding-left: 15px;
+  }
 }

@@ -1,5 +1,6 @@
 import uiRouter from 'angular-ui-router';
 import tooltip from 'angular-ui-bootstrap/src/tooltip';
+import popover from 'angular-ui-bootstrap/src/popover';
 import component from './home.component';
 import socialModule from './social-dashboard/social-dashboard.module';
 import searchModule from './search-dashboard/search-dashboard.module';
@@ -10,10 +11,11 @@ export default angular
   .module('home', [
     uiRouter,
     tooltip,
+    popover,
     socialModule,
     searchModule
   ])
-  .config(($stateProvider, $urlRouterProvider) => {
+  .config(($stateProvider, $urlRouterProvider, $uibTooltipProvider) => {
     'ngInject';
     $stateProvider
       .state('home', {
@@ -34,6 +36,12 @@ export default angular
         }
       });
     $urlRouterProvider.when('/home', '/home/search');
+    $uibTooltipProvider.options({
+      appendToBody: true,
+      placement: 'auto bottom',
+      trigger: 'mouseenter',
+      delay: 500
+    });
   })
   .component('home', component)
   .name;

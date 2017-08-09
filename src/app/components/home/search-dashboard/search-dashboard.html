@@ -23,6 +23,270 @@
           </div>
         </div>
       </header>
+      <section class="rl-dashboard-table">
+        <div class="dashboard-table">
+          <span class="first-cycle-legend"></span>
+          <span translate>searchDashboard.firstCycle</span>
+          <span class="second-cycle-legend"></span>
+          <span translate>searchDashboard.secondCycle</span>
+          <table class="table table-bordered table-condensed table-striped table-header-rotated" rl-cpi-sticky-header>
+            <thead>
+              <tr class="title-row">
+                <th class="rotate">
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.cidTemplateUrl">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.campaignId'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.CID</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.campaignName'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.campaignName</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.priorityTemplateUrl">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.rank'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.priority</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.budgetAmountTemplateUrl">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.campaignBudget'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.budget</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.clientSentimentTemplateUrl">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.sentiment'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.csScore</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.performanceTemplateUrl">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.performance'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.performance</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.cplTemplateUrl">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.sortCpl'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.CPL</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.cplTrendTemplateUrl">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.cplTrendValue'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.cplTrend</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.utilizationTemplateUrl">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.utilization'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.utilization</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.costPerClickTemplateUrl">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.sortCostPerClick'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.moneyClick</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.costPerCallTemplateUrl">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.sortCostPerCall'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.moneyCall</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.ctrTemplateUrl">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.sortCtr'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.CTR</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.avgQSTemplateUrl">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.averageQualityScore'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.avgQS</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.clickPerLeadTemplateUrl">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.sortClickPerLead'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.clickLead</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.budgetScoreTemplateUrl">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.sortBudgetScore'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.budgetScore</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.alertsTemplateUrl">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.alert'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.alerts</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider">
+                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.clientCallTemplateUrl">
+                    <div class="title-cell">
+                      <span>
+                        <rl-sortable-header
+                          key="'entity.lastClientCallAlert'"
+                          sort-state="{}">
+                          <span translate>searchDashboard.tableHeader.lastCltCall</span>
+                        </rl-sortable-header>
+                      </span>
+                    </div>
+                  </div>
+                </th>
+                <th class="rotate">
+                  <hr class="column-divider-last">
+                  <div class="title-center-last-item" uib-popover-template="$ctrl.dynamicPopover.reviewedTemplateUrl">
+                    <div class="title-cell">
+                      <span translate>searchDashboard.tableHeader.reviewed</span>
+                    </div>
+                  </div>
+                </th>
+              </tr>
+            </thead>
+            <tbody>
+            </tbody>
+          </table>
+        </div>
+      </section>
     </div>
   </div>
 </div>

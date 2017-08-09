@@ -4,4 +4,93 @@
   .nav-tabs > li.dashboard-tab.active > a {
     background-color: $rl-white;
   }
+
+  .rl-dashboard-table {
+    .first-cycle-legend {
+      background: $highlighter-orange;
+      padding: 0px 8px;
+      margin: 0px 6px 0px 8px;
+    }
+
+    .second-cycle-legend {
+      background: $highlighter-blue;
+      padding: 0px 8px;
+      margin: 0px 6px 0px 8px;
+    }
+
+    .dashboard-table {
+      overflow: visible;
+    }
+
+    .table-header-rotated {
+      border-collapse: collapse;
+      overflow: visible;
+    }
+
+    .table-header-rotated th {
+      padding: 5px 10px;
+    }
+
+    .table-header-rotated td {
+      width: 30px;
+    }
+
+    .table-header-rotated > thead td {
+      text-align: center;
+      padding: 10px 5px;
+      border: 1px solid $border_color;
+    }
+
+    .table-header-rotated .title-row {
+      background-color: $title_row_gray;
+    }
+
+    .table-header-rotated th.rotate {
+      height: 140px;
+      white-space: nowrap;
+      border: none;
+
+      hr.column-divider {
+        transform: translate(-48px, -58px) rotate(298deg);
+        width: 160px;
+        position: absolute;
+        background-color: $border_color;
+        color: $border_color;
+        height: 1px;
+        border: 0;
+        margin-top: 13px;
+      }
+
+      hr.column-divider-last {
+        transform: translate(-48px, -64px) rotate(296deg);
+        width: 155px;
+        position: absolute;
+        background-color: $border_color;
+        color: $border_color;
+        height: 1px;
+        border: 0;
+      }
+
+      .title-center {
+        width: 50%;
+        float: right;
+      }
+
+      .title-center-last-item {
+        width: 74%;
+        float: right;
+      }
+    }
+
+    .table-header-rotated th.rotate .title-cell {
+      -webkit-transform: translate(0px, -10px) rotate(298deg);
+      transform: translate(0px, -10px) rotate(298deg);
+      width: 25px;
+    }
+
+    .table-header-rotated th.row-header {
+      padding: 0 10px;
+      border-bottom: 1px solid $border_color;
+    }
+  }
 }

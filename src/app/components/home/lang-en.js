@@ -171,6 +171,14 @@ export default {
         secondSectionYellowDesc: 'Campaign Cycle < 3 and Utilization % < 60% or > 140% or Utilization < 90% or > 110% = Yellow',
         secondSectionGreenDesc: 'Else Green'
       }
-    }
+    },
+    decisionTree: 'Campaign Management Decision Tree'
+  },
+  socialDashboard: {
+    platform: 'Platform',
+    fbSpecialist: 'FB Specialist',
+    channel: 'Channel',
+    offerName: 'Offer Name',
+    dmc: 'DMC'
   }
 };

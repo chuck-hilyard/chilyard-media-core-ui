@@ -7,6 +7,7 @@ import filters from './filters/filters.module';
 import components from './components/components.module';
 import rootComponent from './root.component';
 import en from './lang-en.js';
+import httpAuthInterceptor from 'angular-http-auth';
 import './root.scss';
 
 export default angular

@@ -50,6 +50,12 @@
             </div>
           </div>
         </div>
+        <div class="fb-search-filter">
+          <rl-multi-filter-toolbar settings="$ctrl.filterSettings" updateSettings="$ctrl.updateSettings(settings)"></rl-multi-filter-toolbar>
+        </div>
+        <div class="dashboard-filter-container">
+          <rl-multi-filter label="CID" settings="$ctrl.filterSettings" apply="$ctrl.applyFilters()" updateSettings="$ctrl.updateSettings(settings)"></rl-multi-filter>
+        </div>
       </div>
     </div>
   </div>

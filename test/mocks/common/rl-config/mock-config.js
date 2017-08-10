@@ -1,4 +1,5 @@
 export default {
-  gatewayUrl: '',
+  gatewayUrl: 'gw',
+  mediaGatewayUrl: 'mgw',
   languages: 'en'
 };

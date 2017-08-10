@@ -19,6 +19,8 @@ import sortableHeader from './rl-sortable-header/sortable-header.module';
 import session from './session/session.module';
 import colors from './rl-colors/colors.module';
 import colorThemePicker from './rl-color-theme-picker/rl-color-theme-picker.module';
+import routeHelper from './rl-route-helper/route-helper.module';
+import currentCampaign from './rl-current-campaign/current-campaign.module';
 
 export default angular
   .module('common', [
@@ -42,6 +44,8 @@ export default angular
     dropdown,
     searchFilter,
     colors,
-    colorThemePicker
+    colorThemePicker,
+    routeHelper,
+    currentCampaign
   ])
   .name;

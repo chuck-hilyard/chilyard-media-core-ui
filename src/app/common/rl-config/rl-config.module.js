@@ -9,10 +9,18 @@ class service {
     /*eslint no-undef: "off"*/
     this.languages = LANGUAGES;
     this.gatewayUrl = GATEWAY_URL;
+    this.mediaGatewayUrl = MEDIA_GATEWAY_URL;
     this.featureFlags = FEATURE_FLAGS;
     this.logLevel = LOG_LEVEL;
     this.loggingUrl = LOGGING_URL;
-    this.appName = 'Media Facebook UI';
+    this.platform = PLATFORM;
+    this.appName = 'Media Core UI';
+    this.app = {
+      madmin: MADMIN_UI,
+      search: '',
+      social: '',
+      display: ''
+    };
   }
 
 }

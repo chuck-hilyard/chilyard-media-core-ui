@@ -2,9 +2,10 @@ import template from './campaign.html';
 const me = 'Campaign Controller';
 
 class Controller {
-  constructor(rlLogger, CampaignSidebar, $stateParams, $translate, rlDateTime, DataSettings) {
+  constructor(rlLogger, rlCurrentCampaign, CampaignSidebar, $stateParams, $translate, rlDateTime, DataSettings) {
     'ngInject';
     this.Logger = rlLogger;
+    this.CurrentCampaign = rlCurrentCampaign;
     this.sidebar = CampaignSidebar;
     this.DataSettings = DataSettings;
     this.DateTime = rlDateTime;
@@ -18,16 +19,22 @@ class Controller {
     this.header = {};
   }
 
+  $onDestroy() {
+    this.CurrentCampaign.clearCampaign();
+  }
+
   $onInit() {
-    this.Logger.trace('$onInit', {
+    this.Logger.info('Navigate to Campaign '+this.mcid, {
       campaignCycles: this.campaignCycles,
-      campaignOverview: this.campaignOverview
+      campaignOverview: this.campaignOverview,
+      campaignGmcid: this.campaignGmcid
     }, me);
 
     if (!this.isError()) {
       this.cycles = mapCycles(this.DateTime, this.campaignCycles, this.cycleString, this.to);
       this.campaignDataSettings = this.DataSettings.initialize(this.cycles, this.mcid);
       this.header = setHeader(this.campaignOverview, this.translatedTitles);
+      this.CurrentCampaign.setCampaign(this.mcid, this.campaignGmcid.gmcid);
     }
 
     this.Logger.trace('$onInit complete', {
@@ -42,6 +49,9 @@ class Controller {
       return true;
     }
     if (this.campaignCycles instanceof Error) {
+      return true;
+    }
+    if (this.campaignGmcid instanceof Error) {
       return true;
     }
     if (this.campaignOverview.masterCampaignId !== parseInt(this.mcid)) {
@@ -151,6 +161,7 @@ export default {
   controller: Controller,
   bindings: {
     campaignCycles: '<',
-    campaignOverview: '<'
+    campaignOverview: '<',
+    campaignGmcid: '<'
   }
 };

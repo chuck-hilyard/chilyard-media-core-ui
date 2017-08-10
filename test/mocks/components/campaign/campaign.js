@@ -3,6 +3,7 @@ import overview from './overview/overview.module';
 import performance from './performance/performance.module';
 import ageGender from './age-gender/age-gender.module';
 import device from './device/device.module';
+import gmcid from './gmcid/gmcid.module';
 
 
 export default angular
@@ -11,6 +12,7 @@ export default angular
     overview,
     performance,
     ageGender,
-    device
+    device,
+    gmcid
   ])
   .name;

@@ -41,11 +41,14 @@ config.plugins = [
   ]),
   new webpack.DefinePlugin({
     ENVIRONMENT: JSON.stringify('test'),
+    PLATFORM: JSON.stringify('USA'),
     FEATURE_FLAGS: JSON.stringify(flags),
     LANGUAGES: JSON.stringify(['en']),
     LOG_LEVEL: JSON.stringify('info'),
     LOGGING_URL: JSON.stringify(''),
-    GATEWAY_URL: JSON.stringify('')
+    GATEWAY_URL: JSON.stringify(''),
+    MEDIA_GATEWAY_URL: JSON.stringify(''),
+    MADMIN_UI: JSON.stringify('http://localhost:4000')
   })
 ];
 

@@ -1,5 +1,6 @@
 import mockCampaignOverview from '../../../../test/mocks/components/campaign/overview/overview';
 import mockCampaignCycles from '../../../../test/mocks/components/campaign/cycles/cycles';
+import mockCampaignGmcid from '../../../../test/mocks/components/campaign/gmcid/gmcid';
 import commonMocks from '../../../../test/mocks/common/common.mocks';
 
 describe('components.campaign', () => {
@@ -14,6 +15,10 @@ describe('components.campaign', () => {
   let mockTranslate = {
     instant: angular.noop
   };
+  let mockCurrentCampaign = {
+    setCampaign: angular.noop,
+    clearCampaign: angular.noop
+  };
   let $ctrl;
 
   beforeEach(() => {
@@ -22,11 +27,13 @@ describe('components.campaign', () => {
       $provide.value('DataSettings', mockDataSettings);
       $provide.value('rlLogger', commonMocks.logger);
       $provide.value('rlDateTime', mockDateTime);
+      $provide.value('rlCurrentCampaign', mockCurrentCampaign);
     });
 
     let bindings = {
       campaignCycles: mockCampaignCycles,
-      campaignOverview: mockCampaignOverview
+      campaignOverview: mockCampaignOverview,
+      campaignGmcid: mockCampaignGmcid
     };
 
     angular.mock.inject(($injector) => {
@@ -79,6 +86,19 @@ describe('components.campaign', () => {
         expect($ctrl.header.title).toEqual(mockCampaignOverview.name);
         expect($ctrl.header.subTitle).toEqual(mockCampaignOverview.advertiserName);
       });
+      it('should set the CurrentCampaign', () => {
+        spyOn(mockCurrentCampaign, 'setCampaign');
+        $ctrl.$onInit();
+        expect(mockCurrentCampaign.setCampaign).toHaveBeenCalled();
+      });
+    });
+  });
+
+  describe('$onDestroy', () => {
+    it('clears the current campaign', () => {
+      spyOn(mockCurrentCampaign, 'clearCampaign');
+      $ctrl.$onDestroy();
+      expect(mockCurrentCampaign.clearCampaign).toHaveBeenCalled();
     });
   });
 

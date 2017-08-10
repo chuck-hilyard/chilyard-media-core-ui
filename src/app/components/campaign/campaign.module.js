@@ -23,7 +23,8 @@ export default angular
         component: 'campaign',
         resolve: {
           campaignCycles: (CampaignService, $stateParams) => CampaignService.getCampaignCycles($stateParams.mcid),
-          campaignOverview: (CampaignService, $stateParams) => CampaignService.getCampaignOverview($stateParams.mcid)
+          campaignOverview: (CampaignService, $stateParams) => CampaignService.getCampaignOverview($stateParams.mcid),
+          campaignGmcid: (CampaignService, $stateParams) => CampaignService.getGlobalMcid($stateParams.mcid)
         }
       });
   })

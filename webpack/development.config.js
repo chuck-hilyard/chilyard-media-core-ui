@@ -35,12 +35,16 @@ config.plugins = [
   ]),
   new webpack.DefinePlugin({
     ENVIRONMENT: JSON.stringify('development'),
+    PLATFORM: JSON.stringify('USA'),
     FEATURE_FLAGS: JSON.stringify(flags),
     LANGUAGES: JSON.stringify(['en']),
     LOG_LEVEL: JSON.stringify('info'),
     LOGGING_URL: JSON.stringify(''),
     // NOTE: need to add CORS allow origin * to gateway to run locally
-    GATEWAY_URL: JSON.stringify('http://localhost:8081/media-core-gateway')
+    GATEWAY_URL: JSON.stringify('http://localhost:8081/media-core-gateway'),
+    MEDIA_GATEWAY_URL: JSON.stringify('https://mediagateway-gbl.qa.reachlocal.com'),
+    //MADMIN_UI: JSON.stringify('http://localhost:4000')
+    MADMIN_UI: JSON.stringify('https://cpiclient-usa.qa.reachlocal.com')
   }),
   new webpack.optimize.CommonsChunkPlugin({
     name: 'vendor'

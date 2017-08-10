@@ -1,6 +1,6 @@
 @import './src/styles/variables';
 
-.rl-color-theme-picker
+.rl-color-theme-picker {
   .red-indicator {
     .scheme1 {
       color: $scheme1_red;
@@ -30,7 +30,6 @@
       color: $schemes_gray;
     }
   }
-
   .theme-panel {
     .toggler {
       right: 0;
@@ -104,3 +103,4 @@
     right: 0;
     width: 420px;
   }
+}

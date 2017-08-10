@@ -76,6 +76,7 @@ class DropdownController {
       if (options.placeholder) {
         this.placeholder = options.placeholder;
       }
+      this.disabled = options.disabled;
       this.mainField = this.showFields[0].field;
     }
     catch (err) {

@@ -5,10 +5,6 @@ export default class Service {
     this.$q = $q;
   }
 
-  checkLogin() {
-    return this.api.request('GET', '/campaigns/');
-  }
-
   getChannelList(platform) {
 
     let platformSpecificChannelList = {
@@ -43,7 +39,7 @@ export default class Service {
   }
 
   getFacebookSpecialistDmcList(platform, businessUserId, offerId) {
-    let offerQueryStr = (offerId === '' || typeof offerId === 'undefined' || offerId === null) ? '' : '&offerId='+offerId;
+    let offerQueryStr = (!!offerId) ? '' : '&offerId='+offerId;
     return this.api.mediaGatewayGet('/facebookdashboard/dmc?platform='+platform+'&businessUserId='+businessUserId+offerQueryStr)
       .then((success) => success.data)
       .catch((error) => {
@@ -52,8 +48,8 @@ export default class Service {
   }
 
   getFacebookAdvertiserList(platform, businessUserId, offerId, businessId) {
-    let offerQueryStr = (offerId === '' || typeof offerId === 'undefined' || offerId === null) ? '' : '&offerId='+offerId,
-      dmcQueryStr = (businessId === '' || typeof businessId === 'undefined' || businessId === null) ? '' : '&businessId='+businessId;
+    let offerQueryStr = (!!offerId) ? '' : '&offerId='+offerId,
+      dmcQueryStr = (!!businessId) ? '' : '&businessId='+businessId;
     return this.api.mediaGatewayGet('/facebookdashboard/advertiser?platform='+platform+'&businessUserId='+businessUserId+offerQueryStr+dmcQueryStr)
       .then((success) => success.data)
       .catch((error) => {

@@ -2,7 +2,7 @@ import template from './social-dashboard.html';
 
 class Controller {
 
-  constructor($log, SocialDashboardService) {
+  constructor($log, SocialDashboardService, $q) {
     'ngInject';
     this.dropdown_values = [];
     this.$log = $log;
@@ -11,34 +11,37 @@ class Controller {
     this.fbSpecialist_values = {};
     this.offer_values = {};
     this.dmc_values = {};
+    this.$q = $q;
   }
 
   $onInit() {
     this.setInitialValues();
-    this.checkLogin();
+    this.loadDropdownValues();
   }
 
-  checkLogin() {
-    this.socialService.checkLogin().then(() => {
-      this.socialService.getChannelList('USA').then((response) => {
-        let placeholder = {'channelId': -1, 'channelName': 'All'};
-        response.data.splice(0, 0, placeholder);
-        this.channel_values = {
-          showFields: [{field: 'channelName'}],
-          list: response.data,
-          selected: placeholder
-        };
-      });
-      this.socialService.getFacebookSpecialistList('USA').then((response) => {
-        let placeholder = {'businessEmail': '', 'businessId': -1, 'facebookSpecialistName': 'SelectFB'};
-        response.splice(0, 0, placeholder);
-        this.fbSpecialist_values = {
-          showFields: [{field: 'facebookSpecialistName'}],
-          list: response,
-          selected: placeholder
-        };
-      });
-    }, () => {
+  loadDropdownValues() {
+    this.$q.all([
+      this.socialService.getChannelList('USA'),
+      this.socialService.getFacebookSpecialistList('USA')
+    ]).then((data) => {
+      let channelResponse = data[0];
+      let fbSpecialistResponse = data[1];
+
+      let placeholder = {'channelId': -1, 'channelName': 'All'};
+      channelResponse.data.splice(0, 0, placeholder);
+      this.channel_values = {
+        showFields: [{field: 'channelName'}],
+        list: channelResponse.data,
+        selected: placeholder
+      };
+
+      placeholder = {'businessEmail': '', 'businessId': -1, 'facebookSpecialistName': 'SelectFB'};
+      fbSpecialistResponse.splice(0, 0, placeholder);
+      this.fbSpecialist_values = {
+        showFields: [{field: 'facebookSpecialistName'}],
+        list: fbSpecialistResponse,
+        selected: placeholder
+      };
     });
   }
 
@@ -85,31 +88,36 @@ class Controller {
     this.platform_values = {
       showFields: [{field: 'platformName'}],
       list: [placeholder],
-      selected: placeholder
+      selected: placeholder,
+      disabled: true
     };
     placeholder = {'channelId': -1, 'channelName': 'All'};
     this.channel_values = {
       showFields: [{field: 'channelName'}],
       list: [placeholder],
-      selected: placeholder
+      selected: placeholder,
+      disabled: true
     };
     placeholder = {'businessEmail': '', 'businessId': -1, 'facebookSpecialistName': 'SelectFB'};
     this.fbSpecialist_values = {
       showFields: [{field: 'facebookSpecialistName'}],
       list: [placeholder],
-      selected: placeholder
+      selected: placeholder,
+      disabled: true
     };
     placeholder = {'offerId': -1, 'offerName': 'All'};
     this.offer_values = {
       showFields: [{field: 'offerName'}],
       list: [placeholder],
-      selected: placeholder
+      selected: placeholder,
+      disabled: true
     };
     placeholder = {'businessId': -1, 'businessName': 'All'};
     this.dmc_values = {
       showFields: [{field: 'businessName'}],
       list: [placeholder],
-      selected: placeholder
+      selected: placeholder,
+      disabled: true
     };
   }
 

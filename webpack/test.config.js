@@ -3,6 +3,8 @@ const copyPlugin = require('copy-webpack-plugin');
 const webpack = require('webpack');
 const paths = require('./support/paths.js');
 const flags = require('./support/development.flags.json');
+const rules = require('./support/rules.js');
+
 
 let config = require('./support/default.config.js');
 
@@ -13,12 +15,12 @@ config.entry = {
   ]
 };
 
-config.module.rules.push({
-  enforce: 'pre',
-  test: /\.js$/,
-  exclude: /node_modules/,
-  loader: 'eslint-loader',
+config.module.rules.forEach((rule, index) => {
+  if ('.css'.match(rule.test)) {
+    config.module.rules[index] = rules.styleSourceMaps;
+  }
 });
+config.module.rules.push(rules.lint);
 
 config.plugins = [
   new cleanPlugin([paths.dist], {

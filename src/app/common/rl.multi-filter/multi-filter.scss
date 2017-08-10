@@ -1,0 +1,32 @@
+.rl-multi-filter {
+
+  .form-inline {
+    margin-bottom: 5px;
+
+    .form-control-static {
+      margin: 0 5px;
+    }
+
+    .fixed-width {
+      width: 150px;
+    }
+
+  }
+
+  .btn-add-another {
+    padding-left: 0;
+  }
+
+}
+
+.rl-multi-filter-toolbar {
+  display: inline-block;
+
+  .form-inline {
+    display: inline-block;
+
+    input[type="text"] {
+      width: 200px;
+    }
+  }
+}

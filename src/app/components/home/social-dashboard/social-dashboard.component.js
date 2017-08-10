@@ -3,7 +3,7 @@ const me = 'SocialDashboard';
 
 class Controller {
 
-  constructor(rlApi, SocialDashboardService, $q, rlConfig, rlLogger) {
+  constructor(rlApi, SocialDashboardService, $q, rlConfig, rlLogger, MultiFilterSettings) {
     'ngInject';
     this.api = rlApi;
     this.dropdown_values = [];
@@ -17,6 +17,7 @@ class Controller {
     this.$q = $q;
     this.filteredData = [];
     this.colorScheme = 'scheme1';
+    this.filterSettings = MultiFilterSettings;
   }
 
   $onInit() {

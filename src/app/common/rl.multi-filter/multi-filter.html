@@ -1,0 +1,74 @@
+<div class="panel panel-warning rl-multi-filter"
+     ng-class="{'panel-collapse': multiFilter.collapsed}"
+     ng-show="multiFilter.show()">
+  <div class="panel-heading" ng-click="multiFilter.collapsed = !multiFilter.collapsed">
+    <h3 class="panel-title">
+      <i class="glyphicon" ng-class="{'glyphicon-triangle-bottom': multiFilter.collapsed, 'glyphicon-triangle-right': !multiFilter.collapsed }"></i>
+      Filters &nbsp;
+      <small ng-show="multiFilter.collapsed" ng-bind-html="multiFilter.readableFilters"></small>
+    </h3>
+  </div>
+
+  <div class="panel-body" collapse="multiFilter.collapsed">
+    <div class="form-inline" ng-repeat="filter in multiFilter.staged">
+      <div class="form-group">
+
+        <select class="form-control" ng-model="filter.type" ng-change="multiFilter.updateFilter($index)">
+          <option value="default" selected>{{multiFilter.label}}</option>
+          <option ng-if="multiFilter.additionalFilters.length > 0"
+            ng-repeat="additionalFilter in multiFilter.additionalFilters"
+            ng-value="additionalFilter.type">{{additionalFilter.label}}</option>
+        </select>
+
+        <span ng-switch on="filter.settings.comparator">
+          <select class="form-control fixed-width"
+            ng-switch-when="text"
+            ng-model="filter.comparator"
+            ng-options="option.label for option in multiFilter.options"></select>
+
+          <select class="form-control fixed-width"
+            ng-switch-when="number"
+            ng-model="filter.comparator"
+            ng-options="option.label for option in multiFilter.numericOptions"></select>
+
+          <span class="form-control-static" ng-switch-when="none">{{ 'tableFilters.is' | translate }}</span>
+        </span>
+
+        <span ng-switch on="filter.settings.input">
+          <input class="form-control"
+            type="text"
+            ng-switch-when="text"
+            ng-model="filter.searchTerm">
+
+          <input class="form-control"
+            type="number"
+            ng-switch-when="number"
+            ng-model="filter.searchTerm">
+
+          <select class="form-control fixed-width"
+            ng-switch-when="select"
+            ng-model="filter.option"
+            ng-options="option as option.label for option in multiFilter.filterSettings[filter.type].options">
+          </select>
+        </span>
+
+        <button class="btn btn-danger" ng-show="multiFilter.staged.length > 1" ng-click="multiFilter.remove($index)">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-link btn-add-another" rel="add-filter" ng-click="multiFilter.add()">
+        <span class="fa fa-plus"></span> {{ 'tableFilters.Add another filter' | translate }}
+      </button>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-primary" rel="apply-filters" ng-click="multiFilter.apply()">{{ 'tableFilters.Apply' | translate }}</button>
+      <button class="btn btn-default" rel="clear-filters" ng-click="multiFilter.clear()">{{ 'tableFilters.Clear filters' | translate }}</button>
+    </div>
+
+  </div>
+</div>

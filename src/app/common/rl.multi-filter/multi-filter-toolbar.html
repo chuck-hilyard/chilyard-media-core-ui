@@ -1,0 +1,24 @@
+<div class="rl-multi-filter-toolbar">
+  <form class="form-inline" ng-submit="$ctrl.search()">
+    <div class="input-group" ng-if="$ctrl.showSearch">
+      <input type="text" class="form-control" placeholder="Search" ng-model="$ctrl.sInput">
+      <span class="input-group-btn">
+        <button class="btn btn-default" type="button" rel="search" ng-click="$ctrl.search()">
+          <span class="glyphicon glyphicon-search"></span>
+        </button>
+      </span>
+    </div>
+  </form>
+
+  <div class="btn-group" ng-class="css" uib-dropdown>
+    <button class="btn btn-default" rel="filter-dropdown" uib-dropdown-toggle>
+      Filter
+      <span class="caret"></span>
+    </button>
+    <ul class="dropdown-menu">
+      <li>
+        <a rel="create-filter" ng-click="$ctrl.create()">Create Filter</a>
+      </li>
+    </ul>
+  </div>
+</div>

@@ -161,6 +161,10 @@ export default function rlScrollingTable($timeout, rlLogger) {
       // Put temp header into body
       bodyTable.appendChild( headerTable.querySelector('thead').cloneNode(true) );
 
+      // Reset table-layout to 'auto' for measuring
+      bodyTable.style.tableLayout = 'auto';
+      headerTable.style.tableLayout = 'auto';
+
       // Set table widths to match container
       bodyTable.style.width = `${this.body.clientWidth}px`;
       headerTable.style.width = `${this.body.clientWidth}px`;
@@ -188,6 +192,10 @@ export default function rlScrollingTable($timeout, rlLogger) {
       if (scrollbarHeight !== 0) {
         this.staticColumn.style.bottom = `${scrollbarHeight - this.borderWidth}px`;
       }
+
+      // Set table-layout to 'fixed' to honor set widths
+      bodyTable.style.tableLayout = 'fixed';
+      headerTable.style.tableLayout = 'fixed';
 
       // Remove temp header
       this.body.querySelector('thead').remove();

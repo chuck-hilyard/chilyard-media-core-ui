@@ -19,6 +19,11 @@ config.plugins = [
       to: 'img/',
       flatten: true
     },
+    {
+      from: `${paths.source}/**/*.template.html`,
+      to: 'templates/',
+      flatten: true
+    }
   ]),
   new webpack.DefinePlugin({
     ENVIRONMENT: JSON.stringify('production'),

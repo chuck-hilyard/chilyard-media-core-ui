@@ -32,6 +32,11 @@ config.plugins = [
       from: `${paths.source}/img/**/*`,
       to: 'img/',
       flatten: true
+    },
+    {
+      from: `${paths.source}/**/*.template.html`,
+      to: 'templates/',
+      flatten: true
     }
   ]),
   new webpack.DefinePlugin({

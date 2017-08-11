@@ -51,7 +51,7 @@ class Controller {
 
   fbSpecialistSelected(fbSpecialist) {
     this.fbSpecialist = fbSpecialist;
-    this.socialService.getFacebookOfferList('USA', fbSpecialist.businessUserId).then((response) => {
+    this.socialService.getFacebookOfferList('USA', this.fbSpecialist.businessUserId).then((response) => {
       let placeholder = {'offerId': -1, 'offerName': 'All'};
       response.splice(0, 0, placeholder);
       this.offer_values = {
@@ -68,7 +68,7 @@ class Controller {
 
   offerSelected(offer) {
     this.offer = offer;
-    this.socialService.getFacebookSpecialistDmcList('USA', this.fbSpecialist.businessUserId, offer.offerId).then((response) => {
+    this.socialService.getFacebookSpecialistDmcList('USA', this.fbSpecialist.businessUserId, this.offer.offerId).then((response) => {
       let placeholder = {'businessId': -1, 'businessName': 'All'};
       response.splice(0, 0, placeholder);
       this.dmc_values = {

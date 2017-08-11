@@ -70,6 +70,5 @@ describe('rl.sso', () => {
   // TODO respond to message token
 
   // TODO respond to message reject
-  
 
 });

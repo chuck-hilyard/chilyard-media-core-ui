@@ -34,6 +34,7 @@ config.plugins = [
     FEATURE_FLAGS: JSON.stringify(flags),
     LANGUAGES: JSON.stringify(['en']),
     LOG_LEVEL: JSON.stringify('info'),
+    LOG_INTERVAL: JSON.stringify(5),
     LOGGING_URL: JSON.stringify(''),
     // TODO when media-core-gateway is deployed update here
     GATEWAY_URL: JSON.stringify('http://localhost:8081/media-core-gateway'),

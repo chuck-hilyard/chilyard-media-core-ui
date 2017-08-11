@@ -11,3 +11,13 @@
   width: $width;
   height: $height;
 }
+
+.rl-login-container {
+  position: fixed;
+  top: 50px;
+  bottom: 38px;
+  left: 0;
+  right: 0;
+  background-color: white;
+  z-index: 20000;
+}

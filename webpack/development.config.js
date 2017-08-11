@@ -4,6 +4,7 @@ const webpack = require('webpack');
 const paths = require('./support/paths.js');
 const flags = require('./support/development.flags.json');
 const rules = require('./support/rules.js');
+const styleLintPlugin = require('stylelint-webpack-plugin');
 
 
 let config = require('./support/default.config.js');
@@ -35,6 +36,7 @@ config.plugins = [
       flatten: true
     }
   ]),
+  new styleLintPlugin(),
   new webpack.DefinePlugin({
     ENVIRONMENT: JSON.stringify('development'),
     PLATFORM: JSON.stringify('USA'),

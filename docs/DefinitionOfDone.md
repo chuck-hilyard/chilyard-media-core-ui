@@ -24,7 +24,7 @@
 | Update Comments      |                    | Make sure any existing comments still make sense.  Adding a common component?  Add a jsdoc comment block to the top explaining how to use it (@usage) including a description of all of the inputs
 | Run Karma Tests      | npm run test:unit  | All karma tests should pass, no skipped tests
 | Run Protractor Tests | npm run test:e2e   | All protractor tests should pass |
-| Run with Mocks       | npm run start:test | Make sure mocks are present and functionality works when running with mocks |
+| Run with Mocks       | npm run start:test | Make sure mocks are present and functionality works when running with mocks (See [See Webpack Dev Server with Mocks](#webpack-dev-server-with-mocks))|
 | Run with dev server  | npm start          | If practical, run on localhost while running gateways and server on localhost as well to ensure it all still runs |
 | Pull and Rebase from Master | git pull --rebase,  or your favorite git tool | Pull and rebase from the current master branch (See [Git Rebasing](https://git-scm.com/book/en/v2/Git-Branching-Rebasing)) then make sure it still lints, passes tests, builds and runs before you make your PR |
 |<td colspan=3>AFTER PR APPROVED</td>|
@@ -80,6 +80,67 @@ Prefer changing the specificity in the style definition to using !important
 ##### z-index
 Prefer changing the DOM order to explicitly setting the z-index. [See Stacking without z-index](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Positioning/Understanding_z_index/Stacking_without_z-index)
 
+## Webpack dev server with mocks
+If you add a component, you will also likely need to add mocks.
+
+Mocks can be used for unit testing but mocks of api call responses are also needed to run the app on the webpack dev server with mocks (`npm run start:test`).
+
+### Test/mocks folder structure
+- The test/mocks/mocks.module.js imports the common mocks and the component mocks.
+- Component mocks imports the mocks.js file for each component folder
+- Each component's <component>.mocks.js file imports the routes.js file for each subfolder or api call.
+- Subfolders should contain a single api call or a set of closely related api calls.  If your api calls don't have json files you don't need a subfolder.
+```
+test
+  mocks
+    common
+      rl-api
+      common.mocks.js
+    components
+      campaign
+        ping.routes.js << example of api with no json
+        gmcid
+          gmcid.routes.js
+      home
+      components.mocks.js
+    mocks.module.js
+```
+
+### Example Api routes.js file
+The <api>.mocks.js file tells webpack what to do with your mocks.  
+We use $httpBackend.when to wire up our mocks to our actual $http calls.
+Make sure that your regular expression inside the when call is unique to this api request.
+Here is an example:
+```javascript
+import ngMockE2E from 'angular-mocks/ngMockE2E';
+import data from './gmcid';
+import data1000020 from './gmcid1000020';
+
+export default angular
+  .module('mocks.campaign.gmcid', [
+    ngMockE2E
+  ])
+  .run(($httpBackend) => {
+    'ngInject';
+
+    $httpBackend
+      .when('GET', /\/campaigns\?platform=USA&q=1000020/)
+      .respond(200, data1000020);
+
+    $httpBackend
+      .when('GET', /\/campaigns\?platform=USA&q=\d+/)
+      .respond(200, data);
+  })
+  .name;
+```
+### Steps to add mocks for a new api
+1) If it is a new component, create a new component folder and add t his component to the components.mocks.js file
+2) Create a folder for the api under the component folder
+3) Add the json file with the mocked data response to this folder
+4) Add an <api>.mocks.js file to tell $httpBackend what to do
+5) Wire this <api> folder up to the component mocks.js file
+6) Test it!  npm run start:test
+
 ## Merging Approved PRs
 
 #### No Merge Conflicts
@@ -87,6 +148,7 @@ If there are no merge conficts, once your PR is approved it will show a Squash a
 ![There should be a screenshot here.](./images/SquashAndMerge.png)
 
 Once you push the Squash and Merge button, you should see a Delete Branch button.  To keep our repo clean push this button.
+
 ![There should be a screenshot here.](./images/MergeSuccess.png)
 
 #### Merge conflicts

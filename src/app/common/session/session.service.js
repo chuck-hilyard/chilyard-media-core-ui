@@ -3,7 +3,7 @@
  * @module common.rl-session
  * @name common.rl-session
  * @description provides interface to the session storage.
- * Please use nameing convention of module path name key so we don't
+ * Please use naming convention of module path name key so we don't
  * have collisions: campaign.data-settings
  * NOTE: toJson will convert dates into utc string but fromJson will not
  * convert them back into date objects you need to do that on your own.

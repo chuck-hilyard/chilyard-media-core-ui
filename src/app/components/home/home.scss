@@ -8,14 +8,14 @@
   .rl-dashboard-table {
     .first-cycle-legend {
       background: $highlighter-orange;
-      padding: 0px 8px;
-      margin: 0px 6px 0px 8px;
+      padding: 0 8px;
+      margin: 0 6px 0 8px;
     }
 
     .second-cycle-legend {
       background: $highlighter-blue;
-      padding: 0px 8px;
-      margin: 0px 6px 0px 8px;
+      padding: 0 8px;
+      margin: 0 6px 0 8px;
     }
 
     .dashboard-table {
@@ -83,8 +83,8 @@
     }
 
     .table-header-rotated th.rotate .title-cell {
-      -webkit-transform: translate(0px, -10px) rotate(298deg);
-      transform: translate(0px, -10px) rotate(298deg);
+      -webkit-transform: translate(0, -10px) rotate(298deg);
+      transform: translate(0, -10px) rotate(298deg);
       width: 25px;
     }
 

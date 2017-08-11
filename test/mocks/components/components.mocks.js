@@ -1,6 +1,6 @@
-import getAdvertiser from './advertiser/get_advertiser';
-import campaign from './campaign/campaign';
-import getOrder from './order/get_order';
+import getAdvertiser from './advertiser/get_advertiser.mocks';
+import campaign from './campaign/campaign.mocks';
+import getOrder from './order/get_order.mocks';
 
 export default angular
   .module('mocks.components', [

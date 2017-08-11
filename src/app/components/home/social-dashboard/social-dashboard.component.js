@@ -2,15 +2,16 @@ import template from './social-dashboard.html';
 
 class Controller {
 
-  constructor($log, SocialDashboardService, $q) {
+  constructor(SocialDashboardService, $q, rlConfig, rlLogger) {
     'ngInject';
     this.dropdown_values = [];
-    this.$log = $log;
+    this.Logger = rlLogger;
     this.socialService = SocialDashboardService;
     this.channel_values = {};
     this.fbSpecialist_values = {};
     this.offer_values = {};
     this.dmc_values = {};
+    this.featureFlags = rlConfig.featureFlags;
     this.$q = $q;
   }
 
@@ -46,7 +47,7 @@ class Controller {
   }
 
   platformSelected(platform) {
-    this.$log.log(platform, 'platform');
+    this.Logger.trace('platformSelected', {platform: platform}, 'SocialDashboard');
   }
 
   fbSpecialistSelected(fbSpecialist) {
@@ -63,7 +64,7 @@ class Controller {
   }
 
   channelSelected(channel) {
-    this.$log.log(channel, 'channel');
+    this.Logger.trace('channelSelected', {channel: channel}, 'SocialDashboard');
   }
 
   offerSelected(offer) {
@@ -80,7 +81,7 @@ class Controller {
   }
 
   dmcSelected(dmc) {
-    this.$log.log(dmc, 'dmc');
+    this.Logger.trace('dmcSelected', {dmc: dmc}, 'SocialDashboard');
   }
 
   setInitialValues() {

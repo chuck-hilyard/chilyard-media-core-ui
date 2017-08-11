@@ -1,4 +1,7 @@
+const me = 'Social Dashboard Service';
+
 export default class Service {
+
   constructor(rlApi, $q) {
     'ngInject';
     this.api = rlApi;
@@ -23,7 +26,7 @@ export default class Service {
   }
 
   getFacebookSpecialistList(platform) {
-    return this.api.mediaGatewayGet('/facebookdashboard/specialist?platform=' + platform)
+    return this.api.mediaGatewayGet('/facebookdashboard/specialist', me, {platform: platform})
       .then((success) => success.data)
       .catch((error) => {
         return new Error(error);
@@ -31,7 +34,7 @@ export default class Service {
   }
 
   getFacebookOfferList(platform, businessUserId) {
-    return this.api.mediaGatewayGet('/facebookdashboard/offers?platform='+platform+'&businessUserId='+businessUserId)
+    return this.api.mediaGatewayGet('/facebookdashboard/offers', me, {platform: platform, businessUserId: businessUserId})
       .then((success) => success.data)
       .catch((error) => {
         return new Error(error);

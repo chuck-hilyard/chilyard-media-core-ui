@@ -41,7 +41,10 @@ export default class Logger {
     this.$window = $window;
     this.logLevel = levels[rlConfig.logLevel];
     this.loggingUrl = rlConfig.loggingUrl;
-    this.sendInterval = $interval(this.checkLog.bind(null, this), 120000); // 2 minutes
+    if (rlConfig.logInterval) {
+      let interval = rlConfig.logInterval * 60000;
+      this.sendInterval = $interval(this.checkLog.bind(null, this), interval);
+    }
   }
 
   checkLog(service) {

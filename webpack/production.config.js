@@ -31,6 +31,7 @@ config.plugins = [
     FEATURE_FLAGS: JSON.stringify(flags),
     LANGUAGES: JSON.stringify(['en']),
     LOG_LEVEL: JSON.stringify('info'),
+    LOG_INTERVAL: JSON.stringify(5),
     LOGGING_URL: JSON.stringify('???'),
     GATEWAY_URL: JSON.stringify('BAMBOOMEDIACOREGATEWAY'),
     MEDIA_GATEWAY_URL: JSON.stringify('BAMBOOMEDIAGATEWAY'),

@@ -12,6 +12,7 @@ class service {
     this.mediaGatewayUrl = MEDIA_GATEWAY_URL;
     this.featureFlags = FEATURE_FLAGS;
     this.logLevel = LOG_LEVEL;
+    this.logInterval = LOG_INTERVAL;
     this.loggingUrl = LOGGING_URL;
     this.platform = PLATFORM;
     this.appName = 'Media Core UI';

@@ -50,6 +50,7 @@
   },
   "devDependencies": {
     "angular-mocks": "^1.5.8",
+    "angular-stub-changes": "^1.0.2",
     "eslint": "^3.18.0",
     "eslint-loader": "^1.9.0",
     "eslint-plugin-json": "^1.2.0",

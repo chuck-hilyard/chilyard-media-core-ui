@@ -6,20 +6,19 @@
   </div>
 </div>
 
-<!-- <campaign-overview-panels></campaign-overview-panels> -->
-
 <campaign-trend-chart
+  ng-if="$ctrl.supported.performance"
   data="$ctrl.performanceData"
   breakdown-type="$ctrl.currentDataSettings.selectedSettings.breakdownType"
   loading="$ctrl.loading.performance"></campaign-trend-chart>
 
 <div class="row row-striped padding-top-lg padding-bottom">
-  <div class="col-md-9">
+  <div class="col-md-9" ng-if="$ctrl.supported.ageGender">
     <campaign-age-gender-chart
       data="$ctrl.ageGenderData"
       loading="$ctrl.loading.ageGender"></campaign-age-gender-chart>
   </div>
-  <div class="col-md-3 col-xs-6">
+  <div class="col-md-3 col-xs-6" ng-if="$ctrl.supported.device">
     <campaign-device-chart
       data="$ctrl.deviceData"
       loading="$ctrl.loading.device"></campaign-device-chart>
@@ -27,6 +26,7 @@
 </div>
 
 <campaign-performance
+  ng-if="$ctrl.supported.performance"
   data="$ctrl.performanceData"
   breakdown-type="$ctrl.currentDataSettings.selectedSettings.breakdownType"
   loading="$ctrl.loading.performance"></campaign-performance>

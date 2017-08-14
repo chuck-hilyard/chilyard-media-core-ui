@@ -20,16 +20,11 @@ describe('components.campaign.detail', () => {
       $provide.value('rlLogger', commonMocks.logger);
     });
 
-    let bindings = {
-      campaignOverview: mockSocialCampaignOverview,
-      currentDataSettings: mockDataSettings
-    };
-
     angular.mock.inject(($injector) => {
       $q = $injector.get('$q');
       let $componentController = $injector.get('$componentController');
       service = $injector.get('CampaignDetailService');
-      $ctrl = $componentController('campaign.detail', {}, bindings);
+      $ctrl = $componentController('campaign.detail');
     });
 
     spyOn(service, 'getPerformanceData').and.returnValue($q.when());

@@ -58,17 +58,34 @@ describe('rl.sso', () => {
     });
   });
 
-  // TODO figure out how to test adding and removing the iframe (Vacation calls...)
-  xdescribe('Respond to event:auth-loginRequired', () => {
-    it('when the data has a valid realm, then it should add the iframe to the body', () => {
+  describe('Respond to event:auth-loginRequired', () => {
+    let body;
+
+    beforeEach(() => {
       service.setUpListeners();
       rootScope.$broadcast('event:auth-loginRequired', mockResponse);
-      expect(myWindow.document.getElementsByTagName('body')[0].html()).toContain('<div class="rl-login-container">');
+      body = myWindow.document.querySelector('body');
     });
+
+    it('when the data has a valid realm, then it should add the iframe to the body', () => {
+      let iframe = body.querySelector('.rl-login-container');
+      expect(iframe).not.toBeNull();
+    });
+
+    // TODO respond to message token and remove the iframe
+    xdescribe('iframe responds with auth token', () => {
+      it('should add token to window session and remove iframe', () => {
+        let event = new CustomEvent('message', {
+          data: {
+            type: 'token'
+          }
+        });
+        myWindow.dispatchEvent(event);
+      });
+    });
+
+    // TODO respond to message reject and remove the iframe
+
   });
-
-  // TODO respond to message token
-
-  // TODO respond to message reject
 
 });

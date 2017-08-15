@@ -105,10 +105,10 @@ class Controller {
 
   setSupported() {
     this.campaign.webPublisherCampaigns.forEach((wpc) => {
-      if (wpc.publisherCampaignType === 'SOCIAL') {
+      if (wpc.publishserType === 'SOCIAL') {
         this.enableModules(['ageGender', 'device', 'performance']);
       }
-      if (wpc.publisherCampaignType === 'SEARCH') {
+      if (wpc.publishserType === 'SEARCH') {
         this.enableModules(['device', 'performance']);
       }
     });

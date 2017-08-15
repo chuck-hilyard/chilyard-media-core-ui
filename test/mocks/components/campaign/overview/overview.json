@@ -14,7 +14,7 @@
     {
       "publisherCampaignId": 12345,
       "publisherName": "Facebook",
-      "publisherCampaignType": "SOCIAL"
+      "publishserType": "SOCIAL"
     }
   ]
 }

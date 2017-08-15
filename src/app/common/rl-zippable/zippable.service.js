@@ -1,8 +1,4 @@
 export default class Zippable {
-  constructor() {
-    'ngInject';
-  }
-
   build(collection, key, alias) {
     return this.zippable(collection, key, alias);
   }

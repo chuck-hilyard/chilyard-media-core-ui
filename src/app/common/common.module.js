@@ -21,6 +21,7 @@ import colors from './rl-colors/colors.module';
 import colorThemePicker from './rl-color-theme-picker/rl-color-theme-picker.module';
 import routeHelper from './rl-route-helper/route-helper.module';
 import currentCampaign from './rl-current-campaign/current-campaign.module';
+import zippable from './rl-zippable/zippable.module';
 
 export default angular
   .module('common', [
@@ -46,6 +47,7 @@ export default angular
     colors,
     colorThemePicker,
     routeHelper,
-    currentCampaign
+    currentCampaign,
+    zippable
   ])
   .name;

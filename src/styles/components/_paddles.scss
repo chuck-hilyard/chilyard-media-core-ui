@@ -1,0 +1,98 @@
+// Card paddles
+.card-paddle,
+.card-paddle-sm {
+  position: relative;
+  text-align: center;
+  flex: 0 0 auto;
+  min-width: 50px;
+  &:first-child {
+    border-top-left-radius: $border-radius-base - 1px;
+    border-bottom-left-radius: $border-radius-base - 1px;
+  }
+  &:last-child {
+    border-top-right-radius: $border-radius-base - 1px;
+    border-bottom-right-radius: $border-radius-base - 1px;
+  }
+
+  @media(max-width: $screen-xs-max) {
+    flex: 0 0 auto;
+    min-width: 40px;
+  }
+  button,
+  span,
+  div,
+  input {
+    font-size: 16px;
+  }
+  .btn-link{
+    color: $btn-info-bg;
+    &:hover{
+      text-decoration: none;
+      color: $rl-primary-color;
+    }
+    &:focus, &.focus, &:active:focus, &:active.focus, &.active:focus, &.active.focus{
+      outline: 0;
+      text-decoration: none;
+    }
+  }
+}
+.card-paddle-sm {
+  flex: 0 0 auto;
+  min-width: 30px;
+}
+.card-paddle-lg {
+  flex: 0 0 auto;
+  min-width: 60px;
+}
+
+// Card paddle borders
+.card-paddle,
+.card-content {
+  border-style: solid;
+  border-width: 0;
+}
+.card-paddle + .card-paddle,
+.card-paddle + .card-content,
+.card-content + .card-paddle {
+  border-left-width: 1px;
+}
+
+// Action positioning
+.paddle-inner {
+  display: block;
+  height: 42px;
+  width: 100%;
+}
+label.paddle-inner {
+  cursor: pointer;
+  margin: 0;
+  padding: 10px;
+  input {
+    margin-top: 3px;
+  }
+}
+a.paddle-inner {
+  height: auto;
+  padding: 10px 5px;
+  svg {
+    height: 20px;
+    width: 20px;
+    fill: $rl-blue-gray;
+  }
+  .card-paddle-sm & {
+    svg {
+      height: 14px;
+      width: 14px;
+    }
+  }
+  &:hover {
+    svg {
+      fill: $rl-medium-blue-gray;
+    }
+  }
+}
+// Selects in paddles
+.card-paddle-select {
+  margin: 0 15px;
+  min-width: 100px;
+}

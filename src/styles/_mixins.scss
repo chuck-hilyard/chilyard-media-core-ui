@@ -1,0 +1,12 @@
+@mixin card-variant($card-bg, $border, $text-color, $paddle-bg) {
+  background-color: $card-bg;
+  border-color: $border;
+  color: $text-color;
+  .card-content {
+    border-color: $border;
+  }
+  .card-paddle {
+    background: $paddle-bg;
+    border-color: $border;
+  }
+}

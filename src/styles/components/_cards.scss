@@ -1,0 +1,116 @@
+@import '../variables';
+
+$card-dropdown-background: #EFF5FD;
+$card-dropdown-hover-background: #FFFFFF;
+$card-archived-background-color: $rl-pale-gray;
+$card-dropdown-link-color: $rl-slate;
+$card-dropdown-icon-rl-check-color: $rl-light-blue-gray;
+$card-read-background-color: #F4F5F8;
+$card-addon-background: $rl-white;
+$card-read-addon-background: #F0F1F4;
+$card-archived-addon-background: #E9EBF1;
+
+// Base class
+.card {
+  margin-bottom: $line-height-computed;
+  background-color: $rl-pale-gray;
+  border: solid 1px transparent;
+  border-radius: $border-radius-base;
+  display: flex;
+  flex-flow: row wrap;
+  position: relative;
+  width: auto;
+  &:not(.card-expandable) {
+    .card-paddle {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+  }
+}
+
+
+// Card content
+.card-content{
+  flex: 1 0;
+  padding: 17px 20px;
+  position: relative;
+  min-width: 0;
+
+  .card-title {
+    margin-top: 0;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+}
+
+// Hoverable card
+.card-hover {
+  cursor: pointer;
+  &:hover {
+    border-color: darken($border-color, 10%);
+    box-shadow: 0 2px 4px rgba(0,0,0,.1);
+  }
+}
+
+
+// Expandable card
+.card-expandable {
+  &:after {
+    color: rgba(0,0,0,.12);
+    margin-left: -7px;
+    width: 14px;
+    position: absolute;
+    bottom: 3px;
+    top: auto;
+    left: 50%;
+    z-index: 2;
+  }
+}
+
+
+// Nav card
+.card-nav {
+  @media(min-width: $screen-sm-min) {
+    margin-left: -30px;
+  }
+}
+
+.card-vertical-center {
+  align-items: center;
+}
+
+
+// Contextual variations
+.card {
+  @include card-variant($rl-bright-white, $border-color, $text-color, $card-addon-background);
+}
+.card-read {
+  @include card-variant($card-read-background-color, $border-color, $link-visited-color, $card-read-addon-background);
+}
+.card-archived {
+  @include card-variant($card-archived-background-color, $border-color, $link-visited-color, $card-archived-addon-background);
+}
+.card-program {
+  @include card-variant($rl-bright-white, $border-color, $text-color, $card-addon-background);
+}
+
+
+// Custom colors for card-read
+.card-read,
+.card-archived {
+  .btn-link-dark {
+    color: $link-visited-color;
+  }
+  .card-title {
+    a,
+    button {
+      color: $link-visited-color;
+    }
+  }
+  .event-type {
+    font-weight: normal;
+  }
+}

@@ -1,5 +1,5 @@
 import home from './home/home.module';
-// import advertisers from './advertisers/advertisers.module';
+import advertisers from './advertisers/advertisers.module';
 // import advertiser from './advertiser/advertiser.module';
 import campaigns from './campaigns/campaigns.module';
 import campaign from './campaign/campaign.module';
@@ -10,7 +10,7 @@ import campaign from './campaign/campaign.module';
 export default angular
   .module('components', [
     home,
-    // advertisers,
+    advertisers,
     // advertiser,
     campaigns,
     campaign

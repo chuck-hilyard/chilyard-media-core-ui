@@ -1,29 +1,31 @@
+@import './src/styles/variables';
+
 .rl-social-dashboard {
-	.dropdown-container {
-		.col {
-			display: flex;
-			align-items: center;
-			float: left;
-			margin-left: 10px;
-		}
+  .dropdown-container {
+    .col {
+      display: flex;
+      align-items: center;
+      float: left;
+      margin-left: 10px;
+    }
 
-		label {
-			float: left;
-			font-weight: normal;
-			margin-bottom: 0px;
-		}
+    label {
+      float: left;
+      font-weight: normal;
+      margin-bottom: 0;
+    }
 
-		rl-dropdown {
-			position: relative;
-			margin-left: 5px;
-			border-left: thin solid #000;
-			padding-left: 10px;
-			float: left;
-			min-width: 8.5em;
-		}
+    .left-bordered-dropdown {
+      position: relative;
+      margin-left: 5px;
+      border-left: thin solid $rl-black;
+      padding-left: 10px;
+      float: left;
+      min-width: 136px;
+    }
 
-		.form-group {
-			width: 9em;
-		}
-	}
+    .form-group {
+      width: 144px;
+    }
+  }
 }

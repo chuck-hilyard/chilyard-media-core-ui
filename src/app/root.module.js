@@ -3,11 +3,11 @@ import ngAnimate from 'angular-animate';
 import ngCookies from 'angular-cookies';
 import ngTranslate from 'angular-translate';
 import common from './common/common.module';
+import filters from './filters/filters.module';
 import components from './components/components.module';
 import rootComponent from './root.component';
 import en from './lang-en.js';
 import './root.scss';
-
 
 export default angular
   .module('root', [
@@ -16,6 +16,7 @@ export default angular
     ngCookies,
     ngTranslate,
     common,
+    filters,
     components
   ])
   .component('root', rootComponent)

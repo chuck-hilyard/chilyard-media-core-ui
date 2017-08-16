@@ -22,6 +22,7 @@ import colorThemePicker from './rl-color-theme-picker/rl-color-theme-picker.modu
 import routeHelper from './rl-route-helper/route-helper.module';
 import currentCampaign from './rl-current-campaign/current-campaign.module';
 import zippable from './rl-zippable/zippable.module';
+import dashboardMetricHover from './rl-dashboard-metric-hover/dashboard-metric-hover.module';
 
 export default angular
   .module('common', [
@@ -48,6 +49,7 @@ export default angular
     colorThemePicker,
     routeHelper,
     currentCampaign,
-    zippable
+    zippable,
+    dashboardMetricHover
   ])
   .name;

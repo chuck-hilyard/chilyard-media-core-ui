@@ -1,0 +1,13 @@
+<div class="rl-dashboard-metric-hover">
+  <div class="metric-hover" ng-class="{'metric-hover-left': $ctrl.popupPosition === 'left', 'metric-hover-left-chekbox': $ctrl.popupPosition === 'left-checkbox'}">
+    <div class="{{ $ctrl.metricPopupClass }}" ng-if="$ctrl.metricItemList.length > 0">
+      <span class="list-container">
+        <div class="list-item" ng-repeat="metricItem in $ctrl.metricItemList">
+          <span class="list-item-title">{{ metricItem.title }} </span>
+          <span class="list-item-value">{{ metricItem.value }}</span>
+          <span class="list-item-title"><br></span>
+        </div>
+      </span>
+    </div>
+  </div>
+</div>

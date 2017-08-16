@@ -1,0 +1,77 @@
+@import './src/styles/variables';
+
+.rl-dashboard-metric-hover {
+
+  .metric-hover {
+    display: none;
+    min-height: 140px;
+    min-width: 280px;
+    text-align: left;
+    background: white none repeat scroll 0% 0%;
+    padding: 12px;
+    z-index: 1; // this is necessary because the indicators appear on top of the hover box
+    position: absolute;
+    overflow: visible;
+    border: 1px solid $metric_hover_box_border;
+    border-radius: 1px;
+    box-shadow: 1px 2px 1px 0 $rl-black;
+    font-size: 12px;
+
+    .list-container {
+      tab-size:10;
+      -moz-tab-size:10
+    }
+
+    .list-item {
+      text-align:left;
+    }
+
+    .list-item-title {
+      font-family: $font-arial;
+      font-size:13px;
+      color: $metric_hover_box_title;
+    }
+
+    .list-item-value {
+      font-family: $font-arial;
+      font-size:13px;
+      color: $rl-black;
+      font-weight:bold;
+    }
+
+  }
+
+  .metric-hover-left {
+    position: absolute;
+    left: -226px;
+  }
+
+  .metric-hover-left-chekbox {
+    position: absolute;
+    left: -226px;
+    top: 32px;
+  }
+
+  .up-arrow-left:after {
+    content: '';
+    position: absolute;
+    left: 20px;
+    bottom: 100%;
+    border-bottom: 10px solid $metric_hover_box_arrow;
+    border-top: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+
+  .up-arrow-right:after {
+    content: '';
+    position: absolute;
+    right: 20px;
+    bottom: 100%;
+    border-bottom: 10px solid $metric_hover_box_arrow;
+    border-top: 10px solid transparent;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+  }
+
+}

@@ -1,9 +1,9 @@
 {
+  "selected": {
+    "name": "testName",
+    "id": 12345
+  },
   "options": {
-    "selected": {
-      "name": "testName",
-      "id": 12345
-    },
     "list": [
       {
         "name": "testName",
@@ -17,6 +17,7 @@
         "name": "testName3",
         "id": 34567
       }
-    ]
+    ],
+    "placeholder": "foo"
   }
 }

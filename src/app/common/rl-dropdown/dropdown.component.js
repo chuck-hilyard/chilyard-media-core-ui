@@ -44,10 +44,10 @@ class DropdownController {
     this.disabled = false;
   }
 
-  $onChanges(changes) {
-    this.Logger.trace('$onChanges', changes, me);
-    if (changes.options) {
-      this.updateData(changes.options.currentValue);
+  $onInit() {
+    this.Logger.trace('$onInit', this.options, me);
+    if (this.options) {
+      this.updateData(this.options);
     }
   }
 
@@ -64,9 +64,6 @@ class DropdownController {
 
   updateData(options) {
     try {
-      if (options.selected) {
-        this.selected = angular.copy(options.selected);
-      }
       if (options.list) {
         this.list = options.list;
       }
@@ -94,6 +91,7 @@ export default {
   bindings: {
     disabled: '<',
     options: '<',
+    selected: '<',
     onSelect: '&'
   }
 };

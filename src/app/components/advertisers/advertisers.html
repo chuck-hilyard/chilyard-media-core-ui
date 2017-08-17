@@ -6,11 +6,26 @@
         <div class="page-header">
           <h1 translate>advertisers.title</h1>
         </div>
+
+        <div class="card card-archived" ng-if="$ctrl.hasFilters()">
+          <div class="card-content">
+            <span class="pull-left">
+              50
+              <span translate>advertisers.of</span>
+              100
+            </span>
+            <a class="pull-right" ng-click="$ctrl.clearFilters()" translate>
+              advertisers.clearFilters
+            </a>
+          </div>
+        </div>
+
         <p class="text-right">
           1-25
           <span translate>advertisers.of</span>
           100
         </p>
+
         <div class="card" ng-repeat="row in $ctrl.rows">
           <div class="card-content">
             <h4 class="card-title">
@@ -26,32 +41,64 @@
             </p>
           </div>
         </div>
+
       </div>
     </div>
   </div>
 
   <div class="search-column">
     <div class="form-group">
-      <label class="text-uppercase" translate>advertisers.advertiserSearchTitle</label>
-      <input type="input" class="form-control" translate-attr-placeholder="advertisers.advertiserSearchPlaceholder" translate>
+      <form ng-submit="$ctrl.setFilter('advertiser', $ctrl.searchInputs.advertiser)">
+        <label class="text-uppercase" translate>advertisers.advertiserSearchTitle</label>
+        <div class="input-group">
+          <input
+            type="input"
+            class="form-control"
+            ng-model="$ctrl.searchInputs.advertiser"
+            translate-attr-placeholder="advertisers.advertiserSearchPlaceholder"
+            translate>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+              <span class="fa fa-search"></span>
+            </button>
+          </span>
+        </div>
+      </form>
     </div>
     <hr>
     <div class="form-group">
-      <label class="text-uppercase" translate>advertisers.businessSearchTitle</label>
-      <input type="input" class="form-control" translate-attr-placeholder="advertisers.businessSearchPlaceholder" translate>
+      <form ng-submit="$ctrl.setFilter('business', $ctrl.searchInputs.business)">
+        <label class="text-uppercase" translate>advertisers.businessSearchTitle</label>
+        <div class="input-group">
+          <input
+            type="input"
+            class="form-control"
+            ng-model="$ctrl.searchInputs.business"
+            translate-attr-placeholder="advertisers.businessSearchPlaceholder"
+            translate>
+          <span class="input-group-btn">
+            <button class="btn btn-default" type="submit">
+              <span class="fa fa-search"></span>
+            </button>
+          </span>
+        </div>
+      </form>
     </div>
     <hr>
     <div class="form-group">
       <label class="text-uppercase" translate>advertisers.advertiserCategoryTitle</label>
-      <rl-dropdown options="$ctrl.categories" on-select="$ctrl.handleCategorySelect(item)"></rl-dropdown>
+      <rl-dropdown
+        options="$ctrl.categories"
+        selected="$ctrl.searchInputs.category"
+        on-select="$ctrl.setFilter('category', item)"></rl-dropdown>
     </div>
     <hr>
     <div class="form-group">
       <label class="text-uppercase" translate>advertisers.advertiserSubCategory</label>
       <rl-dropdown
-        disabled="$ctrl.subCategories.disabled"
         options="$ctrl.subCategories"
-        on-select="$ctrl.handleSubCategorySelect(item)"></rl-dropdown>
+        selected="$ctrl.searchInputs.subCategory"
+        on-select="$ctrl.setFilter('subCategory', item)"></rl-dropdown>
     </div>
   </div>
 

@@ -5,7 +5,15 @@ class Controller {
 
   constructor($filter) {
     'ngInject';
+
     this.rows = [];
+    this.filters = {};
+    this.searchInputs = {
+      advertiser: null,
+      business: null,
+      category: null,
+      subCategory: null
+    };
     this.categories = {
       list: [{
         name: 'Home Improvement',
@@ -17,7 +25,6 @@ class Controller {
       placeholder: $filter('translate')('advertisers.advertiserCategoryPlaceholder')
     };
     this.subCategories = {
-      disabled: true,
       list: [{
         name: 'Plumber',
         id: 1
@@ -35,9 +42,20 @@ class Controller {
     }
   }
 
-  handleCategorySelect(item) {
-    this.categories.selected = item;
-    this.subCategories.disabled = this.categories.selected ? false : true;
+  clearFilters() {
+    this.filters = {};
+    angular.forEach(this.searchInputs, (value, key) => {
+      this.searchInputs[key] = null;
+    });
+  }
+
+  hasFilters() {
+    return Object.keys(this.filters).length > 0;
+  }
+
+  setFilter(key, item) {
+    this.filters[key] = item;
+    this.searchInputs[key] = item;
   }
 
 }

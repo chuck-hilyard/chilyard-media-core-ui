@@ -13,6 +13,7 @@ describe('common.dropdown', () => {
     angular.mock.inject(($injector) => {
       let $componentController = $injector.get('$componentController');
       let bindings = {
+        selected: mocks.selected,
         options: mocks.options,
         onSelect: angular.noop
       };
@@ -20,13 +21,12 @@ describe('common.dropdown', () => {
     });
   });
 
-  it('constructs', () => {
-    $ctrl.$onChanges({
-      options: {
-        currentValue: mocks.options
-      }
-    });
-    expect($ctrl.selected).toEqual(mocks.options.selected);
+  it('$onInit', () => {
+    $ctrl.$onInit();
+    expect($ctrl.selected).toEqual(mocks.selected);
+    expect($ctrl.list).toEqual(mocks.options.list);
+    expect($ctrl.placeholder).toBe(mocks.options.placeholder);
+    expect($ctrl.disabled).toBeFalsy();
   });
 
 });

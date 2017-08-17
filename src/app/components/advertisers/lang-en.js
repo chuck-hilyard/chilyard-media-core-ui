@@ -10,7 +10,8 @@ export default Object.assign(
       advertiserCategoryTitle: 'Advertiser Category',
       advertiserCategoryPlaceholder: 'Search by Advertiser Category',
       advertiserSubCategory: 'Advertiser Sub-category',
-      advertiserSubCategoryPlaceholder: 'Search by Advertiser Sub-Category'
+      advertiserSubCategoryPlaceholder: 'Search by Advertiser Sub-Category',
+      clearFilters: 'Clear Filters'
     }
   }
 );

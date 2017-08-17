@@ -104,12 +104,13 @@ class Controller {
   }
 
   setSupported() {
-    this.campaign.webPublisherCampaigns.forEach((wpc) => {
+    this.enableModules(['device', 'performance']);
+    if (!this.campaign.publisherCampaigns) {
+      return;
+    }
+    this.campaign.publisherCampaigns.forEach((wpc) => {
       if (wpc.publishserType === 'SOCIAL') {
-        this.enableModules(['ageGender', 'device', 'performance']);
-      }
-      if (wpc.publishserType === 'SEARCH') {
-        this.enableModules(['device', 'performance']);
+        this.enableModules(['ageGender']);
       }
     });
   }

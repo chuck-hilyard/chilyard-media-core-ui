@@ -10,10 +10,11 @@
   "businessId": 15022,
   "offerId": 1,
   "offerName": "Search Engine Marketing",
-  "webPublisherCampaigns": [
+  "publisherCampaigns": [
     {
       "publisherCampaignId": 12345,
       "publisherName": "Facebook",
+      "geoType" : "City",
       "publishserType": "SOCIAL"
     }
   ]

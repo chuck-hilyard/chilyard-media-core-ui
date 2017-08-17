@@ -1,0 +1,9 @@
+@import './src/styles/variables';
+
+.advertisers {
+  .card {
+    .text-info {
+      margin-left: ($grid-gutter-width / 2);
+    }
+  }
+}

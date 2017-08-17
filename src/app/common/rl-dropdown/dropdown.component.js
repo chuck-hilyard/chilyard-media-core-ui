@@ -33,13 +33,15 @@ class DropdownController {
     'ngInject';
     this.Logger = rlLogger;
     this.list = [];
-    this.selected = {};
+    this.selected = null;
     this.customClass = '';
     this.showFields = [{
       field: 'name'
     }];
     this.mainField = 'name';
+    this.placeholder = 'Search...';
     this.search = '';
+    this.disabled = false;
   }
 
   $onChanges(changes) {
@@ -74,6 +76,9 @@ class DropdownController {
       if (options.customClass) {
         this.customClass = options.customClass;
       }
+      if (options.placeholder) {
+        this.placeholder = options.placeholder;
+      }
       this.mainField = this.showFields[0].field;
     }
     catch (err) {
@@ -87,6 +92,7 @@ export default {
   template: dropdownTemplate,
   controller: DropdownController,
   bindings: {
+    disabled: '<',
     options: '<',
     onSelect: '&'
   }

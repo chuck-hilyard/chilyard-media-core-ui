@@ -3,7 +3,6 @@
     indentation: 2,
     length-zero-no-unit: true,
     max-empty-lines: 2,
-    no-duplicate-selectors: true,
     no-empty-source: true,
     no-eol-whitespace: true
   }

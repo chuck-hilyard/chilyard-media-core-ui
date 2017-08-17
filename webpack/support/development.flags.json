@@ -1,6 +1,6 @@
 {
   "dashboard": true,
-  "advertisers": false,
+  "advertisers": true,
   "orders": false,
   "userData": false
 }

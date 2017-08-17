@@ -17,7 +17,7 @@ describe('advertisers', () => {
 
   describe('user filters by category', () => {
     it('enables the sub-category filter select', () => {
-      $ctrl.handleCategorySelect({name: 'foo', id: 1});
+      $ctrl.handleCategorySelect({name:'foo', id:1});
       expect($ctrl.subCategories.disabled).toBeFalsy();
     });
   });

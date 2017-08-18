@@ -1,4 +1,5 @@
 import template from './social-dashboard.html';
+const me = 'SocialDashboard';
 
 class Controller {
 
@@ -24,100 +25,125 @@ class Controller {
     this.$q.all([
       this.socialService.getChannelList('USA'),
       this.socialService.getFacebookSpecialistList('USA')
-    ]).then((data) => {
-      let channelResponse = data[0];
-      let fbSpecialistResponse = data[1];
+    ]).then((success) => {
+      let channelResponse = success[0];
+      let fbSpecialistResponse = success[1];
 
-      let placeholder = {'channelId': -1, 'channelName': 'All'};
-      channelResponse.data.splice(0, 0, placeholder);
-      this.channel_values = {
+      this.channel_values.options = {
         showFields: [{field: 'channelName'}],
         list: channelResponse.data,
-        selected: placeholder
+        placeholder: 'All',
+        customClass: 'left-bordered-dropdown'
       };
+      this.channel_values.disabled = false;
 
-      placeholder = {'businessEmail': '', 'businessId': -1, 'facebookSpecialistName': 'SelectFB'};
-      fbSpecialistResponse.splice(0, 0, placeholder);
-      this.fbSpecialist_values = {
+      this.fbSpecialist_values.options = {
         showFields: [{field: 'facebookSpecialistName'}],
         list: fbSpecialistResponse,
-        selected: placeholder
+        placeholder: 'SelectFB',
+        customClass: 'left-bordered-dropdown'
       };
+      this.fbSpecialist_values.disabled = false;
+    })
+    .catch((error) => {
+      this.Logger.warning('Error in loading channel or facebook list', {error: error}, me);
+    })
+    .finally(() => {
     });
   }
 
   platformSelected(platform) {
-    this.Logger.trace('platformSelected', {platform: platform}, 'SocialDashboard');
+    this.Logger.trace('platformSelected', {platform: platform}, me);
   }
 
   fbSpecialistSelected(fbSpecialist) {
     this.fbSpecialist = fbSpecialist;
     this.socialService.getFacebookOfferList('USA', this.fbSpecialist.businessUserId).then((response) => {
-      let placeholder = {'offerId': -1, 'offerName': 'All'};
-      response.splice(0, 0, placeholder);
-      this.offer_values = {
+      this.offer_values.options = {
         showFields: [{field: 'offerName'}],
         list: response,
-        selected: placeholder
+        placeholder: 'All',
+        customClass: 'left-bordered-dropdown'
       };
+      this.offer_values.disabled = false;
+    })
+    .catch((error) => {
+      this.Logger.warning('Error in loading offers', {error: error}, me);
+    })
+    .finally(() => {
     });
   }
 
   channelSelected(channel) {
-    this.Logger.trace('channelSelected', {channel: channel}, 'SocialDashboard');
+    this.Logger.trace('channelSelected', {channel: channel}, me);
   }
 
   offerSelected(offer) {
     this.offer = offer;
     this.socialService.getFacebookSpecialistDmcList('USA', this.fbSpecialist.businessUserId, this.offer.offerId).then((response) => {
-      let placeholder = {'businessId': -1, 'businessName': 'All'};
-      response.splice(0, 0, placeholder);
-      this.dmc_values = {
+      this.dmc_values.options = {
         showFields: [{field: 'businessName'}],
         list: response,
-        selected: placeholder
+        placeholder: 'All',
+        customClass: 'left-bordered-dropdown'
       };
+      this.dmc_values.disabled = false;
+    })
+    .catch((error) => {
+      this.Logger.warning('Error in loading dmc list', {error: error}, me);
+    })
+    .finally(() => {
     });
   }
 
   dmcSelected(dmc) {
-    this.Logger.trace('dmcSelected', {dmc: dmc}, 'SocialDashboard');
+    this.Logger.trace('dmcSelected', {dmc: dmc}, me);
   }
 
   setInitialValues() {
-    let placeholder = {'platformId': 1, 'platformName': 'USA'};
     this.platform_values = {
-      showFields: [{field: 'platformName'}],
-      list: [placeholder],
-      selected: placeholder,
+      options: {
+        showFields: [{field: 'platformName'}],
+        list: [],
+        placeholder: 'USA',
+        customClass: 'left-bordered-dropdown'
+      },
       disabled: true
     };
-    placeholder = {'channelId': -1, 'channelName': 'All'};
     this.channel_values = {
-      showFields: [{field: 'channelName'}],
-      list: [placeholder],
-      selected: placeholder,
+      options: {
+        showFields: [{field: 'channelName'}],
+        list: [],
+        placeholder: 'All',
+        customClass: 'left-bordered-dropdown'
+      },
       disabled: true
     };
-    placeholder = {'businessEmail': '', 'businessId': -1, 'facebookSpecialistName': 'SelectFB'};
     this.fbSpecialist_values = {
-      showFields: [{field: 'facebookSpecialistName'}],
-      list: [placeholder],
-      selected: placeholder,
+      options: {
+        showFields: [{field: 'facebookSpecialistName'}],
+        list: [],
+        placeholder: 'SelectFB',
+        customClass: 'left-bordered-dropdown'
+      },
       disabled: true
     };
-    placeholder = {'offerId': -1, 'offerName': 'All'};
     this.offer_values = {
-      showFields: [{field: 'offerName'}],
-      list: [placeholder],
-      selected: placeholder,
+      options: {
+        showFields: [{field: 'offerName'}],
+        list: [],
+        placeholder: 'All',
+        customClass: 'left-bordered-dropdown'
+      },
       disabled: true
     };
-    placeholder = {'businessId': -1, 'businessName': 'All'};
     this.dmc_values = {
-      showFields: [{field: 'businessName'}],
-      list: [placeholder],
-      selected: placeholder,
+      options: {
+        showFields: [{field: 'businessName'}],
+        list: [],
+        placeholder: 'All',
+        customClass: 'left-bordered-dropdown'
+      },
       disabled: true
     };
   }

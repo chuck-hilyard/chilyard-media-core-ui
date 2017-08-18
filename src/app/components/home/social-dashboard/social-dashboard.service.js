@@ -42,8 +42,12 @@ export default class Service {
   }
 
   getFacebookSpecialistDmcList(platform, businessUserId, offerId) {
-    let offerQueryStr = (!offerId) ? '' : '&offerId='+offerId;
-    return this.api.mediaGatewayGet('/facebookdashboard/dmc?platform='+platform+'&businessUserId='+businessUserId+offerQueryStr)
+    let params = {
+      platform: platform,
+      businessUserId: businessUserId
+    };
+    if (offerId) params.offerId = offerId;
+    return this.api.mediaGatewayGet('/facebookdashboard/dmc', me, params)
       .then((success) => success.data)
       .catch((error) => {
         return new Error(error);
@@ -51,9 +55,13 @@ export default class Service {
   }
 
   getFacebookAdvertiserList(platform, businessUserId, offerId, businessId) {
-    let offerQueryStr = (!offerId) ? '' : '&offerId='+offerId,
-      dmcQueryStr = (!businessId) ? '' : '&businessId='+businessId;
-    return this.api.mediaGatewayGet('/facebookdashboard/advertiser?platform='+platform+'&businessUserId='+businessUserId+offerQueryStr+dmcQueryStr)
+    let params = {
+      platform: platform,
+      businessUserId: businessUserId
+    };
+    if (offerId) params.offerId = offerId;
+    if (businessId) params.businessId = businessId;
+    return this.api.mediaGatewayGet('/facebookdashboard/advertiser', me, params)
       .then((success) => success.data)
       .catch((error) => {
         return new Error(error);

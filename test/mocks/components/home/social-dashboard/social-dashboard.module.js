@@ -17,7 +17,7 @@ export default angular
       .respond(200, socialDashboardData.facebookOfferList);
 
     $httpBackend
-      .when('GET', /\/dmc\?platform=USA&businessUserId=\d+/)
+      .when('GET', /\/dmc\?businessUserId=(\d)+&offerId=(\d+)&platform=USA/)
       .respond(200, socialDashboardData.facebookSpecialistDmcList);
 
     $httpBackend

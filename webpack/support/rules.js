@@ -3,12 +3,7 @@ let rules = {
     test: /\.(css|scss)$/,
     use: [
       'style-loader',
-      {
-        loader: 'css-loader',
-        options: {
-          sourceMap: true
-        }
-      },
+      'css-loader',
       {
         loader: 'sass-loader',
         options: {

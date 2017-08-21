@@ -109,7 +109,7 @@ class Controller {
       return;
     }
     this.campaign.publisherCampaigns.forEach((wpc) => {
-      if (wpc.publishserType === 'SOCIAL') {
+      if (wpc.publisherType === 'SOCIAL') {
         this.enableModules(['ageGender']);
       }
     });

@@ -50,7 +50,6 @@ describe('components.campaign', () => {
 
   it('constructs', () => {
     expect($ctrl.sidebar).toBeDefined();
-    expect($ctrl.sidebar.links).toBeDefined();
   });
 
   describe('$onInit', () => {
@@ -90,6 +89,19 @@ describe('components.campaign', () => {
         spyOn(mockCurrentCampaign, 'setCampaign');
         $ctrl.$onInit();
         expect(mockCurrentCampaign.setCampaign).toHaveBeenCalled();
+      });
+      it('should set sidebar for campaign', () => {
+        $ctrl.$onInit();
+        expect($ctrl.publisherTypes).toEqual(['DEFAULT', 'SOCIAL']);
+        let expectedLinks = [{
+          translateKey: 'campaign.overview',
+          state: 'campaign.detail',
+          icon: 'fa-folder',
+          order: 0,
+          capabilities: ['DEFAULT'],
+          children: []
+        }];
+        expect($ctrl.sidebar.links).toEqual(expectedLinks);
       });
     });
   });

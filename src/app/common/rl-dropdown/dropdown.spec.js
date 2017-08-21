@@ -14,19 +14,24 @@ describe('common.dropdown', () => {
       let $componentController = $injector.get('$componentController');
       let bindings = {
         selected: mocks.selected,
-        options: mocks.options,
         onSelect: angular.noop
       };
       $ctrl = $componentController('rlDropdown', {}, bindings);
     });
   });
 
-  it('$onInit', () => {
-    $ctrl.$onInit();
+  it('constructs', () => {
     expect($ctrl.selected).toEqual(mocks.selected);
+    expect($ctrl.disabled).toBeFalsy();
+  });
+
+  it('$onChanges', () => {
+    let MockChange = new commonMocks.StubChanges()
+      .addInitialChange('options', mocks.options)
+      .build();
+    $ctrl.$onChanges(MockChange);
     expect($ctrl.list).toEqual(mocks.options.list);
     expect($ctrl.placeholder).toBe(mocks.options.placeholder);
-    expect($ctrl.disabled).toBeFalsy();
   });
 
 });

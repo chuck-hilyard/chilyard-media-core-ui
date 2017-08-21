@@ -6,7 +6,7 @@ class Controller {
     'ngInject';
     this.Logger = rlLogger;
     this.CurrentCampaign = rlCurrentCampaign;
-    this.sidebar = CampaignSidebar;
+    this.sidebarService = CampaignSidebar;
     this.DataSettings = DataSettings;
     this.DateTime = rlDateTime;
 
@@ -17,6 +17,7 @@ class Controller {
     this.cycles = null;
     this.campaignDataSettings = {};
     this.header = {};
+    this.sidebar = {};
   }
 
   $onDestroy() {
@@ -29,6 +30,9 @@ class Controller {
       campaignOverview: this.campaignOverview,
       campaignGmcid: this.campaignGmcid
     }, me);
+
+    this.publisherTypes = getPublisherTypes(this.campaignOverview);
+    this.sidebar.links = setSidebarLinks(this.publisherTypes, this.sidebarService.links);
 
     if (!this.isError()) {
       this.cycles = mapCycles(this.DateTime, this.campaignCycles, this.cycleString, this.to);
@@ -71,6 +75,16 @@ class Controller {
 }
 
 // Private Functions
+function getPublisherTypes(overviewData) {
+  let output = ['DEFAULT'];
+  angular.forEach(overviewData.publisherCampaigns, (campaign) => {
+    if (output.indexOf(campaign.publisherType) < 0) {
+      output.push(campaign.publisherType);
+    }
+  });
+  return output;
+}
+
 function mapCycles(DateTime, cycles, cycleString, toString) {
   return {
     currentCycleIndex: cycles.currentCycleIndex,
@@ -137,6 +151,14 @@ function setHeader(overview, titles) {
       }]
     }]
   };
+}
+
+function setSidebarLinks(types, links) {
+  return links.filter((link) => {
+    return link.capabilities.some((capability) => {
+      return types.indexOf(capability) >= 0;
+    });
+  });
 }
 
 function setTitles(translate) {

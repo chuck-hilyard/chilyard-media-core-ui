@@ -20,10 +20,8 @@ export default angular
     components
   ])
   .component('root', rootComponent)
-  .config(($urlRouterProvider, $translateProvider) => {
+  .config(($translateProvider) => {
     'ngInject';
-    /* Default path is to /components/home/home.module.js */
-    $urlRouterProvider.otherwise('/home');
 
     $translateProvider
       .useSanitizeValueStrategy(null)
@@ -31,8 +29,11 @@ export default angular
       .preferredLanguage('en')
       .fallbackLanguage('en');
   })
-  .run(($cookies, $translate) => {
+  .run(($cookies, $translate, $urlService, rlConfig) => {
     'ngInject';
+
+    $urlService.rules.otherwise(`/${rlConfig.defaultUrl}`);
+
     let language = $cookies.get('language');
     if (language) {
       $translate.use(language);

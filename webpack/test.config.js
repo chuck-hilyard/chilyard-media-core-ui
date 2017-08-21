@@ -46,6 +46,7 @@ config.plugins = [
   new webpack.DefinePlugin({
     ENVIRONMENT: JSON.stringify('test'),
     PLATFORM: JSON.stringify('USA'),
+    DEFAULT_URL: JSON.stringify('home'),
     FEATURE_FLAGS: JSON.stringify(flags),
     LANGUAGES: JSON.stringify(['en']),
     LOG_LEVEL: JSON.stringify('info'),

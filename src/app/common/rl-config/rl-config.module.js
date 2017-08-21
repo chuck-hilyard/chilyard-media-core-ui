@@ -8,6 +8,7 @@ class service {
   constructor() {
     /*eslint no-undef: "off"*/
     this.languages = LANGUAGES;
+    this.defaultUrl = DEFAULT_URL;
     this.gatewayUrl = GATEWAY_URL;
     this.mediaGatewayUrl = MEDIA_GATEWAY_URL;
     this.featureFlags = FEATURE_FLAGS;

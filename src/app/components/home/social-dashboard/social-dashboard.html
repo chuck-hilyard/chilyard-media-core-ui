@@ -1,7 +1,38 @@
 <div class="rl-social-dashboard">
-	<div class="rl-container">
-	  <div class="rl-content">
-	  	<p>Social Dashboard</p>
-	  </div>
-	</div>
+  <div class="rl-container">
+    <div class="rl-content" ng-if="$ctrl.featureFlags.socialDashboard">
+      <div class="dropdown-container">
+        <div class="col">
+          <label for="platform-dropdown" translate>socialDashboard.platform</label>:
+          <rl-dropdown id="platform-dropdown" options="$ctrl.platform_values.options" on-select="$ctrl.platformSelected(item)" disabled="$ctrl.platform_values.disabled"></rl-dropdown>
+        </div>
+        <div class="col">
+          <label for="cp-dropdown" translate>socialDashboard.fbSpecialist</label>:
+          <rl-dropdown id="cp-dropdown" options="$ctrl.fbSpecialist_values.options" on-select="$ctrl.fbSpecialistSelected(item)" disabled="$ctrl.fbSpecialist_values.disabled"></rl-dropdown>
+        </div>
+        <div class="col">
+          <label for="channel-dropdown" translate>socialDashboard.channel</label>:
+          <rl-dropdown id="channel-dropdown" options="$ctrl.channel_values.options" on-select="$ctrl.channelSelected(item)" disabled="$ctrl.channel_values.disabled"></rl-dropdown>
+        </div>
+        <div class="col">
+          <label for="offer-dropdown" translate>socialDashboard.offerName</label>:
+          <rl-dropdown id="offer-dropdown" options="$ctrl.offer_values.options" on-select="$ctrl.offerSelected(item)" disabled="$ctrl.offer_values.disabled"></rl-dropdown>
+        </div>
+        <div class="col">
+          <label for="dmc-dropdown" translate>socialDashboard.dmc</label>:
+          <rl-dropdown id="dmc-dropdown" options="$ctrl.dmc_values.options" on-select="$ctrl.dmcSelected(item)" disabled="$ctrl.dmc_values.disabled"></rl-dropdown>
+        </div>
+        <div class="col">
+          <div class="form-group">
+            <div class="input-group">
+              <input type="text" class="form-control" placeholder="Search" id="inputGroup"/>
+              <span class="input-group-addon">
+                <i class="fa fa-search"></i>
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

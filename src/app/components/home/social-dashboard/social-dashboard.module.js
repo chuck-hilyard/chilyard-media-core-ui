@@ -1,5 +1,6 @@
 import uiRouter from 'angular-ui-router';
 import component from './social-dashboard.component';
+import service from './social-dashboard.service';
 import './social-dashboard.scss';
 
 export default angular
@@ -10,4 +11,5 @@ export default angular
     'ngInject';
   })
   .component('socialDashboard', component)
+  .service('SocialDashboardService', service)
   .name;

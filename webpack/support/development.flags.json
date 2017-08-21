@@ -2,5 +2,6 @@
   "dashboard": true,
   "advertisers": true,
   "orders": false,
-  "userData": false
+  "userData": false,
+  "socialDashboard": true
 }

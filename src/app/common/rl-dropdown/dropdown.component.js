@@ -44,10 +44,10 @@ class DropdownController {
     this.disabled = false;
   }
 
-  $onInit() {
-    this.Logger.trace('$onInit', this.options, me);
-    if (this.options) {
-      this.updateData(this.options);
+  $onChanges(changes) {
+    this.Logger.trace('$onChanges', changes, me);
+    if (changes.options) {
+      this.updateData(changes.options.currentValue);
     }
   }
 

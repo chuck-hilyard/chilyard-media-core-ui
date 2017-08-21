@@ -1,0 +1,332 @@
+{
+    "defaultSortingColumn": { "key": "rank", "reverse": false },
+    "paltformList": [
+        {"platformId":1,"platformName":"USA"},
+        {"platformId":2,"platformName":"CAN"},
+        {"platformId":3,"platformName":"GBR"},
+        {"platformId":4,"platformName":"EUR"},
+        {"platformId":5,"platformName":"AUS"},
+        {"platformId":6,"platformName":"JPN"}
+    ],
+    "facebookSpecialistList": [ 
+        {
+            "businessUserId" : 416787,
+            "facebookSpecialistName" : "Adam Lopez",
+            "businessEmail" : "adam.lopez@reachlocal.com",
+            "businessId" : 16317,
+            "businessName" : "Bergen_1"
+        },
+        {
+            "businessUserId" : 402600,
+            "facebookSpecialistName" : "Adedoyin Adebiyi",
+            "businessEmail" : "adedoyin.adebiyi@reachlocal.com",
+            "businessId" : 14587,
+            "businessName" : "Mike Raichman"
+        },
+        {
+            "businessUserId" : 62366,
+            "facebookSpecialistName" : "Angela Hamilton",
+            "businessEmail" : "angela.hamilton@reachlocal.comXYZ",
+            "businessId" : 12735,
+            "businessName" : "Lisa Cruz (ARS)"
+        },
+        {
+            "businessUserId" : 394895,
+            "facebookSpecialistName" : "Chris Waters",
+            "businessEmail" : "chris.waters@reachlocal.com",
+            "businessId" : 10642,
+            "businessName" : "Tara Leifer"
+        }
+    ],
+    "channelList": [
+        {
+            "channelId":2488,
+            "channelName":"DirectLocal"
+        },
+        {
+            "channelId":2865,
+            "channelName":"National"
+        },
+        {
+            "channelId":1,
+            "channelName":"Partner"
+        }
+    ],
+    "facebookOfferList": [
+        {
+            "offerId" : 1889,
+            "offerName" : "Facebook Lead Ads"
+        },
+        {
+            "offerId" : 1952,
+            "offerName" : "Facebook Lead Ads with Detailed Targeting"
+        },
+        {
+            "offerId" : 1824,
+            "offerName" : "Facebook Local Awareness"
+        },
+        {
+            "offerId" : 1873,
+            "offerName" : "Facebook Website Clicks"
+        },
+        {
+            "offerId" : 1953,
+            "offerName" : "Facebook Website Clicks with Detailed Targeting"
+        },
+        {
+            "offerId" : 1890,
+            "offerName" : "Facebook Website Retargeting"
+        }
+    ],
+    "facebookSpecialistDmcList": [
+        {
+            "businessUserId" : 394895,
+            "facebookSpecialistName" : "Chris Waters",
+            "businessEmail" : "chris.waters@reachlocal.com",
+            "businessId" : 6219,
+            "businessName" : "Alan Moore"
+        },
+        {
+            "businessUserId" : 394895,
+            "facebookSpecialistName" : "Chris Waters",
+            "businessEmail" : "chris.waters@reachlocal.com",
+            "businessId" : 6527,
+            "businessName" : "Alan Moore (Steven Oliver)"
+        },
+        {
+            "businessUserId" : 394895,
+            "facebookSpecialistName" : "Chris Waters",
+            "businessEmail" : "chris.waters@reachlocal.com",
+            "businessId" : 11029,
+            "businessName" : "Richard Terrana"
+        }
+    ],
+    "facebookAdvertiserList": [
+        {
+            "id" : 144318,
+            "label" : "Honda PowerSports of Crofton"
+        },
+        {
+            "id" : 145057,
+            "label" : "Deck Wizard"
+        },
+        {
+            "id" : 171513,
+            "label" : "Effective Medspa & Wellness Center"
+        },
+        {
+            "id" : 191489,
+            "label" : "Wheaton Door and Window Company"
+        }
+    ],
+    "campaignList": [
+        {
+            "campaignId" : 2261686,
+            "masterCampaignId" : 2236081,
+            "campaignBudget" : 300.00,
+            "netCost" : 0.00,
+            "cpmTrendValue" : "Change Within Normal Range",
+            "lastDaySpend" : "2017-05-10",
+            "campaignName" : "FB Retargeting | Barstow and Sons | HVAC",
+            "ctrTrendValue" : "Change Within Normal Range",
+            "calls" : 0,
+            "clicks" : 0,
+            "impressions" : 0,
+            "sentiment" : 0,
+            "lastClientCallAlert" : 1,
+            "alert" : 0,
+            "cpmComp" : 2,
+            "ctrComp" : 2,
+            "utilizationScore" : 1,
+            "cpmTrendComp" : 3,
+            "ctrTrendComp" : 3,
+            "frequencyComp" : 3,
+            "dayRun" : 0,
+            "advertiserId" : 175563,
+            "advertiserName" : "Barstow and Sons",
+            "businessId" : 3957,
+            "businessVIPId" : 2488,
+            "businessSubCategoryName" : "Air Conditioning Installation and Repair",
+            "businessSubCategoryId" : 2100,
+            "businessCategoryName" : "Home & Home Improvement",
+            "businessCategoryId" : 21,
+            "campaignCurrency" : "USD",
+            "businessName": "Tori Dunbar",
+            "requestedCommunicationFrequency": "Monthly",
+            "rank": 1,
+            "sentimentValue": "Poor",
+            "performance": 0.5333333333333333,
+            "performanceComp": 1,
+            "cpm": 17.415242,
+            "ctr": 1.112963,
+            "adChangeComp": 3,
+            "relevance": 300.00,
+            "frequency": 500.00,
+            "cpc": 780.00,
+            "cpcComp": 2,
+            "lastClientCallActivity": "04/13/2017",             
+            "campaignsReviews" : {
+                "campaignsReviewsId" : 9262,
+                "businessUserId" : 386838,
+                "businessUserName" : "Abe Kotara",
+                "campaignId" : 2230715,
+                "masterCampaignId" : 2230715,
+                "reviewerComment" : "",
+                "alreadyReview" : false,
+                "check" : true,
+                "created" : "05/08/2017 15:24:16",
+                "businessUserEmail" : "abe.kotara@reachlocal.com;XYZ"
+            }
+        },
+        {
+            "campaignId" : 2261685,
+            "masterCampaignId" : 2235983,
+            "campaignBudget" : 300.00,
+            "netCost" : 0.00,
+            "cpmTrendValue" : "Change Within Normal Range",
+            "lastDaySpend" : "2017-05-10",
+            "campaignName" : "FB RT | All Star Pest | Pest Control",
+            "ctrTrendValue" : "Better",
+            "calls" : 0,
+            "clicks" : 0,
+            "impressions" : 0,
+            "sentiment" : 0,
+            "lastClientCallAlert" : 1,
+            "alert" : 0,
+            "cpmComp" : 2,
+            "ctrComp" : 2,
+            "utilizationScore" : 1,
+            "cpmTrendComp" : 3,
+            "ctrTrendComp" : 3,
+            "frequencyComp" : 3,
+            "dayRun" : 0,
+            "advertiserId" : 102804,
+            "advertiserName" : "All Star Pest Management Inc",
+            "businessId" : 6219,
+            "businessVIPId" : 2488,
+            "businessSubCategoryName" : "Pest & Rodent Control",
+            "businessSubCategoryId" : 2168,
+            "businessCategoryName" : "Home & Home Improvement",
+            "businessCategoryId" : 21,
+            "campaignCurrency" : "USD",
+            "businessName": "Jeffrey hamm",
+            "requestedCommunicationFrequency": "Quarterly",
+            "rank": 2,
+            "sentimentValue": "Poor",
+            "performance": 0.6333333333333333,
+            "performanceComp": 3,
+            "cpm": 18.415242,
+            "ctr": 3.112963,
+            "adChangeComp": 1,
+            "relevance": 250.00,
+            "frequency": 460.00,
+            "cpc": 440.00,
+            "cpcComp": 2,
+            "lastClientCallActivity": "04/14/2017" 
+        },
+        {
+            "campaignId" : 2198524,
+            "masterCampaignId" : 2198524,
+            "webPublisherCampaignId" : 3487276,
+            "campaignStartDate" : "2017-02-06 12:35:07.0",
+            "campaignBudget" : 500.00,
+            "netCost" : 0.00,
+            "campaignName" : "FB Leads | The Lab School | Admissions Winter 2017",
+            "utilization" : 0.000000,
+            "calls" : 1,
+            "clicks" : 0,
+            "impressions" : 0,
+            "sentiment" : 0,
+            "lastClientCallAlert" : 1,
+            "alert" : 0,
+            "cpmComp" : 1,
+            "ctrComp" : 1,
+            "utilizationScore" : 1,
+            "cpmTrendComp" : 3,
+            "ctrTrendComp" : 3,
+            "frequencyComp" : 3,
+            "dayRun" : 101,
+            "advertiserId" : 184192,
+            "advertiserName" : "The Lab School Of Washington",
+            "businessId" : 11931,
+            "businessVIPId" : 2488,
+            "businessSubCategoryName" : "Special Education & Learning Disabilities",
+            "businessSubCategoryId" : 1436,
+            "businessCategoryName" : "Education & Instruction",
+            "businessCategoryId" : 14,
+            "campaignCurrency" : "USD",
+            "businessName": "Tim Demik",
+            "requestedCommunicationFrequency": "Quarterly",
+            "rank": 3,
+            "sentimentValue": "Poor",
+            "performance": 0.3333333333333333,
+            "performanceComp": 3,
+            "cpm": 13.415242,
+            "ctr": 5.112963,
+            "adChangeComp": 1,
+            "relevance": 300.00,
+            "frequency": 100.00,
+            "cpc": 150.00,
+            "cpcComp": 1,
+            "lastClientCallActivity": "02/13/2017" 
+        },
+        {
+            "campaignId" : 2236141,
+            "masterCampaignId" : 2236141,
+            "webPublisherCampaignId" : 3511136,
+            "campaignStartDate" : "2017-05-04 09:35:11.0",
+            "campaignBudget" : 500.00,
+            "netCost" : 0.00,
+            "campaignName" : "FB Leads | Wheaton Door | Friends/Family",
+            "utilization" : 0.000000,
+            "calls" : 0,
+            "clicks" : 0,
+            "impressions" : 0,
+            "sentiment" : 0,
+            "lastClientCallAlert" : 1,
+            "alert" : 0,
+            "cpmComp" : 1,
+            "ctrComp" : 1,
+            "utilizationScore" : 1,
+            "cpmTrendComp" : 3,
+            "ctrTrendComp" : 3,
+            "adChange" : 7,
+            "frequencyComp" : 3,
+            "dayRun" : 14,
+            "advertiserId" : 191489,
+            "advertiserName" : "Wheaton Door and Window Company",
+            "businessId" : 6219,
+            "businessVIPId" : 2488,
+            "businessSubCategoryName" : "Doors & Windows Sales",
+            "businessSubCategoryId" : 2134,
+            "businessCategoryName" : "Home & Home Improvement",
+            "businessCategoryId" : 21,
+            "campaignCurrency" : "USD",
+            "businessName": "Bob Phillips",
+            "requestedCommunicationFrequency": "Ad-Hoc",
+            "rank": 4,
+            "sentimentValue": "Poor",
+            "performance": 0.2333333333333333,
+            "performanceComp": 2,
+            "cpm": 11.415242,
+            "ctr": 9.112963,
+            "adChangeComp": 2,
+            "relevance": 410.00,
+            "frequency": 240.00,
+            "cpc": 130.00,
+            "cpcComp": 3,
+            "lastClientCallActivity": "05/13/2017" 
+        }
+    ],
+    "reviewedData": {
+        "campaignsReviewsId" : 159, 
+        "businessUserId" : 367056, 
+        "businessUserName" : "Black Ball", 
+        "campaignId" : 2091842, 
+        "reviewerComment" : "", 
+        "alreadyReview" : false, 
+        "check" : true, 
+        "created" : "09/27/2016 05:47:07", 
+        "businessUserEmail" : "chris.waters@reachlocal.com"
+    }
+}

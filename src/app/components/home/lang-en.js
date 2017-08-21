@@ -172,5 +172,12 @@ export default {
         secondSectionGreenDesc: 'Else Green'
       }
     }
+  },
+  socialDashboard: {
+    platform: 'Platform',
+    fbSpecialist: 'FB Specialist',
+    channel: 'Channel',
+    offerName: 'Offer Name',
+    dmc: 'DMC'
   }
 };

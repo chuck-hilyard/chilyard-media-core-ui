@@ -8,6 +8,10 @@ describe('components.home.social-dashboard', () => {
   beforeEach(() => {
     angular.mock.module('socialDashboard');
     angular.mock.module(($provide) => {
+      $provide.service('MultiFilterSettingsService', function() {
+        this.build = angular.noop;
+        this.parseAdditional = angular.noop;
+      });
       $provide.service('SocialDashboardService', function() {
         this.getChannelList = function() {
           return {data: dropdownValues.channelList};

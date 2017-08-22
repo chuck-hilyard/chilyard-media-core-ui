@@ -3,7 +3,7 @@ const me = 'SocialDashboard';
 
 class Controller {
 
-  constructor(rlApi, SocialDashboardService, $q, rlConfig, rlLogger, MultiFilterSettings) {
+  constructor(rlApi, SocialDashboardService, $q, rlConfig, rlLogger, MultiFilterSettingsService, $filter) {
     'ngInject';
     this.api = rlApi;
     this.dropdown_values = [];
@@ -17,13 +17,18 @@ class Controller {
     this.$q = $q;
     this.filteredData = [];
     this.colorScheme = 'scheme1';
-    this.filterSettings = MultiFilterSettings;
+    this.filterService = MultiFilterSettingsService;
+    this.advertiser_list = [];
+    this.$filter = $filter;
   }
 
   $onInit() {
+    this.filteredData = [];
+    this.filterSettings = this.filterService.build();
+    this.additionalFilters();
+    this.selectedAdditional = this.filterService.parseAdditional(this.filterSettings);
     this.setInitialValues();
     this.loadDropdownValues();
-
     this.dynamicPopover = {
       cidTemplateUrl: 'templates/cid.template.html',
       priorityTemplateUrl: 'templates/priority.template.html',
@@ -46,8 +51,8 @@ class Controller {
       clientCallTemplateUrl: 'templates/clientcall.template.html',
       reviewedTemplateUrl: 'templates/reviewed.template.html'
     };
-
     this.getCampaignList();
+    this.sort = {};
   }
 
   loadDropdownValues() {
@@ -104,7 +109,7 @@ class Controller {
   }
 
   channelSelected(channel) {
-    this.Logger.trace('channelSelected', {channel: channel}, me);
+    this.channel = channel;
   }
 
   offerSelected(offer) {
@@ -180,6 +185,7 @@ class Controller {
   getCampaignList() {
     return this.api.mediaGatewayGet('/socialcampaigns')
       .then((success) => {
+        this.table = success.data;
         this.filteredData = success.data;
       })
       .catch((error) => {
@@ -214,6 +220,53 @@ class Controller {
 
     return colorClass;
   }
+
+  additionalFilters() {
+    if (this.advertiser_list.length === 0) {
+      this.advertiser_list = [{id: null, label: 'Select Advertiser'}];
+    }
+
+    this.filterSettings.additionalFilters = [
+      {
+        'type': 'campaignName',
+        'label': 'Campaign Name',
+        'settings': {
+          'comparator': 'text',
+          'input': 'text'
+        },
+        'options': []
+      },
+      {
+        'type': 'advertiserId',
+        'label': 'Advertiser',
+        'settings': {
+          'comparator': 'none',
+          'input': 'select'
+        },
+        'options': this.advertiser_list
+      }
+    ];
+  }
+
+  updateSettings(settings) {
+    this.filterSettings = settings;
+  }
+
+  applyFilters() {
+    this.filteredData = this.table;
+    this.selectedAdditional = this.filterService.parseAdditional(this.filterSettings);
+    let filters = [
+      {func: this.$filter('multiFilter'), args: [this.filterSettings, 'campaignId']},
+      {func: this.$filter('orderBy'), args: (this.sort.reverse ? '-' : '') + this.sort.key},
+      {func: this.$filter('sortNulls'), args: this.sort.key},
+      {func: this.$filter('facebookAdvertiser'), args: [this.selectedAdditional]},
+      {func: this.$filter('facebookChannel'), args: [this.channel]}
+    ];
+    filters.forEach((filter) => {
+      this.filteredData = filter.func.apply(filter.func, [this.filteredData, filter.args]);
+    });
+  }
+
 }
 
 export default {

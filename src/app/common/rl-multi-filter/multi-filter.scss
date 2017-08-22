@@ -1,5 +1,11 @@
 .rl-multi-filter {
 
+  .form-inline .form-control {
+    display: inline-block;
+    width: auto;
+    vertical-align: middle;
+  }
+
   .form-inline {
     margin-bottom: 5px;
 
@@ -19,6 +25,10 @@
 
 }
 
+.form-group {
+  width: auto;
+}
+
 .rl-multi-filter-toolbar {
   display: inline-block;
 
@@ -26,7 +36,7 @@
     display: inline-block;
 
     input[type="text"] {
-      width: 200px;
+      width: 136px;
     }
   }
 }

@@ -1,14 +1,13 @@
 import template from './multi-filter.html';
+const me = 'MultiFilter';
 
 class Controller {
-  constructor($scope, $log) {
+  constructor(rlLogger) {
     'ngInject';
     this.collapsed = false;
     this.readableFilters = '';
-    this.$scope = $scope;
-    // $scope.settings = MultiFilterSettings;
     this.filterSettings = {};
-    this.$log = $log;
+    this.Logger = rlLogger;
   }
 
   $onInit() {
@@ -17,14 +16,14 @@ class Controller {
     this.numericOptions = this.settings.numericOptions;
     this.additionalFilters = this.settings.additionalFilters || [];
     this.gatherSettings();
-    let self = this;
-    this.$scope.$watch('settings.filters', function(newValue) {
-      self.$log.log('settings.filter', newValue);
-      if (newValue && newValue.length > 0) {
-        this.parseFilters();
-      }
-    }, true);
-    this.update( this.staged.length - 1 );
+    this.updateFilter(this.staged.length - 1);
+  }
+
+  $onChanges(changes) {
+    this.Logger.trace('$onChanges', changes, me);
+    if (changes.settings) {
+      this.settings = changes.settings.currentValue;
+    }
   }
 
   show() {
@@ -33,10 +32,10 @@ class Controller {
 
   add() {
     this.settings.addFilter();
-    this.update( this.staged.length - 1 );
+    this.updateFilter( this.staged.length - 1 );
   }
 
-  update(idx) {
+  updateFilter(idx) {
     let filterType = this.staged[idx].type;
     let filterSettings = this.filterSettings[filterType];
     this.staged[idx].settings = filterSettings.settings;
@@ -59,15 +58,19 @@ class Controller {
     this.staged.splice(idx, 1);
   }
 
-  apply() {
+  applyFilters() {
     this.settings.applyStaged();
+    this.updateSettings(this.settings);
+    this.apply();
   }
 
   clear() {
     this.settings.clearFilters();
+    this.apply();
   }
 
   gatherSettings() {
+    let self = this;
     this.filterSettings.default = {
       type: 'default',
       label: this.label,
@@ -78,12 +81,12 @@ class Controller {
     }
     if (this.additionalFilters.length > 0) {
       angular.forEach(this.additionalFilters, function (value) {
-        this.filterSettings[value.type] = value;
+        self.filterSettings[value.type] = value;
       });
     }
   }
 
-  tarseFilters() {
+  parseFilters() {
     this.readableFilters = '';
     angular.forEach(this.settings.filters, function(value, index) {
       this.readableFilters += this.filterSettings[value.type].label + ' ';
@@ -115,7 +118,9 @@ export default {
   template: template,
   controller: Controller,
   bindings: {
-    settings: '=',
-    label: '@'
+    settings: '<',
+    label: '@',
+    apply: '&',
+    updateSettings: '&'
   }
 };

@@ -1,0 +1,74 @@
+<div class="panel panel-warning rl-multi-filter"
+     ng-class="{'panel-collapse': $ctrl.collapsed}"
+     ng-show="$ctrl.show()">
+  <div class="panel-heading" ng-click="$ctrl.collapsed = !$ctrl.collapsed">
+    <h3 class="panel-title">
+      <i class="glyphicon" ng-class="{'glyphicon-triangle-bottom': $ctrl.collapsed, 'glyphicon-triangle-right': !$ctrl.collapsed }"></i>
+      <span translate>{{'tableFilters.filters'}} &nbsp;</span>
+      <small ng-show="$ctrl.collapsed" ng-bind-html="$ctrl.readableFilters"></small>
+    </h3>
+  </div>
+
+  <div class="panel-body" collapse="$ctrl.collapsed">
+    <div class="form-inline" ng-repeat="filter in $ctrl.staged">
+      <div class="form-group">
+
+        <select class="form-control" ng-model="filter.type" ng-change="$ctrl.updateFilter($index)">
+          <option value="default" selected>{{$ctrl.label}}</option>
+          <option ng-if="$ctrl.additionalFilters.length > 0"
+            ng-repeat="additionalFilter in $ctrl.additionalFilters"
+            ng-value="additionalFilter.type">{{additionalFilter.label}}</option>
+        </select>
+
+        <span ng-switch on="filter.settings.comparator">
+          <select class="form-control fixed-width"
+            ng-switch-when="text"
+            ng-model="filter.comparator"
+            ng-options="option.label for option in $ctrl.options"></select>
+
+          <select class="form-control fixed-width"
+            ng-switch-when="number"
+            ng-model="filter.comparator"
+            ng-options="option.label for option in $ctrl.numericOptions"></select>
+
+          <span class="form-control-static" ng-switch-when="none" translate>{{'tableFilters.is'}}</span>
+        </span>
+
+        <span ng-switch on="filter.settings.input">
+          <input class="form-control"
+            type="text"
+            ng-switch-when="text"
+            ng-model="filter.searchTerm">
+
+          <input class="form-control"
+            type="number"
+            ng-switch-when="number"
+            ng-model="filter.searchTerm">
+
+          <select class="form-control fixed-width"
+            ng-switch-when="select"
+            ng-model="filter.option"
+            ng-options="option as option.label for option in $ctrl.filterSettings[filter.type].options">
+          </select>
+        </span>
+
+        <button class="btn btn-danger" ng-show="$ctrl.staged.length > 1" ng-click="$ctrl.remove($index)">
+          <span class="glyphicon glyphicon-remove"></span>
+        </button>
+
+      </div>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-link btn-add-another" rel="add-filter" ng-click="$ctrl.add()">
+        <span class="fa fa-plus">&nbsp;</span><span translate>tableFilters.addFilter</span>
+      </button>
+    </div>
+
+    <div class="form-group">
+      <button class="btn btn-primary" rel="apply-filters" ng-click="$ctrl.applyFilters()" translate>{{'tableFilters.apply'}}</button>
+      <button class="btn btn-default" rel="clear-filters" ng-click="$ctrl.clear()" translate>{{'tableFilters.clearFilters'}}</button>
+    </div>
+
+  </div>
+</div>

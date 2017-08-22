@@ -22,6 +22,31 @@ export default class Service {
 
   constructor() {
     'ngInject';
+  }
+
+  build(defaultSettings) {
+    return new FilterSettings(defaultSettings);
+  }
+
+  parseAdditional(obj) {
+    let output = {};
+    angular.forEach(obj.additionalFilters, function (filter) {
+      let selected = obj.filters.filter((objFilter) => {
+        return objFilter.type === filter.type;
+      });
+      output[filter.type] = [];
+      if (selected.length > 0) {
+        angular.forEach(selected, function (value) {
+          output[filter.type].push(value.option);
+        });
+      }
+    });
+    return output;
+  }
+}
+
+class FilterSettings {
+  constructor(defaultSettings) {
     this.filterOptions = [
       new Comparator('contains', function(haystack, needle) {
         return haystack.toString().toLowerCase().indexOf(needle.toLowerCase()) !== -1;
@@ -48,9 +73,9 @@ export default class Service {
       'input': 'text'
     };
     this.defaultComparator = this.filterOptions[0];
-    if (angular.isDefined(this.defaultSettings)) {
-      this.filterSettings = this.defaultSettings;
-      if (this.defaultSettings.comparator.number) {
+    if (angular.isDefined(defaultSettings)) {
+      this.filterSettings = defaultSettings;
+      if (defaultSettings.comparator.number) {
         this.defaultComparator = this.numericOptions[0];
       }
     }
@@ -78,7 +103,6 @@ export default class Service {
     this.showFilters = false;
   }
 }
-
 
 class Comparator {
   constructor(label, func) {

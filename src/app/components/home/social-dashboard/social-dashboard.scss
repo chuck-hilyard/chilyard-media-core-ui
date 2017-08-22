@@ -1,12 +1,21 @@
+@import './src/styles/variables';
+
 .rl-social-dashboard {
   background-color: $rl-white;
 
+  .doc-reference-container {
+    background-color: $references_box_blue;
+    padding: 5px;
+  }
+
   .dropdown-container {
+    margin: 0;
     .col {
       display: flex;
       align-items: center;
       float: left;
       margin-left: 10px;
+      margin-top: 10px;
     }
 
     label {
@@ -24,9 +33,32 @@
       min-width: 136px;
     }
 
-    .form-group {
-      width: 144px;
+    .fb-search-filter {
+      position: initial;
     }
+
+    .fb-search-filter .form-inline input[type="text"] {
+      width: 114px;
+    }
+
+    .rl-dropdown .select2 > .select2-choice.ui-select-match {
+      height: 36px;
+    }
+
+    .rl-multi-filter-toolbar
+    {
+      .form-inline {
+        vertical-align: middle;
+      }
+
+      .input-group-btn {
+        width: auto;
+      }
+    }
+  }
+
+  .dashboard-filter-container {
+    margin: 10px 0 0 0;
   }
 
   .metric-hover-item:hover .metric-hover {

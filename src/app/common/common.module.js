@@ -23,7 +23,8 @@ import routeHelper from './rl-route-helper/route-helper.module';
 import currentCampaign from './rl-current-campaign/current-campaign.module';
 import zippable from './rl-zippable/zippable.module';
 import dashboardMetricHover from './rl-dashboard-metric-hover/dashboard-metric-hover.module';
-import multiFilter from './rl.multi-filter/multi-filter.module';
+import multiFilter from './rl-multi-filter/multi-filter.module';
+import multiFilterToolbar from './rl-multi-filter/multi-filter-toolbar.module';
 
 export default angular
   .module('common', [
@@ -52,6 +53,7 @@ export default angular
     currentCampaign,
     zippable,
     dashboardMetricHover,
-    multiFilter
+    multiFilter,
+    multiFilterToolbar
   ])
   .name;

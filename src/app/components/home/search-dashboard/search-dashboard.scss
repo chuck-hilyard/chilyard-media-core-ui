@@ -12,4 +12,78 @@
     font-weight: bold;
     padding-left: 15px;
   }
+
+  .metric-hover-item:hover .metric-hover {
+    display: block;
+  }
+
+  .row-expansion-symbol {
+    color: $expansion_btn_color;
+  }
+
+  .drilldown-rows {
+
+    td:first-child {
+      background-color: $expansion_btn_color;
+      color: $rl-white;
+    }
+
+    td {
+
+      .title {
+        font-size: 16px;
+      }
+
+      .subtitle {
+        font-size: 13px;
+        font-style: italic;
+      }
+
+      border: none;
+
+    }
+
+    background-color: $references_box_blue;
+
+  }
+
+  .blocked-dashboard-visible-item-drilldown-header {
+    z-index: 10000; // the visible when greyout effect is achieved
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    position: relative;
+  }
+
+  .blocked-dashboard-visible-item-drilldown {
+    z-index: 10000; // the visible when greyout effect is achieved
+    background-color: $rl-white;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    position: relative;
+  }
+
+  .blocked-dashboard-visible-item-drilldown-highlighted {
+    background-color: $references_box_blue;
+  }
+
+  .blocked-dashboard-visible-item {
+    z-index: 10000; // the visible when greyout effect is achieved
+    background-color: $rl-white;
+    box-shadow: 0 0 1px rgba(0, 0, 0, 0.3);
+    position: relative;
+  }
+
+  .last-year {
+    display: none;
+  }
+
+}
+
+.dashboard-container-grayout:after {
+  content: "";
+  background-color: rgba(0,0,0,.2);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 9999; // the greyout effect is achieved
 }

@@ -1,0 +1,158 @@
+{
+  "lastYear_5_days" : {
+    "campaignBudget" : 1500.0,
+    "costPerLead" : 41.673333,
+    "costPerClick" : 19.024783,
+    "costPerCall" : 41.673333,
+    "utilization" : 1.405397,
+    "ctr" : 0.0209,
+    "averageQualityScore" : 5,
+    "clicksPerLead" : 2.1905,
+    "lastYear" : "2016",
+    "startDate" : "08/12/2016",
+    "endDate" : "08/22/2016",
+    "campaignCurrency" : "USD"
+  },
+  "lastYear_10_days" : {
+    "campaignBudget" : 1500.0,
+    "costPerLead" : 47.953571,
+    "costPerClick" : 18.648611,
+    "costPerCall" : 47.953571,
+    "utilization" : 1.437344,
+    "ctr" : 0.0185,
+    "averageQualityScore" : 5,
+    "clicksPerLead" : 2.5714,
+    "lastYear" : "2016",
+    "startDate" : "08/07/2016",
+    "endDate" : "08/27/2016",
+    "campaignCurrency" : "USD"
+  },
+  "lastYear_15_days" : {
+    "campaignBudget" : 1500.0,
+    "costPerLead" : 47.402381,
+    "costPerClick" : 18.606542,
+    "costPerCall" : 48.558537,
+    "utilization" : 1.449788,
+    "ctr" : 0.0169,
+    "averageQualityScore" : 5,
+    "clicksPerLead" : 2.5476,
+    "lastYear" : "2016",
+    "startDate" : "08/02/2016",
+    "endDate" : "09/01/2016",
+    "campaignCurrency" : "USD"
+  },
+  "lastYear_20_days" : {
+    "campaignBudget" : 1500.0,
+    "costPerLead" : 46.935303,
+    "costPerClick" : 19.12179,
+    "costPerCall" : 47.657385,
+    "utilization" : 1.454116,
+    "ctr" : 0.019,
+    "averageQualityScore" : 5,
+    "clicksPerLead" : 2.4545,
+    "lastYear" : "2016",
+    "startDate" : "07/28/2016",
+    "endDate" : "09/06/2016",
+    "campaignCurrency" : "USD"
+  },
+  "lastYear_25_days" : {
+    "campaignBudget" : 1500.0,
+    "costPerLead" : 47.171139,
+    "costPerClick" : 18.6326,
+    "costPerCall" : 47.775897,
+    "utilization" : 1.442516,
+    "ctr" : 0.0186,
+    "averageQualityScore" : 5,
+    "clicksPerLead" : 2.5316,
+    "lastYear" : "2016",
+    "startDate" : "07/23/2016",
+    "endDate" : "09/11/2016",
+    "campaignCurrency" : "USD"
+  },
+  "lastYear_30_days" : {
+    "campaignBudget" : 1500.0,
+    "costPerLead" : 43.564949,
+    "costPerClick" : 18.431325,
+    "costPerCall" : 44.00949,
+    "utilization" : 1.420558,
+    "ctr" : 0.0178,
+    "averageQualityScore" : 5,
+    "clicksPerLead" : 2.3636,
+    "lastYear" : "2016",
+    "startDate" : "07/18/2016",
+    "endDate" : "09/16/2016",
+    "campaignCurrency" : "USD"
+  },
+  "currentCycle" : {
+    "campaignId" : 2302665,
+    "campaignBudget" : 1800.0,
+    "performance" : 0.3966666666666667,
+    "costPerLead" : 77.989333,
+    "costPerClick" : 15.808649,
+    "costPerCall" : 89.987692,
+    "utilization" : 0.886242,
+    "ctr" : 0.0139,
+    "averageQualityScore" : 7.0,
+    "clicksPerLead" : 4.9333,
+    "sentiment" : 0,
+    "performanceComp" : {
+      "arrow" : -1,
+      "color" : 1
+    },
+    "costPerLeadComp" : {
+      "arrow" : 1,
+      "color" : 1
+    },
+    "costPerClickComp" : {
+      "arrow" : -1,
+      "color" : 3
+    },
+    "clicksPerLeadComp" : {
+      "arrow" : 1,
+      "color" : 1
+    },
+    "costPerCallComp" : {
+      "arrow" : 1,
+      "color" : 1
+    },
+    "ctrComp" : {
+      "arrow" : -1,
+      "color" : 1
+    },
+    "utilizationScoreComp" : {
+      "arrow" : -1
+    },
+    "qualityScoreComp" : {
+      "arrow" : 0,
+      "color" : 2
+    },
+    "startDate" : "07/12/2017",
+    "campaignCurrency" : "USD"
+  },
+  "lastCycle" : {
+    "campaignId" : 2277707,
+    "campaignBudget" : 1800.0,
+    "performance" : 0.4883333333333333,
+    "costPerLead" : 56.25,
+    "costPerClick" : 17.647059,
+    "costPerCall" : 58.064516,
+    "utilization" : 1.0,
+    "ctr" : 0.0163,
+    "averageQualityScore" : 7.0,
+    "clicksPerLead" : 3.1875,
+    "sentiment" : 0,
+    "startDate" : "06/10/2017",
+    "endDate" : "07/12/2017",
+    "campaignCurrency" : "USD"
+  },
+  "bscBenchmark" : {
+    "campaignBudget" : 1250.0,
+    "costPerLead" : 34.54,
+    "costPerClick" : 6.79,
+    "costPerCall" : 39.75,
+    "ctr" : 0.02257,
+    "clicksPerLead" : 3.7,
+    "category" : "Air Conditioning Installation and Repair",
+    "campaignCurrency" : "USD"
+  }
+}

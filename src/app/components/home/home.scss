@@ -6,6 +6,40 @@
   }
 
   .rl-dashboard-table {
+
+    .red-indicator {
+      .scheme1 {
+        color: $scheme1_red;
+      }
+      .scheme2 {
+        color: $scheme2_red;
+      }
+    }
+
+    .green-indicator {
+      .scheme1 {
+        color: $scheme1_green;
+      }
+      .scheme2 {
+        color: $scheme2_green;
+      }
+    }
+
+    .yellow-indicator {
+      .scheme1 {
+        color: $scheme1_yellow;
+      }
+      .scheme2 {
+        color: $scheme2_yellow;
+      }
+    }
+
+    .grey-indicator {
+      .scheme1,.scheme2 {
+        color: $schemes_gray;
+      }
+    }
+
     .first-cycle-legend {
       background: $highlighter-orange;
       padding: 0 8px;
@@ -51,7 +85,7 @@
       border: none;
 
       hr.column-divider {
-        transform: translate(-48px, -58px) rotate(298deg);
+        transform: translate(-52px, -58px) rotate(298deg);
         width: 160px;
         position: absolute;
         background-color: $border_color;
@@ -62,7 +96,7 @@
       }
 
       hr.column-divider-last {
-        transform: translate(-48px, -64px) rotate(296deg);
+        transform: translate(-52px, -64px) rotate(296deg);
         width: 155px;
         position: absolute;
         background-color: $border_color;
@@ -92,5 +126,80 @@
       padding: 0 10px;
       border-bottom: 1px solid $border_color;
     }
+
+    .control {
+      font-size: 18px;
+      position: relative;
+      display: block;
+      margin-bottom: 15px;
+      padding-left: 30px;
+      cursor: pointer;
+      height: 20px;
+    }
+
+    .control input {
+      position: absolute;
+      display: none;
+    }
+
+    .control__indicator {
+      position: absolute;
+      top: 2px;
+      left: 16px;
+      width: 20px;
+      height: 20px;
+      background: $checkbox_bg;
+    }
+
+    /* Hover and focus states */
+    .control:hover input ~ .control__indicator,
+    .control input:focus ~ .control__indicator {
+      background: $border-color;
+    }
+
+    /* Checked state */
+    .control input:checked ~ .green_control_indicator {
+      background: $indicator_green;
+    }
+
+    /* Hover state whilst checked */
+    .control input:checked ~ .yellow_control_indicator {
+      background: $indicator_yellow;
+    }
+
+    /* Disabled state */
+    .control input:disabled ~ .green_control_indicator {
+      pointer-events: none;
+      background: $indicator_green;
+    }
+    .control input:disabled ~ .yellow_control_indicator {
+      pointer-events: none;
+      background: $indicator_yellow;
+    }
+
+    /* Check mark */
+    .control__indicator:after {
+      position: absolute;
+      display: none;
+      content: '';
+    }
+
+    /* Show check mark */
+    .control input:checked ~ .control__indicator:after {
+      display: block;
+    }
+
+    /* Checkbox tick */
+    .control--checkbox .control__indicator:after {
+      top: 2px;
+      left: 8px;
+      width: 7px;
+      height: 12px;
+      transform: rotate(45deg);
+      border: solid $rl-white;
+      border-width: 0 2px 2px 0;
+    }
+
   }
+
 }

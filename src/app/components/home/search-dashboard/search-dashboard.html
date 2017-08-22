@@ -1,4 +1,4 @@
-<div class="rl-search-dashboard">
+<div class="rl-search-dashboard" ng-class="{'dashboard-container-grayout': $ctrl.grayoutDashboard}">
 
   <div class="rl-container">
     <div class="rl-content">
@@ -283,6 +283,215 @@
               </tr>
             </thead>
             <tbody>
+              <tr ng-repeat-start="row in $ctrl.filteredData" item="row" class="campaign-list-item-{{row.campaignId}}">
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}, {'first-cycle': (row.cycleCount === 1)}, {'second-cycle': (row.cycleCount === 2)}]">
+                  <span class="row-expansion-symbol" ng-if="row.cycleCount > 1">
+                    <i class="fa fa-lg fa-plus-circle" aria-hidden="true" ng-show="!$ctrl.drilldownIconStatus[{{row.campaignId}}]" ng-click="$ctrl.openDrillDownView({campaignId: row.campaignId, cplTrendValue: row.cplTrendValue})"></i>
+                    <!-- showDrilldownLoader(row.entity.campaignId); -->
+                    <i class="fa fa-lg fa-minus-circle" aria-hidden="true" ng-show="$ctrl.drilldownIconStatus[row.campaignId] === 1" ng-click="$ctrl.closeDrillDownView(row.campaignId)"></i>
+                    <!-- <img ng-show="drilldownIconStatus[{{row.entity.campaignId}}] === 2" class="drilldown-loader" src="statics/preloader.gif"> -->
+                  </span>
+                  <span class="row-expansion-symbol-disabled" ng-if="row.cycleCount <= 1">
+                    <i class="fa fa-lg fa-plus-circle" aria-hidden="true"></i>
+                  </span>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <a ng-bind-html="row.campaignId"></a>
+                </td>
+                <td ng-class="['text-left', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <p ng-bind-html="row.campaignName"></p>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <p ng-bind-html="row.rank"></p>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <p ng-bind-html="row.campaignBudget | isoCurrency: row.campaignCurrency"></p>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <div class="metric-hover-item">
+                    <p ng-class="$ctrl.getIndicator(row.sentiment)">
+                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                    </p>
+                    <dashboard-metric-hover metric-key="sentiment" campaign-details="row" dashboard-type="userdashboard"></dashboard-metric-hover>
+                  </div>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <div class="metric-hover-item">
+                    <p ng-class="$ctrl.getIndicator(row.performanceComp)">
+                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                    </p>
+                    <dashboard-metric-hover metric-key="performance" campaign-details="row" dashboard-type="userdashboard"></dashboard-metric-hover>
+                  </div>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <div class="metric-hover-item">
+                    <p ng-class="$ctrl.getIndicator(row.costPerLeadComp)">
+                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                    </p>
+                    <dashboard-metric-hover metric-key="cpl" campaign-details="row" dashboard-type="userdashboard"></dashboard-metric-hover>
+                  </div>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <div class="metric-hover-item">
+                    <p ng-class="$ctrl.getIndicator(row.cplTrend)">
+                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                    </p>
+                    <dashboard-metric-hover metric-key="cplTrend" campaign-details="row" dashboard-type="userdashboard"></dashboard-metric-hover>
+                  </div>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <div class="metric-hover-item">
+                    <p ng-class="$ctrl.getIndicator(row.utilizationScore)">
+                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                    </p>
+                    <dashboard-metric-hover metric-key="utilization" campaign-details="row" dashboard-type="userdashboard"></dashboard-metric-hover>
+                  </div>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <div class="metric-hover-item">
+                    <p ng-class="$ctrl.getIndicator(row.costPerClickComp)">
+                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                    </p>
+                    <dashboard-metric-hover metric-key="costPerClick" campaign-details="row" dashboard-type="userdashboard"></dashboard-metric-hover>
+                  </div>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <div class="metric-hover-item">
+                    <p ng-class="$ctrl.getIndicator(row.costPerCallComp)">
+                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                    </p>
+                    <dashboard-metric-hover metric-key="costPerCall" campaign-details="row" dashboard-type="userdashboard"></dashboard-metric-hover>
+                  </div>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <div class="metric-hover-item">
+                    <p ng-class="$ctrl.getIndicator(row.ctrComp)">
+                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                    </p>
+                    <dashboard-metric-hover metric-key="ctr" campaign-details="row" dashboard-type="userdashboard"></dashboard-metric-hover>
+                  </div>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <div class="metric-hover-item">
+                    <p ng-class="$ctrl.getIndicator(row.qualityScore)">
+                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                    </p>
+                    <dashboard-metric-hover metric-key="avgQs" campaign-details="row" dashboard-type="userdashboard"></dashboard-metric-hover>
+                  </div>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <div class="metric-hover-item">
+                    <p ng-class="$ctrl.getIndicator(row.clicksPerLeadComp)">
+                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                    </p>
+                    <dashboard-metric-hover metric-key="clickPerLead" campaign-details="row" dashboard-type="userdashboard"></dashboard-metric-hover>
+                  </div>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <div class="metric-hover-item">
+                    <p ng-class="$ctrl.getIndicator(row.budgetComp)">
+                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                    </p>
+                    <dashboard-metric-hover metric-key="budgetScore" campaign-details="row" dashboard-type="userdashboard"></dashboard-metric-hover>
+                  </div>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <div class="metric-hover-item">
+                    <p ng-class="$ctrl.getFlagIndicator(row.alert)">
+                      <i class="fa fa-flag fa-2x {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                    </p>
+                    <dashboard-metric-hover ng-if="row.alert" metric-key="alert" campaign-details="row" popup-position="left" dashboard-type="userdashboard"></dashboard-metric-hover>
+                  </div>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <div class="metric-hover-item">
+                    <p ng-class="$ctrl.getIndicator(row.lastClientCallAlert)">
+                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                    </p>
+                    <dashboard-metric-hover metric-key="lastClientCall" campaign-details="row" popup-position="left" dashboard-type="userdashboard"></dashboard-metric-hover>
+                  </div>
+                </td>
+                <td ng-class="['text-center', {'blocked-dashboard-visible-item': $ctrl.drilldownIconStatus[{{row.campaignId}}]}]">
+                  <!-- Reviewed Checkbox -->
+                  <label class="control control--checkbox metric-hover-item">
+                    <!-- Review checkbox -->
+                    <input ng-checked="row.campaignsReviews.check" type="checkbox" id="review_{{$index}}" name="review_{{$index}}" ng-click="markReviewedConfirmation(row,$index,row.campaignsReviews.check,$event)" />
+                    <div ng-class="['control__indicator', {'green_control_indicator': isReviewedByCurrentUser(row.campaignsReviews.businessUserEmail), 'yellow_control_indicator': !isReviewedByCurrentUser(row.campaignsReviews.businessUserEmail)}]"></div>
+                    <dashboard-metric-hover ng-if="row.campaignsReviews.check" metric-key="reviewed" campaign-details="row" popup-position="left-checkbox" dashboard-type="userdashboard"></dashboard-metric-hover>
+                  </label>
+                </td>
+              </tr>
+              <tr ng-repeat-end class="drilldown-rows drilldown-view-item-set-{{ drilldownViewItem.drilldownRowIndex }} {{ ($index > 1 && $index < 8 ? 'last-year' : '') }}" ng-if="$ctrl.drilldownIconStatus[row.campaignId]" ng-repeat="drilldownViewItem in $ctrl.drilldownViewItemList track by drilldownViewItem.drilldownItemRowIndex">
+
+                <td class="text-right blocked-dashboard-visible-item-drilldown-header" colspan="3">
+                  <div class="title">{{ drilldownViewItem.title }}</div>
+                  <div ng-if="$index == 0" class="subtitle">Started on {{ drilldownViewItem.startDate }}</div>
+                  <div ng-if="$index == 1" class="subtitle">{{ drilldownViewItem.startDate }} to {{ drilldownViewItem.endDate }}</div>
+                  <div ng-if="$index > 1 && $index < 8" class="subtitle">
+                    Period(+/-):
+                    <last-year-days-selector></last-year-days-selector>
+                    | {{ drilldownViewItem.startDate }} to {{ drilldownViewItem.endDate }}
+                  </div>
+                  <div ng-if="$index == 8" class="subtitle">&nbsp;</div>
+                </td>
+                <td ng-class="['text-center','blocked-dashboard-visible-item-drilldown',{'blocked-dashboard-visible-item-drilldown-highlighted': $index === 1 || $index === 8}]">
+                  &nbsp;
+                </td>
+                <td ng-class="['text-center','blocked-dashboard-visible-item-drilldown',{'blocked-dashboard-visible-item-drilldown-highlighted': $index === 1 || $index === 8}]">
+                  {{ drilldownViewItem.budget }}
+                </td>
+                <td ng-class="['text-center','blocked-dashboard-visible-item-drilldown',{'blocked-dashboard-visible-item-drilldown-highlighted': $index === 1 || $index === 8}]">
+                  {{ drilldownViewItem.clientSentimentScore }}
+                  <div ng-bind-html="drilldownViewItem.sentimentIndicator"></div>
+                </td>
+                <td ng-class="['text-center','blocked-dashboard-visible-item-drilldown',{'blocked-dashboard-visible-item-drilldown-highlighted': $index === 1 || $index === 8}]">
+                  {{ drilldownViewItem.performance }}
+                  <div ng-bind-html="drilldownViewItem.performanceIndicator"></div>
+                </td>
+                <td ng-class="['text-center','blocked-dashboard-visible-item-drilldown',{'blocked-dashboard-visible-item-drilldown-highlighted': $index === 1 || $index === 8}]">
+                  {{ drilldownViewItem.cpl }}
+                  <div ng-bind-html="drilldownViewItem.costPerLeadIndicator"></div>
+                </td>
+                <td ng-class="['text-center','blocked-dashboard-visible-item-drilldown',{'blocked-dashboard-visible-item-drilldown-highlighted': $index === 1 || $index === 8}]">
+                  {{ drilldownViewItem.cplTrend }}
+                </td>
+                <td ng-class="['text-center','blocked-dashboard-visible-item-drilldown',{'blocked-dashboard-visible-item-drilldown-highlighted': $index === 1 || $index === 8}]">
+                  {{ drilldownViewItem.utilization }}
+                  <div ng-bind-html="drilldownViewItem.utilizationScoreIndicator"></div>
+                </td>
+                <td ng-class="['text-center','blocked-dashboard-visible-item-drilldown',{'blocked-dashboard-visible-item-drilldown-highlighted': $index === 1 || $index === 8}]">
+                  {{ drilldownViewItem.costPerClick }}
+                  <div ng-bind-html="drilldownViewItem.costPerClickIndicator"></div>
+                </td>
+                <td ng-class="['text-center','blocked-dashboard-visible-item-drilldown',{'blocked-dashboard-visible-item-drilldown-highlighted': $index === 1 || $index === 8}]">
+                  {{ drilldownViewItem.costPerCall }}
+                  <div ng-bind-html="drilldownViewItem.costPerCallIndicator"></div>
+                </td>
+                <td ng-class="['text-center','blocked-dashboard-visible-item-drilldown',{'blocked-dashboard-visible-item-drilldown-highlighted': $index === 1 || $index === 8}]">
+                  {{ drilldownViewItem.ctr }}
+                  <div ng-bind-html="drilldownViewItem.ctrIndicator"></div>
+                </td>
+                <td ng-class="['text-center','blocked-dashboard-visible-item-drilldown',{'blocked-dashboard-visible-item-drilldown-highlighted': $index === 1 || $index === 8}]">
+                  {{ drilldownViewItem.avgQs }}
+                  <div ng-bind-html="drilldownViewItem.qualityScoreIndicator"></div>
+                </td>
+                <td ng-class="['text-center','blocked-dashboard-visible-item-drilldown',{'blocked-dashboard-visible-item-drilldown-highlighted': $index === 1 || $index === 8}]">
+                  {{ drilldownViewItem.clickPerLead }}
+                  <div ng-bind-html="drilldownViewItem.clickPerLeadIndicator"></div>
+                </td>
+                <td ng-class="['text-center','blocked-dashboard-visible-item-drilldown',{'blocked-dashboard-visible-item-drilldown-highlighted': $index === 1 || $index === 8}]">
+                  {{ drilldownViewItem.budgetScore }}
+                </td>
+                <td ng-class="['text-center','blocked-dashboard-visible-item-drilldown',{'blocked-dashboard-visible-item-drilldown-highlighted': $index === 1 || $index === 8}]">
+                  &nbsp;
+                </td>
+                <td ng-class="['text-center','blocked-dashboard-visible-item-drilldown',{'blocked-dashboard-visible-item-drilldown-highlighted': $index === 1 || $index === 8}]">
+                  &nbsp;
+                </td>
+                <td ng-class="['text-center','blocked-dashboard-visible-item-drilldown',{'blocked-dashboard-visible-item-drilldown-highlighted': $index === 1 || $index === 8}]">
+                  &nbsp;
+                </td>
+              </tr>
             </tbody>
           </table>
         </div>

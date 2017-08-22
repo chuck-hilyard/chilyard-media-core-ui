@@ -48,25 +48,25 @@ describe('components.home.social-dashboard', () => {
   it('set properly list with values of channel dropdown', () => {
     $ctrl.loadDropdownValues();
     $scope.$apply();
-    expect($ctrl.channel_values.list).toEqual(dropdownValues.channelList);
+    expect($ctrl.channel_values.options.list).toEqual(dropdownValues.channelList);
   });
 
   it('set properly list with values of fbSpeciaList dropdown', () => {
     $ctrl.loadDropdownValues();
     $scope.$apply();
-    expect($ctrl.fbSpecialist_values.list).toEqual(dropdownValues.facebookSpecialistList);
+    expect($ctrl.fbSpecialist_values.options.list).toEqual(dropdownValues.facebookSpecialistList);
   });
 
   it('set properly list with values of offerList dropdown', () => {
     $ctrl.fbSpecialistSelected(dropdownValues.facebookSpecialistList[0]);
     $scope.$apply();
-    expect($ctrl.offer_values.list).toEqual(dropdownValues.facebookOfferList);
+    expect($ctrl.offer_values.options.list).toEqual(dropdownValues.facebookOfferList);
   });
 
   it('set properly list with values of dmcList dropdown', () => {
     $ctrl.fbSpecialist = dropdownValues.facebookSpecialistList[0];
     $ctrl.offerSelected(dropdownValues.facebookOfferList[0]);
     $scope.$apply();
-    expect($ctrl.dmc_values.list).toEqual(dropdownValues.facebookSpecialistDmcList);
+    expect($ctrl.dmc_values.options.list).toEqual(dropdownValues.facebookSpecialistDmcList);
   });
 });

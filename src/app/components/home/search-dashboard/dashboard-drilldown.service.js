@@ -146,6 +146,6 @@ class DrillDownService {
 }
 
 export default angular
-  .module('home.search-dashboard.service', [])
+  .module('home.dashboard-drilldown.service', [])
   .service('DrillDownService', DrillDownService)
   .name;

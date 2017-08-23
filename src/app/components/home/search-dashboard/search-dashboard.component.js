@@ -2,16 +2,15 @@ import template from './search-dashboard.html';
 
 class Controller {
 
-  constructor(rlApi, DrillDownService) {
+  constructor(DrillDownService, SearchDashboardService) {
     'ngInject';
     this.colorScheme = 'scheme1';
     this.filteredData = [];
-    this.campaignDrilldown;
     this.drilldownIconStatus = [];
     this.drilldownViewItemList = [];
     this.grayoutDashboard = false;
     this.DrillDownService = DrillDownService;
-    this.api = rlApi;
+    this.SearchDashboardService = SearchDashboardService;
   }
 
   $onInit() {
@@ -43,12 +42,9 @@ class Controller {
   }
 
   getCampaignList() {
-    return this.api.mediaGatewayGet('/campaigns/')
+    this.SearchDashboardService.getCampaignList()
       .then((success) => {
-        this.filteredData = success.data;
-      })
-      .catch((error) => {
-        return new Error(error);
+        this.filteredData = success;
       });
   }
 
@@ -79,16 +75,13 @@ class Controller {
   openDrillDownView(campaignObj) {
     this.drilldownIconStatus[campaignObj.campaignId] = 1;
     this.grayoutDashboard = true;
-    this.api.mediaGatewayGet('/campaign/drilldown/')
+    this.SearchDashboardService.getCampaignDrilldown()
       .then((success) => {
         this.drilldownViewItemList = this.DrillDownService.userDashboardDrilldownViewCtrl(
           campaignObj,
-          success.data,
+          success,
           this.colorScheme
         );
-      })
-      .catch((error) => {
-        return new Error(error);
       });
   }
 

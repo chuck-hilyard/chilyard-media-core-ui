@@ -1,5 +1,6 @@
 import ngMockE2E from 'angular-mocks/ngMockE2E';
 import socialDashboardData from './dropdown-values';
+import campaignsData from './get-campaigns';
 
 export default angular
   .module('mocks.home.social-dashboard', [
@@ -23,5 +24,9 @@ export default angular
     $httpBackend
       .when('GET', /\/advertiser\?platform=USA&businessUserId=\d+/)
       .respond(200, socialDashboardData.facebookAdvertiserList);
+
+    $httpBackend
+      .when('GET', /\/socialcampaigns/)
+      .respond(200, campaignsData);
   })
   .name;

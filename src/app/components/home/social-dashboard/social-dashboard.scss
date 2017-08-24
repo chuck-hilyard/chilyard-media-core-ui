@@ -1,6 +1,8 @@
 @import './src/styles/variables';
 
 .rl-social-dashboard {
+  background-color: $rl-white;
+
   .dropdown-container {
     .col {
       display: flex;
@@ -28,4 +30,20 @@
       width: 144px;
     }
   }
+
+  .metric-hover-item:hover .metric-hover {
+    display: block;
+  }
+
+  .rl-dashboard-table {
+    padding: 20px;
+  }
+}
+
+.table-bordered > tbody > tr > .first-cycle {
+  border-left: 0.6rem solid $highlighter-orange;
+}
+
+.table-bordered > tbody > tr > .second-cycle {
+  border-left: 0.6rem solid $highlighter-blue;
 }

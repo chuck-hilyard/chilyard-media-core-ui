@@ -67,5 +67,4 @@ export default class Service {
         return new Error(error);
       });
   }
-
 }

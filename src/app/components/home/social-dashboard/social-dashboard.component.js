@@ -3,8 +3,9 @@ const me = 'SocialDashboard';
 
 class Controller {
 
-  constructor(SocialDashboardService, $q, rlConfig, rlLogger) {
+  constructor(rlApi, SocialDashboardService, $q, rlConfig, rlLogger) {
     'ngInject';
+    this.api = rlApi;
     this.dropdown_values = [];
     this.Logger = rlLogger;
     this.socialService = SocialDashboardService;
@@ -14,11 +15,38 @@ class Controller {
     this.dmc_values = {};
     this.featureFlags = rlConfig.featureFlags;
     this.$q = $q;
+    this.filteredData = [];
+    this.colorScheme = 'scheme1';
   }
 
   $onInit() {
     this.setInitialValues();
     this.loadDropdownValues();
+
+    this.dynamicPopover = {
+      cidTemplateUrl: 'templates/cid.template.html',
+      priorityTemplateUrl: 'templates/priority.template.html',
+      budgetAmountTemplateUrl: 'templates/budget-amount.template.html',
+      clientSentimentTemplateUrl: 'templates/client-sentiment.template.html',
+      performanceTemplateUrl: 'templates/performance.template.html',
+      cplTemplateUrl: 'templates/cpl.template.html',
+      cplTrendTemplateUrl: 'templates/cpl-trend.template.html',
+      utilizationTemplateUrl: 'templates/utilization.template.html',
+      ctrTemplateUrl: 'templates/ctr.template.html',
+      adChangeUrl: 'templates/ad-change,template.html',
+      cpmTemplateUrl: 'templates/cpm.template.html',
+      cpmTrendTemplateUrl: 'templates/cpm-trend.template.html',
+      ctrTrendTemplateUrl: 'templates/ctr-trend.template.html',
+      cpcTemplateUrl: 'templates/cpc.template.html',
+      adChangeTemplateUrl: 'templates/ad-change.template.html',
+      lastDaySpendTemplateUrl: 'templates/last-day-spend.template.html',
+      frequencyTemplateUrl: 'templates/frequency.template.html',
+      relevanceTemplateUrl: 'templates/relevance.template.html',
+      clientCallTemplateUrl: 'templates/clientcall.template.html',
+      reviewedTemplateUrl: 'templates/reviewed.template.html'
+    };
+
+    this.getCampaignList();
   }
 
   loadDropdownValues() {
@@ -148,6 +176,43 @@ class Controller {
     };
   }
 
+  getCampaignList() {
+    return this.api.mediaGatewayGet('/socialcampaigns')
+      .then((success) => {
+        this.filteredData = success.data;
+      })
+      .catch((error) => {
+        return new Error(error);
+      });
+  }
+
+  clearCampaignList() {
+    this.filteredData = [];
+  }
+
+  changeDashboardTheme(newTheme) {
+    this.colorScheme = newTheme;
+  }
+
+  getIndicator(value) {
+    let colorClass;
+
+    switch (value) {
+      case 1:
+        colorClass = 'red-indicator';
+        break;
+      case 2:
+        colorClass = 'yellow-indicator';
+        break;
+      case 3:
+        colorClass = 'green-indicator';
+        break;
+      default:
+        colorClass = 'grey-indicator';
+    }
+
+    return colorClass;
+  }
 }
 
 export default {

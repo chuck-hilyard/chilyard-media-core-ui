@@ -6,10 +6,13 @@
 
 import sidebar from './rl-sidebar/lang-en';
 import languageSelect from './rl-language-select/lang-en';
+import colorThemePicker from './rl-color-theme-picker/lang-en';
 
 export default Object.assign(
   sidebar,
-  languageSelect, {
+  languageSelect,
+  colorThemePicker,
+  {
     app: {
       start: 'Start',
       end: 'End',

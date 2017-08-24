@@ -1,6 +1,9 @@
 @import './src/styles/variables';
 
 .rl-color-theme-picker {
+
+  z-index: 1; // the theme picker should appear over the dashboard table
+
   .red-indicator {
     .scheme1 {
       color: $scheme1_red;
@@ -9,6 +12,7 @@
       color:$scheme2_red;
     }
   }
+
   .green-indicator {
     .scheme1 {
       color: $scheme1_green;
@@ -17,6 +21,7 @@
       color: $scheme2_green;
     }
   }
+
   .yellow-indicator {
     .scheme1 {
       color: $scheme1_yellow;
@@ -25,11 +30,13 @@
       color: $scheme2_yellow;
     }
   }
+
   .grey-indicator {
     .scheme1,.scheme2 {
       color: $schemes_gray;
     }
   }
+
   .theme-panel {
     .toggler {
       right: 0;
@@ -40,6 +47,7 @@
       background-color: $togler_gray;
       color: $rl-bright-white;
     }
+
     .toggler-close {
       right: 0;
       z-index: 101; //when the color picker is open the close btn should be visible
@@ -51,6 +59,7 @@
       cursor: pointer;
       color: $rl-bright-white;
     }
+
     .theme-options {
       .theme-option {
         > span:first-child {
@@ -77,6 +86,10 @@
           display: block;
           margin-bottom: 10px;
           margin-top: 15px;
+
+          li input {
+            cursor: pointer;
+          }
         }
         .theme-indicators-container {
           span {
@@ -98,6 +111,16 @@
       background: $theme_picker_black;
       border-radius: 4px;
     }
+
+    .vertical-divider {
+      display: inline-block;
+      width: 1px;
+      height: 33px;
+      margin: 0 7.5px;
+      background-color: $theme_picker_divider;
+      vertical-align: middle;
+    }
+
     position: absolute;
     margin-right: 20px;
     right: 0;

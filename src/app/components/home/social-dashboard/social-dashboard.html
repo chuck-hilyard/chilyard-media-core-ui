@@ -1,452 +1,446 @@
 <div class="rl-social-dashboard">
   <div class="rl-container">
-    <header>
-      <div class="page-header row">
-        <h1 class="col-md-8 pull-left" translate>socialDashboard.socialDashboard</h1>
-        <!-- References section -->
-        <div class="col-md-3 doc-reference-container">
-          <span class="doc-reference-title" translate>socialDashboard.references</span>
-          <ul>
-            <li>
-                <a href="https://docs.google.com/a/reachlocal.com/document/d/1GoxWq_XQcPchBBwEsjUgurJyz91ytnfJQc2uQsZBmRo/edit?usp=sharing" target="_blank" translate>socialDashboard.socialDashboardLogic</a><br/>
-            </li>
-          </ul>
+    <div class="rl-content">
+      <header>
+        <div class="page-header row">
+          <h1 class="col-md-8 pull-left" translate>socialDashboard.socialDashboard</h1>
+          <!-- References section -->
+          <div class="col-md-3 doc-reference-container">
+            <span class="doc-reference-title" translate>socialDashboard.references</span>
+            <ul>
+              <li>
+                  <a href="https://docs.google.com/a/reachlocal.com/document/d/1GoxWq_XQcPchBBwEsjUgurJyz91ytnfJQc2uQsZBmRo/edit?usp=sharing" target="_blank" translate>socialDashboard.socialDashboardLogic</a><br/>
+              </li>
+            </ul>
+          </div>
+          <!-- Theme panel -->
+          <div class="col-md-1">
+            <rl-color-theme-picker on-theme-change="$ctrl.changeDashboardTheme(newTheme)"></rl-color-theme-picker>
+          </div>
         </div>
-        <!-- Theme panel -->
-        <div class="col-md-1">
-          <rl-color-theme-picker on-theme-change="$ctrl.changeDashboardTheme(newTheme)"></rl-color-theme-picker>
+      </header>
+  	  <section class="rl-dashboard-table" ng-if="$ctrl.featureFlags.socialDashboard">
+        <div class="dropdown-container row">
+          <div class="col">
+            <label for="platform-dropdown" translate>socialDashboard.platform</label>:
+            <rl-dropdown id="platform-dropdown" options="$ctrl.platform_values.options" on-select="$ctrl.platformSelected(item)" disabled="$ctrl.platform_values.disabled"></rl-dropdown>
+          </div>
+          <div class="col">
+            <label for="cp-dropdown" translate>socialDashboard.fbSpecialist</label>:
+            <rl-dropdown id="cp-dropdown" options="$ctrl.fbSpecialist_values.options" on-select="$ctrl.fbSpecialistSelected(item)" disabled="$ctrl.fbSpecialist_values.disabled"></rl-dropdown>
+          </div>
+          <div class="col">
+            <label for="channel-dropdown" translate>socialDashboard.channel</label>:
+            <rl-dropdown id="channel-dropdown" options="$ctrl.channel_values.options" on-select="$ctrl.channelSelected(item)" disabled="$ctrl.channel_values.disabled"></rl-dropdown>
+          </div>
+          <div class="col">
+            <label for="offer-dropdown" translate>socialDashboard.offerName</label>:
+            <rl-dropdown id="offer-dropdown" options="$ctrl.offer_values.options" on-select="$ctrl.offerSelected(item)" disabled="$ctrl.offer_values.disabled"></rl-dropdown>
+          </div>
+          <div class="col">
+            <label for="dmc-dropdown" translate>socialDashboard.dmc</label>:
+            <rl-dropdown id="dmc-dropdown" options="$ctrl.dmc_values.options" on-select="$ctrl.dmcSelected(item)" disabled="$ctrl.dmc_values.disabled"></rl-dropdown>
+          </div>
+          <div class="fb-search-filter col">
+            <rl-multi-filter-toolbar settings="$ctrl.filterSettings" updateSettings="$ctrl.updateSettings(settings)"></rl-multi-filter-toolbar>
+          </div>
         </div>
-      </div>
-    </header>
-    <div class="rl-content" ng-if="$ctrl.featureFlags.socialDashboard">
-      <div class="dropdown-container">
-        <div class="col">
-          <label for="platform-dropdown" translate>socialDashboard.platform</label>:
-          <rl-dropdown id="platform-dropdown" options="$ctrl.platform_values.options" on-select="$ctrl.platformSelected(item)" disabled="$ctrl.platform_values.disabled"></rl-dropdown>
+        <div class="dashboard-filter-container row">
+          <rl-multi-filter label="CID" settings="$ctrl.filterSettings" apply="$ctrl.applyFilters()" updateSettings="$ctrl.updateSettings(settings)"></rl-multi-filter>
         </div>
-        <div class="col">
-          <label for="cp-dropdown" translate>socialDashboard.fbSpecialist</label>:
-          <rl-dropdown id="cp-dropdown" options="$ctrl.fbSpecialist_values.options" on-select="$ctrl.fbSpecialistSelected(item)" disabled="$ctrl.fbSpecialist_values.disabled"></rl-dropdown>
-        </div>
-        <div class="col">
-          <label for="channel-dropdown" translate>socialDashboard.channel</label>:
-          <rl-dropdown id="channel-dropdown" options="$ctrl.channel_values.options" on-select="$ctrl.channelSelected(item)" disabled="$ctrl.channel_values.disabled"></rl-dropdown>
-        </div>
-        <div class="col">
-          <label for="offer-dropdown" translate>socialDashboard.offerName</label>:
-          <rl-dropdown id="offer-dropdown" options="$ctrl.offer_values.options" on-select="$ctrl.offerSelected(item)" disabled="$ctrl.offer_values.disabled"></rl-dropdown>
-        </div>
-        <div class="col">
-          <label for="dmc-dropdown" translate>socialDashboard.dmc</label>:
-          <rl-dropdown id="dmc-dropdown" options="$ctrl.dmc_values.options" on-select="$ctrl.dmcSelected(item)" disabled="$ctrl.dmc_values.disabled"></rl-dropdown>
-        </div>
-        <div class="col">
-          <div class="form-group">
-            <div class="input-group">
-              <input type="text" class="form-control" placeholder="Search" id="inputGroup"/>
-              <span class="input-group-addon">
-                <i class="fa fa-search"></i>
-              </span>
+        <!-- Campaign list table & paginator content section -->
+        <div ng-show="$ctrl.filteredData.length > 0">
+          <!-- Intimate user for CID's not loaded -->
+          <div class="notification-item alert alert-info" role="alert" ng-show="$ctrl.filteredData[0].excludedCampaignIds.length > 0">
+            <i class="fa fa-info-circle" aria-hidden="true"></i>
+            Error processing these campaigns: {{ $ctrl.filteredData[0].excludedCampaignIds.join(', ') }}
+          </div>
+          <!-- Campaign list table content section -->
+          <div class="dashboard-table">
+            <div>
+              <span class="first-cycle-legend"></span>
+              <span translate>socialDashboard.firstCycle</span>
+              <span class="second-cycle-legend"></span>
+              <span translate>socialDashboard.secondCycle</span>
             </div>
+            <table class="table table-bordered table-condensed table-striped table-header-rotated"  rl-cpi-sticky-header>
+              <thead>
+                <tr class="title-row">
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.cidTemplateUrl">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.campaignId'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.CID</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.campaignName'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.campaignName</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.priorityTemplateUrl">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.rank'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.priority</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.budgetAmountTemplateUrl">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.campaignBudget'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.budget</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.clientSentimentTemplateUrl">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.sentiment'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.csScore</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.performanceTemplateUrl">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.performance'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.performance</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.cpmTemplateUrl">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.sortCpm'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.CPM</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.ctrTemplateUrl">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.ctr'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.CTR</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.utilizationTemplateUrl">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.utilization'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.utilization</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.cpmTrendTemplateUrl">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.cpmTrendComp'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.cpmTrend</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.ctrTrendTemplateUrl">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.ctrTrendComp'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.ctrTrend</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.adChangeTemplateUrl">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.adChange'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.adChange</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.relevanceTemplateUrl">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.relevance'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.relevance</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.frequencyTemplateUrl">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.frequency'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.frequency</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.cpcTemplateUrl">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.costPerClick'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.CPC</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.clientCallTemplateUrl">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.lastClientCallAlert'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.lastCltCall</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider">
+                    <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.lastDaySpendTemplateUrl">
+                      <div class="title-cell">
+                        <span>
+                          <rl-sortable-header
+                            key="'entity.lastDaySpend'"
+                            sort-state="{}">
+                            <span translate>socialDashboard.tableHeader.lastDaySpend</span>
+                          </rl-sortable-header>
+                        </span>
+                      </div>
+                    </div>
+                  </th>
+                  <th class="rotate">
+                    <hr class="column-divider-last">
+                    <div class="title-center-last-item" uib-popover-template="$ctrl.dynamicPopover.reviewedTemplateUrl">
+                      <div class="title-cell">
+                        <span translate>socialDashboard.tableHeader.reviewed</span>
+                      </div>
+                    </div>
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr ng-repeat="row in $ctrl.filteredData" item="row" class="campaign-list-item-{{row.campaignId}}">
+                  <td ng-class="['text-center', {'first-cycle': (row.cycleCount === 1)}, {'second-cycle': (row.cycleCount === 2)}]">
+                    <a href="/#/landing/reporting?cid={{row.campaignId}}&country={{getPlatform()}}" target="_blank" ng-bind-html="row.campaignId"></a>
+                  </td>
+                  <td class="text-left">
+                    <p ng-bind-html="row.campaignName"></p>
+                  </td>
+                  <td class="text-center">
+                    <p ng-bind-html="row.rank"></p>
+                  </td>
+                  <td class="text-center">
+                    <p ng-bind-html="row.campaignBudget | isoCurrency: row.campaignCurrency"></p>
+                  </td>
+                  <td class="text-center">
+                    <div class="metric-hover-item">
+                      <p ng-class="$ctrl.getIndicator(row.sentiment)">
+                        <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                      </p>
+                      <dashboard-metric-hover class="metric-hover" metric-key="sentiment" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="metric-hover-item">
+                      <p ng-class="$ctrl.getIndicator(row.performanceComp)">
+                        <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                      </p>
+                      <dashboard-metric-hover class="metric-hover" metric-key="performance" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="metric-hover-item">
+                      <p ng-class="$ctrl.getIndicator(row.cpmComp)">
+                        <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                      </p>
+                      <dashboard-metric-hover class="metric-hover" metric-key="cpm" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="metric-hover-item">
+                      <p ng-class="$ctrl.getIndicator(row.ctrComp)">
+                        <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                      </p>
+                      <dashboard-metric-hover class="metric-hover" metric-key="ctr" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="metric-hover-item">
+                      <p ng-class="$ctrl.getIndicator(row.utilizationScore)">
+                        <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                      </p>
+                      <dashboard-metric-hover class="metric-hover" metric-key="utilization" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="metric-hover-item">
+                      <p ng-class="$ctrl.getIndicator(row.cpmTrendComp)">
+                        <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                      </p>
+                      <dashboard-metric-hover class="metric-hover" metric-key="cpmTrend" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="metric-hover-item">
+                      <p ng-class="$ctrl.getIndicator(row.ctrTrendComp)">
+                        <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                      </p>
+                      <dashboard-metric-hover class="metric-hover" metric-key="ctrTrend" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="metric-hover-item">
+                      <p ng-class="$ctrl.getIndicator(row.adChangeComp)">
+                        <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                      </p>
+                      <dashboard-metric-hover class="metric-hover" metric-key="adChange" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="metric-hover-item">
+                      <p ng-class="$ctrl.getIndicator(row.relevanceComp)">
+                        <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                      </p>
+                      <dashboard-metric-hover class="metric-hover" metric-key="relevance" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="metric-hover-item">
+                      <p ng-class="$ctrl.getIndicator(row.frequencyComp)">
+                        <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                      </p>
+                      <dashboard-metric-hover class="metric-hover" metric-key="frequency" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="metric-hover-item">
+                      <p ng-class="$ctrl.getIndicator(row.cpcComp)">
+                        <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                      </p>
+                      <dashboard-metric-hover class="metric-hover" metric-key="cpc" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <div class="metric-hover-item">
+                      <p ng-class="$ctrl.getIndicator(row.lastClientCallAlert)">
+                        <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
+                      </p>
+                      <dashboard-metric-hover class="metric-hover metric-hover-left" metric-key="lastClientCall" campaign-details="row" popup-position="left" dashboard-type="facebookdashboard"></dashboard-metric-hover>
+                    </div>
+                  </td>
+                  <td class="text-center">
+                    <p ng-if="row.lastDaySpend" ng-bind-html="row.lastDaySpend"></p>
+                    <p ng-if="!row.lastDaySpend">{{row.lastDaySpend = 'N/A'}}</p>
+                  </td>
+                  <td class="text-center">
+                    <label class="control control--checkbox metric-hover-item">
+                      <input ng-checked="row.campaignsReviews.check" type="checkbox"/>
+                      <div ng-class="['control__indicator', {'green_control_indicator': isReviewedByCurrentUser(row.campaignsReviews.businessUserEmail), 'yellow_control_indicator': !isReviewedByCurrentUser(row.campaignsReviews.businessUserEmail)}]"></div>
+                      <dashboard-metric-hover class="metric-hover metric-hover-left-chekbox" ng-if="row.campaignsReviews.check" metric-key="reviewed" campaign-details="row" popup-position="left" dashboard-type="facebookdashboard"></dashboard-metric-hover>
+                    </label>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
           </div>
         </div>
-      </div>
+  	  </section>
     </div>
-  </div>
-	<div class="rl-container">
-	  <div class="rl-content">
-      <!-- Campaign list table & paginator content section -->
-      <div ng-show="$ctrl.filteredData.length > 0">
-        <!-- Intimate user for CID's not loaded -->
-        <div class="notification-item alert alert-info" role="alert" ng-show="$ctrl.filteredData[0].excludedCampaignIds.length > 0">
-          <i class="fa fa-info-circle" aria-hidden="true"></i>
-          Error processing these campaigns: {{ $ctrl.filteredData[0].excludedCampaignIds.join(', ') }}
-        </div>
-        <!-- Campaign list table content section -->
-        <div class="rl-dashboard-table">
-          <div>
-            <span class="first-cycle-legend"></span>
-            <span translate>socialDashboard.firstCycle</span>
-            <span class="second-cycle-legend"></span>
-            <span translate>socialDashboard.secondCycle</span>
-          </div>
-          <table class="table table-bordered table-condensed table-striped table-header-rotated"  rl-cpi-sticky-header>
-            <thead>
-              <tr class="title-row">
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.cidTemplateUrl">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.campaignId'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.CID</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.campaignName'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.campaignName</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.priorityTemplateUrl">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.rank'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.priority</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.budgetAmountTemplateUrl">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.campaignBudget'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.budget</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.clientSentimentTemplateUrl">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.sentiment'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.csScore</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.performanceTemplateUrl">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.performance'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.performance</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.cpmTemplateUrl">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.sortCpm'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.CPM</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.ctrTemplateUrl">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.ctr'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.CTR</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.utilizationTemplateUrl">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.utilization'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.utilization</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.cpmTrendTemplateUrl">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.cpmTrendComp'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.cpmTrend</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.ctrTrendTemplateUrl">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.ctrTrendComp'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.ctrTrend</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.adChangeTemplateUrl">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.adChange'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.adChange</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.relevanceTemplateUrl">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.relevance'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.relevance</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.frequencyTemplateUrl">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.frequency'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.frequency</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.cpcTemplateUrl">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.costPerClick'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.CPC</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.clientCallTemplateUrl">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.lastClientCallAlert'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.lastCltCall</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider">
-                  <div class="title-center" uib-popover-template="$ctrl.dynamicPopover.lastDaySpendTemplateUrl">
-                    <div class="title-cell">
-                      <span>
-                        <rl-sortable-header
-                          key="'entity.lastDaySpend'"
-                          sort-state="{}">
-                          <span translate>socialDashboard.tableHeader.lastDaySpend</span>
-                        </rl-sortable-header>
-                      </span>
-                    </div>
-                  </div>
-                </th>
-                <th class="rotate">
-                  <hr class="column-divider-last">
-                  <div class="title-center-last-item" uib-popover-template="$ctrl.dynamicPopover.reviewedTemplateUrl">
-                    <div class="title-cell">
-                      <span translate>socialDashboard.tableHeader.reviewed</span>
-                    </div>
-                  </div>
-                </th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr ng-repeat="row in $ctrl.filteredData" item="row" class="campaign-list-item-{{row.campaignId}}">
-                <td ng-class="['text-center', {'first-cycle': (row.cycleCount === 1)}, {'second-cycle': (row.cycleCount === 2)}]">
-                  <a href="/#/landing/reporting?cid={{row.campaignId}}&country={{getPlatform()}}" target="_blank" ng-bind-html="row.campaignId"></a>
-                </td>
-                <td class="text-left">
-                  <p ng-bind-html="row.campaignName"></p>
-                </td>
-                <td class="text-center">
-                  <p ng-bind-html="row.rank"></p>
-                </td>
-                <td class="text-center">
-                  <p ng-bind-html="row.campaignBudget | isoCurrency: row.campaignCurrency"></p>
-                </td>
-                <td class="text-center">
-                  <div class="metric-hover-item">
-                    <p ng-class="$ctrl.getIndicator(row.sentiment)">
-                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
-                    </p>
-                    <dashboard-metric-hover class="metric-hover" metric-key="sentiment" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
-                  </div>
-                </td>
-                <td class="text-center">
-                  <div class="metric-hover-item">
-                    <p ng-class="$ctrl.getIndicator(row.performanceComp)">
-                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
-                    </p>
-                    <dashboard-metric-hover class="metric-hover" metric-key="performance" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
-                  </div>
-                </td>
-                <td class="text-center">
-                  <div class="metric-hover-item">
-                    <p ng-class="$ctrl.getIndicator(row.cpmComp)">
-                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
-                    </p>
-                    <dashboard-metric-hover class="metric-hover" metric-key="cpm" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
-                  </div>
-                </td>
-                <td class="text-center">
-                  <div class="metric-hover-item">
-                    <p ng-class="$ctrl.getIndicator(row.ctrComp)">
-                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
-                    </p>
-                    <dashboard-metric-hover class="metric-hover" metric-key="ctr" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
-                  </div>
-                </td>
-                <td class="text-center">
-                  <div class="metric-hover-item">
-                    <p ng-class="$ctrl.getIndicator(row.utilizationScore)">
-                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
-                    </p>
-                    <dashboard-metric-hover class="metric-hover" metric-key="utilization" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
-                  </div>
-                </td>
-                <td class="text-center">
-                  <div class="metric-hover-item">
-                    <p ng-class="$ctrl.getIndicator(row.cpmTrendComp)">
-                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
-                    </p>
-                    <dashboard-metric-hover class="metric-hover" metric-key="cpmTrend" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
-                  </div>
-                </td>
-                <td class="text-center">
-                  <div class="metric-hover-item">
-                    <p ng-class="$ctrl.getIndicator(row.ctrTrendComp)">
-                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
-                    </p>
-                    <dashboard-metric-hover class="metric-hover" metric-key="ctrTrend" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
-                  </div>
-                </td>
-                <td class="text-center">
-                  <div class="metric-hover-item">
-                    <p ng-class="$ctrl.getIndicator(row.adChangeComp)">
-                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
-                    </p>
-                    <dashboard-metric-hover class="metric-hover" metric-key="adChange" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
-                  </div>
-                </td>
-                <td class="text-center">
-                  <div class="metric-hover-item">
-                    <p ng-class="$ctrl.getIndicator(row.relevanceComp)">
-                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
-                    </p>
-                    <dashboard-metric-hover class="metric-hover" metric-key="relevance" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
-                  </div>
-                </td>
-                <td class="text-center">
-                  <div class="metric-hover-item">
-                    <p ng-class="$ctrl.getIndicator(row.frequencyComp)">
-                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
-                    </p>
-                    <dashboard-metric-hover class="metric-hover" metric-key="frequency" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
-                  </div>
-                </td>
-                <td class="text-center">
-                  <div class="metric-hover-item">
-                    <p ng-class="$ctrl.getIndicator(row.cpcComp)">
-                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
-                    </p>
-                    <dashboard-metric-hover class="metric-hover" metric-key="cpc" campaign-details="row" dashboard-type="facebookdashboard"></dashboard-metric-hover>
-                  </div>
-                </td>
-                <td class="text-center">
-                  <div class="metric-hover-item">
-                    <p ng-class="$ctrl.getIndicator(row.lastClientCallAlert)">
-                      <i class="fa fa-circle {{$ctrl.colorScheme}}" aria-hidden="true"></i>
-                    </p>
-                    <dashboard-metric-hover class="metric-hover metric-hover-left" metric-key="lastClientCall" campaign-details="row" popup-position="left" dashboard-type="facebookdashboard"></dashboard-metric-hover>
-                  </div>
-                </td>
-                <td class="text-center">
-                  <p ng-if="row.lastDaySpend" ng-bind-html="row.lastDaySpend"></p>
-                  <p ng-if="!row.lastDaySpend">{{row.lastDaySpend = 'N/A'}}</p>
-                </td>
-                <td class="text-center">
-                  <label class="control control--checkbox metric-hover-item">
-                    <input ng-checked="row.campaignsReviews.check" type="checkbox"/>
-                    <div ng-class="['control__indicator', {'green_control_indicator': isReviewedByCurrentUser(row.campaignsReviews.businessUserEmail), 'yellow_control_indicator': !isReviewedByCurrentUser(row.campaignsReviews.businessUserEmail)}]"></div>
-                    <dashboard-metric-hover class="metric-hover metric-hover-left-chekbox" ng-if="row.campaignsReviews.check" metric-key="reviewed" campaign-details="row" popup-position="left" dashboard-type="facebookdashboard"></dashboard-metric-hover>
-                  </label>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-	  </div>
 	</div>
 </div>

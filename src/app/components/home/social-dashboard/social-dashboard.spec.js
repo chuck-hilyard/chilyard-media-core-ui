@@ -26,6 +26,7 @@ describe('components.home.social-dashboard', () => {
           return deferred.promise;
         };
       });
+      $provide.value('rlApi', commonMocks.rlApi);
       $provide.value('rlConfig', commonMocks.config);
       $provide.value('rlLogger', commonMocks.logger);
       $provide.value('fbSpecialist', dropdownValues.facebookSpecialistList[0]);

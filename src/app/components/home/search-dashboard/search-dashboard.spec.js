@@ -4,21 +4,31 @@ describe('components.home.search-dashboard', () => {
 
   let $q;
   let $ctrl;
+  let $filter;
   let drilldownService;
   let searchDashboardService;
+  let multiFilterSettingsService;
 
   beforeEach(() => {
     angular.mock.module('searchDashboard', ($provide) => {
+      $provide.service('MultiFilterSettingsService', function() {
+        this.build = angular.noop;
+        this.parseAdditional = angular.noop;
+      });
+
       $provide.value('rlApi', commonMocks.rlApi);
+      $provide.value('rlLogger', commonMocks.rlLogger);
     });
 
     angular.mock.inject(($injector) => {
       let $componentController = $injector.get('$componentController');
       $ctrl = $componentController('searchDashboard');
       $q = $injector.get('$q');
+      $filter = $injector.get('$filter');
 
       drilldownService = $injector.get('DrillDownService');
       searchDashboardService = $injector.get('SearchDashboardService');
+      multiFilterSettingsService = $injector.get('MultiFilterSettingsService');
     });
 
     spyOn(searchDashboardService, 'getCampaignList').and.returnValue($q.when());
@@ -34,6 +44,9 @@ describe('components.home.search-dashboard', () => {
     expect($ctrl.grayoutDashboard).toBeFalsy();
     expect($ctrl.DrillDownService).toEqual(drilldownService);
     expect($ctrl.SearchDashboardService).toEqual(searchDashboardService);
+    expect($ctrl.filterService).toEqual(multiFilterSettingsService);
+    expect($ctrl.$filter).toEqual($filter);
+    expect($ctrl.$q).toEqual($q);
   });
 
   it('changes dashboard theme', () => {
@@ -70,6 +83,50 @@ describe('components.home.search-dashboard', () => {
     $ctrl.closeDrillDownView(campaignId);
     expect($ctrl.drilldownIconStatus[campaignId]).toEqual(0);
     expect($ctrl.grayoutDashboard).toBeFalsy();
+  });
+
+  it('sets dropdowns', () => {
+    expect($ctrl.platform_values).toBeUndefined();
+    expect($ctrl.cp_values).toBeUndefined();
+    expect($ctrl.dmc_values).toBeUndefined();
+
+    $ctrl.setInitialValues();
+
+    expect($ctrl.platform_values).toEqual({
+      options: {
+        showFields: [{field: 'platformName'}],
+        list: [],
+        placeholder: 'USA',
+        customClass: 'left-bordered-dropdown'
+      },
+      disabled: true
+    });
+
+    expect($ctrl.cp_values).toEqual({
+      options: {
+        showFields: [{field: 'CP'}],
+        list: [],
+        placeholder: 'All',
+        customClass: 'left-bordered-dropdown'
+      },
+      disabled: true
+    });
+
+    expect($ctrl.dmc_values).toEqual({
+      options: {
+        showFields: [{field: 'businessName'}],
+        list: [],
+        placeholder: 'All',
+        customClass: 'left-bordered-dropdown'
+      },
+      disabled: true
+    });
+  });
+
+  it('updates settings', () => {
+    expect($ctrl.filterSettings).toBeUndefined();
+    $ctrl.updateSettings({testSettings: 'testSettings'});
+    expect($ctrl.filterSettings).toEqual({testSettings: 'testSettings'});
   });
 
 });

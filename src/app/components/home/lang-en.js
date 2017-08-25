@@ -149,6 +149,9 @@ export default {
     decisionTree: 'Campaign Management Decision Tree',
     firstCycle: 'First Cycle',
     secondCycle: 'Second Cycle',
+    platform: 'Platform',
+    cp: 'CP',
+    dmc: 'DMC',
     tableHeader: {
       CID: 'CID',
       campaignName: 'Campaign Name',

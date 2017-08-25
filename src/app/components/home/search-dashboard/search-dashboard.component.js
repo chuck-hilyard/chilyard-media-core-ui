@@ -1,16 +1,22 @@
 import template from './search-dashboard.html';
 
+const me = 'SearchDashboard';
+
 class Controller {
 
-  constructor(DrillDownService, SearchDashboardService) {
+  constructor($filter, $q, rlLogger, DrillDownService, SearchDashboardService, MultiFilterSettingsService) {
     'ngInject';
     this.colorScheme = 'scheme1';
     this.filteredData = [];
     this.drilldownIconStatus = [];
     this.drilldownViewItemList = [];
     this.grayoutDashboard = false;
+    this.$filter = $filter;
+    this.$q = $q;
+    this.Logger = rlLogger;
     this.DrillDownService = DrillDownService;
     this.SearchDashboardService = SearchDashboardService;
+    this.filterService = MultiFilterSettingsService;
   }
 
   $onInit() {
@@ -34,7 +40,93 @@ class Controller {
       reviewedTemplateUrl: 'templates/reviewed.template.html'
     };
 
+    this.filterSettings = this.filterService.build();
+
+    this.setInitialValues();
+    this.loadCPValues();
     this.getCampaignList();
+  }
+
+  setInitialValues() {
+    this.platform_values = {
+      options: {
+        showFields: [{field: 'platformName'}],
+        list: [],
+        placeholder: 'USA',
+        customClass: 'left-bordered-dropdown'
+      },
+      disabled: true
+    };
+    this.cp_values = {
+      options: {
+        showFields: [{field: 'CP'}],
+        list: [],
+        placeholder: 'All',
+        customClass: 'left-bordered-dropdown'
+      },
+      disabled: true
+    };
+    this.dmc_values = {
+      options: {
+        showFields: [{field: 'businessName'}],
+        list: [],
+        placeholder: 'All',
+        customClass: 'left-bordered-dropdown'
+      },
+      disabled: true
+    };
+  }
+
+  loadCPValues() {
+    this.SearchDashboardService.getCPList('USA')
+      .then((response) => {
+        this.cp_values.options = {
+          showFields: [{field: 'campaignPerformerName'}],
+          list: response,
+          placeholder: 'All',
+          customClass: 'left-bordered-dropdown'
+        };
+        this.cp_values.disabled = false;
+      })
+      .catch((error) => {
+        this.Logger.error('Error in loading channel or facebook list', {error: error}, me);
+      })
+      .finally(() => {
+      });
+  }
+
+  CPSelected(campaignProfessional) {
+    this.campaignProfessional = campaignProfessional;
+    this.SearchDashboardService.getDMCList('USA', this.campaignProfessional.businessUserId).then((response) => {
+      this.dmc_values.options = {
+        showFields: [{field: 'campaignPerformerName'}],
+        list: response,
+        placeholder: 'All',
+        customClass: 'left-bordered-dropdown'
+      };
+      this.dmc_values.disabled = false;
+    })
+    .catch((error) => {
+      this.Logger.error('Error in loading offers', {error: error}, me);
+    })
+    .finally(() => {
+    });
+  }
+
+  updateSettings(settings) {
+    this.filterSettings = settings;
+  }
+
+  applyFilters() {
+    this.selectedAdditional = this.filterService.parseAdditional(this.filterSettings);
+    let filters = [
+      {func: this.$filter('multiFilter'), args: [this.filterSettings, 'campaignId']},
+      {func: this.$filter('orderBy'), args: (this.sort.reverse ? '-' : '') + this.sort.key},
+      {func: this.$filter('sortNulls'), args: this.sort.key}
+    ];
+    filters.forEach((filter) => {
+      this.filteredData = filter.func.apply(filter.func, [this.filteredData, filter.args]);
+    });
   }
 
   changeDashboardTheme(newTheme) {

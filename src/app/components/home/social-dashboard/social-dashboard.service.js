@@ -67,4 +67,12 @@ export default class Service {
         return new Error(error);
       });
   }
+
+  getCampaignList() {
+    return this.api.mediaGatewayGet('/socialcampaigns')
+      .then((success) => success.data)
+      .catch((error) => {
+        return new Error(error);
+      });
+  }
 }

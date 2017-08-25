@@ -184,13 +184,9 @@ class Controller {
   }
 
   getCampaignList() {
-    return this.api.mediaGatewayGet('/socialcampaigns')
+    this.socialService.getCampaignList()
       .then((success) => {
-        this.table = success.data;
-        this.filteredData = success.data;
-      })
-      .catch((error) => {
-        return new Error(error);
+        this.filteredData = success;
       });
   }
 
@@ -220,6 +216,10 @@ class Controller {
     }
 
     return colorClass;
+  }
+
+  getFlagIndicator(value) {
+    return (angular.isDefined(value) ? 'red-indicator' : 'green-indicator');
   }
 
   additionalFilters() {

@@ -23,6 +23,7 @@ class Controller {
     this.Logger.trace('$onChanges', changes, me);
     if (changes.settings) {
       this.settings = changes.settings.currentValue;
+      this.parseFilters();
     }
   }
 
@@ -52,6 +53,7 @@ class Controller {
     else if ( this.staged[idx].settings.comparator == 'number' ) {
       this.staged[idx].comparator = this.settings.numericOptions[0];
     }
+    this.parseFilters();
   }
 
   remove(idx) {
@@ -61,6 +63,7 @@ class Controller {
   applyFilters() {
     this.settings.applyStaged();
     this.updateSettings(this.settings);
+    this.parseFilters();
     this.apply();
   }
 
@@ -88,8 +91,10 @@ class Controller {
 
   parseFilters() {
     this.readableFilters = '';
-    angular.forEach(this.settings.filters, function(value, index) {
-      this.readableFilters += this.filterSettings[value.type].label + ' ';
+    angular.forEach(this.settings.filters, (value, index) => {
+      if (this.filterSettings[value.type]) {
+        this.readableFilters += this.filterSettings[value.type].label + ' ';
+      }
 
       if (value.settings.comparator == 'none') {
         this.readableFilters += 'is ';

@@ -9,3 +9,4 @@ artifacts:
   base-directory: dist
   files:
     - 'index.html'
+    - '**/*'

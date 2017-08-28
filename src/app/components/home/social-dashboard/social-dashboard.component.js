@@ -24,6 +24,7 @@ class Controller {
 
   $onInit() {
     this.filteredData = [];
+    this.table = [];
     this.filterSettings = this.filterService.build();
     this.additionalFilters();
     this.selectedAdditional = this.filterService.parseAdditional(this.filterSettings);

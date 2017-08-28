@@ -25,7 +25,7 @@ class SearchDashboardService {
   }
 
   getCPList(platform) {
-    return this.api.mediaGatewayGet('/campaign-professional', me, {platform: platform})
+    return this.api.mediaGatewayGet('/userdashboard/campaign-professional', me, {platform: platform})
       .then((success) => success.data)
       .catch((error) => {
         return new Error(error);
@@ -33,7 +33,7 @@ class SearchDashboardService {
   }
 
   getDMCList(platform, businessUserId) {
-    return this.api.mediaGatewayGet('/campaign-professional', me, {businessUserId: businessUserId, platform: platform})
+    return this.api.mediaGatewayGet('/userdashboard/campaign-professional', me, {businessUserId: businessUserId, platform: platform})
       .then((success) => success.data)
       .catch((error) => {
         return new Error(error);

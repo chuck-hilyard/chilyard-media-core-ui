@@ -69,7 +69,7 @@ export default class Service {
   }
 
   getCampaignList() {
-    return this.api.mediaGatewayGet('/socialcampaigns')
+    return this.api.mediaGatewayGet('/campaigns')
       .then((success) => success.data)
       .catch((error) => {
         return new Error(error);

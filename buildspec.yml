@@ -1,5 +1,9 @@
 version: 0.2
 
+env:
+  parameter-store:
+    region: ""
+
 phases:
   pre_build:
     commands:
@@ -11,5 +15,4 @@ phases:
 artifacts:
   base-directory: dist
   files:
-    - 'index.html'
     - '**/*'

@@ -1,13 +1,8 @@
 version: 0.2
 
-env:
-  parameter-store:
-    region: "us-west-2"
-
 phases:
   pre_build:
     commands:
-      - printf "region - ${region}"
       - npm install
   build:
     commands:

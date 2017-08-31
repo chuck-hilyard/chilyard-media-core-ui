@@ -12,3 +12,4 @@ artifacts:
   base-directory: dist
   files:
     - '**/*'
+    - 'Dockerfile'

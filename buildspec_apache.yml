@@ -4,8 +4,8 @@ phases:
   pre_build:
     commands:
       - printf "in buildspec_apache.yml"
-      - `which apt-get` update
-      - `which apt-get` install -y awscli
+      - apt-get update
+      - apt-get install -y awscli
       - aws ecr get-login --profile fa
   build:
     commands:

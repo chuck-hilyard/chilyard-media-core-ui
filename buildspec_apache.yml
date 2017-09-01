@@ -7,7 +7,7 @@ env:
 phases:
   pre_build:
     commands:
-      - printf "region - ${region}"
+      - printf "in buildspec_apache.yml"
       - npm install
   build:
     commands:

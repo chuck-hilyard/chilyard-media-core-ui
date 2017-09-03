@@ -9,7 +9,7 @@ phases:
       - $(aws ecr get-login --region us-west-2)
   build:
     commands:
-      - docker build -t 762858336698.dkr.ecr.us-west-2.amazonaws.com/chilyard-media-core-ui:latest .
+      - docker build -t chilyard-media-core-ui:latest .
       - docker tag chilyard-media-core-ui:latest 762858336698.dkr.ecr.us-west-2.amazonaws.com/chilyard-media-core-ui:latest
   post_build:
     commands:

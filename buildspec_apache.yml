@@ -6,7 +6,7 @@ phases:
       - printf "in buildspec_apache.yml"
       - apt-get update
       - apt-get install -y awscli
-      - aws ecr login get-login --no-include-email --region us-west-2
+      - aws ecr get-login --no-include-email --region us-west-2
   build:
     commands:
       - docker build -t 762858336698.dkr.ecr.us-west-2.amazonaws.com/chilyard-media-core-ui:latest .
